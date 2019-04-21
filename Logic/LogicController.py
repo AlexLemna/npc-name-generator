@@ -7,7 +7,8 @@ import tempfile
 print ("done. ", end="")
 
 print ("Importing my modules... ", end = "")
-import RandomFromFile
+import RandomTextLocal
+import RandomTextSampleData
 print ("done. ", end="")
 
 print ("Setting my home folder as the current working directory... ", end="")
@@ -19,12 +20,12 @@ with pathlib.Path.cwd() as homepath:
 print ()
 
 os.chdir ("..") # <-- Moves up to parent directory.
-print ("Looking for UI, Logic, and Data directories in my parent folder...")
 with pathlib.Path.cwd() as parentPath:
     uiDirectory = parentPath / 'UI'
     logicDirectory = parentPath / 'Logic'
     dataDirectory = parentPath / 'Data'
 
+print ("Looking for UI, Logic, and Data directories in my parent folder...")
 missingDirectories = []
 if os.path.exists (uiDirectory):
     print ("   ...UI directory located.")
