@@ -39,13 +39,12 @@ if os.path.exists (dataDirectory):
 else: 
     print ("   ...data directory not found.")
     missingDirectories.append("Data")
-print (f"   (Parent folder is {parentPath})")
-print ()
 
 if os.path.exists (uiDirectory) == False or os.path.exists (logicDirectory) == False or os.path.exists (dataDirectory) == False:
-    print("I'm currently missing the following directories:")
-    print("   ", missingDirectories)
-    print("    This is a problem.")
+    print (f"   (Parent folder is {parentPath})")
+    print("I'm currently missing the following directories:", end="")
+    print("",missingDirectories, end=". ")
+    print("This is a problem.")
 else:
     print ("Everything fine here, carry on.")
 print()
