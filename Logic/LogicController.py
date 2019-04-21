@@ -48,4 +48,7 @@ else:
     print ("Everything fine here, carry on.")
 print()
 
+print ("Random output from local text file: ", end="")
+runpy.run_module ('RandomFromFile')
+
 print("How are you?")
