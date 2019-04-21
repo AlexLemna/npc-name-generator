@@ -1,39 +1,27 @@
-print ("Starting LogicController.")
+print ()
+print ("Starting LogicController. Importing modules... ", end = "")
 import pathlib
 import os
 import random
 import runpy
 import sys
 import tempfile
-print ("Successfully imported modules.")
+print ("done. ", end="")
+
+print ("Setting my home folder as the current working directory... ", end="")
+os.chdir(os.path.dirname(sys.argv[0])) # <-- from https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
+print ("done. ")
+
+with pathlib.Path.cwd() as homepath:
+    print (f"   My home folder is {homepath}.")
 print ()
 
-print ("Checking current directory...")
-with pathlib.Path.cwd() as cdpath:
-    print (f"...the current directory is {cdpath}. ")
-print ()
-
-print ("Scanning current directory...")
-with os.scandir() as entries:
-    for entry in entries:
-        print(f"   {entry.name}")
-print ()
-
-print ("Creating a temporary file and writing some data to it...")
-with tempfile.TemporaryFile("w+t") as tp:
-    tp.write("   Hello universe!")
-    tp.seek(0) # <-- Moves program back to beginning of temporary file, in preperation for reading.
-    print (f"{tp.read()}")
-    tp.close() # <-- Closes temporary file. It is automatically erased.
-print ()
-
-print ("Looking for UI, Logic, and Data directories...")
 os.chdir ("..") # <-- Moves up to parent directory.
-with pathlib.Path.cwd() as cdpath: # <-- Restates 'cdpath' since it will otherwise still reflect the old directory.
-    print (f"...in {cdpath}...")
-    uiDirectory = cdpath / 'UI'
-    logicDirectory = cdpath / 'Logic'
-    dataDirectory = cdpath / 'Data'
+print ("Looking for UI, Logic, and Data directories in my parent folder...")
+with pathlib.Path.cwd() as parentPath:
+    uiDirectory = parentPath / 'UI'
+    logicDirectory = parentPath / 'Logic'
+    dataDirectory = parentPath / 'Data'
 
 missingDirectories = []
 if os.path.exists (uiDirectory):
@@ -51,6 +39,7 @@ if os.path.exists (dataDirectory):
 else: 
     print ("   ...data directory not found.")
     missingDirectories.append("Data")
+print (f"   (Parent folder is {parentPath})")
 print ()
 
 if os.path.exists (uiDirectory) == False or os.path.exists (logicDirectory) == False or os.path.exists (dataDirectory) == False:
