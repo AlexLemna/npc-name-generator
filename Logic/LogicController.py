@@ -1,10 +1,13 @@
 print ()
-print ("Starting LogicController. Importing modules... ", end = "")
+print ("Starting LogicController. Importing standard modules... ", end = "")
 import pathlib
 import os
-import runpy
 import sys
 import tempfile
+print ("done. ", end="")
+
+print ("Importing my modules... ", end = "")
+import RandomFromFile
 print ("done. ", end="")
 
 print ("Setting my home folder as the current working directory... ", end="")
@@ -47,8 +50,5 @@ if os.path.exists (uiDirectory) == False or os.path.exists (logicDirectory) == F
 else:
     print ("Everything fine here, carry on.")
 print()
-
-print ("Random output from local text file: ", end="")
-runpy.run_module ('RandomFromFile')
 
 print("How are you?")
