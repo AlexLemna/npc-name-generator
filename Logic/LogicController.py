@@ -2,7 +2,6 @@ print ()
 print ("Starting LogicController. Importing modules... ", end = "")
 import pathlib
 import os
-import random
 import runpy
 import sys
 import tempfile
