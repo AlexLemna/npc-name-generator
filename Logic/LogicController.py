@@ -2,8 +2,8 @@ print ()
 print ("Starting LogicController. Importing standard modules... ", end = "")
 import pathlib
 import os
+import subprocess
 import sys
-import tempfile
 print ("done. ", end="")
 
 print ("Importing my modules... ", end = "")
@@ -51,5 +51,10 @@ if os.path.exists (uiDirectory) == False or os.path.exists (logicDirectory) == F
 else:
     print ("Everything fine here, carry on.")
 print()
+
+# DEFINING THE "RUNLOGIC" FUNCTION
+# This will be used to run other modules in the Logic directory.
+def runLogic ( )
+    return
 
 print("How are you?")
