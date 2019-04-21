@@ -13,4 +13,4 @@ contents = []
 with open('local-test-data.txt', 'r') as fileData:
     contents = fileData.readlines()
 
-print ( random.choice(contents) )
+# print ( random.choice(contents) )
