@@ -25,6 +25,7 @@ print ("done.")
 def myModules():
     print ("Getting some local modules... ")
     from Logic import LogicController
+    LogicController.setup()
     print ("Local modules imported.")
 
 # SOME FUNCTIONS AND VARIABLES FOR EASY REFERENCE
@@ -79,7 +80,6 @@ def RosaSetup(): # Contains setup instructions.
             sys.exit(1) # Exits the program. "0" is the exit code for a successful program exiting. "1" is the exit code for a program exiting due to an error.
     else:
         print ("All directories present. Proceeding to get local modules.")
-    myModules()
     print("Setup complete.")
     print()
 
@@ -96,6 +96,7 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
     print ("     5. Full names")
     print ("     6. Full names, female-only")
     print ("     7. Full names, male-only")
+    print ("     8. Generate from sample data (dev purposes)")
     print ("X or 0. Exit program")
     print ()
     menuChoice = input ("Enter your choice: ")
@@ -115,6 +116,8 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
         pass
     elif menuChoice == "7":
         pass
+    elif menuChoice == "8":
+        LogicController.gen("sample")
     elif menuChoice == '0' or menuChoice == 'X' or menuChoice == "x":
         see_rosa_run is False
     else:
@@ -122,6 +125,7 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
 
 # *** MAIN PROGRAM STARTS HERE ***
 RosaSetup()
+from Logic import LogicController
 
 see_rosa_run = True
 if see_rosa_run is True:

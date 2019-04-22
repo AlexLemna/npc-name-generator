@@ -2,7 +2,6 @@
 # rlRandomName.py
 # ----------------------------------------
 # A logic module for Alex's "Project Rosa" that contains functions for randomly generating names.
-
 import os
 import random
 import sys
