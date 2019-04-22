@@ -2,7 +2,6 @@ print ()
 print ("Starting LogicController. Importing standard modules... ", end = "")
 import pathlib
 import os
-import subprocess
 import sys
 print ("done. ", end="")
 
@@ -52,9 +51,8 @@ else:
     print ("Everything fine here, carry on.")
 print()
 
-# DEFINING THE "RUNLOGIC" FUNCTION
-# This will be used to run other modules in the Logic directory.
-def runLogic ( )
-    return
+print ("Let's run RandomTextSampleData.py.")
+output = RandomTextSampleData.fRandomTextSampleData()
+print ( output )
 
 print("How are you?")
