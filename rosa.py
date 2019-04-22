@@ -20,13 +20,9 @@ print ("done.")
 # MODULES FROM PYPI (the Python community)
 # none
 
-os.chdir(os.path.dirname(sys.argv[0]))
-print (sys.path)
-
-
 # MY MODULES
 print ("Getting some local modules... ", end="")
-import RandomTextSampleData
+# from Logic import LogicController
 print ("done.")
 
 # SOME FUNCTIONS AND VARIABLES FOR EASY REFERENCE
