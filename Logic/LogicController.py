@@ -6,8 +6,7 @@ import sys
 print ("done. ", end="")
 
 print ("Importing my modules... ", end = "")
-import RandomTextLocal
-import RandomTextSampleData
+from Logic import RandomTextSampleData
 print ("done. ", end="")
 
 print ("Setting my home folder as the current working directory... ", end="")
