@@ -1,57 +1,30 @@
+# --------------------
+# LogicController.py
+# --------------------
+# This is the main "logic" file for Alex's "Project Rosa", a random name generator written in Python. Its job is to keep track of the program's custom logic modules and to serve as an intermediary in between them and the main file (rosa.py). This isn't actually necessary, but it serves as good coding practice for me. Hopefully.
+
+# import pathlib
+# import os
+# import sys
+import textwrap
+
+def printLC(x, end = "\n"): # Applies a consistant format to LogicController's text output.
+    print ("   LOGIC CONTROLLER:", x, end = end)
+
 print ()
-print ("Starting LogicController. Importing standard modules... ", end = "")
-import pathlib
-import os
-import sys
-print ("done. ", end="")
+printLC ("Present and accounted for.")
+printLC ( "Importing my modules...", "")
 
-print ("Importing my modules... ", end = "")
-from Logic import RandomTextSampleData
-print ("done. ", end="")
-
-print ("Setting my home folder as the current working directory... ", end="")
-os.chdir(os.path.dirname(sys.argv[0])) # <-- from https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
-print ("done. ")
-
-with pathlib.Path.cwd() as homepath:
-    print (f"   My home folder is {homepath}.")
-print ()
-
-os.chdir ("..") # <-- Moves up to parent directory.
-with pathlib.Path.cwd() as parentPath:
-    uiDirectory = parentPath / 'UI'
-    logicDirectory = parentPath / 'Logic'
-    dataDirectory = parentPath / 'Data'
-
-print ("Looking for UI, Logic, and Data directories in my parent folder...")
-missingDirectories = []
-if os.path.exists (uiDirectory):
-    print ("   ...UI directory located.")
-else: 
-    print ("   ...UI directory not found.")
-    missingDirectories.append("UI")
-if os.path.exists (logicDirectory):
-    print ("   ...logic directory located.")
-else: 
-    print ("   ...logic directory not found.")
-    missingDirectories.append("Logic")
-if os.path.exists (dataDirectory):
-    print ("   ...data directory located.")
-else: 
-    print ("   ...data directory not found.")
-    missingDirectories.append("Data")
-
-if os.path.exists (uiDirectory) == False or os.path.exists (logicDirectory) == False or os.path.exists (dataDirectory) == False:
-    print (f"   (Parent folder is {parentPath})")
-    print("I'm currently missing the following directories:", end="")
-    print("",missingDirectories, end=". ")
-    print("This is a problem.")
+# This section determines if this module is running on its own, if it is being invoked from another module. If it is running on its own, it can import 'rlRandomName' without any additional specific instructions. If it is being run from another module, however, it needs to specify that it is trying to import the 'rlRandomName' from the 'Logic' package. Note that for the \Logic directory to be considered a package, it needs to contain an __init__.py file.
+if __name__ == "__main__":
+    import rlRandomName
 else:
-    print ("Everything fine here, carry on.")
+    from Logic import rlRandomName
+
+print ("done. ")
+printLC ("LogicController setup complete.")
 print()
 
-print ("Let's run RandomTextSampleData.py.")
-output = RandomTextSampleData.fRandomTextSampleData()
-print ( output )
-
-print("How are you?")
+# print ("Let's run rlRandomName.py.")
+# output = RandomTextSampleData.fRandomTextSampleData()
+# print ( output )

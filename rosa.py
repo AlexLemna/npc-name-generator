@@ -23,9 +23,9 @@ print ("done.")
 
 # MY MODULES
 def myModules():
-    print ("Getting some local modules... ", end="")
-    # from Logic import LogicController
-    print ("done.")
+    print ("Getting some local modules... ")
+    from Logic import LogicController
+    print ("Local modules imported.")
 
 # SOME FUNCTIONS AND VARIABLES FOR EASY REFERENCE
 def CWD_home(): # Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
@@ -68,7 +68,7 @@ def RosaSetup(): # Contains setup instructions.
         if os.path.exists (uiDirectory) == False:
             printw ("The UI directory is missing, but this program can run perfectly fine from the command-line interface (CLI). User input specifying alternate locations for the UI directory is not supported at this time, but will be added in future versions soon(TM). For now, though, you're stuck with the CLI.")
             print()
-            menuChoice = inputw ("If you would like to exit the program now, enter X or 0. Otherwise, press any key to continue. ")
+            menuChoice = inputw ("If you would like to exit the program now, enter X or 0. Otherwise, press any key to continue setup. ")
             if menuChoice == '0' or menuChoice == 'X' or menuChoice == "x":
                 sys.exit(0) # Exits the program. "0" is the exit code for a successful program exiting. "1" is the exit code for a program exiting due to an error.
             else:
