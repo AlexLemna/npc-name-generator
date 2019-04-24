@@ -21,7 +21,13 @@ def setup():
     print()
 
 def gen(x):
-    if x == "last names":
+    if x == "firstfemale":
+        output = rlRandomName.txtFile("NamesFirstFemale.txt")
+        print ( output )
+    elif x == "firstmale":
+        output = rlRandomName.txtFile("NamesFirstMale.txt")
+        print ( output )
+    elif x == "last":
         output = rlRandomName.txtFile("NamesLast.txt")
         print ( output )
     elif x == "Sample" or x == "sample":

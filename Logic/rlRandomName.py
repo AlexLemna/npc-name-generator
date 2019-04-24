@@ -12,7 +12,7 @@ contents = []
 def CWD_home(): # Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
     os.chdir (os.path.dirname (sys.argv[0]))
 
-# target file is at \Data\NamesLast.txt
+# A function that returns one random line from a text file
 def txtFile (x):
   CWD_home ()
   if __name__ == "Logic.rlRandomName": # This is the normal module behavior - it's being run from somewhere else.
