@@ -109,7 +109,7 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
     elif menuChoice == "3":
         pass
     elif menuChoice == "4":
-        pass
+        LogicController.gen("last names")
     elif menuChoice == "5":
         pass
     elif menuChoice == "6":

@@ -21,7 +21,10 @@ def setup():
     print()
 
 def gen(x):
-    if x == "Sample" or x == "sample":
+    if x == "last names":
+        output = rlRandomName.txtFile("NamesLast.txt")
+        print ( output )
+    elif x == "Sample" or x == "sample":
         output = rlRandomName.SampleData()
         print ( output )
     else:
