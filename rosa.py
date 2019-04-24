@@ -103,7 +103,7 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
     print ()
 
     if menuChoice == "1":
-        pass
+        LogicController.gen("first")
     elif menuChoice == "2":
         LogicController.gen("firstfemale")
     elif menuChoice == "3":

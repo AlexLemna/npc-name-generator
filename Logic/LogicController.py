@@ -21,22 +21,25 @@ def setup():
     print()
 
 def gen(x):
-    if x == "firstfemale":
-        output = rlRandomName.txtFile("NamesFirstFemale.txt")
+    if x == "first":
+        output = rlRandomName.manyfiles("NamesFirstFemale.txt", "NamesFirstMale.txt")
+        print ( output )
+    elif x == "firstfemale":
+        output = rlRandomName.onefile("NamesFirstFemale.txt")
         print ( output )
     elif x == "firstmale":
-        output = rlRandomName.txtFile("NamesFirstMale.txt")
+        output = rlRandomName.onefile("NamesFirstMale.txt")
         print ( output )
     elif x == "last":
-        output = rlRandomName.txtFile("NamesLast.txt")
+        output = rlRandomName.onefile("NamesLast.txt")
         print ( output )
     elif x == "fullfemale":
-        output = rlRandomName.txtFile("NamesFirstFemale.txt")
-        output1 = rlRandomName.txtFile("NamesLast.txt")
+        output = rlRandomName.onefile("NamesFirstFemale.txt")
+        output1 = rlRandomName.onefile("NamesLast.txt")
         print ( output, output1 )
     elif x == "fullmale":
-        output = rlRandomName.txtFile("NamesFirstMale.txt")
-        output1 = rlRandomName.txtFile("NamesLast.txt")
+        output = rlRandomName.onefile("NamesFirstMale.txt")
+        output1 = rlRandomName.onefile("NamesLast.txt")
         print ( output, output1 )
     elif x == "Sample" or x == "sample":
         output = rlRandomName.SampleData()

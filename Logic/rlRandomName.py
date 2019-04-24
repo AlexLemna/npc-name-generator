@@ -12,8 +12,10 @@ contents = []
 def CWD_home(): # Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
     os.chdir (os.path.dirname (sys.argv[0]))
 
+
+
 # A function that returns one random line from a text file 'x'
-def txtFile (x):
+def onefile (x):
   CWD_home ()
   if __name__ == "Logic.rlRandomName": # This is the normal module behavior - it's being run from somewhere else.
     os.chdir ( ".\Data" )
@@ -61,6 +63,62 @@ def txtFile (x):
     print ( "   Take a screenshot and contact Alex. Also, tell him to create some kind of")
     print ( "   error logging system so you don't have to manually ask him for help every")
     print ( "   time he messes up.")
+
+
+
+# A function that returns one random line from a list generated from multiple text files 'x', 'y', and so on.
+def manyfiles ( *files ):
+  CWD_home ()
+  if __name__ == "Logic.rlRandomName": # This is the normal module behavior - it's being run from somewhere else.
+    os.chdir ( ".\Data" )
+    contents = []
+    for filename in files:
+      with open ( filename, 'r') as fileData:
+        contents = contents.append ( fileData.readlines())
+    contents = [item.rstrip() for item in contents] # strips newline characters ('\n') and spaces
+    return ( random.choice(contents) )
+
+  elif __name__ == "__main__": # Checks if this program is running as the main script (only happens for debugging purposes)
+    os.chdir ("..")
+    os.chdir ( ".\Data" )
+    with open( x, 'r') as fileData:
+      contents = fileData.readlines()
+      contents = [item.rstrip() for item in contents] # strips newline characters ('\n') and spaces
+      print ( random.choice(contents) )
+  
+  elif __name__ == "rlRandomName": # Checks if this program is running as a module from another script inside its home directory (only happens for debugging purposes)
+    os.chdir ("..")
+    os.chdir ( ".\Data" )
+    with open( x, 'r') as fileData:
+      contents = fileData.readlines()
+      contents = [item.rstrip() for item in contents] # strips newline characters ('\n') and spaces
+      return ( random.choice(contents) )
+
+  else: # I'm honestly not sure what situation wouldn't fit into the statements above.
+    from inspect import currentframe, getframeinfo
+    frameinfo = getframeinfo ( currentframe())
+
+    print ("")
+    print ("A wild UNEXPECTED ERROR appeared!")
+    print ( f"REF: The file location is {frameinfo.filename}." )
+    print ( f"REF: This error message is around line {frameinfo.lineno} of that file.")
+    print ( "   SUMMARY:")
+    print ( "   This section of code has some 'if' and 'else if' statements that should")
+    print ( "   cover every situation. This error is the 'else' statement, and it means")
+    print ( "   a situation occured that I didn't forsee.")
+    print ( "   SPECIFICS:")
+    print ( "   The error occured in a file called 'rlRandomName.py'. The file behaves")
+    print ( "   differently depending on if it is running by itself or as a 'module' being")
+    print ( "   called by a different file. It can tell how it is being run by checking")
+    print ( "   a variable called __name__ against some predetermined values. It expects")
+    print ( "   __name__'s value to be 'rlRandomName', 'Logic.rlRandomName', or '__main__'.")
+    print ( f"   Instead, the value is '{__name__}'.")
+    print ( "   WHAT YOU SHOULD DO:")
+    print ( "   Take a screenshot and contact Alex. Also, tell him to create some kind of")
+    print ( "   error logging system so you don't have to manually ask him for help every")
+    print ( "   time he messes up.")
+
+
 
 # A function that returns one random line from a text file at \Data\SampleData.txt"
 def SampleData ():
