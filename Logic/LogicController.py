@@ -30,6 +30,14 @@ def gen(x):
     elif x == "last":
         output = rlRandomName.txtFile("NamesLast.txt")
         print ( output )
+    elif x == "fullfemale":
+        output = rlRandomName.txtFile("NamesFirstFemale.txt")
+        output1 = rlRandomName.txtFile("NamesLast.txt")
+        print ( output, output1 )
+    elif x == "fullmale":
+        output = rlRandomName.txtFile("NamesFirstMale.txt")
+        output1 = rlRandomName.txtFile("NamesLast.txt")
+        print ( output, output1 )
     elif x == "Sample" or x == "sample":
         output = rlRandomName.SampleData()
         print ( output )

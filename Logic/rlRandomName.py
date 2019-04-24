@@ -12,13 +12,14 @@ contents = []
 def CWD_home(): # Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
     os.chdir (os.path.dirname (sys.argv[0]))
 
-# A function that returns one random line from a text file
+# A function that returns one random line from a text file 'x'
 def txtFile (x):
   CWD_home ()
   if __name__ == "Logic.rlRandomName": # This is the normal module behavior - it's being run from somewhere else.
     os.chdir ( ".\Data" )
     with open( x, 'r') as fileData:
       contents = fileData.readlines()
+      contents = [item.rstrip() for item in contents] # strips newline characters ('\n') and spaces
       return ( random.choice(contents) )
 
   elif __name__ == "__main__": # Checks if this program is running as the main script (only happens for debugging purposes)
@@ -26,6 +27,7 @@ def txtFile (x):
     os.chdir ( ".\Data" )
     with open( x, 'r') as fileData:
       contents = fileData.readlines()
+      contents = [item.rstrip() for item in contents] # strips newline characters ('\n') and spaces
       print ( random.choice(contents) )
   
   elif __name__ == "rlRandomName": # Checks if this program is running as a module from another script inside its home directory (only happens for debugging purposes)
@@ -33,6 +35,7 @@ def txtFile (x):
     os.chdir ( ".\Data" )
     with open( x, 'r') as fileData:
       contents = fileData.readlines()
+      contents = [item.rstrip() for item in contents] # strips newline characters ('\n') and spaces
       return ( random.choice(contents) )
 
   else: # I'm honestly not sure what situation wouldn't fit into the statements above.
@@ -59,17 +62,16 @@ def txtFile (x):
     print ( "   error logging system so you don't have to manually ask him for help every")
     print ( "   time he messes up.")
 
-# target file is at \Data\SampleData.txt"
+# A function that returns one random line from a text file at \Data\SampleData.txt"
 def SampleData ():
+  CWD_home()
   if __name__ == "Logic.rlRandomName": # This is the normal module behavior - it's being run from somewhere else.
-    CWD_home()
     os.chdir ( ".\Data" )
     with open('SampleData.txt', 'r') as fileData:
       contents = fileData.readlines()
       return ( random.choice(contents) )
 
   elif __name__ == "__main__": # Checks if this program is running as the main script (only happens for debugging purposes)
-    CWD_home()
     os.chdir ("..")
     os.chdir ( ".\Data" )
     with open('SampleData.txt', 'r') as fileData:
@@ -77,7 +79,6 @@ def SampleData ():
       print ( random.choice(contents) )
   
   elif __name__ == "rlRandomName": # Checks if this program is running as a module from another script inside its home directory (only happens for debugging purposes)
-    CWD_home()
     os.chdir ("..")
     os.chdir ( ".\Data" )
     with open('SampleData.txt', 'r') as fileData:
