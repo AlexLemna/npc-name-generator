@@ -13,7 +13,6 @@ def CWD_home(): # Ensures that the current working directory is set to the home 
     os.chdir (os.path.dirname (sys.argv[0]))
 
 
-
 # A function that returns one random line from a text file 'x'
 def onefile (x):
   CWD_home ()
