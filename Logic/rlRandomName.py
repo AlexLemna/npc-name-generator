@@ -67,15 +67,19 @@ def onefile (x):
 
 
 # A function that returns one random line from a list generated from multiple text files 'x', 'y', and so on.
-def manyfiles ( *files ):
+def twofiles ( file1, file2 ):
   CWD_home ()
   if __name__ == "Logic.rlRandomName": # This is the normal module behavior - it's being run from somewhere else.
     os.chdir ( ".\Data" )
-    contents = []
-    for filename in files:
-      with open ( filename, 'r') as fileData:
-        contents = contents.append ( fileData.readlines())
-    contents = [item.rstrip() for item in contents] # strips newline characters ('\n') and spaces
+    fileData1 = open ( file1, 'r')
+    contents1 = fileData1.readlines()
+    contents1 = [item.rstrip() for item in contents1] # strips newline characters ('\n') and spaces
+    fileData1.close()
+    fileData2 = open ( file2, 'r')
+    contents2 = fileData2.readlines()
+    contents2 = [item.rstrip() for item in contents2]
+    fileData2.close()
+    contents = contents1 + contents2
     return ( random.choice(contents) )
 
   elif __name__ == "__main__": # Checks if this program is running as the main script (only happens for debugging purposes)

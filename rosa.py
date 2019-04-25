@@ -111,7 +111,7 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
     elif menuChoice == "4":
         LogicController.gen("last")
     elif menuChoice == "5":
-        pass
+        LogicController.gen("full")
     elif menuChoice == "6":
         LogicController.gen("fullfemale")
     elif menuChoice == "7":
@@ -128,7 +128,7 @@ RosaSetup()
 from Logic import LogicController
 
 see_rosa_run = True
-if see_rosa_run is True:
+while see_rosa_run is True:
     MainMenu()
 else:
     sys.exit(0)

@@ -22,7 +22,7 @@ def setup():
 
 def gen(x):
     if x == "first":
-        output = rlRandomName.manyfiles("NamesFirstFemale.txt", "NamesFirstMale.txt")
+        output = rlRandomName.twofiles("NamesFirstFemale.txt", "NamesFirstMale.txt")
         print ( output )
     elif x == "firstfemale":
         output = rlRandomName.onefile("NamesFirstFemale.txt")
@@ -33,6 +33,10 @@ def gen(x):
     elif x == "last":
         output = rlRandomName.onefile("NamesLast.txt")
         print ( output )
+    elif x == "full":
+        output = rlRandomName.twofiles("NamesFirstFemale.txt", "NamesFirstMale.txt")
+        output1 = rlRandomName.onefile("NamesLast.txt")
+        print ( output, output1 )
     elif x == "fullfemale":
         output = rlRandomName.onefile("NamesFirstFemale.txt")
         output1 = rlRandomName.onefile("NamesLast.txt")
