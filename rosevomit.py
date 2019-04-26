@@ -1,11 +1,11 @@
 # --------------------
-# ROSA.PY
+# ROSEVOMIT.PY
 # --------------------
-# The main file for Alex's "Project Rosa", a random name generator written in Python.
+# The main file for Alex's "Project ROSEVOMIT", a random name generator written in Python.
 
 print ()
 print (70 * "-")
-print (30 * "-", "ROSA.PY", 31 * "-")
+print (28 * "-", "ROSEVOMIT.PY", 28 * "-")
 print (70 * "-")
 print ()
 
@@ -38,7 +38,7 @@ def printw(x): # Textwrapping for regular 'print' commands.
 def inputw(x): # Textwrapping for user input prompts.
     input ( textwrap.fill (x, width=70))
 
-def RosaSetup(): # Contains setup instructions.
+def RosevomitSetup(): # Contains setup instructions.
     print ("Looking for UI, Logic, and Data directories...")
     missingDirectories = []
     CWD_home ()
@@ -87,7 +87,7 @@ def RosaSetup(): # Contains setup instructions.
 
 def MainMenu(): # Contains logic and display instructions for the main menu.
     print ()
-    print (10 * "-", "Rosa.py Main Menu", 10 * "-" )
+    print (10 * "-", "Rosevomit.py Main Menu", 10 * "-" )
     print ("What sorts of names would you like to generate?")
     print ("     1. First names")
     print ("     2. First names, female-only")
@@ -119,17 +119,17 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
     elif menuChoice == "8":
         LogicController.gen("sample")
     elif menuChoice == '0' or menuChoice == 'X' or menuChoice == "x":
-        see_rosa_run is False # This command doesn't actually seem to do anything, so for good measure...
-        sys.exit(0) # ...I added this.
+        sys.exit(0)
     else:
         print ("Look, I'm just a computer program. I've got all the time to waste in the world, and I don't get bored. You can keep entering invalid inputs, or you can actually follow instructions. Your call.")
 
 # *** MAIN PROGRAM STARTS HERE ***
-RosaSetup()
+RosevomitSetup()
 from Logic import LogicController
 
+# After setup, rosevomit.py will display the main menu and will carry out instructions based on user input. This is an indefinite loop - if a vosevomit.py ever has no more instructions to carry out, it displays the main menu again and awaits further instructions. This is based on the 'see_rosa_run' variable. This variable should never change. If it does, the program exits and gives the system an error code.
 see_rosa_run = True
 while see_rosa_run is True:
     MainMenu()
 else:
-    sys.exit(0)
+    sys.exit(1)
