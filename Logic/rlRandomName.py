@@ -1,7 +1,8 @@
 # ----------------------------------------
 # rlRandomName.py
 # ----------------------------------------
-# A logic module for Alex's "Project Rosa" that contains functions for randomly generating names.
+# A logic module for Alex's "Project Rosevomit" that contains functions for randomly generating names.
+
 import os
 import random
 import sys
