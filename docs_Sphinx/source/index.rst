@@ -8,8 +8,11 @@ Welcome to Rosevomit's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   core/rosevomit.py
+   core/Data
+   core/Logic
+   core/UI
 
 
 Indices and tables
