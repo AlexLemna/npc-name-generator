@@ -70,7 +70,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+# docs/_build/ (<-- this was in the template, but I want to include these files in the repo)
 
 # PyBuilder
 target/
