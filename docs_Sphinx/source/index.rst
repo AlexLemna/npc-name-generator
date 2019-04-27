@@ -13,11 +13,23 @@ Contents
   .gitignore <help-content/gitignore>
   requirements.txt <help-content/requirements.txt.rst>        
 
-
-
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+Some definitions
+=================
+package
+  Any folder/directory that contains an __init__.py file.
+
+module
+  A valid Python file with a .py extension, when it is being called from another file. In Python terms, it is running with a __name__ not equal to __main__.
+
+script
+  A valid Python file with a .py extension, when it is running on its own. In Python terms, it is running with a __name__ equal to __main__.
+
+distribution
+  How one *package* relates to other *packages* and *modules*.
