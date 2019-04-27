@@ -8,9 +8,10 @@ Contents
 
 .. toctree::           
   :maxdepth: 2   
-                          
-  core/rosevomit.py                           
-  Core folders <core/core>           
+                                                 
+  Rosevomit core files and folders <help-content/core>
+  .gitignore <help-content/gitignore>
+  requirements.txt <help-content/requirements.txt.rst>        
 
 
 
