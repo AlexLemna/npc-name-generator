@@ -21,13 +21,6 @@ print ("done.")
 # MODULES FROM PYPI (the Python community)
 # none
 
-# MY MODULES
-def myModules():
-    print ("Getting some local modules... ")
-    from Logic import LogicController
-    LogicController.setup()
-    print ("Local modules imported.")
-
 # SOME FUNCTIONS AND VARIABLES FOR EASY REFERENCE
 def CWD_home(): # Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
     os.chdir (os.path.dirname (sys.argv[0]))
@@ -36,7 +29,8 @@ def printw(x): # Textwrapping for regular 'print' commands.
     print ( textwrap.fill (x, width = 70))
 
 def inputw(x): # Textwrapping for user input prompts.
-    input ( textwrap.fill (x, width=70))
+    _input = input ( textwrap.fill (x, width=70))
+    return ( _input )
 
 def RosevomitSetup(): # Contains setup instructions.
     print ("Looking for UI, Logic, and Data directories...")
@@ -79,8 +73,8 @@ def RosevomitSetup(): # Contains setup instructions.
             input ("Press any key to quit.")
             sys.exit(1) # Exits the program. "0" is the exit code for a successful program exiting. "1" is the exit code for a program exiting due to an error.
     else:
-        print ("All directories present. Proceeding to get local modules.")
-    print("Setup complete.")
+        print ("All directories present.")
+    print("Main setup complete.")
     print()
 
 
@@ -103,7 +97,11 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
     print ()
 
     if menuChoice == "1":
-        LogicController.gen("first")
+        import Logic
+        from Logic import rlRepeatFunction
+        _input = input ("How many first names should be generated? ")
+        _output = LogicController.gen("first")
+        Logic.rlRepeatFunction( _output, _input)
     elif menuChoice == "2":
         LogicController.gen("firstfemale")
     elif menuChoice == "3":
@@ -123,9 +121,16 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
     else:
         print ("Look, I'm just a computer program. I've got all the time to waste in the world, and I don't get bored. You can keep entering invalid inputs, or you can actually follow instructions. Your call.")
 
+
+
+
 # *** MAIN PROGRAM STARTS HERE ***
 RosevomitSetup()
+print ("Proceeding to get local modules... ", end="")
+CWD_home()
 from Logic import LogicController
+from Logic import rlRepeatFunction
+print ("done.")
 
 # After setup, rosevomit.py will display the main menu and will carry out instructions based on user input. This is an indefinite loop - if a vosevomit.py ever has no more instructions to carry out, it displays the main menu again and awaits further instructions. This is based on the 'see_rosa_run' variable. This variable should never change. If it does, the program exits and gives the system an error code.
 see_rosa_run = True
