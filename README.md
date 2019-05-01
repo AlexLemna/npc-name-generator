@@ -22,6 +22,8 @@ Don't freak out - it can look intimidating, but you can see that there's only a 
 
 Hopefully, any questions you might have about Rosevomit's code can be answered either in the [wiki](https://github.com/AlexLemna/rosevomit/wiki) or in `_docs_Sphinx`. Both are works in progress - the wiki is mostly focused on what Rosevomit down the road, while Sphinx is mostly focused on documenting what exists right now. Sphinx, by the way, is [a tool](http://www.sphinx-doc.org/en/master/index.html) commonly used by Python programmers to document their projects and is totally separate from Rosevomit. I haven't done much with it yet, but if you want to look around here's a quick overview of the contents:
 
+*EDIT: I'll be getting rid of Sphinx shortly, at least for the time being. While it's a powerful tool, I'm not sure how to use it yet and I want to focus on one thing at a time.*
+
 ````
 + _docs_Sphinx/
     +-- build/      <-- the documentation Sphinx builds
@@ -33,4 +35,3 @@ Hopefully, any questions you might have about Rosevomit's code can be answered e
     +-- make.bat
     +-- Makefile
 ````
-Stick to the `build` folder and you should be fine.
