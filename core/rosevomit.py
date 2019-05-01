@@ -97,25 +97,29 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
     print ()
 
     if menuChoice == "1":
-        import Logic
-        from Logic import rlRepeatFunction
         _input = input ("How many first names should be generated? ")
-        _output = LogicController.gen("first")
-        Logic.rlRepeatFunction( _output, _input)
+        LogicController.gen("first", int(_input))
     elif menuChoice == "2":
-        LogicController.gen("firstfemale")
+        _input = input ("How many first names should be generated? ")
+        LogicController.gen("firstfemale", int(_input))
     elif menuChoice == "3":
-        LogicController.gen("firstmale")
+        _input = input ("How many first names should be generated? ")
+        LogicController.gen("firstmale", int(_input))
     elif menuChoice == "4":
-        LogicController.gen("last")
+        _input = input ("How many first names should be generated? ")
+        LogicController.gen("last", int(_input))
     elif menuChoice == "5":
-        LogicController.gen("full")
+        _input = input ("How many first names should be generated? ")
+        LogicController.gen("full", int(_input))
     elif menuChoice == "6":
-        LogicController.gen("fullfemale")
+        _input = input ("How many first names should be generated? ")
+        LogicController.gen("fullfemale", int(_input))
     elif menuChoice == "7":
-        LogicController.gen("fullmale")
+        _input = input ("How many first names should be generated? ")
+        LogicController.gen("fullmale", int(_input))
     elif menuChoice == "8":
-        LogicController.gen("sample")
+        _input = input ("How many first names should be generated? ")
+        LogicController.gen("sample", int(_input))
     elif menuChoice == '0' or menuChoice == 'X' or menuChoice == "x":
         sys.exit(0)
     else:

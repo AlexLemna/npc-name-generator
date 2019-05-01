@@ -21,35 +21,58 @@ def setup():
     printLC ("Present and accounted for.")
     print()
 
-def gen(x):
+def gen(x, y):
     if x == "first":
-        output = rlRandomName.twofiles("NamesFirstFemale.txt", "NamesFirstMale.txt")
-        print ( output )
+        def get_names():
+            output = rlRandomName.twofiles("NamesFirstFemale.txt", "NamesFirstMale.txt")
+            print ( output )
+        rlRepeatFunction.repeatfunction (get_names, y)
+
     elif x == "firstfemale":
-        output = rlRandomName.onefile("NamesFirstFemale.txt")
-        print ( output )
+        def get_names():
+            output = rlRandomName.onefile("NamesFirstFemale.txt")
+            print ( output )
+        rlRepeatFunction.repeatfunction (get_names, y)
+
+
     elif x == "firstmale":
-        output = rlRandomName.onefile("NamesFirstMale.txt")
-        print ( output )
+        def get_names():
+            output = rlRandomName.onefile("NamesFirstMale.txt")
+            print ( output )
+        rlRepeatFunction.repeatfunction (get_names, y)
+
     elif x == "last":
-        output = rlRandomName.onefile("NamesLast.txt")
-        print ( output )
+        def get_names():
+            output = rlRandomName.onefile("NamesLast.txt")
+            print ( output )
+        rlRepeatFunction.repeatfunction (get_names, y)
+
     elif x == "full":
-        output = rlRandomName.twofiles("NamesFirstFemale.txt", "NamesFirstMale.txt")
-        output1 = rlRandomName.onefile("NamesLast.txt")
-        print ( output, output1 )
+        def get_names():
+            output = rlRandomName.twofiles("NamesFirstFemale.txt", "NamesFirstMale.txt")
+            output1 = rlRandomName.onefile("NamesLast.txt")
+            print ( output, output1 )
+        rlRepeatFunction.repeatfunction (get_names, y)
+
     elif x == "fullfemale":
-        output = rlRandomName.onefile("NamesFirstFemale.txt")
-        output1 = rlRandomName.onefile("NamesLast.txt")
-        print ( output, output1 )
+        def get_names():
+            output = rlRandomName.onefile("NamesFirstFemale.txt")
+            output1 = rlRandomName.onefile("NamesLast.txt")
+            print ( output, output1 )
+        rlRepeatFunction.repeatfunction (get_names, y)
+
     elif x == "fullmale":
-        output = rlRandomName.onefile("NamesFirstMale.txt")
-        output1 = rlRandomName.onefile("NamesLast.txt")
-        print ( output, output1 )
+        def get_names():
+            output = rlRandomName.onefile("NamesFirstMale.txt")
+            output1 = rlRandomName.onefile("NamesLast.txt")
+            print ( output, output1 )
+        rlRepeatFunction.repeatfunction (get_names, y)
+
     elif x == "Sample" or x == "sample":
-        output = rlRandomName.SampleData()
-        print ( output )
+        def get_names():
+            output = rlRandomName.SampleData()
+            print ( output )
+        rlRepeatFunction.repeatfunction (get_names, y)
+
     else:
         printLC ("I'm sorry, I can't do that.")
-
-# Sdef repeatFunction (x, y)
