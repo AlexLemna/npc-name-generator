@@ -1,2 +1,5 @@
-packaging==19.0
-python_version >=3.7.2
+prompt-toolkit == 1.0.14
+Pygments  >= 2.2.0
+PyInquirer == 1.0.3
+regex >= 2016.11.21
+
