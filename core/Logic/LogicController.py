@@ -5,12 +5,12 @@
 
 import textwrap
 
-# This section determines if this module is running on its own, if it is being invoked from another module. If it is running on its own, it can import 'rlRandomName' without any additional specific instructions. If it is being run from another module, however, it needs to specify that it is trying to import the 'rlRandomName' from the 'Logic' package. Note that for the \Logic directory to be considered a package, it needs to contain an __init__.py file.
+# This section determines if this module is running on its own, if it is being invoked from another module. If it is running on its own, it can import 'RandomName' without any additional specific instructions. If it is being run from another module, however, it needs to specify that it is trying to import the 'RandomName' from the 'Logic' package. Note that for the \Logic directory to be considered a package, it needs to contain an __init__.py file.
 if __name__ == "__main__":
-    import rlRandomName
-    import rlRepeatFunction
+    import RandomName
+    import RepeatFunction
 else:
-    from Logic import rlRandomName, rlRepeatFunction
+    from Logic import RandomName, RepeatFunction
 
 
 def printLC(x, end = "\n"): # Applies a consistant format to LogicController's text output.
@@ -24,55 +24,55 @@ def setup():
 def gen(x, y):
     if x == "first":
         def get_names():
-            output = rlRandomName.twofiles("NamesFirstFemale.txt", "NamesFirstMale.txt")
+            output = RandomName.twofiles("NamesFirstFemale.txt", "NamesFirstMale.txt")
             print ( output )
-        rlRepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeatfunction (get_names, y)
 
     elif x == "firstfemale":
         def get_names():
-            output = rlRandomName.onefile("NamesFirstFemale.txt")
+            output = RandomName.onefile("NamesFirstFemale.txt")
             print ( output )
-        rlRepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeatfunction (get_names, y)
 
 
     elif x == "firstmale":
         def get_names():
-            output = rlRandomName.onefile("NamesFirstMale.txt")
+            output = RandomName.onefile("NamesFirstMale.txt")
             print ( output )
-        rlRepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeatfunction (get_names, y)
 
     elif x == "last":
         def get_names():
-            output = rlRandomName.onefile("NamesLast.txt")
+            output = RandomName.onefile("NamesLast.txt")
             print ( output )
-        rlRepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeatfunction (get_names, y)
 
     elif x == "full":
         def get_names():
-            output = rlRandomName.twofiles("NamesFirstFemale.txt", "NamesFirstMale.txt")
-            output1 = rlRandomName.onefile("NamesLast.txt")
+            output = RandomName.twofiles("NamesFirstFemale.txt", "NamesFirstMale.txt")
+            output1 = RandomName.onefile("NamesLast.txt")
             print ( output, output1 )
-        rlRepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeatfunction (get_names, y)
 
     elif x == "fullfemale":
         def get_names():
-            output = rlRandomName.onefile("NamesFirstFemale.txt")
-            output1 = rlRandomName.onefile("NamesLast.txt")
+            output = RandomName.onefile("NamesFirstFemale.txt")
+            output1 = RandomName.onefile("NamesLast.txt")
             print ( output, output1 )
-        rlRepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeatfunction (get_names, y)
 
     elif x == "fullmale":
         def get_names():
-            output = rlRandomName.onefile("NamesFirstMale.txt")
-            output1 = rlRandomName.onefile("NamesLast.txt")
+            output = RandomName.onefile("NamesFirstMale.txt")
+            output1 = RandomName.onefile("NamesLast.txt")
             print ( output, output1 )
-        rlRepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeatfunction (get_names, y)
 
     elif x == "Sample" or x == "sample":
         def get_names():
-            output = rlRandomName.SampleData()
+            output = RandomName.SampleData()
             print ( output )
-        rlRepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeatfunction (get_names, y)
 
     else:
         printLC ("I'm sorry, I can't do that.")

@@ -133,7 +133,6 @@ RosevomitSetup()
 print ("Proceeding to get local modules... ", end="")
 CWD_home()
 from Logic import LogicController
-from Logic import rlRepeatFunction
 print ("done.")
 
 # After setup, rosevomit.py will display the main menu and will carry out instructions based on user input. This is an indefinite loop - if a vosevomit.py ever has no more instructions to carry out, it displays the main menu again and awaits further instructions. This is based on the 'see_rosa_run' variable. This variable should never change. If it does, the program exits and gives the system an error code.

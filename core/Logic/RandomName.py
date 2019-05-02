@@ -1,5 +1,5 @@
 # ----------------------------------------
-# rlRandomName.py
+# RandomName.py
 # ----------------------------------------
 # A logic module for Alex's "Project Rosevomit" that contains functions for randomly generating names.
 
@@ -17,7 +17,7 @@ def CWD_home(): # Ensures that the current working directory is set to the home 
 # A function that returns one random line from a text file 'x'
 def onefile (x):
   CWD_home ()
-  if __name__ == "Logic.rlRandomName": # This is the normal module behavior - it's being run from somewhere else.
+  if __name__ == "Logic.RandomName": # This is the normal module behavior - it's being run from somewhere else.
     os.chdir ( ".\Data" )
     with open( x, 'r') as fileData:
       contents = fileData.readlines()
@@ -32,7 +32,7 @@ def onefile (x):
       contents = [item.rstrip() for item in contents] # strips newline characters ('\n') and spaces
       print ( random.choice(contents) )
   
-  elif __name__ == "rlRandomName": # Checks if this program is running as a module from another script inside its home directory (only happens for debugging purposes)
+  elif __name__ == "RandomName": # Checks if this program is running as a module from another script inside its home directory (only happens for debugging purposes)
     os.chdir ("..")
     os.chdir ( ".\Data" )
     with open( x, 'r') as fileData:
@@ -53,11 +53,11 @@ def onefile (x):
     print ( "   cover every situation. This error is the 'else' statement, and it means")
     print ( "   a situation occured that I didn't forsee.")
     print ( "   SPECIFICS:")
-    print ( "   The error occured in a file called 'rlRandomName.py'. The file behaves")
+    print ( "   The error occured in a file called 'RandomName.py'. The file behaves")
     print ( "   differently depending on if it is running by itself or as a 'module' being")
     print ( "   called by a different file. It can tell how it is being run by checking")
     print ( "   a variable called __name__ against some predetermined values. It expects")
-    print ( "   __name__'s value to be 'rlRandomName', 'Logic.rlRandomName', or '__main__'.")
+    print ( "   __name__'s value to be 'RandomName', 'Logic.RandomName', or '__main__'.")
     print ( f"   Instead, the value is '{__name__}'.")
     print ( "   WHAT YOU SHOULD DO:")
     print ( "   Take a screenshot and contact Alex. Also, tell him to create some kind of")
@@ -69,7 +69,7 @@ def onefile (x):
 # A function that returns one random line from a list generated from multiple text files 'x', 'y', and so on.
 def twofiles ( file1, file2 ):
   CWD_home ()
-  if __name__ == "Logic.rlRandomName": # This is the normal module behavior - it's being run from somewhere else.
+  if __name__ == "Logic.RandomName": # This is the normal module behavior - it's being run from somewhere else.
     os.chdir ( ".\Data" )
     fileData1 = open ( file1, 'r')
     contents1 = fileData1.readlines()
@@ -90,7 +90,7 @@ def twofiles ( file1, file2 ):
       contents = [item.rstrip() for item in contents] # strips newline characters ('\n') and spaces
       print ( random.choice(contents) )
   
-  elif __name__ == "rlRandomName": # Checks if this program is running as a module from another script inside its home directory (only happens for debugging purposes)
+  elif __name__ == "RandomName": # Checks if this program is running as a module from another script inside its home directory (only happens for debugging purposes)
     os.chdir ("..")
     os.chdir ( ".\Data" )
     with open( x, 'r') as fileData:
@@ -111,11 +111,11 @@ def twofiles ( file1, file2 ):
     print ( "   cover every situation. This error is the 'else' statement, and it means")
     print ( "   a situation occured that I didn't forsee.")
     print ( "   SPECIFICS:")
-    print ( "   The error occured in a file called 'rlRandomName.py'. The file behaves")
+    print ( "   The error occured in a file called 'RandomName.py'. The file behaves")
     print ( "   differently depending on if it is running by itself or as a 'module' being")
     print ( "   called by a different file. It can tell how it is being run by checking")
     print ( "   a variable called __name__ against some predetermined values. It expects")
-    print ( "   __name__'s value to be 'rlRandomName', 'Logic.rlRandomName', or '__main__'.")
+    print ( "   __name__'s value to be 'RandomName', 'Logic.RandomName', or '__main__'.")
     print ( f"   Instead, the value is '{__name__}'.")
     print ( "   WHAT YOU SHOULD DO:")
     print ( "   Take a screenshot and contact Alex. Also, tell him to create some kind of")
@@ -127,7 +127,7 @@ def twofiles ( file1, file2 ):
 # A function that returns one random line from a text file at \Data\SampleData.txt"
 def SampleData ():
   CWD_home()
-  if __name__ == "Logic.rlRandomName": # This is the normal module behavior - it's being run from somewhere else.
+  if __name__ == "Logic.RandomName": # This is the normal module behavior - it's being run from somewhere else.
     os.chdir ( ".\Data" )
     with open('SampleData.txt', 'r') as fileData:
       contents = fileData.readlines()
@@ -140,7 +140,7 @@ def SampleData ():
       contents = fileData.readlines()
       print ( random.choice(contents) )
   
-  elif __name__ == "rlRandomName": # Checks if this program is running as a module from another script inside its home directory (only happens for debugging purposes)
+  elif __name__ == "RandomName": # Checks if this program is running as a module from another script inside its home directory (only happens for debugging purposes)
     os.chdir ("..")
     os.chdir ( ".\Data" )
     with open('SampleData.txt', 'r') as fileData:
@@ -160,11 +160,11 @@ def SampleData ():
     print ( "   cover every situation. This error is the 'else' statement, and it means")
     print ( "   a situation occured that I didn't forsee.")
     print ( "   SPECIFICS:")
-    print ( "   The error occured in a file called 'rlRandomName.py'. The file behaves")
+    print ( "   The error occured in a file called 'RandomName.py'. The file behaves")
     print ( "   differently depending on if it is running by itself or as a 'module' being")
     print ( "   called by a different file. It can tell how it is being run by checking")
     print ( "   a variable called __name__ against some predetermined values. It expects")
-    print ( "   __name__'s value to be 'rlRandomName', 'Logic.rlRandomName', or '__main__'.")
+    print ( "   __name__'s value to be 'RandomName', 'Logic.RandomName', or '__main__'.")
     print ( f"   Instead, the value is '{__name__}'.")
     print ( "   WHAT YOU SHOULD DO:")
     print ( "   Take a screenshot and contact Alex. Also, tell him to create some kind of")
