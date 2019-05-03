@@ -85,18 +85,30 @@ def twofiles ( file1, file2 ):
   elif __name__ == "__main__": # Checks if this program is running as the main script (only happens for debugging purposes)
     os.chdir ("..")
     os.chdir ( ".\Data" )
-    with open( x, 'r') as fileData:
-      contents = fileData.readlines()
-      contents = [item.rstrip() for item in contents] # strips newline characters ('\n') and spaces
-      print ( random.choice(contents) )
+    fileData1 = open ( file1, 'r')
+    contents1 = fileData1.readlines()
+    contents1 = [item.rstrip() for item in contents1] # strips newline characters ('\n') and spaces
+    fileData1.close()
+    fileData2 = open ( file2, 'r')
+    contents2 = fileData2.readlines()
+    contents2 = [item.rstrip() for item in contents2]
+    fileData2.close()
+    contents = contents1 + contents2
+    return ( random.choice(contents) )
   
   elif __name__ == "RandomName": # Checks if this program is running as a module from another script inside its home directory (only happens for debugging purposes)
     os.chdir ("..")
     os.chdir ( ".\Data" )
-    with open( x, 'r') as fileData:
-      contents = fileData.readlines()
-      contents = [item.rstrip() for item in contents] # strips newline characters ('\n') and spaces
-      return ( random.choice(contents) )
+    fileData1 = open ( file1, 'r')
+    contents1 = fileData1.readlines()
+    contents1 = [item.rstrip() for item in contents1] # strips newline characters ('\n') and spaces
+    fileData1.close()
+    fileData2 = open ( file2, 'r')
+    contents2 = fileData2.readlines()
+    contents2 = [item.rstrip() for item in contents2]
+    fileData2.close()
+    contents = contents1 + contents2
+    return ( random.choice(contents) )
 
   else: # I'm honestly not sure what situation wouldn't fit into the statements above.
     from inspect import currentframe, getframeinfo
