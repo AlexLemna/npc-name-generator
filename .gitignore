@@ -140,7 +140,7 @@ htmlcov/
 .nox/
 .coverage
 .coverage.*
-.cache
+*.cache
 nosetests.xml
 coverage.xml
 *.cover
@@ -158,10 +158,10 @@ db.sqlite3
 
 # Flask stuff:
 instance/
-.webassets-cache
+*.webassets-cache
 
 # Scrapy stuff:
-.scrapy
+*.scrapy
 
 # Sphinx documentation
 # docs/_build/ (<-- this was in the template, but I want to include these files in the repo)
@@ -170,14 +170,14 @@ instance/
 target/
 
 # Jupyter Notebook
-.ipynb_checkpoints
+*.ipynb_checkpoints
 
 # IPython
 profile_default/
 ipython_config.py
 
 # pyenv
-.python-version
+*.python-version
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
@@ -193,8 +193,8 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
-.env
-.venv
+*.env
+*.venv
 env/
 venv/
 ENV/
@@ -624,6 +624,10 @@ ASALocalRun/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Ignores the file providing the PYTHONPATH.
+# This file was created to fix this issue: https://github.com/AlexLemna/rosevomit/issues/12
+*.env
 
 
 ## ===========================================================
