@@ -31,11 +31,6 @@ def printw(x):
     '''Textwrapping for regular 'print' commands.'''
     print ( textwrap.fill (x, width = 70))
 
-#def inputw(x): 
-#    '''Textwrapping for user input prompts.'''
-#    _input = input ( textwrap.fill (x, width=70))
-#    return ( _input )
-
 def RosevomitSetup(): # Contains setup instructions.
     print ("Looking for UI, Logic, and Data directories...")
     missingDirectories = []
@@ -44,7 +39,7 @@ def RosevomitSetup(): # Contains setup instructions.
         cliDirectory = cwd / 'cli'
         guiDirectory = cwd / 'gui'
         logicDirectory = cwd / 'logic'
-        dataDirectory = cwd / 'lata'
+        dataDirectory = cwd / 'data'
     
     if os.path.exists (cliDirectory):
         print ("   ...CLI directory located.")
