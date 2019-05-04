@@ -112,41 +112,41 @@ def ask_for_input():
         LogicController.gen("first", int(_input))
         print ()
     elif menuChoice == "2":
-        _input = input ("How many first names should be generated? ")
+        _input = input ("How many female first names should be generated? ")
         print ()
         LogicController.gen("firstfemale", int(_input))
         print ()
     elif menuChoice == "3":
-        _input = input ("How many first names should be generated? ")
+        _input = input ("How many male first names should be generated? ")
         print ()
         LogicController.gen("firstmale", int(_input))
         print ()
     elif menuChoice == "4":
-        _input = input ("How many first names should be generated? ")
+        _input = input ("How many last names should be generated? ")
         print ()
         LogicController.gen("last", int(_input))
         print ()
     elif menuChoice == "5":
-        _input = input ("How many first names should be generated? ")
+        _input = input ("How many full names should be generated? ")
         print ()
         LogicController.gen("full", int(_input))
         print ()
     elif menuChoice == "6":
-        _input = input ("How many first names should be generated? ")
+        _input = input ("How many female full names should be generated? ")
         print ()
         LogicController.gen("fullfemale", int(_input))
         print ()
     elif menuChoice == "7":
-        _input = input ("How many first names should be generated? ")
+        _input = input ("How many male full names should be generated? ")
         print ()
         LogicController.gen("fullmale", int(_input))
         print ()
     elif menuChoice == "8":
-        _input = input ("How many first names should be generated? ")
+        _input = input ("How many sample outputs should be generated? ")
         print ()
         LogicController.gen("sample", int(_input))
         print ()
-    elif menuChoice == '0' or menuChoice == 'X' or menuChoice == "x":
+    elif menuChoice == '0' or menuChoice == 'X' or menuChoice == "x" or menuChoice == "exit":
         sys.exit(0)
     elif menuChoice == "help" or menuChoice == "'help'" or  menuChoice == "h" or  menuChoice == "H" or menuChoice == "helf":
         show_main_menu()
