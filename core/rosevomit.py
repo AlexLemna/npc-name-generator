@@ -3,6 +3,8 @@
 # --------------------
 # The main file for Alex's "Project ROSEVOMIT", a random name generator written in Python.
 
+print ()
+print ("Starting ROSEVOMIT.")
 # *** SOME SETUP STUFF ***
 # MODULES FROM PYTHON'S STANDARD LIBRARY
 print ("Getting some modules from the standard library... ", end="")
@@ -31,7 +33,7 @@ def printw(x):
     '''Textwrapping for regular 'print' commands.'''
     print ( textwrap.fill (x, width = 70))
 
-def RosevomitSetup(): # Contains setup instructions.
+def look_for_directories(): # Contains setup instructions.
     print ("Looking for UI, Logic, and Data directories...")
     missingDirectories = []
     CWD_home ()
@@ -83,7 +85,8 @@ def RosevomitSetup(): # Contains setup instructions.
     print("Main setup complete.")
     print()
 
-def MainMenu(): # Contains logic and display instructions for the main menu.
+def show_main_menu():
+    '''Contains logic and display instructions for the main menu.'''
     print ()
     print (10 * "-", "Rosevomit.py Main Menu", 10 * "-" )
     print ("What sorts of names would you like to generate?")
@@ -97,46 +100,68 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
     print ("     8. Generate from sample data (dev purposes)")
     print ("X or 0. Exit program")
     print ()
-    menuChoice = input ("Enter your choice: ")
-    print ()
+
+def ask_for_input():
+    '''Asks for user input and processes it. Contains logic for the main menu.'''
+    menuChoice = input ("Enter your choice, or type 'help' for main menu: ")
+    menuChoice = menuChoice.rstrip() # Strips whitespaces at the end.
 
     if menuChoice == "1":
         _input = input ("How many first names should be generated? ")
+        print ()
         LogicController.gen("first", int(_input))
+        print ()
     elif menuChoice == "2":
         _input = input ("How many first names should be generated? ")
+        print ()
         LogicController.gen("firstfemale", int(_input))
+        print ()
     elif menuChoice == "3":
         _input = input ("How many first names should be generated? ")
+        print ()
         LogicController.gen("firstmale", int(_input))
+        print ()
     elif menuChoice == "4":
         _input = input ("How many first names should be generated? ")
+        print ()
         LogicController.gen("last", int(_input))
+        print ()
     elif menuChoice == "5":
         _input = input ("How many first names should be generated? ")
+        print ()
         LogicController.gen("full", int(_input))
+        print ()
     elif menuChoice == "6":
         _input = input ("How many first names should be generated? ")
+        print ()
         LogicController.gen("fullfemale", int(_input))
+        print ()
     elif menuChoice == "7":
         _input = input ("How many first names should be generated? ")
+        print ()
         LogicController.gen("fullmale", int(_input))
+        print ()
     elif menuChoice == "8":
         _input = input ("How many first names should be generated? ")
+        print ()
         LogicController.gen("sample", int(_input))
+        print ()
     elif menuChoice == '0' or menuChoice == 'X' or menuChoice == "x":
         sys.exit(0)
+    elif menuChoice == "help" or menuChoice == "'help'" or  menuChoice == "h" or  menuChoice == "H" or menuChoice == "helf":
+        show_main_menu()
+    elif menuChoice == "":
+        ask_for_input()
     else:
-        print ("Look, I'm just a computer program. I've got all the time to waste in the world, and I don't get bored. You can keep entering invalid inputs, or you can actually follow instructions. Your call.")
-
-
+        print (f"{menuChoice} is not a recognized command.")
+        print()
 
 
 
 
 # *** MAIN PROGRAM STARTS HERE ***
 
-RosevomitSetup()
+look_for_directories()
 print ("Proceeding to get local modules... ", end="")
 CWD_home()
 from logic import LogicController
@@ -151,7 +176,8 @@ print ()
 
 # After setup, rosevomit.py will display the main menu and will carry out instructions based on user input. This is an infinite loop - if rosevomit.py ever has no more instructions to carry out, it displays the main menu again and awaits further instructions. This is based on the 'see_rosa_run' variable. This variable should never change. If it does, the program exits and gives the system an error code.
 see_rosa_run = True
+show_main_menu()
 while see_rosa_run is True:
-    MainMenu()
+    ask_for_input()
 else:
     sys.exit(1)
