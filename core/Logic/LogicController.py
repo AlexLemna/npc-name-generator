@@ -10,7 +10,7 @@ if __name__ == "__main__":
     import RandomName
     import RepeatFunction
 else:
-    from Logic import RandomName, RepeatFunction
+    from logic import RandomName, RepeatFunction
 
 
 def printLC(x, end = "\n"): # Applies a consistant format to LogicController's text output.
