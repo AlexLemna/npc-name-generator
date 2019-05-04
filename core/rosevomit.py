@@ -3,12 +3,6 @@
 # --------------------
 # The main file for Alex's "Project ROSEVOMIT", a random name generator written in Python.
 
-print ()
-print (70 * "-")
-print (28 * "-", "ROSEVOMIT.PY", 28 * "-")
-print (70 * "-")
-print ()
-
 # *** SOME SETUP STUFF ***
 # MODULES FROM PYTHON'S STANDARD LIBRARY
 print ("Getting some modules from the standard library... ", end="")
@@ -21,31 +15,47 @@ print ("done.")
 # MODULES FROM PYPI (the Python community)
 # none
 
+
+
 # SOME FUNCTIONS AND VARIABLES FOR EASY REFERENCE
-def CWD_home(): # Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
+def CWD_home():
+    '''A function to set the current working directory.
+
+    Ensures that the current working directory is set to 
+    the home directory of the active script. From 
+    https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
+    '''
     os.chdir (os.path.dirname (sys.argv[0]))
 
-def printw(x): # Textwrapping for regular 'print' commands.
+def printw(x): 
+    '''Textwrapping for regular 'print' commands.'''
     print ( textwrap.fill (x, width = 70))
 
-def inputw(x): # Textwrapping for user input prompts.
-    _input = input ( textwrap.fill (x, width=70))
-    return ( _input )
+#def inputw(x): 
+#    '''Textwrapping for user input prompts.'''
+#    _input = input ( textwrap.fill (x, width=70))
+#    return ( _input )
 
 def RosevomitSetup(): # Contains setup instructions.
     print ("Looking for UI, Logic, and Data directories...")
     missingDirectories = []
     CWD_home ()
     with pathlib.Path.cwd() as cwd:
-        uiDirectory = cwd / 'UI'
-        logicDirectory = cwd / 'Logic'
-        dataDirectory = cwd / 'Data'
+        cliDirectory = cwd / 'cli'
+        guiDirectory = cwd / 'gui'
+        logicDirectory = cwd / 'logic'
+        dataDirectory = cwd / 'lata'
     
-    if os.path.exists (uiDirectory):
-        print ("   ...UI directory located.")
+    if os.path.exists (cliDirectory):
+        print ("   ...CLI directory located.")
     else: 
-        print ("   ...UI directory not found.")
-        missingDirectories.append("UI")
+        print ("   ...CLI directory not found.")
+        missingDirectories.append("CLI")
+    if os.path.exists (guiDirectory):
+        print ("   ...GUI directory located.")
+    else: 
+        print ("   ...GUI directory not found.")
+        missingDirectories.append("GUI")
     if os.path.exists (logicDirectory):
         print ("   ...logic directory located.")
     else: 
@@ -57,27 +67,26 @@ def RosevomitSetup(): # Contains setup instructions.
         print ("   ...data directory not found.")
         missingDirectories.append("Data")
 
-    if os.path.exists (uiDirectory) == False or os.path.exists (logicDirectory) == False or os.path.exists (dataDirectory) == False:
+    if os.path.exists (cliDirectory) == False or os.path.exists (guiDirectory) == False or os.path.exists (logicDirectory) == False or os.path.exists (dataDirectory) == False:
         print (f"I can't find following directories: {missingDirectories}.")
         print ()
-        if os.path.exists (uiDirectory) == False:
-            printw ("The UI directory is missing, but this program can run perfectly fine from the command-line interface (CLI). User input specifying alternate locations for the UI directory is not supported at this time, but will be added in future versions soon(TM). For now, though, you're stuck with the CLI.")
+        if os.path.exists (guiDirectory) == False:
+            printw ("The GUI directory is missing, but this program can run perfectly fine from the command-line interface (CLI). User input specifying alternate locations for the UI directory is not supported at this time, but will be added in future versions soon(TM). For now, though, you're stuck with the CLI.")
             print()
-            menuChoice = inputw ("If you would like to exit the program now, enter X or 0. Otherwise, press any key to continue setup. ")
+            print ("If you would like to exit the program now, enter X or 0.")
+            menuChoice = input (" Otherwise, press any key to continue setup.")
             if menuChoice == '0' or menuChoice == 'X' or menuChoice == "x":
-                sys.exit(0) # Exits the program. "0" is the exit code for a successful program exiting. "1" is the exit code for a program exiting due to an error.
+                sys.exit(0)
             else:
                 pass
         else:
             printw ("This is a problem - this program will not run properly without a logic or data directory. User input specifying alternate locations for these directories is not supported at this time, but will be added in future versions soon(TM).")
             input ("Press any key to quit.")
-            sys.exit(1) # Exits the program. "0" is the exit code for a successful program exiting. "1" is the exit code for a program exiting due to an error.
+            sys.exit(1)
     else:
         print ("All directories present.")
     print("Main setup complete.")
     print()
-
-
 
 def MainMenu(): # Contains logic and display instructions for the main menu.
     print ()
@@ -128,14 +137,23 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
 
 
 
+
+
 # *** MAIN PROGRAM STARTS HERE ***
+print ()
+print (69 * "-")
+print (27 * "-", "ROSEVOMIT.PY", 28 * "-")
+print (69 * "-")
+print ()
+
 RosevomitSetup()
 print ("Proceeding to get local modules... ", end="")
 CWD_home()
-from Logic import LogicController
+from logic import LogicController
+from cli import TextStuff
 print ("done.")
 
-# After setup, rosevomit.py will display the main menu and will carry out instructions based on user input. This is an indefinite loop - if a vosevomit.py ever has no more instructions to carry out, it displays the main menu again and awaits further instructions. This is based on the 'see_rosa_run' variable. This variable should never change. If it does, the program exits and gives the system an error code.
+# After setup, rosevomit.py will display the main menu and will carry out instructions based on user input. This is an infinite loop - if rosevomit.py ever has no more instructions to carry out, it displays the main menu again and awaits further instructions. This is based on the 'see_rosa_run' variable. This variable should never change. If it does, the program exits and gives the system an error code.
 see_rosa_run = True
 while see_rosa_run is True:
     MainMenu()
