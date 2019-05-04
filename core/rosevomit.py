@@ -69,7 +69,7 @@ def RosevomitSetup(): # Contains setup instructions.
             printw ("The GUI directory is missing, but this program can run perfectly fine from the command-line interface (CLI). User input specifying alternate locations for the UI directory is not supported at this time, but will be added in future versions soon(TM). For now, though, you're stuck with the CLI.")
             print()
             print ("If you would like to exit the program now, enter X or 0.")
-            menuChoice = input (" Otherwise, press any key to continue setup.")
+            menuChoice = input ("Otherwise, press any key to continue setup. ")
             if menuChoice == '0' or menuChoice == 'X' or menuChoice == "x":
                 sys.exit(0)
             else:
@@ -135,11 +135,6 @@ def MainMenu(): # Contains logic and display instructions for the main menu.
 
 
 # *** MAIN PROGRAM STARTS HERE ***
-print ()
-print (69 * "-")
-print (27 * "-", "ROSEVOMIT.PY", 28 * "-")
-print (69 * "-")
-print ()
 
 RosevomitSetup()
 print ("Proceeding to get local modules... ", end="")
@@ -147,6 +142,12 @@ CWD_home()
 from logic import LogicController
 from cli import TextStuff
 print ("done.")
+
+print ()
+print (69 * "-")
+print (27 * "-", "ROSEVOMIT.PY", 28 * "-")
+print (69 * "-")
+print ()
 
 # After setup, rosevomit.py will display the main menu and will carry out instructions based on user input. This is an infinite loop - if rosevomit.py ever has no more instructions to carry out, it displays the main menu again and awaits further instructions. This is based on the 'see_rosa_run' variable. This variable should never change. If it does, the program exits and gives the system an error code.
 see_rosa_run = True
