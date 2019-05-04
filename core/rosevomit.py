@@ -3,12 +3,6 @@
 # --------------------
 # The main file for Alex's "Project ROSEVOMIT", a random name generator written in Python.
 
-print ()
-print (70 * "-")
-print (28 * "-", "ROSEVOMIT.PY", 28 * "-")
-print (70 * "-")
-print ()
-
 # *** SOME SETUP STUFF ***
 # MODULES FROM PYTHON'S STANDARD LIBRARY
 print ("Getting some modules from the standard library... ", end="")
@@ -21,14 +15,18 @@ print ("done.")
 # MODULES FROM PYPI (the Python community)
 # none
 
+
+
 # SOME FUNCTIONS AND VARIABLES FOR EASY REFERENCE
 def CWD_home(): # Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
     os.chdir (os.path.dirname (sys.argv[0]))
 
-def printw(x): # Textwrapping for regular 'print' commands.
+def printw(x): 
+    '''Textwrapping for regular 'print' commands.'''
     print ( textwrap.fill (x, width = 70))
 
-def inputw(x): # Textwrapping for user input prompts.
+def inputw(x):
+    '''Textwrapping for user input prompts.'''
     _input = input ( textwrap.fill (x, width=70))
     return ( _input )
 
@@ -63,7 +61,8 @@ def RosevomitSetup(): # Contains setup instructions.
         if os.path.exists (uiDirectory) == False:
             printw ("The UI directory is missing, but this program can run perfectly fine from the command-line interface (CLI). User input specifying alternate locations for the UI directory is not supported at this time, but will be added in future versions soon(TM). For now, though, you're stuck with the CLI.")
             print()
-            menuChoice = inputw ("If you would like to exit the program now, enter X or 0. Otherwise, press any key to continue setup. ")
+            print ("If you would like to exit the program now, enter X or 0.")
+            menuChoice = input ("Otherwise, press any key to continue setup. ")
             if menuChoice == '0' or menuChoice == 'X' or menuChoice == "x":
                 sys.exit(0) # Exits the program. "0" is the exit code for a successful program exiting. "1" is the exit code for a program exiting due to an error.
             else:
@@ -135,7 +134,13 @@ CWD_home()
 from Logic import LogicController
 print ("done.")
 
-# After setup, rosevomit.py will display the main menu and will carry out instructions based on user input. This is an indefinite loop - if a vosevomit.py ever has no more instructions to carry out, it displays the main menu again and awaits further instructions. This is based on the 'see_rosa_run' variable. This variable should never change. If it does, the program exits and gives the system an error code.
+print ()
+print (69 * "-")
+print (27 * "-", "ROSEVOMIT.PY", 28 * "-")
+print (69 * "-")
+print ()
+
+# After setup, rosevomit.py will display the main menu and will carry out instructions based on user input. This is an infinite loop - if rosevomit.py ever has no more instructions to carry out, it displays the main menu again and awaits further instructions. This is based on the 'see_rosa_run' variable. This variable should never change. If it does, the program exits and gives the system an error code.
 see_rosa_run = True
 while see_rosa_run is True:
     MainMenu()
