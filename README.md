@@ -7,16 +7,8 @@ This program's documentation is currently spread out between this README and the
 New to coding? You and me both, buddy. If you've viewing this on GitHub, you probably see this README underneath a bunch of files and folders. The file structure should be something like this:
 
 ````text
-+ /core/
-+   Data/              <-- ROSEVOMIT's data
-+       (a bunch of data files)
-+   Logic/             <-- ROSEVOMIT's modules
-+       __init__.py
-+       LogicController.py
-+       rlRandomName.py
-+       rlRepeatFunction.py
-+   __init__.py
-+   rosevomit.py       <-- ROSEVOMIT's main program
++ /core/               <-- ROSEVOMIT's main directory
++   rosevomit.py       <-- ROSEVOMIT's main file
 + /docs/
 + .gitignore           <-- a file Git needs
 + __init__.py          <-- a file Python needs
@@ -26,4 +18,4 @@ New to coding? You and me both, buddy. If you've viewing this on GitHub, you pro
 + setup.py
 ````
 
-Don't freak out - it can look intimidating, but you can see that there's only a few places you actually need to look if you want to see Rosevomit's code: the `Data` folder, the `Logic` folder, and the `rosevomit.py` file.
+Don't freak out - it can look intimidating, but you can see that there's only a few places you actually need to look if you want to start looking Rosevomit's code: the [`rosevomit.py`](https://github.com/AlexLemna/rosevomit/blob/master/core/rosevomit.py) file and the contents of the [`core/`](https://github.com/AlexLemna/rosevomit/tree/master/core) directory. If you're like me and like to see an expandable "file tree" instead navigating through seperate webpages for each folder, I recommend using the browser extension [Octotree](https://www.octotree.io/).
