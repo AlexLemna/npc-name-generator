@@ -17,23 +17,25 @@ print ("done.")
 # MODULES FROM PYPI (the Python community)
 # none
 
-
-
 # SOME FUNCTIONS AND VARIABLES FOR EASY REFERENCE
+
+
 def CWD_home():
     '''A function to set the current working directory.
 
-    Ensures that the current working directory is set to 
-    the home directory of the active script. From 
+    Ensures that the current working directory is set to
+    the home directory of the active script. From
     https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
     '''
     os.chdir (os.path.dirname (sys.argv[0]))
 
-def printw(x): 
-    '''Textwrapping for regular 'print' commands.'''
-    print ( textwrap.fill (x, width = 70))
 
-def look_for_directories(): # Contains setup instructions.
+def printw(x):
+    '''Textwrapping for regular 'print' commands.'''
+    print (textwrap.fill (x, width=70))
+
+
+def look_for_directories():  # Contains setup instructions.
     print ("Looking for UI, Logic, and Data directories...")
     missingDirectories = []
     CWD_home ()
@@ -42,32 +44,32 @@ def look_for_directories(): # Contains setup instructions.
         guiDirectory = cwd / 'gui'
         logicDirectory = cwd / 'logic'
         dataDirectory = cwd / 'data'
-    
+
     if os.path.exists (cliDirectory):
         print ("   ...CLI directory located.")
-    else: 
+    else:
         print ("   ...CLI directory not found.")
         missingDirectories.append("CLI")
     if os.path.exists (guiDirectory):
         print ("   ...GUI directory located.")
-    else: 
+    else:
         print ("   ...GUI directory not found.")
         missingDirectories.append("GUI")
     if os.path.exists (logicDirectory):
         print ("   ...logic directory located.")
-    else: 
+    else:
         print ("   ...logic directory not found.")
         missingDirectories.append("Logic")
     if os.path.exists (dataDirectory):
         print ("   ...data directory located.")
-    else: 
+    else:
         print ("   ...data directory not found.")
         missingDirectories.append("Data")
 
-    if os.path.exists (cliDirectory) == False or os.path.exists (guiDirectory) == False or os.path.exists (logicDirectory) == False or os.path.exists (dataDirectory) == False:
+    if os.path.exists (cliDirectory) is False or os.path.exists (guiDirectory) is False or os.path.exists (logicDirectory) is False or os.path.exists (dataDirectory) is False:
         print (f"I can't find following directories: {missingDirectories}.")
         print ()
-        if os.path.exists (guiDirectory) == False:
+        if os.path.exists (guiDirectory) is False:
             printw ("The GUI directory is missing, but this program can run perfectly fine from the command-line interface (CLI). User input specifying alternate locations for the UI directory is not supported at this time, but will be added in future versions soon(TM). For now, though, you're stuck with the CLI.")
             print()
             print ("If you would like to exit the program now, enter X or 0.")
@@ -85,10 +87,11 @@ def look_for_directories(): # Contains setup instructions.
     print("Main setup complete.")
     print()
 
+
 def show_main_menu():
     '''Contains logic and display instructions for the main menu.'''
     print ()
-    print (10 * "-", "Rosevomit.py Main Menu", 10 * "-" )
+    print (10 * "-", "Rosevomit.py Main Menu", 10 * "-")
     print ("What sorts of names would you like to generate?")
     print ("     1. First names")
     print ("     2. First names, female-only")
@@ -101,10 +104,11 @@ def show_main_menu():
     print ("X or 0. Exit program")
     print ()
 
+
 def ask_for_input():
     '''Asks for user input and processes it. Contains logic for the main menu.'''
     menuChoice = input ("Enter your choice, or type 'help' for main menu: ")
-    menuChoice = menuChoice.rstrip() # Strips whitespaces at the end.
+    menuChoice = menuChoice.rstrip()  # Strips whitespaces at the end.
 
     if menuChoice == "1":
         _input = input ("How many first names should be generated? ")
@@ -148,15 +152,13 @@ def ask_for_input():
         print ()
     elif menuChoice == '0' or menuChoice == 'X' or menuChoice == "x" or menuChoice == "exit":
         sys.exit(0)
-    elif menuChoice == "help" or menuChoice == "'help'" or  menuChoice == "h" or  menuChoice == "H" or menuChoice == "helf":
+    elif menuChoice == "help" or menuChoice == "'help'" or menuChoice == "h" or menuChoice == "H" or menuChoice == "helf":
         show_main_menu()
     elif menuChoice == "":
         ask_for_input()
     else:
         print (f"{menuChoice} is not a recognized command.")
         print()
-
-
 
 
 # *** MAIN PROGRAM STARTS HERE ***

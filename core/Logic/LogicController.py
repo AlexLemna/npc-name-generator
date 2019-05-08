@@ -13,65 +13,66 @@ else:
     from logic import RandomName, RepeatFunction
 
 
-def printLC(x, end = "\n"): # Applies a consistant format to LogicController's text output.
-    print ("   LOGIC CONTROLLER:", x, end = end)
+def printLC(x, end="\n"):  # Applies a consistant format to LogicController's text output.
+    print ("   LOGIC CONTROLLER:", x, end=end)
+
 
 def setup():
     print ()
     printLC ("Present and accounted for.")
     print()
 
+
 def gen(x, y):
     if x == "first":
         def get_names():
             output = RandomName.twofiles("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")
-            print ( output )
+            print (output)
         RepeatFunction.repeatfunction (get_names, y)
 
     elif x == "firstfemale":
         def get_names():
             output = RandomName.onefile("USCensusNamesFirstFemale.txt")
-            print ( output )
+            print (output)
         RepeatFunction.repeatfunction (get_names, y)
-
 
     elif x == "firstmale":
         def get_names():
             output = RandomName.onefile("USCensusNamesFirstMale.txt")
-            print ( output )
+            print (output)
         RepeatFunction.repeatfunction (get_names, y)
 
     elif x == "last":
         def get_names():
             output = RandomName.onefile("USCensusNamesLast.txt")
-            print ( output )
+            print (output)
         RepeatFunction.repeatfunction (get_names, y)
 
     elif x == "full":
         def get_names():
             output = RandomName.twofiles("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")
             output1 = RandomName.onefile("USCensusNamesLast.txt")
-            print ( output, output1 )
+            print (output, output1)
         RepeatFunction.repeatfunction (get_names, y)
 
     elif x == "fullfemale":
         def get_names():
             output = RandomName.onefile("USCensusNamesFirstFemale.txt")
             output1 = RandomName.onefile("USCensusNamesLast.txt")
-            print ( output, output1 )
+            print (output, output1)
         RepeatFunction.repeatfunction (get_names, y)
 
     elif x == "fullmale":
         def get_names():
             output = RandomName.onefile("USCensusNamesFirstMale.txt")
             output1 = RandomName.onefile("USCensusNamesLast.txt")
-            print ( output, output1 )
+            print (output, output1)
         RepeatFunction.repeatfunction (get_names, y)
 
     elif x == "Sample" or x == "sample":
         def get_names():
             output = RandomName.SampleData()
-            print ( output )
+            print (output)
         RepeatFunction.repeatfunction (get_names, y)
 
     else:
