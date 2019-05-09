@@ -26,54 +26,54 @@ def setup():
 def gen(x, y):
     if x == "first":
         def get_names():
-            output = RandomName.twofiles("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")
+            output = RandomName.two_files ("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")
             print (output)
-        RepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeat (get_names, y)
 
     elif x == "firstfemale":
         def get_names():
-            output = RandomName.onefile("USCensusNamesFirstFemale.txt")
+            output = RandomName.one_file ("USCensusNamesFirstFemale.txt")
             print (output)
-        RepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeat (get_names, y)
 
     elif x == "firstmale":
         def get_names():
-            output = RandomName.onefile("USCensusNamesFirstMale.txt")
+            output = RandomName.one_file ("USCensusNamesFirstMale.txt")
             print (output)
-        RepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeat (get_names, y)
 
     elif x == "last":
         def get_names():
-            output = RandomName.onefile("USCensusNamesLast.txt")
+            output = RandomName.one_file ("USCensusNamesLast.txt")
             print (output)
-        RepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeat (get_names, y)
 
     elif x == "full":
         def get_names():
-            output = RandomName.twofiles("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")
-            output1 = RandomName.onefile("USCensusNamesLast.txt")
+            output = RandomName.two_files ("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")
+            output1 = RandomName.one_file ("USCensusNamesLast.txt")
             print (output, output1)
-        RepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeat (get_names, y)
 
     elif x == "fullfemale":
         def get_names():
-            output = RandomName.onefile("USCensusNamesFirstFemale.txt")
-            output1 = RandomName.onefile("USCensusNamesLast.txt")
+            output = RandomName.one_file ("USCensusNamesFirstFemale.txt")
+            output1 = RandomName.one_file ("USCensusNamesLast.txt")
             print (output, output1)
-        RepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeat (get_names, y)
 
     elif x == "fullmale":
         def get_names():
-            output = RandomName.onefile("USCensusNamesFirstMale.txt")
-            output1 = RandomName.onefile("USCensusNamesLast.txt")
+            output = RandomName.one_file ("USCensusNamesFirstMale.txt")
+            output1 = RandomName.one_file ("USCensusNamesLast.txt")
             print (output, output1)
-        RepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeat (get_names, y)
 
     elif x == "Sample" or x == "sample":
         def get_names():
-            output = RandomName.SampleData()
+            output = RandomName.sample_file()
             print (output)
-        RepeatFunction.repeatfunction (get_names, y)
+        RepeatFunction.repeat (get_names, y)
 
     else:
         printLC ("I'm sorry, I can't do that.")

@@ -37,44 +37,44 @@ def printw(x):
 
 def look_for_directories():  # Contains setup instructions.
     print ("Looking for UI, Logic, and Data directories...")
-    missingDirectories = []
+    missingdirectories = []
     CWD_home ()
     with pathlib.Path.cwd() as cwd:
-        cliDirectory = cwd / 'cli'
-        guiDirectory = cwd / 'gui'
-        logicDirectory = cwd / 'logic'
-        dataDirectory = cwd / 'data'
+        cli_directory = cwd / 'cli'
+        gui_directory = cwd / 'gui'
+        logic_directory = cwd / 'logic'
+        data_directory = cwd / 'data'
 
-    if os.path.exists (cliDirectory):
+    if os.path.exists (cli_directory):
         print ("   ...CLI directory located.")
     else:
         print ("   ...CLI directory not found.")
-        missingDirectories.append("CLI")
-    if os.path.exists (guiDirectory):
+        missingdirectories.append("CLI")
+    if os.path.exists (gui_directory):
         print ("   ...GUI directory located.")
     else:
         print ("   ...GUI directory not found.")
-        missingDirectories.append("GUI")
-    if os.path.exists (logicDirectory):
+        missingdirectories.append("GUI")
+    if os.path.exists (logic_directory):
         print ("   ...logic directory located.")
     else:
         print ("   ...logic directory not found.")
-        missingDirectories.append("Logic")
-    if os.path.exists (dataDirectory):
+        missingdirectories.append("Logic")
+    if os.path.exists (data_directory):
         print ("   ...data directory located.")
     else:
         print ("   ...data directory not found.")
-        missingDirectories.append("Data")
+        missingdirectories.append("Data")
 
-    if os.path.exists (cliDirectory) is False or os.path.exists (guiDirectory) is False or os.path.exists (logicDirectory) is False or os.path.exists (dataDirectory) is False:
-        print (f"I can't find following directories: {missingDirectories}.")
+    if os.path.exists (cli_directory) is False or os.path.exists (gui_directory) is False or os.path.exists (logic_directory) is False or os.path.exists (data_directory) is False:
+        print (f"I can't find following directories: {missingdirectories}.")
         print ()
-        if os.path.exists (guiDirectory) is False:
+        if os.path.exists (gui_directory) is False:
             printw ("The GUI directory is missing, but this program can run perfectly fine from the command-line interface (CLI). User input specifying alternate locations for the UI directory is not supported at this time, but will be added in future versions soon(TM). For now, though, you're stuck with the CLI.")
             print()
             print ("If you would like to exit the program now, enter X or 0.")
-            menuChoice = input ("Otherwise, press any key to continue setup. ")
-            if menuChoice == '0' or menuChoice == 'X' or menuChoice == "x":
+            menuchoice = input ("Otherwise, press any key to continue setup. ")
+            if menuchoice == '0' or menuchoice == 'X' or menuchoice == "x":
                 sys.exit(0)
             else:
                 pass
@@ -107,57 +107,57 @@ def show_main_menu():
 
 def ask_for_input():
     '''Asks for user input and processes it. Contains logic for the main menu.'''
-    menuChoice = input ("Enter your choice, or type 'help' for main menu: ")
-    menuChoice = menuChoice.rstrip()  # Strips whitespaces at the end.
+    menuchoice = input ("Enter your choice, or type 'help' for main menu: ")
+    menuchoice = menuchoice.rstrip()  # Strips whitespaces at the end.
 
-    if menuChoice == "1":
+    if menuchoice == "1":
         _input = input ("How many first names should be generated? ")
         print ()
         LogicController.gen("first", int(_input))
         print ()
-    elif menuChoice == "2":
+    elif menuchoice == "2":
         _input = input ("How many female first names should be generated? ")
         print ()
         LogicController.gen("firstfemale", int(_input))
         print ()
-    elif menuChoice == "3":
+    elif menuchoice == "3":
         _input = input ("How many male first names should be generated? ")
         print ()
         LogicController.gen("firstmale", int(_input))
         print ()
-    elif menuChoice == "4":
+    elif menuchoice == "4":
         _input = input ("How many last names should be generated? ")
         print ()
         LogicController.gen("last", int(_input))
         print ()
-    elif menuChoice == "5":
+    elif menuchoice == "5":
         _input = input ("How many full names should be generated? ")
         print ()
         LogicController.gen("full", int(_input))
         print ()
-    elif menuChoice == "6":
+    elif menuchoice == "6":
         _input = input ("How many female full names should be generated? ")
         print ()
         LogicController.gen("fullfemale", int(_input))
         print ()
-    elif menuChoice == "7":
+    elif menuchoice == "7":
         _input = input ("How many male full names should be generated? ")
         print ()
         LogicController.gen("fullmale", int(_input))
         print ()
-    elif menuChoice == "8":
+    elif menuchoice == "8":
         _input = input ("How many sample outputs should be generated? ")
         print ()
         LogicController.gen("sample", int(_input))
         print ()
-    elif menuChoice == '0' or menuChoice == 'X' or menuChoice == "x" or menuChoice == "exit":
+    elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
         sys.exit(0)
-    elif menuChoice == "help" or menuChoice == "'help'" or menuChoice == "h" or menuChoice == "H" or menuChoice == "helf":
+    elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
         show_main_menu()
-    elif menuChoice == "":
+    elif menuchoice == "":
         ask_for_input()
     else:
-        print (f"{menuChoice} is not a recognized command.")
+        print (f"{menuchoice} is not a recognized command.")
         print()
 
 

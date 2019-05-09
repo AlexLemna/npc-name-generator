@@ -15,7 +15,7 @@ def CWD_home():  # Ensures that the current working directory is set to the home
 
 
 # A function that returns one random line from a text file 'x'
-def onefile (x):
+def one_file (x):
     CWD_home ()
     if __name__ == "logic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
         os.chdir ("./Data")
@@ -65,7 +65,7 @@ def onefile (x):
     print ("   time he messes up.")
 
 
-def twofiles (file1, file2):
+def two_files (file1, file2):
     """A function that returns one random line from a list generated from multiple text files 'x', 'y', and so on."""
     CWD_home ()
     if __name__ == "logic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
@@ -134,7 +134,7 @@ def twofiles (file1, file2):
         print ("   time he messes up.")
 
 
-def SampleData ():
+def sample_file ():
     """A function that returns one random line from a text file at /Data/SampleData.txt"""
     CWD_home()
     if __name__ == "logic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
