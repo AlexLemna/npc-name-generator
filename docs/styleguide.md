@@ -8,6 +8,10 @@ In general, Rosevomit's code should be written to whatever standards are general
 
 Since Python does not support **constants** natively, is it considered best practice to write variables you expect to be constant in all capital letters. Like all other variables, constants should be written with underscores when it improves readibility.
 
+**Classes** should have the first letter of each word capitalized, and should have no spaces. *See: [CamelCase](https://en.wikipedia.org/wiki/Camel_case)*
+
+**Modules** and **packages** intended for distribution on PyPI should be lowercase. Modules and packages *not* intended for distribution (which is most, if not all, Python files in this repository) should be written with the first letter capitalized and without underscores. *Again, see: [CamelCase](https://en.wikipedia.org/wiki/Camel_case)*
+
 ### tl;dr
 
 - `menu_choice` and `menuchoice` might be variables or functions, but `MenuChoice` is definitely a class.
