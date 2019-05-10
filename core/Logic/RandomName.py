@@ -10,12 +10,14 @@ import sys
 contents = []
 
 
-def CWD_home():  # Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
+def CWD_home():
+    """Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory"""
     os.chdir (os.path.dirname (sys.argv[0]))
 
 
-# A function that returns one random line from a text file 'x'
+# 
 def one_file (x):
+    """A function that returns one random line from a text file 'x'"""
     CWD_home ()
     if __name__ == "logic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
         os.chdir ("./Data")

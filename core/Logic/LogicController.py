@@ -13,7 +13,8 @@ else:
     from logic import RandomName, RepeatFunction
 
 
-def printLC(x, end="\n"):  # Applies a consistant format to LogicController's text output.
+def printLC(x, end="\n"):
+    """Applies a consistant format to LogicController's text output."""
     print ("   LOGIC CONTROLLER:", x, end=end)
 
 
@@ -24,6 +25,7 @@ def setup():
 
 
 def gen(x, y):
+    """This function receives the user input and calls functions accordingly."""
     if x == "first":
         def get_names():
             output = RandomName.two_files ("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")

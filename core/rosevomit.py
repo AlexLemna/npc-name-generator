@@ -21,21 +21,20 @@ print ("done.")
 
 
 def CWD_home():
-    '''A function to set the current working directory.
+    """A function to set the current working directory.
 
-    Ensures that the current working directory is set to
-    the home directory of the active script. From
-    https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
-    '''
+    Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
+    """
     os.chdir (os.path.dirname (sys.argv[0]))
 
 
 def printw(x):
-    '''Textwrapping for regular 'print' commands.'''
+    """Textwrapping for regular 'print' commands."""
     print (textwrap.fill (x, width=70))
 
 
-def look_for_directories():  # Contains setup instructions.
+def look_for_directories():
+    """Contains setup instructions, and prints that info to terminal."""
     print ("Looking for UI, Logic, and Data directories...")
     missingdirectories = []
     CWD_home ()
@@ -89,7 +88,7 @@ def look_for_directories():  # Contains setup instructions.
 
 
 def show_main_menu():
-    '''Contains logic and display instructions for the main menu.'''
+    """Contains logic and display instructions for the main menu."""
     print ()
     print (10 * "-", "Rosevomit.py Main Menu", 10 * "-")
     print ("What sorts of names would you like to generate?")
@@ -106,7 +105,7 @@ def show_main_menu():
 
 
 def ask_for_input():
-    '''Asks for user input and processes it. Contains logic for the main menu.'''
+    """Asks for user input and processes it. Contains logic for the main menu."""
     menuchoice = input ("Enter your choice, or type 'help' for main menu: ")
     menuchoice = menuchoice.rstrip()  # Strips whitespaces at the end.
 
