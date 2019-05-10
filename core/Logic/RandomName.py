@@ -15,7 +15,6 @@ def CWD_home():
     os.chdir (os.path.dirname (sys.argv[0]))
 
 
-# 
 def one_file (x):
     """A function that returns one random line from a text file 'x'"""
     CWD_home ()
