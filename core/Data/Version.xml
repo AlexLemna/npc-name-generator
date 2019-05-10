@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data project-name="Rosevomit">
+
+<!--HUMAN VERSION-->
+<!--The "human version" is the version number most frequently seen by end-users, and also the-->
+<!--version number used internally for planning and discussion.-->
+<version type="human">
+  <major>0</major>
+  <minor>10</minor>
+  <patch>1</patch>
+</version>
+
+<development-version>
+  <!--If "is-milestone" is true, then the milestone info is the info for this version.-->
+  <is-milestone>false</is-milestone>
+  <last-milestone-info>
+    <branch>master</branch>
+    <number>1</number>
+  </last-milestone-info>   
+</development-version>
+
+</data>
