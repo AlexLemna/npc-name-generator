@@ -8,11 +8,24 @@ print ("Starting ROSEVOMIT.")
 # *** SOME SETUP STUFF ***
 # MODULES FROM PYTHON'S STANDARD LIBRARY
 print ("Getting some modules from the standard library... ", end="")
-import os
-import pathlib
-import sys
-import textwrap
-print ("done.")
+try:
+    import os
+    import pathlib
+    import sys
+    import textwrap
+    import xml.etree.ElementTree as ElementTree
+except ImportError as e:
+    print ("ERROR.")
+    print (f"ERROR INFO: {e}")
+    print()
+    user_input = input ("Press 'x' to quit, or any other key to continue.")
+    user_input = user_input.rstrip()
+    if user_input == "x" or user_input == "X":
+        SystemExit()
+    else:
+        pass
+else:
+    print ("done.")
 
 # MODULES FROM PYPI (the Python community)
 # none
@@ -33,7 +46,7 @@ def printw(x):
     print (textwrap.fill (x, width=70))
 
 
-def look_for_directories():
+def main_setup():
     """Contains setup instructions, and prints that info to terminal."""
     print ("Looking for UI, Logic, and Data directories...")
     missingdirectories = []
@@ -83,7 +96,35 @@ def look_for_directories():
             sys.exit(1)
     else:
         print ("All directories present.")
-    print("Main setup complete.")
+    print("Main setup complete. Getting version number... ", end="")
+    try:
+        os.chdir (data_directory)
+        tree = ElementTree.parse ("Version.xml")
+        root = tree.getroot()
+        treeHumanVersion = root.findall("./version[@type='human']//")
+        for child in treeHumanVersion:
+            if child.tag == "major":
+                major_version = child.text
+            elif child.tag == "minor":
+                minor_version = child.text
+            elif child.tag == "patch":
+                patch_version = child.text
+            else:
+                raise IOError
+        print ("done.")
+        print()
+        print (f"You are using Rosevomit {major_version}.{minor_version}.{patch_version}. This software is")
+        print ("actively under development. Proceed at your own risk.")
+    except FileNotFoundError:
+        print ("ERROR.")
+        print ("COULD NOT FIND VERSION FILE.")
+    except IOError:
+        print ("ERROR.")
+        print ("VERSION FILE IS INCOMPLETE OR FORMATTED INCORRECTLY.")
+    print()
+    print ("Press any key to accept risk and continue, or")
+    print ("end the program by exiting this window.")
+    input()
     print()
 
 
@@ -162,7 +203,7 @@ def ask_for_input():
 
 # *** MAIN PROGRAM STARTS HERE ***
 
-look_for_directories()
+main_setup()
 print ("Proceeding to get local modules... ", end="")
 CWD_home()
 from logic import LogicController
