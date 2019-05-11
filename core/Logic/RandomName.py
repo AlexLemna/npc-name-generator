@@ -6,6 +6,7 @@
 import os
 import random
 import sys
+from inspect import currentframe, getframeinfo
 
 contents = []
 
@@ -42,28 +43,27 @@ def one_file (x):
             return (random.choice (contents))
 
     else:  # I'm honestly not sure what situation wouldn't fit into the statements above.
-        from inspect import currentframe, getframeinfo
         frameinfo = getframeinfo (currentframe())
 
-    print ("")
-    print ("A wild UNEXPECTED ERROR appeared!")
-    print (f"REF: The file location is {frameinfo.filename}.")
-    print (f"REF: This error message is around line {frameinfo.lineno} of that file.")
-    print ("   SUMMARY:")
-    print ("   This section of code has some 'if' and 'else if' statements that should")
-    print ("   cover every situation. This error is the 'else' statement, and it means")
-    print ("   a situation occured that I didn't forsee.")
-    print ("   SPECIFICS:")
-    print ("   The error occured in a file called 'RandomName.py'. The file behaves")
-    print ("   differently depending on if it is running by itself or as a 'module' being")
-    print ("   called by a different file. It can tell how it is being run by checking")
-    print ("   a variable called __name__ against some predetermined values. It expects")
-    print ("   __name__'s value to be 'RandomName', 'logic.RandomName', or '__main__'.")
-    print (f"   Instead, the value is '{__name__}'.")
-    print ("   WHAT YOU SHOULD DO:")
-    print ("   Take a screenshot and contact Alex. Also, tell him to create some kind of")
-    print ("   error logging system so you don't have to manually ask him for help every")
-    print ("   time he messes up.")
+        print ("")
+        print ("A wild UNEXPECTED ERROR appeared!")
+        print (f"REF: The file location is {frameinfo.filename}.")
+        print (f"REF: This error message is around line {frameinfo.lineno} of that file.")
+        print ("   SUMMARY:")
+        print ("   This section of code has some 'if' and 'else if' statements that should")
+        print ("   cover every situation. This error is the 'else' statement, and it means")
+        print ("   a situation occured that I didn't forsee.")
+        print ("   SPECIFICS:")
+        print ("   The error occured in a file called 'RandomName.py'. The file behaves")
+        print ("   differently depending on if it is running by itself or as a 'module' being")
+        print ("   called by a different file. It can tell how it is being run by checking")
+        print ("   a variable called __name__ against some predetermined values. It expects")
+        print ("   __name__'s value to be 'RandomName', 'logic.RandomName', or '__main__'.")
+        print (f"   Instead, the value is '{__name__}'.")
+        print ("   WHAT YOU SHOULD DO:")
+        print ("   Take a screenshot and contact Alex. Also, tell him to create some kind of")
+        print ("   error logging system so you don't have to manually ask him for help every")
+        print ("   time he messes up.")
 
 
 def two_files (file1, file2):
@@ -111,7 +111,6 @@ def two_files (file1, file2):
         return (random.choice (contents))
 
     else:  # I'm honestly not sure what situation wouldn't fit into the statements above.
-        from inspect import currentframe, getframeinfo
         frameinfo = getframeinfo (currentframe())
 
         print ("")
@@ -159,7 +158,6 @@ def sample_file ():
             return (random.choice (contents))
 
     else:  # I'm honestly not sure what situation wouldn't fit into the statements above.
-        from inspect import currentframe, getframeinfo
         frameinfo = getframeinfo (currentframe())
 
         print ("")
