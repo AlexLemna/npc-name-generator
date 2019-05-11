@@ -10,13 +10,4 @@
   <patch>1</patch>
 </version>
 
-<development-version>
-  <!--If "is-milestone" is true, then the milestone info is the info for this version.-->
-  <is-milestone>false</is-milestone>
-  <last-milestone-info>
-    <branch>master</branch>
-    <number>1</number>
-  </last-milestone-info>   
-</development-version>
-
 </data>

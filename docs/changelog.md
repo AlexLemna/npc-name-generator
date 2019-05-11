@@ -1,8 +1,20 @@
 # ***Rosevomit* changelog**
 
+## **version 0.10.1**
+
+Completed on May 11, 2019.
+
+* ENHANCEMENT: *Rosevomit* now uses real-world name lists from the [US Census](https://www.census.gov/topics/population/genealogy/data/1990_census/1990_census_namefiles.html).
+* TYPO FIXED: [Whoops](https://github.com/AlexLemna/rosevomit/issues/18).
+* UNDER THE HOOD: Better docstrings, more READMEs instead of the wiki, standardized naming convensions in line with [PEP8](https://www.python.org/dev/peps/pep-0008/), improved error handling, and added software version data.
+
+### **Notes for version 0.10.1**
+
+Many of these changes were small changes. From a user's perspective, the largest change will be that the names generated are no longer from short name lists I wrote. Instead, they're from [old US Census data](https://www.census.gov/topics/population/genealogy/data/1990_census/1990_census_namefiles.html).
+
 ## **version 0.10.0**
 
-Released on May 1, 2019.
+Completed on May 1, 2019.
 
 * NEW FEATURE: This program can now generate random names. It can generate however many names you want, all in a row. It can generate male or female names only, or it can ignore gender. It can generate first names, last names, and full names (first + last).
 * NAME CHANGE: *Project Rosa* is now *Rosevomit*.
@@ -19,6 +31,6 @@ Anyways, yeah: version 0.10.0. It can generate names.
 
 ## **version 0.0.0 *"Project Rosa"***
 
-Released on April 23, 2019.
+Completed on April 23, 2019.
 
 `rosa.py` can respond to user input via a CLI, and call `LogicController.py`. `LogicController.py` can, in turn, call `rlRandomName.py`. `rlRandomName.py` can then extract data randomly from a text file, and return it all the way up the chain for `rosa.py` to display.
