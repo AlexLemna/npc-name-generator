@@ -26,7 +26,7 @@ class RosevomitTestCase(unittest.TestCase):
         else:
             pass
         self.assertEqual (number_names_to_generate, len (names_generated))
-    
+
     def test_female_first_name_generation(self):
         """Do we get the number of names we expect?"""
         number_names_to_generate = random.randint (2, 200)
