@@ -70,7 +70,11 @@ def two_files (file1, file2):
     """A function that returns one random line from a list generated from multiple text files 'x', 'y', and so on."""
     CWD_home ()
     if __name__ == "logic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
-        os.chdir ("./Data")
+        try:
+            os.chdir ("./Data")
+        except FileNotFoundError: # Maybe it's being run by a testing script?
+            os.chdir ("..")
+            os.chdir ("./core/Data")
         fileData1 = open (file1, 'r')
         contents1 = fileData1.readlines()
         contents1 = [item.rstrip() for item in contents1]  # strips newline characters ('\n') and spaces

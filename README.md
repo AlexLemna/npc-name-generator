@@ -10,7 +10,8 @@ New to coding? You and me both, buddy. If you've viewing this on GitHub, you pro
 +     data/
 +     logic/
 +     Rosevomit.py    <-- ROSEVOMIT's main file
-+ docs/
++ dev-tests/          <-- scripts/files for testing purposes
++ docs/               <-- additional documentation
 + .gitignore          <-- a file Git needs
 + LICENSE
 + README.md           <-- the file you're reading now
