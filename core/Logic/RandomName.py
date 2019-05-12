@@ -8,8 +8,6 @@ import random
 import sys
 from inspect import currentframe, getframeinfo
 
-contents = []
-
 
 def CWD_home():
     """Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory"""
@@ -20,7 +18,11 @@ def one_file (x):
     """A function that returns one random line from a text file 'x'"""
     CWD_home ()
     if __name__ == "logic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
-        os.chdir ("./Data")
+        try:
+            os.chdir ("./Data")
+        except FileNotFoundError:  # Maybe it's being run by a testing script?
+            os.chdir ("..")
+            os.chdir ("./core/Data")
         with open (x, 'r') as fileData:
             contents = fileData.readlines()
             contents = [item.rstrip() for item in contents]  # strips newline characters ('\n') and spaces
@@ -72,7 +74,7 @@ def two_files (file1, file2):
     if __name__ == "logic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
         try:
             os.chdir ("./Data")
-        except FileNotFoundError: # Maybe it's being run by a testing script?
+        except FileNotFoundError:  # Maybe it's being run by a testing script?
             os.chdir ("..")
             os.chdir ("./core/Data")
         fileData1 = open (file1, 'r')
@@ -142,7 +144,11 @@ def sample_file ():
     """A function that returns one random line from a text file at /Data/SampleData.txt"""
     CWD_home()
     if __name__ == "logic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
-        os.chdir ("./Data")
+        try:
+            os.chdir ("./Data")
+        except FileNotFoundError:  # Maybe it's being run by a testing script?
+            os.chdir ("..")
+            os.chdir ("./core/Data")
         with open('SampleData.txt', 'r') as fileData:
             contents = fileData.readlines()
             return (random.choice (contents))
