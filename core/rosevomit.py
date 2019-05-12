@@ -185,11 +185,6 @@ def ask_for_input():
         print ()
         LogicController.gen("fullmale", int(_input))
         print ()
-    elif menuchoice == "8":
-        _input = input ("How many sample outputs should be generated? ")
-        print ()
-        LogicController.gen("sample", int(_input))
-        print ()
     elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
         sys.exit(0)
     elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":

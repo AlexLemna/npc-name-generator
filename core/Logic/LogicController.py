@@ -70,12 +70,5 @@ def gen(x, y):
             output1 = RandomName.one_file ("USCensusNamesLast.txt")
             print (output, output1)
         RepeatFunction.repeat (get_names, y)
-
-    elif x == "Sample" or x == "sample":
-        def get_names():
-            output = RandomName.sample_file()
-            print (output)
-        RepeatFunction.repeat (get_names, y)
-
     else:
         printLC ("I'm sorry, I can't do that.")
