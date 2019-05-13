@@ -1,6 +1,6 @@
 # ROSEVOMIT: a name generator
 
-This is a personal project to teach myself some programming basics. You can see my changelog [here](https://github.com/AlexLemna/rosevomit/blob/master/docs/changelog.md) and my roadmap [here](https://github.com/AlexLemna/rosevomit/blob/master/docs/roadmap.md). If you've stumbled across this project in search of an actually functional name generator, I highly recommend checking out [faker](https://github.com/joke2k/faker).
+If you've stumbled across this project in search of an actually functional name generator, I highly recommend checking out [faker](https://github.com/joke2k/faker). This is a personal project to teach myself some programming basics. You can see my changelog [here](https://github.com/AlexLemna/rosevomit/blob/master/docs/changelog.md) and my roadmap [here](https://github.com/AlexLemna/rosevomit/blob/master/docs/roadmap.md).
 
 New to coding? You and me both, buddy. If you've viewing this on GitHub, you probably see this README underneath a bunch of files and folders. The file structure should be something like this:
 
