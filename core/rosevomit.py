@@ -140,7 +140,6 @@ def show_main_menu():
     print ("     5. Full names")
     print ("     6. Full names, female-only")
     print ("     7. Full names, male-only")
-    print ("     8. Generate from sample data (dev purposes)")
     print ("X or 0. Exit program")
     print ()
 
