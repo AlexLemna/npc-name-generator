@@ -129,7 +129,7 @@ def main_setup():
 
 
 def show_main_menu():
-    """Contains logic and display instructions for the main menu."""
+    """Contains display instructions for the main menu."""
     print ()
     print (10 * "-", "Rosevomit.py Main Menu", 10 * "-")
     print ("What sorts of names would you like to generate?")

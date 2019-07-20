@@ -76,9 +76,16 @@ def gen(x, y):
         def get_events(_timelineYear):
             events = []
             print (f"{_timelineYear} years ago, scholars tell us...")
+            # Run checks to generate events. The RandomEvent checks return a list whose
+            # elements are the event text of events that occured. We add these elements
+            # to the "events" list.
             events.extend (RandomEvent.check_volcano ())
+            events.extend (RandomEvent.check_earthquake ())
+            events.extend (RandomEvent.check_impact ())
+            events.extend (RandomEvent.check_astronomy ())
             for item in range (len (events)):
-                print (textwrap.fill (f"    {events[item]}", width=70)),
+                print (textwrap.fill (f"    {events[item]}", width=70))
+                print ()
         RepeatFunction.repeat_decrement (get_events, y)
     else:
         printLC ("I'm sorry, I can't do that.")
