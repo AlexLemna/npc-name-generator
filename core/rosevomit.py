@@ -140,6 +140,8 @@ def show_main_menu():
     print ("     5. Full names")
     print ("     6. Full names, female-only")
     print ("     7. Full names, male-only")
+    print ("What sorts of events would you like to generate?")
+    print ("     8. Global events")
     print ("X or 0. Exit program")
     print ()
 
@@ -183,6 +185,11 @@ def ask_for_input():
         _input = input ("How many male full names should be generated? ")
         print ()
         LogicController.gen("fullmale", int(_input))
+        print ()
+    elif menuchoice == "8":
+        _input = input ("How many years of historical global events should be generated? ")
+        print ()
+        LogicController.gen("globalevents", int(_input))
         print ()
     elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
         sys.exit(0)

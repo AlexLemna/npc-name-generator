@@ -7,3 +7,9 @@
 def repeat (x, y):
     for integer in range (0, y):
         x()
+
+
+def repeat_decrement (x, y):
+    for integer in range (0, y):
+        x(y)
+        y = (y - 1)

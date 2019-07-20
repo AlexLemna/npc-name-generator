@@ -7,10 +7,11 @@ import textwrap
 
 # This section determines if this module is running on its own, if it is being invoked from another module. If it is running on its own, it can import 'RandomName' without any additional specific instructions. If it is being run from another module, however, it needs to specify that it is trying to import the 'RandomName' from the 'Logic' package. Note that for the \Logic directory to be considered a package, it needs to contain an __init__.py file.
 if __name__ == "__main__":
+    import RandomEvent
     import RandomName
     import RepeatFunction
 else:
-    from logic import RandomName, RepeatFunction
+    from logic import RandomEvent, RandomName, RepeatFunction
 
 
 def printLC(x, end="\n"):
@@ -21,7 +22,7 @@ def printLC(x, end="\n"):
 def setup():
     print ()
     printLC ("Present and accounted for.")
-    print()
+    print ()
 
 
 def gen(x, y):
@@ -70,5 +71,14 @@ def gen(x, y):
             output1 = RandomName.one_file ("USCensusNamesLast.txt")
             print (output, output1)
         RepeatFunction.repeat (get_names, y)
+
+    elif x == "globalevents":
+        def get_events(_timelineYear):
+            events = []
+            print (f"{_timelineYear} years ago, scholars tell us...")
+            events.extend (RandomEvent.check_volcano ())
+            for item in range (len (events)):
+                print (textwrap.fill (f"    {events[item]}", width=70)),
+        RepeatFunction.repeat_decrement (get_events, y)
     else:
         printLC ("I'm sorry, I can't do that.")
