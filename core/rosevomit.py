@@ -1,7 +1,7 @@
 # --------------------
 # ROSEVOMIT.PY
 # --------------------
-# The main file for Alex's "Project ROSEVOMIT", a random name generator written in Python.
+# The main file for Alex's "Project ROSEVOMIT", a random name generator  and random timeline generator written in Python.
 
 print ()
 print ("Starting ROSEVOMIT.")
@@ -132,65 +132,26 @@ def show_main_menu():
     """Contains display instructions for the main menu."""
     print ()
     print (10 * "-", "Rosevomit.py Main Menu", 10 * "-")
-    print ("What sorts of names would you like to generate?")
-    print ("     1. First names")
-    print ("     2. First names, female-only")
-    print ("     3. First names, male-only")
-    print ("     4. Last names")
-    print ("     5. Full names")
-    print ("     6. Full names, female-only")
-    print ("     7. Full names, male-only")
-    print ("What sorts of events would you like to generate?")
-    print ("     8. Global events")
+    print ("What would you like to generate?")
+    print ("     1. Random names")
+    print ("     2. A random timeline")
     print ("X or 0. Exit program")
     print ()
 
 
 def ask_for_input():
     """Asks for user input and processes it. Contains logic for the main menu."""
-    menuchoice = input ("Enter your choice, or type 'help' for main menu: ")
+    menuchoice = input ("Enter your choice, or type 'help' for current menu: ")
     menuchoice = menuchoice.rstrip()  # Strips whitespaces at the end.
 
     if menuchoice == "1":
-        _input = input ("How many first names should be generated? ")
-        print ()
-        LogicController.gen("first", int(_input))
-        print ()
+        WorseCLI.submenu_name_show()
+        WorseCLI.submenu_name_input()
+        show_main_menu()
     elif menuchoice == "2":
-        _input = input ("How many female first names should be generated? ")
-        print ()
-        LogicController.gen("firstfemale", int(_input))
-        print ()
-    elif menuchoice == "3":
-        _input = input ("How many male first names should be generated? ")
-        print ()
-        LogicController.gen("firstmale", int(_input))
-        print ()
-    elif menuchoice == "4":
-        _input = input ("How many last names should be generated? ")
-        print ()
-        LogicController.gen("last", int(_input))
-        print ()
-    elif menuchoice == "5":
-        _input = input ("How many full names should be generated? ")
-        print ()
-        LogicController.gen("full", int(_input))
-        print ()
-    elif menuchoice == "6":
-        _input = input ("How many female full names should be generated? ")
-        print ()
-        LogicController.gen("fullfemale", int(_input))
-        print ()
-    elif menuchoice == "7":
-        _input = input ("How many male full names should be generated? ")
-        print ()
-        LogicController.gen("fullmale", int(_input))
-        print ()
-    elif menuchoice == "8":
-        _input = input ("How many years of historical global events should be generated? ")
-        print ()
-        LogicController.gen("globalevents", int(_input))
-        print ()
+        WorseCLI.submenu_timeline_show()
+        WorseCLI.submenu_timeline_input()
+        show_main_menu()
     elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
         sys.exit(0)
     elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
@@ -199,16 +160,17 @@ def ask_for_input():
         ask_for_input()
     else:
         print (f"{menuchoice} is not a recognized command.")
-        print()
 
 
-# *** MAIN PROGRAM STARTS HERE ***
+# **********************************************
+# ********** MAIN PROGRAM STARTS HERE **********
+# **********************************************
 
 main_setup()
 print ("Proceeding to get local modules... ", end="")
 CWD_home()
 from logic import LogicController
-from cli import TextStuff
+from cli import TextStuff, WorseCLI
 print ("done.")
 
 print ()
