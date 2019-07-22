@@ -4,6 +4,7 @@
 # A UI module for Alex's "Project Rosevomit" that contains functions for displaying menus beyond Rosevomits's main menu, and for processing the inputs for those menus.
 
 from logic import LogicController
+import sys
 
 
 def submenu_name_show():
@@ -27,53 +28,57 @@ def submenu_name_input():
     menuchoice = input ("Enter your choice, or type 'help' for current menu: ")
     menuchoice = menuchoice.rstrip()  # Strips whitespaces at the end.
 
-    if menuchoice == "1":
-        _input = input ("How many first names should be generated? ")
-        print ()
-        LogicController.gen("first", int(_input))
-        print ()
-    elif menuchoice == "2":
-        _input = input ("How many female first names should be generated? ")
-        print ()
-        LogicController.gen("firstfemale", int(_input))
-        print ()
-    elif menuchoice == "3":
-        _input = input ("How many male first names should be generated? ")
-        print ()
-        LogicController.gen("firstmale", int(_input))
-        print ()
-    elif menuchoice == "4":
-        _input = input ("How many last names should be generated? ")
-        print ()
-        LogicController.gen("last", int(_input))
-        print ()
-    elif menuchoice == "5":
-        _input = input ("How many full names should be generated? ")
-        print ()
-        LogicController.gen("full", int(_input))
-        print ()
-    elif menuchoice == "6":
-        _input = input ("How many female full names should be generated? ")
-        print ()
-        LogicController.gen("fullfemale", int(_input))
-        print ()
-    elif menuchoice == "7":
-        _input = input ("How many male full names should be generated? ")
-        print ()
-        LogicController.gen("fullmale", int(_input))
-        print ()
-    elif menuchoice == '0':
-        pass
-    elif menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
-        sys.exit(0)
-    elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
-        submenu_name_show()
-        submenu_name_input()
-    elif menuchoice == "":
-        submenu_name_input()
-    else:
-        print (f"{menuchoice} is not a recognized command.")
-        print()
+    try:
+        if menuchoice == "1":
+            _input = input ("How many first names should be generated? ")
+            print ()
+            LogicController.gen("first", int(_input))
+            print ()
+        elif menuchoice == "2":
+            _input = input ("How many female first names should be generated? ")
+            print ()
+            LogicController.gen("firstfemale", int(_input))
+            print ()
+        elif menuchoice == "3":
+            _input = input ("How many male first names should be generated? ")
+            print ()
+            LogicController.gen("firstmale", int(_input))
+            print ()
+        elif menuchoice == "4":
+            _input = input ("How many last names should be generated? ")
+            print ()
+            LogicController.gen("last", int(_input))
+            print ()
+        elif menuchoice == "5":
+            _input = input ("How many full names should be generated? ")
+            print ()
+            LogicController.gen("full", int(_input))
+            print ()
+        elif menuchoice == "6":
+            _input = input ("How many female full names should be generated? ")
+            print ()
+            LogicController.gen("fullfemale", int(_input))
+            print ()
+        elif menuchoice == "7":
+            _input = input ("How many male full names should be generated? ")
+            print ()
+            LogicController.gen("fullmale", int(_input))
+            print ()
+        elif menuchoice == '0':
+            pass
+        elif menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
+            sys.exit(0)
+        elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
+            submenu_name_show()
+            submenu_name_input()
+        elif menuchoice == "":
+            submenu_name_input()
+        else:
+            print (f"{menuchoice} is not a recognized command.")
+            print()
+            submenu_name_input()
+    except ValueError:
+        print ("Sorry, that's not a valid number.")
         submenu_name_input()
 
 
