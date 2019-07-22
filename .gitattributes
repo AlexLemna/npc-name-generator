@@ -1,0 +1,7 @@
+# A .gitattributes file
+# See this medium post for ideas and explanation: https://medium.com/@pablorsk/be-a-git-ninja-the-gitattributes-file-e58c07c9e915
+
+core/data/USCensusNamesFirstFemale.txt linguist-vendored
+core/data/USCensusNamesFirstMale.txt linguist-vendored
+core/data/USCensusNamesLast.txt linguist-vendored
+core/data/1990 US Census/* linguist-vendored

@@ -12,6 +12,7 @@ New to coding? You and me both, buddy. If you've viewing this on GitHub, you pro
 +     Rosevomit.py    <-- ROSEVOMIT's main file
 + dev-tests/          <-- scripts/files for testing purposes
 + docs/               <-- additional documentation
++ .gitattributes      <-- a file Git needs
 + .gitignore          <-- a file Git needs
 + LICENSE
 + README.md           <-- the file you're reading now
