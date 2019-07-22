@@ -1,5 +1,10 @@
 # What's a .gitignore? https://github.com/github/gitignore/blob/master/README.md
 
+## =====================ROSEVOMIT STUFF=======================
+core/temp/
+core/user-files/
+
+
 ## ===========================================================
 ## ============ARCHIVES and COMPRESSION and STUFF=============
 ## ===========================================================
