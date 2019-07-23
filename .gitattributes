@@ -4,4 +4,4 @@
 core/data/USCensusNamesFirstFemale.txt linguist-vendored
 core/data/USCensusNamesFirstMale.txt linguist-vendored
 core/data/USCensusNamesLast.txt linguist-vendored
-core/data/1990 US Census/* linguist-vendored
+core/data/1990-US-Census/* linguist-vendored
