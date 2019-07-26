@@ -8,7 +8,14 @@ from logic import LogicController
 
 class RosevomitTestCase(unittest.TestCase):
     """Tests for 'Rosevomit.py'."""
+    ########
+    ######## TESTING MENU SYSTEM
+    ########
+    # TODO
 
+    ########
+    ######## TESTING NAME GENERATION
+    ########
     def test_first_name_generation(self):
         """Do we get the number of names we expect?"""
         number_names_to_generate = random.randint (2, 200)
