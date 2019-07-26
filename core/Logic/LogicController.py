@@ -14,19 +14,10 @@ if __name__ == "__main__":
     import RandomName
     import RepeatFunction
     import WorkWithProgramFiles
+    from errors import CustomErrors
 else:
+    from errors import CustomErrors
     from logic import RandomEvent, RandomName, RepeatFunction, WorkWithProgramFiles
-
-
-def printLC(x, end="\n"):
-    """Applies a consistant format to LogicController's text output."""
-    print ("   LOGIC CONTROLLER:", x, end=end)
-
-
-def setup():
-    print ()
-    printLC ("Present and accounted for.")
-    print ()
 
 
 def gen(x, y):
@@ -77,7 +68,8 @@ def gen(x, y):
         RepeatFunction.repeat (get_names, y)
 
     else:
-        printLC ("I'm sorry, I can't do that.")
+        print ("I'm sorry, I can't do that.")
+        # TODO: define a custom error message, and raise it here.
 
 
 def gen_timeline(eventtypes, yearrange):
@@ -117,4 +109,5 @@ def gen_timeline(eventtypes, yearrange):
         _tempfile.write ("Testing.")
         _tempfile.close()
     else:
-        printLC ("I'm sorry, I can't do that.")
+        print ("I'm sorry, I can't do that.")
+        # TODO: define a custom error message, and raise it here.
