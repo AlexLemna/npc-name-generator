@@ -153,7 +153,8 @@ def ask_for_input():
         WorseCLI.submenu_timeline_input()
         show_main_menu()
     elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
-        sys.exit(0)
+        DialogExit.exit()
+        # sys.exit(0)
     elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
         show_main_menu()
     elif menuchoice == "":
@@ -170,7 +171,7 @@ main_setup()
 print ("Proceeding to get local modules... ", end="")
 CWD_home()
 from logic import LogicController
-from cli import TextStuff, WorseCLI
+from cli import DialogExit, TextStuff, WorseCLI
 print ("done.")
 
 print ()
