@@ -57,20 +57,15 @@ def main_setup():
     CWD_home ()
     with pathlib.Path.cwd() as cwd:
         cli_directory = cwd / 'cli'
-        gui_directory = cwd / 'gui'
         logic_directory = cwd / 'logic'
         data_directory = cwd / 'data'
+        temp_directory = cwd / 'temp'
 
     if os.path.exists (cli_directory):
         print ("   ...CLI directory located.")
     else:
         print ("   ...CLI directory not found.")
         missingdirectories.append("CLI")
-    if os.path.exists (gui_directory):
-        print ("   ...GUI directory located.")
-    else:
-        print ("   ...GUI directory not found.")
-        missingdirectories.append("GUI")
     if os.path.exists (logic_directory):
         print ("   ...logic directory located.")
     else:
@@ -81,23 +76,19 @@ def main_setup():
     else:
         print ("   ...data directory not found.")
         missingdirectories.append("Data")
+    if os.path.exists(temp_directory):
+        print ("   ...temp directory located.")
+    else:
+        printwrap (f"   ...temp directory not found. A new temp directory will be created in '{cwd}'... ", indented=True, end_with="")
+        os.mkdir ("temp")
+        print ("done.")
 
-    if os.path.exists (cli_directory) is False or os.path.exists (gui_directory) is False or os.path.exists (logic_directory) is False or os.path.exists (data_directory) is False:
+    if os.path.exists (cli_directory) is False or os.path.exists (logic_directory) is False or os.path.exists (data_directory) is False:
         print (f"I can't find following directories: {missingdirectories}.")
         print ()
-        if os.path.exists (gui_directory) is False:
-            printw ("The GUI directory is missing, but this program can run perfectly fine from the command-line interface (CLI). User input specifying alternate locations for the UI directory is not supported at this time, but will be added in future versions soon(TM). For now, though, you're stuck with the CLI.")
-            print()
-            print ("If you would like to exit the program now, enter X or 0.")
-            menuchoice = input ("Otherwise, press any key to continue setup. ")
-            if menuchoice == '0' or menuchoice == 'X' or menuchoice == "x":
-                sys.exit(0)
-            else:
-                pass
-        else:
-            printw ("This is a problem - this program will not run properly without a logic or data directory. User input specifying alternate locations for these directories is not supported at this time, but will be added in future versions soon(TM).")
-            input ("Press any key to quit.")
-            sys.exit(1)
+        printwrap ("This is a problem - this program will not run properly without these directories. User input specifying alternate locations for these directories is not supported at this time, but will be added in future versions soon(TM).")
+        input ("Press any key to quit.")
+        sys.exit(1)
     else:
         print ("All directories present.")
     print("Main setup complete. Getting version number... ", end="")
