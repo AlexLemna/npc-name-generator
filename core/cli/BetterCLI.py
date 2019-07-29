@@ -26,7 +26,7 @@ class CLIv2(cmd.Cmd):
             pass
 
     def help_about_program(self):
-        print ("Displays version and license information about the program.")
+        print ("COMMAND about_program: Displays version and license information about the program.")
 
     def do_generate(self, user_input):
         """Generates random information according to a given set of parameters."""
@@ -36,7 +36,7 @@ class CLIv2(cmd.Cmd):
             pass
 
     def help_generate(self):
-        print ("Generates random information according to a given set of parameters.")
+        print ("COMMAND generate: Generates random information according to a given set of parameters.")
 
     # ----- Formatting request -----
     # Keep the following methods at the end of the class.
@@ -49,7 +49,7 @@ class CLIv2(cmd.Cmd):
             raise SystemExit
 
     def help_quit(self):
-        print("Quits the program.")
+        print("COMMAND quit: Quits the program.")
 
     # "Ctrl-D" is a common way to exit many CLIs. Cmd interprets 'Ctrl-D' as as EOF signal by default, and does not know what to do with it. We can fix this by simply telling Cmd to interpret EOF as 'quit'.
     do_EOF = do_quit

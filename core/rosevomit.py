@@ -36,14 +36,18 @@ else:
 def CWD_home():
     """A function to set the current working directory.
 
-    Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
+    Ensures that the current working directory is set to the home directory of the active script. 
+    From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
     """
     os.chdir (os.path.dirname (sys.argv[0]))
 
 
-def printw(x):
+def printwrap(x, indented=False, end_with='\n'):
     """Textwrapping for regular 'print' commands."""
-    print (textwrap.fill (x, width=70))
+    if indented is True:
+        print (textwrap.fill (x, width=70, subsequent_indent="   "), end=end_with)
+    else:
+        print (textwrap.fill (x, width=70), end=end_with)
 
 
 def main_setup():
