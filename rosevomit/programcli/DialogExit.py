@@ -74,8 +74,8 @@ def exit(headless=False):
     _input = exit_prompt()
     if _input is None or _input is "" or _input is "Y" or any(re.match(pattern, _input) for pattern in regexes_yes):
         cleanup_and_exit()
-    elif _input is "N" or _input is any(re.match(pattern, _input) for pattern in regexes_no):
-        pass  # Ends the exit() function without doing anything
+    elif _input is "N" or any(re.match(pattern, _input) for pattern in regexes_no):
+        return False
     elif _input is "o" or any(re.match(pattern, _input) for pattern in regexes_opt):
         exit_options_menu()
         _input = exit_options_prompt()

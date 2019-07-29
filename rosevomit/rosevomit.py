@@ -150,8 +150,9 @@ def ask_for_input():
         WorseCLI.submenu_timeline_input()
         show_main_menu()
     elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
-        DialogExit.exit()
-        # sys.exit(0)
+        do_we_exit = DialogExit.exit()  # DialogExit.exit() should either return False or close the program itself
+        if do_we_exit is False:
+            show_main_menu()
     elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
         show_main_menu()
     elif menuchoice == "":
