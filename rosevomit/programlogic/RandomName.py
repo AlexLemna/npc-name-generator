@@ -17,12 +17,12 @@ def CWD_home():
 def one_file (x):
     """A function that returns one random line from a text file 'x'"""
     CWD_home ()
-    if __name__ == "logic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
+    if __name__ == "programlogic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
         try:
-            os.chdir ("./Data")
+            os.chdir ("./programdata")
         except FileNotFoundError:  # Maybe it's being run by a testing script?
             os.chdir ("..")
-            os.chdir ("./core/Data")
+            os.chdir ("./rosevomit/programdata")
         with open (x, 'r') as fileData:
             contents = fileData.readlines()
             contents = [item.rstrip() for item in contents]  # strips newline characters ('\n') and spaces
@@ -30,7 +30,7 @@ def one_file (x):
 
     elif __name__ == "__main__":  # Checks if this program is running as the main script (only happens for debugging purposes)
         os.chdir ("..")
-        os.chdir ("./Data")
+        os.chdir ("./programdata")
         with open (x, 'r') as fileData:
             contents = fileData.readlines()
             contents = [item.rstrip() for item in contents]  # strips newline characters ('\n') and spaces
@@ -38,7 +38,7 @@ def one_file (x):
 
     elif __name__ == "RandomName":  # Checks if this program is running as a module from another script inside its home directory (only happens for debugging purposes)
         os.chdir ("..")
-        os.chdir ("./Data")
+        os.chdir ("./programdata")
         with open (x, 'r') as fileData:
             contents = fileData.readlines()
             contents = [item.rstrip() for item in contents]  # strips newline characters ('\n') and spaces
@@ -71,12 +71,12 @@ def one_file (x):
 def two_files (file1, file2):
     """A function that returns one random line from a list generated from multiple text files 'x', 'y', and so on."""
     CWD_home ()
-    if __name__ == "logic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
+    if __name__ == "programlogic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
         try:
-            os.chdir ("./Data")
+            os.chdir ("./programdata")
         except FileNotFoundError:  # Maybe it's being run by a testing script?
             os.chdir ("..")
-            os.chdir ("./core/Data")
+            os.chdir ("./rosevomit/programdata")
         fileData1 = open (file1, 'r')
         contents1 = fileData1.readlines()
         contents1 = [item.rstrip() for item in contents1]  # strips newline characters ('\n') and spaces
@@ -90,7 +90,7 @@ def two_files (file1, file2):
 
     elif __name__ == "__main__":  # Checks if this program is running as the main script (only happens for debugging purposes)
         os.chdir ("..")
-        os.chdir ("./Data")
+        os.chdir ("./programdata")
         fileData1 = open (file1, 'r')
         contents1 = fileData1.readlines()
         contents1 = [item.rstrip() for item in contents1]  # strips newline characters ('\n') and spaces
@@ -104,7 +104,7 @@ def two_files (file1, file2):
 
     elif __name__ == "RandomName":  # Checks if this program is running as a module from another script inside its home directory (only happens for debugging purposes)
         os.chdir ("..")
-        os.chdir ("./Data")
+        os.chdir ("./programdata")
         fileData1 = open (file1, 'r')
         contents1 = fileData1.readlines()
         contents1 = [item.rstrip() for item in contents1]  # strips newline characters ('\n') and spaces

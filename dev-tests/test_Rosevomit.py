@@ -3,7 +3,7 @@ import random
 import sys
 import unittest
 
-from logic import LogicController
+from programlogic import LogicController
 
 
 class RosevomitTestCase(unittest.TestCase):

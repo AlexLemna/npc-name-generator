@@ -14,10 +14,10 @@ if __name__ == "__main__":
     import RandomName
     import RepeatFunction
     import WorkWithProgramFiles
-    from errors import CustomErrors
+    from core import CustomErrors
 else:
-    from errors import CustomErrors
-    from logic import RandomEvent, RandomName, RepeatFunction, WorkWithProgramFiles
+    from core import CustomErrors
+    from programlogic import RandomEvent, RandomName, RepeatFunction, WorkWithProgramFiles
 
 
 def gen(x, y):
@@ -98,7 +98,7 @@ def gen_timeline(eventtypes, yearrange):
                 os.chdir ("./temp")
         except FileNotFoundError:  # Maybe it's being run by a testing script?
             os.chdir ("..")
-            os.chdir ("./core/temp/")
+            os.chdir ("./rosevomit/temp/")
         _tempfile_name = WorkWithProgramFiles.setname()
         _tempfile = open(_tempfile_name, "a+")
 

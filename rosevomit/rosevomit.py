@@ -56,11 +56,12 @@ def main_setup():
     missingdirectories = []
     CWD_home ()
     with pathlib.Path.cwd() as cwd:
-        cli_directory = cwd / 'cli'
-        logic_directory = cwd / 'logic'
-        data_directory = cwd / 'data'
+        cli_directory = cwd / 'programcli'
+        logic_directory = cwd / 'programlogic'
+        data_directory = cwd / 'programdata'
         temp_directory = cwd / 'temp'
 
+    # determining if we've got all our directories where we expect them to be
     if os.path.exists (cli_directory):
         print ("   ...CLI directory located.")
     else:
@@ -83,6 +84,7 @@ def main_setup():
         os.mkdir ("temp")
         print ("done.")
 
+    # let the user know whether or not we've got all the necessary directories
     if os.path.exists (cli_directory) is False or os.path.exists (logic_directory) is False or os.path.exists (data_directory) is False:
         print (f"I can't find following directories: {missingdirectories}.")
         print ()
@@ -165,8 +167,8 @@ def ask_for_input():
 main_setup()
 print ("Proceeding to get local modules... ", end="")
 CWD_home()
-from logic import LogicController
-from cli import DialogExit, TextStuff, WorseCLI
+from programlogic import LogicController
+from programcli import DialogExit, TextStuff, WorseCLI
 print ("done.")
 
 print ()

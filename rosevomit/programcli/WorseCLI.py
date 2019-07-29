@@ -3,7 +3,7 @@
 # ----------------------------------------
 # A UI module for Alex's "Project Rosevomit" that contains functions for displaying menus beyond Rosevomits's main menu, and for processing the inputs for those menus.
 
-from logic import LogicController
+from programlogic import LogicController
 import re
 import sys
 

@@ -7,7 +7,7 @@ import re
 import sys
 import textwrap
 
-from logic import TempFiles
+from programlogic import TempFiles
 
 
 ### SOME LISTS OF REGEX PATTERNS FOR PARSING USER INPT
@@ -85,6 +85,7 @@ def exit(headless=False):
             sys.exit(0)
         elif _input is "3":
             TempFiles.view()
+            exit(headless=False)
         elif _input is "4":
             return
         else:
