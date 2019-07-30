@@ -1,12 +1,9 @@
 import textwrap
 
 
-def printw(x):
-    '''Textwrapping for regular 'print' commands.'''
-    print ( textwrap.fill (x, width=70))
-
-
-def inputw(x):
-    '''Textwrapping for user input prompts.'''
-    _input = input ( textwrap.fill (x, width=70))
-    return ( _input )
+def printwrap(x, indented=False, end_with='\n'):
+    """Textwrapping for regular 'print' commands."""
+    if indented is True:
+        print (textwrap.fill (x, width=70, subsequent_indent="   "), end=end_with)
+    else:
+        print (textwrap.fill (x, width=70), end=end_with)
