@@ -5,19 +5,16 @@
 
 print ()
 print ("Starting ROSEVOMIT.")
-# *** SOME SETUP STUFF ***
 # MODULES FROM PYTHON'S STANDARD LIBRARY
 print ("Getting some modules from the standard library... ", end="")
+from configparser import ConfigParser
 import os
+from pathlib import Path
 import sys
 print ("done.")
-
-# MODULES FROM PYPI (the Python community)
-# none
-
 # INTERNAL MODULES
 print ("Proceeding to get local modules... ", end="")
-from core import Startup
+from core import Settings, Startup
 from programlogic import LogicController
 from programcli import DialogExit, TextStuff, WorseCLI
 print ("done.")
@@ -63,6 +60,15 @@ def ask_for_input():
 # **********************************************
 # ********** MAIN PROGRAM STARTS HERE **********
 # **********************************************
+HOME_DIRECTORY = os.path.dirname (sys.argv[0])
+
+if Settings.existence() is False:
+    print ("The settings don't exist. Recreating settings file at:")
+    print (f"  {Settings.SETTINGS_FILE}")
+    Settings.restore_file()
+    print ()
+else:
+    pass
 Startup.main_setup()
 
 print ()

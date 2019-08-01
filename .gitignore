@@ -4,6 +4,9 @@
 rosevomit/temp/
 rosevomit/saved/
 
+# Local settings
+rosevomit/core/*.ini
+
 
 ## ===========================================================
 ## ============ARCHIVES and COMPRESSION and STUFF=============
