@@ -10,13 +10,8 @@ from inspect import currentframe, getframeinfo
 
 try:
     from core import Directories
-except ImportError:
+except ImportError:  # for external unit testing
     from rosevomit.core import Directories
-
-
-def CWD_home():
-    """Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory"""
-    os.chdir (os.path.dirname (sys.argv[0]))
 
 
 def one_file (file1):
