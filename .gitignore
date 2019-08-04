@@ -7,6 +7,11 @@ rosevomit/saved/
 # Local settings
 rosevomit/core/*.ini
 
+# Dev test results
+devtests/*.log
+devtests/*.txt
+devtests/testlog*/
+
 
 ## ===========================================================
 ## ============ARCHIVES and COMPRESSION and STUFF=============

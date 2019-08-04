@@ -16,8 +16,8 @@ if __name__ == "__main__":
     import WorkWithProgramFiles
     from core import CustomErrors
 else:
-    from core import CustomErrors
-    from programlogic import RandomEvent, RandomName, RepeatFunction, WorkWithProgramFiles
+    from rosevomit.core import CustomErrors
+    from rosevomit.programlogic import RandomEvent, RandomName, RepeatFunction, WorkWithProgramFiles
 
 
 def gen(x, y):

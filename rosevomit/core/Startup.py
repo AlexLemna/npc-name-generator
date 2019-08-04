@@ -8,6 +8,7 @@ import sys
 import textwrap
 import xml.etree.ElementTree as ElementTree
 
+from core import Settings
 from programcli.TextStuff import printwrap
 
 
