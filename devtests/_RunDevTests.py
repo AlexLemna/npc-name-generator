@@ -70,6 +70,7 @@ for item in [ROSEVOMIT_DIR, CLI_DIR, LOGIC_DIR, DATA_DIR, TEMP_DIR]:
     assert pathlib.Path.exists(item)
 
 # Running test and saving output to file
+os.chdir (TESTLOG_DIR)
 with open(testlogname + ".results.txt", "w+") as f:
     # Save original stdout and stderr settings
     _old_stdout = sys.stdout

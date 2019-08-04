@@ -8,14 +8,30 @@ import random
 import sys
 from inspect import currentframe, getframeinfo
 
+try:
+    from core import Directories
+except ImportError:
+    from rosevomit.core import Directories
+
 
 def CWD_home():
     """Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory"""
     os.chdir (os.path.dirname (sys.argv[0]))
 
 
-def one_file (x):
+def one_file (file1):
     """A function that returns one random line from a text file 'x'"""
+    data_dir = Directories.get_data_dir()
+    os.chdir (data_dir)
+    with open (file1, 'r') as fileData:
+        contents = fileData.readlines()
+        contents = [item.rstrip() for item in contents]  # strips newline characters ('\n') and spaces
+        if __name__ != "__main__":
+            return (random.choice (contents))
+        else:
+            print (random.choice (contents))
+
+    """
     CWD_home ()
     if __name__ == "programlogic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
         try:
@@ -66,10 +82,25 @@ def one_file (x):
         print ("   Take a screenshot and contact Alex. Also, tell him to create some kind of")
         print ("   error logging system so you don't have to manually ask him for help every")
         print ("   time he messes up.")
+"""
 
 
 def two_files (file1, file2):
     """A function that returns one random line from a list generated from multiple text files 'x', 'y', and so on."""
+    data_dir = Directories.get_data_dir()
+    os.chdir (data_dir)
+    fileData1 = open (file1, 'r')
+    contents1 = fileData1.readlines()
+    contents1 = [item.rstrip() for item in contents1]  # strips newline characters ('\n') and spaces
+    fileData1.close()
+    fileData2 = open (file2, 'r')
+    contents2 = fileData2.readlines()
+    contents2 = [item.rstrip() for item in contents2]
+    fileData2.close()
+    contents = contents1 + contents2
+    return (random.choice (contents))
+
+    """
     CWD_home ()
     if __name__ == "programlogic.RandomName":  # This is the normal module behavior - it's being run from somewhere else.
         try:
@@ -138,3 +169,7 @@ def two_files (file1, file2):
         print ("   Take a screenshot and contact Alex. Also, tell him to create some kind of")
         print ("   error logging system so you don't have to manually ask him for help every")
         print ("   time he messes up.")
+"""
+
+if __name__ == "__main__":
+    one_file("SampleData.txt")
