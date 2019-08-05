@@ -1,1 +1,2 @@
+## NOT NECESSARY NOW, BUT PROBABLY IN THE FUTURE ##
 pyreadline==2.1
