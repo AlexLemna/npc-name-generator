@@ -135,8 +135,6 @@ class NameGenerationTests(unittest.TestCase):
         else:
             pass
         self.assertEqual (number_names_to_generate, len (names_generated))
-# TODO
-# We need to add similar tests for the rest of 'logiccontroller.gen'
 
 
 if __name__ == "__main__":

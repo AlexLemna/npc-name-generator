@@ -78,10 +78,23 @@ with open(testlogname + ".results.txt", "w+") as f:
     # Switch stdout and stderr to file output
     sys.stdout = f
     sys.stderr = f
-    print ("NAME GENERATION TESTS")
+
+    print (PROJECT_NAME, "test suite results")
+    print (DATESTRING)
+    testmiscstuff.logformat_line ()
+    testmiscstuff.logformat_header ("Introductory Placeholder")
+    print ("blah blah blah")
+
+    testmiscstuff.logformat_line ()
+    testmiscstuff.logformat_header ("NAME GENERATION TEXT")
     testsuite = unittest.TestLoader().loadTestsFromModule(testfunctions)
     unittest.TextTestRunner().run(testsuite)
+
     # Restore stdout and stderr to original settings
     sys.stderr = _old_stderr
     sys.stdout = _old_stdout
-input("Done. Press 'enter' to exit.")
+print ()
+print ("Done. One or more text files with the results of these tests have")
+print ("been placed in:")
+print ("  ", TESTLOG_DIR)
+input ("Press 'enter' to exit.")
