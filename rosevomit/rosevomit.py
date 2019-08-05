@@ -14,9 +14,8 @@ import sys
 print ("done.")
 # INTERNAL MODULES
 print ("Proceeding to get local modules... ", end="")
-from core import Settings, Startup
-from programlogic import LogicController
-from programcli import DialogExit, TextStuff, WorseCLI
+from core import settings, startup
+from programcli import dialogexit, worsecli
 print ("done.")
 
 
@@ -38,15 +37,15 @@ def ask_for_input():
     menuchoice = menuchoice.rstrip()  # Strips whitespaces at the end.
 
     if menuchoice == "1":
-        WorseCLI.submenu_name_show()
-        WorseCLI.submenu_name_input()
+        worsecli.submenu_name_show()
+        worsecli.submenu_name_input()
         show_main_menu()
     elif menuchoice == "2":
-        WorseCLI.submenu_timeline_show()
-        WorseCLI.submenu_timeline_input()
+        worsecli.submenu_timeline_show()
+        worsecli.submenu_timeline_input()
         show_main_menu()
     elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
-        do_we_exit = DialogExit.exit()  # DialogExit.exit() should either return False or close the program itself
+        do_we_exit = dialogexit.exit()  # dialogexit.exit() should either return False or close the program itself
         if do_we_exit is False:
             show_main_menu()
     elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
@@ -62,14 +61,14 @@ def ask_for_input():
 # **********************************************
 HOME_DIRECTORY = os.path.dirname (sys.argv[0])
 
-if Settings.existence() is False:
+if settings.existence() is False:
     print ("The settings don't exist. Recreating settings file at:")
-    print (f"  {Settings.SETTINGS_FILE}")
-    Settings.restore_file()
+    print (f"  {settings.SETTINGS_FILE}")
+    settings.restore_file()
     print ()
 else:
     pass
-Startup.main_setup()
+startup.main_setup()
 
 print ()
 print (69 * "-")

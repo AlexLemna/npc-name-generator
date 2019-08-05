@@ -3,7 +3,7 @@
 # ----------------------------------------
 # A UI module for Alex's "Project Rosevomit" that contains functions for displaying menus beyond Rosevomits's main menu, and for processing the inputs for those menus.
 
-from programlogic import LogicController
+from programlogic import logiccontroller
 import re
 import sys
 
@@ -51,37 +51,37 @@ def submenu_name_input():
     if menuchoice == "1":
         _input = input_integer ("How many first names should be generated? ")
         print ()
-        LogicController.gen("first", int(_input))
+        logiccontroller.gen("first", int(_input))
         print ()
     elif menuchoice == "2":
         _input = input_integer ("How many female first names should be generated? ")
         print ()
-        LogicController.gen("firstfemale", int(_input))
+        logiccontroller.gen("firstfemale", int(_input))
         print ()
     elif menuchoice == "3":
         _input = input_integer ("How many male first names should be generated? ")
         print ()
-        LogicController.gen("firstmale", int(_input))
+        logiccontroller.gen("firstmale", int(_input))
         print ()
     elif menuchoice == "4":
         _input = input_integer ("How many last names should be generated? ")
         print ()
-        LogicController.gen("last", int(_input))
+        logiccontroller.gen("last", int(_input))
         print ()
     elif menuchoice == "5":
         _input = input_integer ("How many full names should be generated? ")
         print ()
-        LogicController.gen("full", int(_input))
+        logiccontroller.gen("full", int(_input))
         print ()
     elif menuchoice == "6":
         _input = input_integer ("How many female full names should be generated? ")
         print ()
-        LogicController.gen("fullfemale", int(_input))
+        logiccontroller.gen("fullfemale", int(_input))
         print ()
     elif menuchoice == "7":
         _input = input_integer ("How many male full names should be generated? ")
         print ()
-        LogicController.gen("fullmale", int(_input))
+        logiccontroller.gen("fullmale", int(_input))
         print ()
     elif menuchoice == '0':
         pass
@@ -117,7 +117,7 @@ def submenu_timeline_input():
     if menuchoice == "1":
         _input = input_integer ("How many years of historical global events should be generated? ")
         print ()
-        LogicController.gen_timeline("globalevents", int(_input))
+        logiccontroller.gen_timeline("globalevents", int(_input))
         print ()
     elif menuchoice == "2":
         print ("This option is not currently supported.")

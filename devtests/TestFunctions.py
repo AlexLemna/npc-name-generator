@@ -10,14 +10,6 @@ from rosevomit import programlogic
 
 class NameGenerationTests(unittest.TestCase):
     """Tests for 'Rosevomit.py'."""
-    ########
-    ######## TESTING MENU SYSTEM
-    ########
-    # TODO
-
-    ########
-    ######## TESTING NAME GENERATION
-    ########
     def test_first_name_generation(self):
         """Do we get the number of names we expect?"""
         number_names_to_generate = random.randint (2, 200)
@@ -25,7 +17,7 @@ class NameGenerationTests(unittest.TestCase):
 
         test_stdout = StringIO()  # io.StringIO is in-memory stream for text I/O.
         sys.stdout = test_stdout  # Redirecting stdout to stream.
-        rosevomit.programlogic.LogicController.gen ("first", number_names_to_generate)  # Actually running test
+        rosevomit.programlogic.logiccontroller.gen ("first", number_names_to_generate)  # Actually running test
 
         sys.stdout = old_stdout  # Resetting stdout to print to terminal again
         result = test_stdout.getvalue()  # Reading the test results from memory
@@ -43,7 +35,7 @@ class NameGenerationTests(unittest.TestCase):
 
         test_stdout = StringIO()  # io.StringIO is in-memory stream for text I/O.
         sys.stdout = test_stdout  # Redirecting stdout to stream.
-        rosevomit.programlogic.LogicController.gen ("firstfemale", number_names_to_generate)  # Actually running test
+        rosevomit.programlogic.logiccontroller.gen ("firstfemale", number_names_to_generate)  # Actually running test
 
         sys.stdout = old_stdout  # Resetting stdout to print to terminal again
         result = test_stdout.getvalue()  # Reading the test results from memory
@@ -61,7 +53,7 @@ class NameGenerationTests(unittest.TestCase):
 
         test_stdout = StringIO()  # io.StringIO is in-memory stream for text I/O.
         sys.stdout = test_stdout  # Redirecting stdout to stream.
-        rosevomit.programlogic.LogicController.gen ("firstmale", number_names_to_generate)  # Actually running test
+        rosevomit.programlogic.logiccontroller.gen ("firstmale", number_names_to_generate)  # Actually running test
 
         sys.stdout = old_stdout  # Resetting stdout to print to terminal again
         result = test_stdout.getvalue()  # Reading the test results from memory
@@ -79,7 +71,7 @@ class NameGenerationTests(unittest.TestCase):
 
         test_stdout = StringIO()  # io.StringIO is in-memory stream for text I/O.
         sys.stdout = test_stdout  # Redirecting stdout to stream.
-        rosevomit.programlogic.LogicController.gen ("last", number_names_to_generate)  # Actually running test
+        rosevomit.programlogic.logiccontroller.gen ("last", number_names_to_generate)  # Actually running test
 
         sys.stdout = old_stdout  # Resetting stdout to print to terminal again
         result = test_stdout.getvalue()  # Reading the test results from memory
@@ -97,7 +89,7 @@ class NameGenerationTests(unittest.TestCase):
 
         test_stdout = StringIO()  # io.StringIO is in-memory stream for text I/O.
         sys.stdout = test_stdout  # Redirecting stdout to stream.
-        rosevomit.programlogic.LogicController.gen ("full", number_names_to_generate)  # Actually running test
+        rosevomit.programlogic.logiccontroller.gen ("full", number_names_to_generate)  # Actually running test
 
         sys.stdout = old_stdout  # Resetting stdout to print to terminal again
         result = test_stdout.getvalue()  # Reading the test results from memory
@@ -115,7 +107,7 @@ class NameGenerationTests(unittest.TestCase):
 
         test_stdout = StringIO()  # io.StringIO is in-memory stream for text I/O.
         sys.stdout = test_stdout  # Redirecting stdout to stream.
-        rosevomit.programlogic.LogicController.gen ("fullfemale", number_names_to_generate)  # Actually running test
+        rosevomit.programlogic.logiccontroller.gen ("fullfemale", number_names_to_generate)  # Actually running test
 
         sys.stdout = old_stdout  # Resetting stdout to print to terminal again
         result = test_stdout.getvalue()  # Reading the test results from memory
@@ -133,7 +125,7 @@ class NameGenerationTests(unittest.TestCase):
 
         test_stdout = StringIO()  # io.StringIO is in-memory stream for text I/O.
         sys.stdout = test_stdout  # Redirecting stdout to stream.
-        rosevomit.programlogic.LogicController.gen ("fullmale", number_names_to_generate)  # Actually running test
+        rosevomit.programlogic.logiccontroller.gen ("fullmale", number_names_to_generate)  # Actually running test
 
         sys.stdout = old_stdout  # Resetting stdout to print to terminal again
         result = test_stdout.getvalue()  # Reading the test results from memory
@@ -144,7 +136,7 @@ class NameGenerationTests(unittest.TestCase):
             pass
         self.assertEqual (number_names_to_generate, len (names_generated))
 # TODO
-# We need to add similar tests for the rest of 'LogicController.gen'
+# We need to add similar tests for the rest of 'logiccontroller.gen'
 
 
 if __name__ == "__main__":

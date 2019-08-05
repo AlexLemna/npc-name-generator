@@ -9,8 +9,8 @@ import traceback
 import unittest
 
 # Rosevomit test modules
-import TestFunctions
-import TestMiscStuff
+import testfunctions
+import testmiscstuff
 # Rosevomit itself
 from context import rosevomit
 
@@ -21,7 +21,7 @@ if __name__ != "__main__":
 
 # Prompt the user before running tests
 # (in the future, we'll ask which tests to run)
-do_we_run = TestMiscStuff.run_prompt()
+do_we_run = testmiscstuff.run_prompt()
 if do_we_run is False:
     sys.exit()
 # TODO: Add ability to pick and choose which tests to run
@@ -44,19 +44,19 @@ DATETIME = datetime.datetime.now()
 DATESTRING = DATETIME.strftime("%Y-%b-%d (%a) %I:%M%p")
 # Creating a directory (TESTLOG_DIR) where we'll store the test results
 testlogname = str("testlog-" + DATETIME.strftime("%Y%b%d-%H%M"))
-testlogname = TestMiscStuff.make_name_unique (testlogname)
+testlogname = testmiscstuff.make_name_unique (testlogname)
 os.mkdir (testlogname)
 os.chdir (testlogname)
 TESTLOG_DIR = pathlib.Path.cwd()
 
 # Moving through filesystem, looking for important directories and saving their paths as constants. Note that, as written, this program basically just looks for the directories in their expected location and freaks out if they're not there.
 os.chdir ("..")
-if TestMiscStuff.get_cwd_name_only() == "devtests":  # NOTE: We use '==' here, not 'is'!
+if testmiscstuff.get_cwd_name_only() == "devtests":  # NOTE: We use '==' here, not 'is'!
     DEVTEST_DIR = pathlib.Path.cwd()
 else:
     raise FileNotFoundError
 os.chdir ("..")
-if TestMiscStuff.get_cwd_name_only() == "rosevomitrepo":
+if testmiscstuff.get_cwd_name_only() == "rosevomitrepo":
     REPO_DIR = pathlib.Path.cwd()
 else:
     raise FileNotFoundError
@@ -78,11 +78,10 @@ with open(testlogname + ".results.txt", "w+") as f:
     # Switch stdout and stderr to file output
     sys.stdout = f
     sys.stderr = f
-    testsuite = unittest.TestLoader().loadTestsFromModule(TestFunctions)
+    print ("NAME GENERATION TESTS")
+    testsuite = unittest.TestLoader().loadTestsFromModule(testfunctions)
     unittest.TextTestRunner().run(testsuite)
     # Restore stdout and stderr to original settings
     sys.stderr = _old_stderr
     sys.stdout = _old_stdout
-
-
-input("Done. Press 'enter' to escape.")
+input("Done. Press 'enter' to exit.")

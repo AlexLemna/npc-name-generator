@@ -7,7 +7,7 @@ import re
 import sys
 import textwrap
 
-from programlogic import TempFiles
+from programlogic import tempfiles
 
 
 ### SOME LISTS OF REGEX PATTERNS FOR PARSING USER INPT
@@ -59,7 +59,7 @@ def exit_options_prompt():
 
 
 def cleanup_and_exit():
-    TempFiles.delete()
+    tempfiles.delete()
     sys.exit(0)
 
 
@@ -84,7 +84,7 @@ def exit(headless=False):
         elif _input is "2":
             sys.exit(0)
         elif _input is "3":
-            TempFiles.view()
+            tempfiles.view()
             exit(headless=False)
         elif _input is "4":
             return

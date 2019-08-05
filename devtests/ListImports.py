@@ -19,4 +19,4 @@ if __name__ == "__main__":
         print ()
         traceback.print_exc()
     finally:
-        input()  # Waits for user to press 'enter' before moving on (closing).
+        input()  # Waits for user to press 'enter' before exiting..
