@@ -5,8 +5,6 @@
 
 import os
 import random
-import sys
-from inspect import currentframe, getframeinfo
 
 try:
     from core import directories

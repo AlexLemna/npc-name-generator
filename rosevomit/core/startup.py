@@ -5,7 +5,6 @@
 import os
 import pathlib
 import sys
-import textwrap
 import xml.etree.ElementTree as ElementTree
 
 from core import settings

@@ -3,9 +3,7 @@
 # --------------------
 # A logic module for Alex's "Project Rosevomit" that contains functions for making temp files, saving files, etc.
 
-from inspect import currentframe, getframeinfo
 import os
-import sys
 
 
 def setname():

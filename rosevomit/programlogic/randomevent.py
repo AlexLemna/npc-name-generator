@@ -3,10 +3,8 @@
 # ----------------------------------------
 # A logic module for Alex's "Project Rosevomit" that contains functions for randomly generating annual events.
 
-import csv
 import os
 import random
-import sys
 
 
 def check_volcano(in_year, csv_destination=""):

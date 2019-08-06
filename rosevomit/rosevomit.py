@@ -7,9 +7,7 @@ print ()
 print ("Starting ROSEVOMIT.")
 # MODULES FROM PYTHON'S STANDARD LIBRARY
 print ("Getting some modules from the standard library... ", end="")
-from configparser import ConfigParser
 import os
-from pathlib import Path
 import sys
 print ("done.")
 # INTERNAL MODULES
