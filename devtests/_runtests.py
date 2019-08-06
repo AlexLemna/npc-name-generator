@@ -116,8 +116,7 @@ if FINDIMPORTS_MODULE_EXISTS is True:
         sys.stderr = f
 
         os.chdir (ROSEVOMIT_DIR)
-        mainfile = "rosevomit.py"
-        mock_cli_args = [mainfile, "-i"]
+        mock_cli_args = ["rosevomit.py", "-i"]
         findimports.main(argv=mock_cli_args)
 
         # Restore stdout and stderr to original settings
@@ -125,7 +124,30 @@ if FINDIMPORTS_MODULE_EXISTS is True:
         sys.stdout = _old_stdout
 else:
     print ("The 'findimports' module is not present.")
-    print ("An import list document will not be generated for this test.")
+    print ("An import list will not be generated for this test.")
+
+# Generating "findimports" results file
+if FINDIMPORTS_MODULE_EXISTS is True:
+    print ("Generating unused import list.")
+    os.chdir (TESTLOG_DIR)
+    with open(DATESTRING_SHORT + ".unusedimports.txt", "w+") as f:
+        # Save original stdout and stderr settings
+        _old_stdout = sys.stdout
+        _old_stderr = sys.stderr
+        # Switch stdout and stderr to file output
+        sys.stdout = f
+        sys.stderr = f
+
+        os.chdir (ROSEVOMIT_DIR)
+        mock_cli_args = ["rosevomit.py", "-i", "-u"]
+        findimports.main(argv=mock_cli_args)
+
+        # Restore stdout and stderr to original settings
+        sys.stderr = _old_stderr
+        sys.stdout = _old_stdout
+else:
+    print ("The 'findimports' module is not present.")
+    print ("An unused imports list will not be generated for this test.")
 
 print ()
 print ("Done. One or more text files with the results of these tests have")
