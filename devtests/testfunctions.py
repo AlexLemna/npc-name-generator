@@ -29,33 +29,11 @@ def test_string_generation (testcaseself, keyword: str):
 
 class NameGenerationTests(unittest.TestCase):
     """Tests for 'Rosevomit.py'."""
-    def test_first_name_generation(self):
+    def test_name_generation(self):
         """Do we get the number of names we expect?"""
-        test_string_generation (self, "first")
-
-    def test_female_first_name_generation(self):
-        """Do we get the number of names we expect?"""
-        test_string_generation (self, "firstfemale")
-
-    def test_male_first_name_generation(self):
-        """Do we get the number of names we expect?"""
-        test_string_generation (self, "firstmale")
-
-    def test_last_name_generation(self):
-        """Do we get the number of names we expect?"""
-        test_string_generation (self, "last")
-
-    def test_full_name_generation(self):
-        """Do we get the number of names we expect?"""
-        test_string_generation (self, "full")
-
-    def test_female_full_name_generation(self):
-        """Do we get the number of names we expect?"""
-        test_string_generation (self, "fullfemale")
-
-    def test_male_full_name_generation(self):
-        """Do we get the number of names we expect?"""
-        test_string_generation (self, "fullmale")
+        keyword_list = ["first", "firstfemale", "firstmale", "last", "full", "fullfemale", "fullmale"]
+        for keyword in keyword_list:
+            test_string_generation (self, keyword)
 
 
 if __name__ == "__main__":

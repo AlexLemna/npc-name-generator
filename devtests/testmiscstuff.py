@@ -1,5 +1,7 @@
 import os
 import pathlib
+import sys
+import traceback
 
 
 def run_prompt():
@@ -47,3 +49,20 @@ def logformat_header(text: str) -> None:
         text = str.upper(text)
     num_spaces = int ((70 - len (text)) / 2)
     print (" " * num_spaces, text, " " * num_spaces, sep="")
+
+
+# THANKS: https://stackoverflow.com/questions/2828953/silence-the-stdout-of-a-function-in-python-without-trashing-sys-stdout-and-resto/40054132#40054132
+class Suppressor(object):
+
+    def __enter__(self):
+        self.stdout = sys.stdout
+        sys.stdout = self
+
+    def __exit__(self, type, value, traceback):
+        sys.stdout = self.stdout
+        if type is not None:
+            # Do normal exception handling
+            raise
+
+    def write(self, x):
+        pass

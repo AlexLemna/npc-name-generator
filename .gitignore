@@ -10,7 +10,7 @@ rosevomit/core/*.ini
 # Dev test results
 devtests/*.log
 devtests/*.txt
-devtests/testlog*/
+devtests/*test/
 
 
 ## ===========================================================
@@ -637,6 +637,9 @@ ASALocalRun/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Ignore any workspace configuration files
+*.code-workspace
 
 # Ignores the file providing the PYTHONPATH.
 # This file was created to fix this issue: https://github.com/AlexLemna/rosevomit/issues/12
