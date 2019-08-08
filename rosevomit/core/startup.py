@@ -11,25 +11,15 @@ from core import settings
 from programcli.textstuff import printwrap
 
 
-def CWD_home():
-    """A function to set the current working directory.
-
-    Ensures that the current working directory is set to the home directory of the active script.
-    From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory
-    """
-    os.chdir (os.path.dirname (sys.argv[0]))
-
-
-def main_setup():
+def main_setup(homedir):
     """Contains setup instructions, and prints that info to terminal."""
     print ("Looking for UI, Logic, and Data directories...")
     missingdirectories = []
-    CWD_home ()
-    with pathlib.Path.cwd() as cwd:
-        cli_directory = cwd / 'programcli'
-        logic_directory = cwd / 'programlogic'
-        data_directory = cwd / 'programdata'
-        temp_directory = cwd / 'temp'
+    homedir = pathlib.Path(homedir)
+    cli_directory = homedir / 'programcli'
+    logic_directory = homedir / 'programlogic'
+    data_directory = homedir / 'programdata'
+    temp_directory = homedir / 'temp'
 
     # determining if we've got all our directories where we expect them to be
     if os.path.exists (cli_directory):

@@ -66,7 +66,7 @@ if settings.existence() is False:
     print ()
 else:
     pass
-startup.main_setup()
+startup.main_setup(HOME_DIRECTORY)
 
 print ()
 print (69 * "-")
