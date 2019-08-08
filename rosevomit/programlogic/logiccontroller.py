@@ -101,7 +101,7 @@ def gen_timeline(eventtypes, yearrange):
         except FileNotFoundError:  # Maybe it's being run by a testing script?
             os.chdir ("..")
             os.chdir ("./rosevomit/temp/")
-        _tempfile_name = workwithprogramfiles.setname()
+        _tempfile_name = workwithprogramfiles.setname("timeline")
         _tempfile = open(_tempfile_name, "a+")
 
         for item in range (0, yearrange):
