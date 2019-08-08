@@ -43,9 +43,13 @@ def ask_for_input():
         worsecli.submenu_timeline_input()
         show_main_menu()
     elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
-        do_we_exit = dialogexit.exit()  # dialogexit.exit() should either return False or close the program itself
-        if do_we_exit is False:
-            show_main_menu()
+        show_exit_dialog = settings.dialog_on_exit()
+        if show_exit_dialog is False:
+            sys.exit()
+        else:
+            do_we_exit = dialogexit.exit()  # dialogexit.exit() should either return False or close the program itself
+            if do_we_exit is False:
+                show_main_menu()
     elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
         show_main_menu()
     elif menuchoice == "":

@@ -19,13 +19,13 @@ def restore_file():
     if check_existence is True:
         raise FileExistsError
     # Initializing ConfigParser()
-    settings = configparser.ConfigParser()
+    config = configparser.ConfigParser()
     # Entering the default values we want to restore
-    settings["debugging"] = {
+    config["debugging"] = {
         "startup_dialog": "on",
         "logging_service": "off"}
-    settings["directories"] = {}
-    settings["exit behavior"] = {"exit_dialog": "on"}
+    config["directories"] = {}
+    config["exit behavior"] = {"exit_dialog": "on"}
     # Creating the file
     with open(SETTINGS_FILE, "w+") as newfile:
         # Header comment
@@ -33,4 +33,14 @@ def restore_file():
         newfile.write("; a file storing Rosevomit's settings\n")
         newfile.write("\n")
         # Writing default values
-        settings.write(newfile)
+        config.write(newfile)
+
+
+def dialog_on_exit():
+    """Returns true or false based on the value of 'exit dialog' in the 'settings-data.ini' file."""
+    global SETTINGS_FILE
+    settings = open(SETTINGS_FILE)
+    config = configparser.ConfigParser()  # Created an instance of ConfigParser
+    config.read_file(settings)
+    _result = config.getboolean(section="exit behavior", option="exit_dialog")
+    return _result
