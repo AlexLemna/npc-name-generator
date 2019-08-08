@@ -153,7 +153,7 @@ with open(DATESTRING_SHORT + ".perf.txt", "w+") as f:
     sys.stdout = _old_stdout
 print ("done.")
 
-# Generating "findimports" results file
+# Generating "imports" results file
 if FINDIMPORTS_MODULE_EXISTS is True:
     print ("Generating import list... ", end="")
     os.chdir (TESTLOG_DIR)
@@ -181,7 +181,7 @@ else:
     print ("The 'findimports' module is not present.")
     print ("An import list will not be generated for this test.")
 
-# Generating "findimports" results file
+# Generating "unused imports" results file
 if FINDIMPORTS_MODULE_EXISTS is True:
     print ("Generating unused import list... ", end="")
     os.chdir (TESTLOG_DIR)
@@ -244,6 +244,8 @@ with open(DATESTRING_SHORT + ".summary.txt", "w+") as f:
     for item in directories_missing:
         print ("  ", item)
     print ()
+    if FINDIMPORTS_MODULE_EXISTS is False:
+        print (textwrap.fill ("The third-party module 'findimports' was not present, therefore the following tests were not run: import list, unused imports list"))
     testtime = t1 - t0
     display_testtime = round (testtime, ndigits=1)
     # For explanations of the '//' and '%' operators, see here: https://stackoverflow.com/questions/4432208/what-is-the-result-of-in-python
