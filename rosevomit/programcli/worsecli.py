@@ -2,10 +2,12 @@
 # WorseCLI.py
 # ----------------------------------------
 # A UI module for Alex's "Project Rosevomit" that contains functions for displaying menus beyond Rosevomits's main menu, and for processing the inputs for those menus.
-
-from programlogic import logiccontroller
 import re
 import sys
+
+from . import dialogexit
+from core import settings
+from programlogic import logiccontroller
 
 
 def input_integer(_prompt_text="", _if_invalid=None):
@@ -148,3 +150,43 @@ def prompt_save():
     else:
         print (f"{menuchoice} is not a recognized command.")
         prompt_save()
+
+        
+def show_main_menu():
+    """Contains display instructions for the main menu."""
+    print ()
+    print (10 * "-", "Rosevomit.py Main Menu", 10 * "-")
+    print ("What would you like to generate?")
+    print ("     1. Random names")
+    print ("     2. A random timeline")
+    print ("X or 0. Exit program")
+    print ()
+        
+        
+def ask_for_input():
+    """Asks for user input and processes it. Contains logic for the main menu."""
+    menuchoice = input ("Enter your choice, or type 'help' for current menu: ")
+    menuchoice = menuchoice.rstrip()  # Strips whitespaces at the end.
+
+    if menuchoice == "1":
+        submenu_name_show()
+        submenu_name_input()
+        show_main_menu()
+    elif menuchoice == "2":
+        submenu_timeline_show()
+        submenu_timeline_input()
+        show_main_menu()
+    elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
+        show_exit_dialog = settings.dialog_on_exit()
+        if show_exit_dialog is False:
+            sys.exit()
+        else:
+            do_we_exit = dialogexit.exit()  # dialogexit.exit() should either return False or close the program itself
+            if do_we_exit is False:
+                show_main_menu()
+    elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
+        show_main_menu()
+    elif menuchoice == "":
+        ask_for_input()
+    else:
+        print (f"{menuchoice} is not a recognized command.")
