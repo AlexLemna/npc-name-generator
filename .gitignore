@@ -12,6 +12,8 @@ devtests/*.log
 devtests/*.txt
 devtests/*test/
 
+# Other dev stuff
+/*.ps1
 
 ## ===========================================================
 ## ============ARCHIVES and COMPRESSION and STUFF=============
