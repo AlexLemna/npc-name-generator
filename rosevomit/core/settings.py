@@ -5,7 +5,7 @@ import os
 SETTINGS_FILE = os.path.join (os.path.dirname (__file__), "settings-data.ini")
 
 
-def existence():
+def existence() -> bool:
     """Checks to see if the file defined as the global constant SETTINGS_FILE exists.
 
     Note: this function might have trouble locating the SETTINGS_FILE if run as a module.
@@ -16,6 +16,7 @@ def existence():
 
 def restore_file():
     """Recreates the file specified in the 'SETTINGS_FILE' variable  using internally defined defaults."""
+    check_existence: bool = existence()
     if check_existence is True:
         raise FileExistsError
     # Initializing ConfigParser()
@@ -36,11 +37,21 @@ def restore_file():
         config.write(newfile)
 
 
-def dialog_on_exit():
+def dialog_on_exit() -> bool:
     """Returns true or false based on the value of 'exit dialog' in the 'settings-data.ini' file."""
     global SETTINGS_FILE
     settings = open(SETTINGS_FILE)
     config = configparser.ConfigParser()  # Created an instance of ConfigParser
     config.read_file(settings)
-    _result = config.getboolean(section="exit behavior", option="exit_dialog")
+    _result: bool = config.getboolean(section="exit behavior", option="exit_dialog")
+    return _result
+
+
+def debug_startup() -> bool:
+    """Returns true or false based on the value of startup_dialog' in the 'settings-data.ini' file."""
+    global SETTINGS_FILE
+    settings = open(SETTINGS_FILE)
+    config = configparser.ConfigParser()  # Created an instance of ConfigParser
+    config.read_file(settings)
+    _result: bool = config.getboolean(section="debugging", option="startup_dialog")
     return _result

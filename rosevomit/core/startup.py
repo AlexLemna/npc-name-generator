@@ -7,13 +7,14 @@ import pathlib
 import sys
 import xml.etree.ElementTree as ElementTree
 
-from core import settings
+from core import settings, utilities
+from core.utilities import debugmessage
 from programcli.textstuff import printwrap
 
 
 def main_setup(homedir):
     """Contains setup instructions, and prints that info to terminal."""
-    print ("Looking for UI, Logic, and Data directories...")
+    debugmessage ("Looking for UI, Logic, and Data directories...")
     missingdirectories = []
     homedir = pathlib.Path(homedir)
     cli_directory = homedir / 'programcli'
@@ -23,26 +24,26 @@ def main_setup(homedir):
 
     # determining if we've got all our directories where we expect them to be
     if os.path.exists (cli_directory):
-        print ("   ...CLI directory located.")
+        debugmessage ("   ...CLI directory located.")
     else:
-        print ("   ...CLI directory not found.")
+        debugmessage ("   ...CLI directory not found.")
         missingdirectories.append("CLI")
     if os.path.exists (logic_directory):
-        print ("   ...logic directory located.")
+        debugmessage ("   ...logic directory located.")
     else:
-        print ("   ...logic directory not found.")
+        debugmessage ("   ...logic directory not found.")
         missingdirectories.append("Logic")
     if os.path.exists (data_directory):
-        print ("   ...data directory located.")
+        debugmessage ("   ...data directory located.")
     else:
-        print ("   ...data directory not found.")
+        debugmessage ("   ...data directory not found.")
         missingdirectories.append("Data")
     if os.path.exists(temp_directory):
-        print ("   ...temp directory located.")
+        debugmessage ("   ...temp directory located.")
     else:
-        printwrap (f"   ...temp directory not found. A new temp directory will be created in '{cwd}'... ", indented=True, end_with="")
+        debugmessage (f"   ...temp directory not found. A new temp directory will be created in '{homedir}'... ", indented=True, end_with="")
         os.mkdir ("temp")
-        print ("done.")
+        debugmessage ("done.")
 
     # let the user know whether or not we've got all the necessary directories
     if os.path.exists (cli_directory) is False or os.path.exists (logic_directory) is False or os.path.exists (data_directory) is False:
@@ -52,7 +53,7 @@ def main_setup(homedir):
         input ("Press any key to quit.")
         sys.exit(1)
     else:
-        print ("All directories present.")
+        debugmessage ("All directories present.")
     print("Main setup complete. Getting version number... ", end="")
     try:
         os.chdir (data_directory)

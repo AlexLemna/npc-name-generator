@@ -151,7 +151,7 @@ def prompt_save():
         print (f"{menuchoice} is not a recognized command.")
         prompt_save()
 
-        
+
 def show_main_menu():
     """Contains display instructions for the main menu."""
     print ()
@@ -161,8 +161,8 @@ def show_main_menu():
     print ("     2. A random timeline")
     print ("X or 0. Exit program")
     print ()
-        
-        
+
+
 def ask_for_input():
     """Asks for user input and processes it. Contains logic for the main menu."""
     menuchoice = input ("Enter your choice, or type 'help' for current menu: ")

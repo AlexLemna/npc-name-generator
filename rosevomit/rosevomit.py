@@ -6,19 +6,14 @@
 print ()
 print ("Starting ROSEVOMIT.")
 # MODULES FROM PYTHON'S STANDARD LIBRARY
-print ("Getting some modules from the standard library... ", end="")
 import os
 import sys
-print ("done.")
+
 # INTERNAL MODULES
-print ("Proceeding to get local modules... ", end="")
 from core import settings, startup
 from programcli import dialogexit, worsecli
-print ("done.")
 
-# **********************************************
-# ********** MAIN PROGRAM STARTS HERE **********
-# **********************************************
+
 HOME_DIRECTORY = os.path.dirname (sys.argv[0])
 
 if settings.existence() is False:
