@@ -1,6 +1,6 @@
+from decimal import Decimal  # to handle some floating-point messiness
 from math import cos, sin, tan, acos, asin, atan2
 from math import degrees, radians  # for converting
-from math import fmod  # returns the remainder (the mathematical modulus) of a division expression
 
 # Calculating the position of the sun in Earth's sky is weird and kinda mind-bending. The terminology and equations we use for tracking things moving across the sky have been developed over hundreds (thousands?) of years, and they've improved along with our understanding of the universe, but we still have to switch between a few different paradigms while we're doing this. Professional astronomers and experienced amateurs might be able to hold all these interrelated concepts in their head, but me? I compensate by using lots of notes.
 # There are three different coordinate systems we need to switch between. We use ecliptic coordinates (technically, geocentric ecliptic coordinates) to calculate the motion of the bodies in the Antikytheran solar system (or, technically, the apparent motion of the sun with respect to Antikythera). The 'ecliptic' that the coordinate system is based on refers to the plane of Antikythera's average orbit around its sun.
@@ -9,18 +9,32 @@ from math import fmod  # returns the remainder (the mathematical modulus) of a d
 # I make some simplifications in Antikythera's system. First, the real orbit *is* the average orbit. Deviations from the average orbit are fixed by the unseen "Silent Cosmic Bureaucracy's Conference on Weights and Measures' Department of Continuity Physics' Enforcement Bureau's Orbital Mechanics Division," often abbreviated to CoWMDoCPEB-OrbMech. Second, Antikythera's orbit is perfectly circular and is completed in exactly 365 days (with each day, or rotation of Antikythera arounds its axis, lasting exactly 24 hours.)
 
 
-def angle_sanity_fix (angle_value):
+def angle_sanity_check (ARG_angle_value):
+    """Ensures that a given angle is between 0 and 360 degrees. If the angle is not within that range, it converts it into that range and returns the corrected angle measurement."""
+    # First, we need to prevent some floating point messiness by using the decimal module, otherwise we get results like "-750.8 + 360 = -390.79999999999995", which is obviously ever-so-slightly off. Now, we COULD just admit that this is a tiny error that won't be meaningful for our program and automatically round our results to an acceptable level of precision before this function returns the result, but... I'm new to programming, so I still have the energy and inexperience required to be offended by binary floating-point.
+    valid_types_for_Decimal_class = [Decimal, str, int, tuple]
+    if type (ARG_angle_value) in valid_types_for_Decimal_class:
+        angle_value = ARG_angle_value
+    else:
+        angle_value = str(ARG_angle_value)
+    angle_value = Decimal (angle_value)
+    # Next, we need to make sure that our angle's measurement is between 0 and 360 degrees. If it's not, we need to convert it to an angle in that range.
     if 0 <= angle_value < 360:
         pass
-    elif angle_value < 0:
-        angle_value = angle_value + 360
-    elif angle_value > 360:
-        angle_value = angle_value - 360
-    elif angle_value == 360:
-        angle_value = 0
     else:
-        raise ValueError
+        # NOTE: The % operator is the 'modulo' operator
+        angle_value = angle_value % 360
+        if angle_value < 0:
+            angle_value = angle_value + 360
     return angle_value
+
+
+def TEST_angle_sanity_check():
+    # TODO: Move this to tests file.
+    angles_to_test = [120, 350, -35, -750.8, 1090, 3601]
+    for angle in angles_to_test:
+        sane_angle = angle_sanity_check(angle)
+        print (f"The sane value of {angle} is {sane_angle}.")
 
 
 def defaultsiteprompt() -> bool:  # type: ignore, because otherwise mypy seems to want an explicit return statement in the 'else' section
@@ -46,8 +60,7 @@ def antikythera_rotation_angle (seconds_elapsed):
     # calculating current rotation angle
     hours_elapsed = seconds_elapsed / 3600
     rotation_angle = hours_elapsed * 15
-    # sanity-checking the degrees
-    rotation_angle = angle_sanity_fix (rotation_angle)
+    rotation_angle = angle_sanity_check (rotation_angle)
     return rotation_angle
 
 
