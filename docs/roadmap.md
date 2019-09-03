@@ -20,7 +20,6 @@
 
 - **Testing improvements**. More tests.
 -- **Include list of tests 'run' vs 'not run'**?
-- **Multiple processes**. Startup + CLI + LogicController (+ datacontroller?)? Could help speed up some list generation.
 - **Debugging and logging support**.
 - **Basic, usable developer-defined error classes and messages**.
 - **Include venv in path, when running outside out VSCode**?
@@ -36,6 +35,7 @@
 
 - **Testing improvements**. More tests.
 - **Better (or any) docstrings**.
+- **Multiple processes**. Startup + CLI + LogicController (+ datacontroller?)? Could help speed up some list generation.
 
 ### Features
 
@@ -43,12 +43,12 @@
 
 ## v0.11.0
 
-- **Improved CLI**. Switch from the current numbered menu to something involving argparse. Add a "help" functionality. Integrate with the error classes (let's do some ```try...except...``` statements!).
-- **Name generation improvements**. Ability to view saved names. Ability to check for duplicate names.
+- **Sunlight calculator**. Enter some planetary variables and find the relevant info regarding sunrise and sunset on any particular day for any particular location, using the [sunrise equation](https://en.wikipedia.org/wiki/Sunrise_equation).
 
 ## v0.12.0
 
-- **Sunlight calculator**. Enter some planetary variables and find the relevant info regarding sunrise and sunset on any particular day for any particular location, using the [sunrise equation](https://en.wikipedia.org/wiki/Sunrise_equation).
+- **Improved CLI**. Switch from the current numbered menu to something involving argparse. Add a "help" functionality. Integrate with the error classes (let's do some ```try...except...``` statements!).
+- **Name generation improvements**. Ability to view saved names. Ability to check for duplicate names.
 
 ## v0.14.0
 
