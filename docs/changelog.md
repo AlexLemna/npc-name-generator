@@ -1,5 +1,14 @@
 # ***Rosevomit* changelog**
 
+## **version 0.10.2**
+
+Completed on September 3rd, 2019.
+
+* NEW FEATURE: *Rosevomit* can now generate a random timeline.
+* NEW FEATURE: These random timelines can be saved!
+* UNDER THE HOOD: Lots of internal refactoring, revamping the internal heirarchy of this project's filesystem, revamping module names, etc.
+* DEVELOPER TOOLS: Added automated code tests to help me catch bugs. I even figured out how to store the results in text files!
+
 ## **version 0.10.1**
 
 Completed on May 11, 2019.
