@@ -1,5 +1,20 @@
 # What's a .gitignore? https://github.com/github/gitignore/blob/master/README.md
 
+## =====================ROSEVOMIT STUFF=======================
+rosevomit/temp/
+rosevomit/saved/
+
+# Local settings
+rosevomit/core/*.ini
+
+# Dev test results
+devtests/*.log
+devtests/*.txt
+devtests/*test/
+
+# Other dev stuff
+/*.ps1
+
 ## ===========================================================
 ## ============ARCHIVES and COMPRESSION and STUFF=============
 ## ===========================================================
@@ -624,6 +639,9 @@ ASALocalRun/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Ignore any workspace configuration files
+*.code-workspace
 
 # Ignores the file providing the PYTHONPATH.
 # This file was created to fix this issue: https://github.com/AlexLemna/rosevomit/issues/12
