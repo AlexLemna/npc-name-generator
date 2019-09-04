@@ -6,20 +6,12 @@
 import os
 import textwrap
 
-# This section determines if this module is running on its own, if it is being invoked from another module. If it is running on its own, it can import 'randomname' without any additional specific instructions. If it is being run from another module, however, it needs to specify that it is trying to import the 'randomname' from the 'Logic' package. Note that for the \Logic directory to be considered a package, it needs to contain an __init__.py file.
-if __name__ == "__main__":
-    import randomevent
-    import randomname
-    import repeatfunction
-    import workwithprogramfiles
+try:
     from core import customerrors
-else:
-    try:
-        from core import customerrors
-        from programlogic import randomevent, randomname, repeatfunction, workwithprogramfiles
-    except ImportError:
-        from rosevomit.core import customerrors
-        from rosevomit.programlogic import randomevent, randomname, repeatfunction, workwithprogramfiles
+    from programlogic import suncalc, randomevent, randomname, repeatfunction, workwithprogramfiles
+except ImportError:
+    from rosevomit.core import customerrors
+    from rosevomit.programlogic import suncalc, randomevent, randomname, repeatfunction, workwithprogramfiles
 
 
 def gen(x, y):
@@ -113,3 +105,17 @@ def gen_timeline(eventtypes, yearrange):
     else:
         print ("I'm sorry, I can't do that.")
         # TODO: define a custom error message, and raise it here.
+
+
+def gen_suncalc (lat, long):
+    try:
+        try:
+            os.chdir ("./temp/")
+        except FileNotFoundError:
+            os.chdir ("..")
+            os.chdir ("./temp")
+    except FileNotFoundError:  # Maybe it's being run by a testing script?
+        os.chdir ("..")
+        os.chdir ("./rosevomit/temp/")
+    suncalc.main(lat, long)
+

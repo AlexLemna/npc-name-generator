@@ -5,9 +5,9 @@
 import re
 import sys
 
-from . import dialogexit
+from programcli import dialogexit
 from core import settings
-from programlogic import logiccontroller
+from programlogic import logiccontroller, suncalc
 
 
 def input_integer(_prompt_text="", _if_invalid=None):
@@ -138,6 +138,48 @@ def submenu_timeline_input():
         submenu_timeline_input()
 
 
+def submenu_suncalc_show():
+    """Displays user options for Suncalc."""
+    print ()
+    print ("What are the observer's coordinates?")
+    print ("     1. Default (0, 0)")
+    print ("     2. Pick a preset place (NOT CURRENTLY SUPPORTED)")
+    print ("     3. I'll enter the coordinates myself, goddammit!")
+    print ("     0. Back to main menu.")
+    print ("     X. Exit program")
+    print ()
+
+
+def submenu_suncalc_input():
+    """Asks for user input for Suncalc."""
+    menuchoice = input ("Enter your choice, or type 'help' for current menu: ")
+    menuchoice = menuchoice.rstrip()  # Strips whitespaces at the end.
+
+    if menuchoice == "1":
+        lat = 0
+        long = 0
+        logiccontroller.gen_suncalc(lat, long)
+    elif menuchoice == "2":
+        print ("This option is not currently supported.")
+        submenu_timeline_input ()
+    elif menuchoice == '0':
+        lat = input ("Enter latitude: ")
+        long = input ("Enter longitude: ")
+        lat = float(lat)
+        long = float(long)
+        logiccontroller.gen_suncalc(lat, long)
+    elif menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
+        sys.exit(0)
+    elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
+        submenu_suncalc_show()
+        submenu_suncalc_input()
+    elif menuchoice == "":
+        submenu_suncalc_input()
+    else:
+        print (f"{menuchoice} is not a recognized command.")
+        submenu_suncalc_input()
+
+
 def prompt_save():
     """Asks the user if they want to save, and processes response."""
     menuchoice = input ("Would you like to save this result? (Yes/No) ")
@@ -156,9 +198,11 @@ def show_main_menu():
     """Contains display instructions for the main menu."""
     print ()
     print (10 * "-", "Rosevomit.py Main Menu", 10 * "-")
-    print ("What would you like to generate?")
-    print ("     1. Random names")
-    print ("     2. A random timeline")
+    print ("What would you like do?")
+    print ("     1. Generate random names")
+    print ("     2. Generate a random timeline")
+    print ("     3. Calculate the sun's position, default coordinates (EXPERIMENTAL)")
+    print ("     4. Calculate the sun's position (EXPERIMENTAL)")
     print ("X or 0. Exit program")
     print ()
 
@@ -176,6 +220,13 @@ def ask_for_input():
         submenu_timeline_show()
         submenu_timeline_input()
         show_main_menu()
+    elif menuchoice == "3":
+        lat = 0
+        long = 0
+        logiccontroller.gen_suncalc(lat, long)
+    elif menuchoice == "4":
+        submenu_suncalc_show()
+        submenu_name_input()
     elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
         show_exit_dialog = settings.dialog_on_exit()
         if show_exit_dialog is False:
