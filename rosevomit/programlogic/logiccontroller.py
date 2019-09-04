@@ -8,10 +8,11 @@ import textwrap
 
 try:
     from core import customerrors
-    from programlogic import suncalc, randomevent, randomname, repeatfunction, workwithprogramfiles
+    import core.utilities as ut
+    from programlogic import suncalc, randomevent, randomname
 except ImportError:
     from rosevomit.core import customerrors
-    from rosevomit.programlogic import suncalc, randomevent, randomname, repeatfunction, workwithprogramfiles
+    from rosevomit.programlogic import suncalc, randomevent, randomname
 
 
 def gen(x, y):
@@ -20,46 +21,46 @@ def gen(x, y):
         def get_names():
             output = randomname.two_files ("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")
             print (output)
-        repeatfunction.repeat (get_names, y)
+        ut.repeat (get_names, y)
 
     elif x == "firstfemale":
         def get_names():
             output = randomname.one_file ("USCensusNamesFirstFemale.txt")
             print (output)
-        repeatfunction.repeat (get_names, y)
+        ut.repeat (get_names, y)
 
     elif x == "firstmale":
         def get_names():
             output = randomname.one_file ("USCensusNamesFirstMale.txt")
             print (output)
-        repeatfunction.repeat (get_names, y)
+        ut.repeat (get_names, y)
 
     elif x == "last":
         def get_names():
             output = randomname.one_file ("USCensusNamesLast.txt")
             print (output)
-        repeatfunction.repeat (get_names, y)
+        ut.repeat (get_names, y)
 
     elif x == "full":
         def get_names():
             output = randomname.two_files ("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")
             output1 = randomname.one_file ("USCensusNamesLast.txt")
             print (output, output1)
-        repeatfunction.repeat (get_names, y)
+        ut.repeat (get_names, y)
 
     elif x == "fullfemale":
         def get_names():
             output = randomname.one_file ("USCensusNamesFirstFemale.txt")
             output1 = randomname.one_file ("USCensusNamesLast.txt")
             print (output, output1)
-        repeatfunction.repeat (get_names, y)
+        ut.repeat (get_names, y)
 
     elif x == "fullmale":
         def get_names():
             output = randomname.one_file ("USCensusNamesFirstMale.txt")
             output1 = randomname.one_file ("USCensusNamesLast.txt")
             print (output, output1)
-        repeatfunction.repeat (get_names, y)
+        ut.repeat (get_names, y)
 
     else:
         print ("I'm sorry, I can't do that.")
@@ -93,7 +94,7 @@ def gen_timeline(eventtypes, yearrange):
         except FileNotFoundError:  # Maybe it's being run by a testing script?
             os.chdir ("..")
             os.chdir ("./rosevomit/temp/")
-        _tempfile_name = workwithprogramfiles.setname("timeline")
+        _tempfile_name = ut.setname("timeline")
         _tempfile = open(_tempfile_name, "a+")
 
         for item in range (0, yearrange):
