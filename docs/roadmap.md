@@ -1,5 +1,7 @@
 # *Rosevomit* roadmap
 
+The roadmap is probably better viewed through this project's "Glo" kanban board [here](https://app.gitkraken.com/glo/board/XW-3b9aSlAAPAWps), which is also linked to this project's issue boards.
+
 ## v0.10.3
 
 ### Internal and development
