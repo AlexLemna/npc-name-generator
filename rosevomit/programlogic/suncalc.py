@@ -1,3 +1,4 @@
+# pylint: skip-file
 import csv
 from decimal import Decimal
 from math import cos, sin, tan, acos, asin, atan2

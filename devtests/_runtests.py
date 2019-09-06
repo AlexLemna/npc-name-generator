@@ -18,6 +18,14 @@ except ImportError:
 else:
     FINDIMPORTS_MODULE_EXISTS = True
 
+try:
+    from pylint import lint as linter
+except ImportError:
+    PYLINT_MODULE_EXISTS = False
+else:
+    PYLINT_MODULE_EXISTS = True
+
+
 # Rosevomit test modules
 from performancetests import timetest_name_generation
 import testfunctions
@@ -153,6 +161,8 @@ with open(DATESTRING_SHORT + ".perf.txt", "w+") as f:
     sys.stdout = _old_stdout
 print ("done.")
 
+"""
+# TODO: The imports module thing doesn't seem to be working. Need to fix this.
 # Generating "imports" results file
 if FINDIMPORTS_MODULE_EXISTS is True:
     print ("Generating import list... ", end="")
@@ -208,6 +218,7 @@ if FINDIMPORTS_MODULE_EXISTS is True:
 else:
     print ("The 'findimports' module is not present.")
     print ("An unused imports list will not be generated for this test.")
+"""
 
 # Generating summary file
 t1 = time.perf_counter()
@@ -301,6 +312,38 @@ with open(DATESTRING_SHORT + ".summary.txt", "w+") as f:
     sys.stderr = _old_stderr
     sys.stdout = _old_stdout
 print ("done.")
+
+
+if PYLINT_MODULE_EXISTS:
+    print ("Running pylint... ", end="")
+    os.chdir (TESTLOG_DIR)
+    with open(DATESTRING_SHORT + ".pylint.txt", "w+") as f:
+        # Save original stdout and stderr settings
+        _old_stdout = sys.stdout
+        _old_stderr = sys.stderr
+        # Switch stdout and stderr to file output
+        sys.stdout = f
+        sys.stderr = f
+
+        print (PROJECT_NAME, "test suite results")
+        print (DATESTRING)
+        testmiscstuff.logformat_line ()
+        testmiscstuff.logformat_header ("pylint")
+        os.chdir (REPO_DIR)
+        # pylint error messages
+        #   C0301 line-too-long
+        #   C0326 spaces
+        #   E0401 import-error (because they don't seem to work properly when running statically)
+        pylint_opts = ["rosevomit", "--disable=C0301,C0326,E0401", "--reports=yes"]
+        linter.Run (pylint_opts)  # BUG: The script seems to end here, after this linter report successfully runs. Need to find out why.
+
+        # Restore stdout and stderr to original settings
+        sys.stderr = _old_stderr
+        sys.stdout = _old_stdout
+    print ("done.")
+else:
+    print ("The 'pylint' module is not present.")
+    print ("A pylint report will not be generated for this test.")
 
 print ()
 print ("Testing complete. One or more text files with the test results have")
