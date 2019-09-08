@@ -162,12 +162,14 @@ def submenu_suncalc_input():
     elif menuchoice == "2":
         print ("This option is not currently supported.")
         submenu_timeline_input ()
-    elif menuchoice == '0':
+    elif menuchoice == '3':
         lat = input ("Enter latitude: ")
         long = input ("Enter longitude: ")
         lat = float(lat)
         long = float(long)
         logiccontroller.gen_suncalc(lat, long)
+    elif menuchoice == "0":
+        show_main_menu()
     elif menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
         sys.exit(0)
     elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
@@ -224,9 +226,28 @@ def ask_for_input():
         lat = 0
         long = 0
         logiccontroller.gen_suncalc(lat, long)
+        show_main_menu()
     elif menuchoice == "4":
         submenu_suncalc_show()
-        submenu_name_input()
+        submenu_suncalc_input()
+        show_main_menu()
+    elif menuchoice == "5":
+        files_to_save = dialogsave.reactive()
+        for file in files_to_save:
+            try:
+                tempfiles.save (file)
+            except FileExistsError:
+                _input = dialogsave.filealreadyexists(file)
+                if type (_input) is str:
+                    tempfiles.save (_input)
+                elif _input is True:
+                    pass
+                elif _input is False:
+                    tempfiles.save (_input, ARG_overwrite=True)
+                else:
+                    # TODO: RealityError?
+                    raise TypeError
+        show_main_menu()
     elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
         show_exit_dialog = settings.dialog_on_exit()
         if show_exit_dialog is False:
