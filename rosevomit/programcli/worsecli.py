@@ -5,9 +5,9 @@
 import re
 import sys
 
-from programcli import dialogexit
-from core import settings
-from programlogic import logiccontroller, suncalc
+from programcli import dialogexit, dialogsave
+from core import settings, tempfiles
+from programlogic import logiccontroller
 
 
 def input_integer(_prompt_text="", _if_invalid=None):
@@ -158,7 +158,7 @@ def submenu_suncalc_input():
     if menuchoice == "1":
         lat = 0
         long = 0
-        logiccontroller.gen_suncalc(lat, long)
+        return lat, long
     elif menuchoice == "2":
         print ("This option is not currently supported.")
         submenu_timeline_input ()
@@ -167,7 +167,7 @@ def submenu_suncalc_input():
         long = input ("Enter longitude: ")
         lat = float(lat)
         long = float(long)
-        logiccontroller.gen_suncalc(lat, long)
+        return lat, long
     elif menuchoice == "0":
         show_main_menu()
     elif menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
@@ -205,6 +205,7 @@ def show_main_menu():
     print ("     2. Generate a random timeline")
     print ("     3. Calculate the sun's position, default coordinates (EXPERIMENTAL)")
     print ("     4. Calculate the sun's position (EXPERIMENTAL)")
+    print ("     5. View and save temporary files")
     print ("X or 0. Exit program")
     print ()
 
@@ -229,7 +230,8 @@ def ask_for_input():
         show_main_menu()
     elif menuchoice == "4":
         submenu_suncalc_show()
-        submenu_suncalc_input()
+        lat, long = submenu_suncalc_input()
+        logiccontroller.gen_suncalc(lat, long)
         show_main_menu()
     elif menuchoice == "5":
         files_to_save = dialogsave.reactive()

@@ -10,12 +10,11 @@ def get_cwd_name_only():
     return _path_split[-1]
 
 
-def get_data_dir():
-    """Returns the path of the 'programdata' directory. This function should work anywhere within the 'rosevomit' module or the associated repository."""
-    # Let's assume we don't know where this function is being called from or to, and we don't know what the exact directory structure is that we're navigating through. Generally, all we know is that (1) our program Rosevomit is contained in a directory named 'rosevomit', and (2) the 'rosevomit' directory plus whatever directories we've created for documentation/testing/general development purposes should be contained in a directory called 'rosevomitrepo'.
-    # Specific to this function, we also know that (3) we're looking looking for Rosevomit's data directory, which should be named 'programdata' and should be contained somewhere within the 'rosevomit' directory.
+def get_dir(ARG_dirname: str):
+    """Returns the path of subdirectory of the 'rosevomit' directory. This function should work anywhere within the 'rosevomit' module or the associated repository."""
+    # Let's assume we don't know where this function is being called from or to, and we don't know what the exact directory structure is that we're navigating through. Generally, all we know is that (1) our program Rosevomit is contained in a directory named 'rosevomit', and (2) the 'rosevomit' directory plus whatever directories we've created for documentation/testing/general development purposes should be contained in a directory called 'rosevomitrepo'. We also know (3) the name of the directory (ARG_dirname) we're looking for, which should be somewhere within the 'rosevomit' directory.
     #
-    # We begin by finding our where we are.
+    # We begin by finding out where we are.
     _cwd = pathlib.Path.cwd()
     # We need a known starting place to begin navigating. This can be either our 'rosevomit' directory or our 'rosevomitrepo' directory.
     _path_parts = pathlib.PurePath (_cwd).parts
@@ -40,14 +39,14 @@ def get_data_dir():
 
     # TODO: Honestly, we should split the part of the function above this comment into it's own function. Otherwise, we're exceeding a single responsibility for this function.
 
-    # Now that we've established which parts of the expected Rosevomit filesystem we can find, we navigate to the best available location to look for the 'programdata' subdirectory.
+    # Now that we've established which parts of the expected Rosevomit filesystem we can find, we navigate to the best available location to look for the subdirectory.
     # TODO: There's a *lot* of advice online about how checking for variable existence in Python is not a good way to handle flow control... so this next part probably needs refactoring.
     if "ROSEVOMIT_DIR" in locals():  # exists
         os.chdir (ROSEVOMIT_DIR)
-        os.chdir ("programdata")
+        os.chdir (f"{ARG_dirname}")
     elif "REPO_DIR" in locals():  # exists
         os.chdir (REPO_DIR)
-        possible_paths = glob.glob ("*/programdata", recursive=True)
+        possible_paths = glob.glob (f"*/{ARG_dirname}", recursive=True)
         if len(possible_paths) is 1:
             os.chdir (possible_paths[0])
         elif len (possible_paths) is 0:
@@ -60,8 +59,5 @@ def get_data_dir():
         # this should definitely 100% never happen
         # TODO: Possible 'RealityError' candidate?
         raise FileNotFoundError
-    _datapath = pathlib.Path.cwd()
-    return _datapath
-
-if __name__ == "__main__":
-    get_data_dir()
+    _dirpath = pathlib.Path.cwd()
+    return _dirpath

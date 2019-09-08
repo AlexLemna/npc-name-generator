@@ -5,20 +5,26 @@ from math import cos, sin, tan, acos, asin, atan2
 from math import degrees, radians
 from math import pi
 import operator
+import os
 import time
 
-from . import antikythera_time
+from core import directories
 from core.utilities import angle, deg2rad, rad2deg, validate_type, angle_sanity_check
+from programlogic import antikythera_time
 
 # defaults
 AXIAL_TILT = 10  # Note that axial tilt is also called "obliquity of the ecliptic"
 
-def main(lat, long):
+def main(lat, long, ARG_output_directory=None, ARG_output_file="results"):
     lat = Decimal(lat)
     long = Decimal(long)
     minute_intervals = [0, 15, 30, 45]
     timed_results = []
-    with open("results.txt", mode="w+") as textfile, open("results.csv", mode="w+") as csvfile:
+    if isinstance (ARG_output_directory, str):
+        path = directories.get_dir(ARG_output_directory)
+        os.chdir (path)
+    # TODO: Move "setname" check from dialogsave.proactive to here!
+    with open(f"{ARG_output_file}.txt", mode="w+") as textfile, open(f"{ARG_output_file}.csv", mode="w+") as csvfile:
         textfile.write (f"LATITUDE: {lat} LONGITUDE: {long} \n")
         textfile.write (f"{44 * '-'} \n")
         csvwriter = csv.writer(csvfile, lineterminator="\n", quoting=csv.QUOTE_NONNUMERIC)

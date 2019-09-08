@@ -14,7 +14,7 @@ except ImportError:  # for external unit testing
 
 def one_file (file1):
     """A function that returns one random line from a text file 'x'"""
-    data_dir = directories.get_data_dir()
+    data_dir = directories.get_dir("programdata")
     os.chdir (data_dir)
     with open (file1, 'r') as fileData:
         contents = fileData.readlines()
@@ -27,7 +27,7 @@ def one_file (file1):
 
 def two_files (file1, file2):
     """A function that returns one random line from a list generated from multiple text files 'x', 'y', and so on."""
-    data_dir = directories.get_data_dir()
+    data_dir = directories.get_dir("programdata")
     os.chdir (data_dir)
     fileData1 = open (file1, 'r')
     contents1 = fileData1.readlines()

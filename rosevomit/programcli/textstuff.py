@@ -7,3 +7,13 @@ def printwrap(x, indented=False, end_with='\n'):
         print (textwrap.fill (x, width=70, subsequent_indent="   "), end=end_with)
     else:
         print (textwrap.fill (x, width=70), end=end_with)
+
+
+def inputwrap(x, indented=False, end_with=" "):
+    """Textwrapping for regular 'input' commands."""
+    if indented is True:
+        _input = input (textwrap.fill (x, width=70, subsequent_indent="   ") + end_with)
+        return _input
+    else:
+        _input = input (textwrap.fill (x, width=70) + end_with)
+        return _input

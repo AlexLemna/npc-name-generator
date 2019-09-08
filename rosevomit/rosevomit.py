@@ -11,7 +11,7 @@ import sys
 
 # INTERNAL MODULES
 from core import settings, startup
-from programcli import dialogexit, worsecli
+from programcli import worsecli
 
 
 HOME_DIRECTORY = os.path.dirname (sys.argv[0])

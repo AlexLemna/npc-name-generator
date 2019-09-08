@@ -49,3 +49,24 @@ def view():
             for filename in os.listdir(cwd):
                 print (f"    {filename}")
             print ()
+
+def save(ARG_file, ARG_overwrite: bool=False, ARG_dialog: bool=True):
+    os.chdir (sys.path[0])
+    os.chdir ("./temp")
+    with pathlib.Path.cwd() as cwd:
+        p = pathlib.PurePath (cwd)
+        if p.parts[-1] is not "temp":
+            print ("POSSIBLE ERROR:")
+            print (textwrap.fill ("We should have found Rosevomit's /temp firectory, but we seem to have gotten lost instead."))
+            print ("CURRENT LOCATION:")
+            print (cwd)
+            print ()
+            input ("Press any key to continue.")
+        elif ARG_file not in os.listdir(cwd):
+            raise FileNotFoundError
+        else:
+            if os.path.exists(f"..\\saved\\{ARG_file}") and ARG_overwrite is False:
+                raise FileExistsError
+            shutil.copy2( ARG_file, '..\\saved')
+            if ARG_dialog is True:
+                print (f"...{ARG_file} saved.")

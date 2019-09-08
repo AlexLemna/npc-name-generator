@@ -7,7 +7,7 @@ import re
 import sys
 import textwrap
 
-from programlogic import tempfiles
+from core import tempfiles
 
 
 ### SOME LISTS OF REGEX PATTERNS FOR PARSING USER INPT

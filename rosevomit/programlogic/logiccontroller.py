@@ -9,9 +9,12 @@ import textwrap
 try:
     from core import customerrors
     import core.utilities as ut
+    from programcli import dialogsave
     from programlogic import suncalc, randomevent, randomname
 except ImportError:
     from rosevomit.core import customerrors
+    import rosevomit.core.utilities as ut
+    from rosevomit.programcli import dialogsave
     from rosevomit.programlogic import suncalc, randomevent, randomname
 
 
@@ -118,5 +121,12 @@ def gen_suncalc (lat, long):
     except FileNotFoundError:  # Maybe it's being run by a testing script?
         os.chdir ("..")
         os.chdir ("./rosevomit/temp/")
-    suncalc.main(lat, long)
+    do_we_save, filename = dialogsave.proactive()
+    if do_we_save is False:
+        suncalc.main(lat, long)
+    elif do_we_save is True:
+        suncalc.main(lat, long, ARG_output_directory="saved", ARG_output_file=filename)
+    else:
+        # RealityError candidate
+        raise TypeError
 
