@@ -2,6 +2,7 @@
 # Startup.PY
 # --------------------
 # The setup utility file for Alex's "Project ROSEVOMIT", a random name generator  and random timeline generator written in Python.
+from distutils.util import strtobool
 import os
 import pathlib
 import sys
@@ -59,8 +60,8 @@ def main_setup(homedir):
         os.chdir (data_directory)
         tree = ElementTree.parse ("Version.xml")
         root = tree.getroot()
-        treeHumanVersion = root.findall("./version[@type='human']//")
-        for child in treeHumanVersion:
+        human_version = root.findall("./version[@type='human']//")
+        for child in human_version:
             if child.tag == "major":
                 major_version = child.text
             elif child.tag == "minor":
@@ -69,10 +70,17 @@ def main_setup(homedir):
                 patch_version = child.text
             else:
                 raise IOError
+        released = root.findtext("released", default=True)
+        released = strtobool (released)  # Because the 'findtext' function above returns a string, not a bool.
         print ("done.")
         print()
-        print (f"You are using Rosevomit {major_version}.{minor_version}.{patch_version}. This software is")
-        print ("actively under development. Proceed at your own risk.")
+        if not released:
+            print (f"You are using a development build of Rosevomit {major_version}.{minor_version}.{patch_version}. This")
+            print ("software is actively under development, and this development")
+            print ("build may not be stable! Proceed at your own risk.")
+        else:
+            print (f"You are using Rosevomit {major_version}.{minor_version}.{patch_version}. This software is")
+            print ("actively under development. Proceed at your own risk.")
     except FileNotFoundError:
         print ("ERROR.")
         print ("COULD NOT FIND VERSION FILE.")
