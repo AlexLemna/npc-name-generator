@@ -4,15 +4,49 @@ import sys
 import traceback
 
 
-def run_prompt():
-    _input = input ("Would you like to run some tests? ([y]/n) ")
+def choose_prompt(ARG_choicelist: list):
+    tests_to_run: list = []
+    print ("Would you like to (y) run all tests (default), or (n) select")
+    _input = input ("specific tests? Enter 'y' or 'n': ")
+    _input = _input.strip()
     if _input == "y" or _input == "":
-        return True
+        tests_to_run = ARG_choicelist
+        return tests_to_run
     elif _input == "n":
-        return False
+        tests_to_run = choose_tests (tests_to_run, ARG_choicelist)
+        return tests_to_run
     else:
         print ("Sorry, please enter either 'y' or 'n'.")
-        run_prompt()
+        choose_prompt(ARG_choicelist)
+
+
+def choose_tests(ARG_selectionlist: list, ARG_choicelist: list) -> list:
+    print (f"The selected tests are: {ARG_selectionlist}")
+    print (f"The available tests are:")
+    num = 0
+    for item in ARG_choicelist:
+        num = num + 1
+        print (f"  {num}. {item}")
+    print ("Type a number to add that test to the list of selected tests, or")
+    _input = input ("leave blank to run the currently selected tests: ")
+    _input = _input.strip()
+    if _input == "":
+        return ARG_selectionlist
+    else:
+        try:
+            _selection_num = int (_input)
+        except TypeError:
+            print (f"{_input} is not a valid input. Please try again.")
+            choose_tests (ARG_selectionlist, ARG_choicelist)
+        if _selection_num <= len(ARG_choicelist):
+            _selection_num = _selection_num - 1  # list indexing starts at 0
+            selectionlist = ARG_selectionlist
+            selectionlist.append (ARG_choicelist[_selection_num])
+            selections = choose_tests (selectionlist, ARG_choicelist)
+            return selections
+        else:
+            print (f"{_selection_num} is not a valid input. Please try again.")
+            choose_tests (ARG_selectionlist, ARG_choicelist)
 
 
 def make_name_unique (basename: str) -> str:
