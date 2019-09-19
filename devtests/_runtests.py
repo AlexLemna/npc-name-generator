@@ -6,22 +6,8 @@ import textwrap
 import time
 import traceback
 
-try:
-    import findimports
-except ImportError:
-    FINDIMPORTS_MODULE_EXISTS = False
-else:
-    FINDIMPORTS_MODULE_EXISTS = True
-
-try:
-    from pylint import lint as linter
-except ImportError:
-    PYLINT_MODULE_EXISTS = False
-else:
-    PYLINT_MODULE_EXISTS = True
-
 # Rosevomit test modules
-import test
+import testmain
 import testmiscstuff
 
 if __name__ != "__main__":
@@ -90,11 +76,11 @@ for item in directories:
 t0 = time.perf_counter()
 # Running sanity test, performance test, and saving output to file
 if "sanity test" in tests_to_run:
-    test.sanity (ARG_test_directory=TESTLOG_DIR, ARG_datestring=DATESTRING, ARG_short_datestring=DATESTRING_SHORT, ARG_project=PROJECT_NAME)
+    testmain.sanity (ARG_test_directory=TESTLOG_DIR, ARG_datestring=DATESTRING, ARG_short_datestring=DATESTRING_SHORT, ARG_project=PROJECT_NAME)
 
 # Running performance tests...
 if "performance test" in tests_to_run:
-    perftest10_results, perftest100_results, perftest1000_results = test.performance (ARG_test_directory=TESTLOG_DIR, ARG_datestring=DATESTRING, ARG_short_datestring=DATESTRING_SHORT, ARG_project=PROJECT_NAME)
+    perftest10_results, perftest100_results, perftest1000_results = testmain.performance (ARG_test_directory=TESTLOG_DIR, ARG_datestring=DATESTRING, ARG_short_datestring=DATESTRING_SHORT, ARG_project=PROJECT_NAME)
 else:
     perftest10_results = {}
     perftest100_results = {}
@@ -103,11 +89,11 @@ else:
 # Generating summary file
 t1 = time.perf_counter()
 time_elapsed = t1 - t0
-test.summary (ARG_test_directory=TESTLOG_DIR, ARG_datestring=DATESTRING, ARG_short_datestring=DATESTRING_SHORT, ARG_project=PROJECT_NAME, ARG_directories_present=directories_present, ARG_directories_missing=directories_missing, ARG_time=time_elapsed, ARG_perfresults_10=perftest10_results, ARG_perfresults_100=perftest100_results, ARG_perfresults_1000=perftest1000_results)
+testmain.summary (ARG_test_directory=TESTLOG_DIR, ARG_datestring=DATESTRING, ARG_short_datestring=DATESTRING_SHORT, ARG_project=PROJECT_NAME, ARG_directories_present=directories_present, ARG_directories_missing=directories_missing, ARG_time=time_elapsed, ARG_perfresults_10=perftest10_results, ARG_perfresults_100=perftest100_results, ARG_perfresults_1000=perftest1000_results)
 
 # Running pylint tests...
 if "pylint test" in tests_to_run:
-    test.pylint (ARG_test_directory=TESTLOG_DIR, ARG_repository_directory=REPO_DIR, ARG_datestring=DATESTRING, ARG_short_datestring=DATESTRING_SHORT, ARG_project=PROJECT_NAME)
+    testmain.pylint (ARG_test_directory=TESTLOG_DIR, ARG_repository_directory=REPO_DIR, ARG_datestring=DATESTRING, ARG_short_datestring=DATESTRING_SHORT, ARG_project=PROJECT_NAME)
     # TODO: The script seems to unexpectedly end here.
 
 print ()

@@ -5,6 +5,7 @@ import traceback
 
 
 def choose_prompt(ARG_choicelist: list):
+    """This test asks the user if they want to select certain tests to run, or if they just want to run all the tests."""
     tests_to_run: list = []
     print ("Would you like to (y) run all tests (default), or (n) select")
     _input = input ("specific tests? Enter 'y' or 'n': ")
@@ -21,6 +22,7 @@ def choose_prompt(ARG_choicelist: list):
 
 
 def choose_tests(ARG_selectionlist: list, ARG_choicelist: list) -> list:
+    """This function prompts the user to select certain tests to run."""
     print (f"The selected tests are: {ARG_selectionlist}")
     print (f"The available tests are:")
     num = 0
@@ -56,7 +58,6 @@ def make_name_unique (basename: str) -> str:
     while os.path.exists (name) is True:
         number = number + 1
         name = basename + "-" + str(number)
-        pass
     return name
 
 
@@ -87,7 +88,12 @@ def logformat_header(text: str) -> None:
 
 # THANKS: https://stackoverflow.com/questions/2828953/silence-the-stdout-of-a-function-in-python-without-trashing-sys-stdout-and-resto/40054132#40054132
 class Suppressor(object):
+    """Silences stdout of a function without wrapping a function all.
 
+    Usage:
+    with Suppressor():
+        DoMyFunction(*args,**kwargs)
+    """
     def __enter__(self):
         self.stdout = sys.stdout
         sys.stdout = self
