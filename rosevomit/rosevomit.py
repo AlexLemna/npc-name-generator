@@ -8,6 +8,7 @@ print ("Starting ROSEVOMIT.")
 # MODULES FROM PYTHON'S STANDARD LIBRARY
 import os
 import sys
+import textwrap
 
 # INTERNAL MODULES
 from core import settings, startup
@@ -21,6 +22,10 @@ if settings.existence() is False:
     print (f"  {settings.SETTINGS_FILE}")
     settings.restore_file()
     print ()
+elif settings.is_valid() is False:
+    print (textwrap.fill ("WARNING: The settings file seems to be corrupted. Rosevomit will restore it to its default state. Press enter to continue. If you do not wish to overwrite the current settings file, please close the program now without pressing enter."))
+    input ()
+    settings.restore_file()
 else:
     pass
 startup.main_setup(HOME_DIRECTORY)

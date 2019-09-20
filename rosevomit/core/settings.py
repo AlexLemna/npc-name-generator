@@ -2,6 +2,7 @@
 
 import configparser
 import os
+import textwrap
 
 # ---------- Contents ----------
 # ---------- -------- ----------
@@ -192,22 +193,27 @@ def settings_user_interface (header: bool=True):
     config = configparser.ConfigParser()
     config.read_file(settings)
 
-    print ("The current settings are listed below in the format")
-    print ("  'SECTION'")
-    print ("    'OPTION': 'VALUE'")
-    print ()
     settings_sections: list = config.sections()
-    for section in settings_sections:
+    if len (settings_sections) < 1:
+        print (textwrap.fill ("WARNING: The setting file appears to be blank. Please close Rosevomit and restart it - Rosevomit should detect a corrupted settings file and offer to restore the settings file to its default state."))
+        input ()
+        return
+    else:
+        print ("The current settings are listed below in the format")
+        print ("  'SECTION'")
+        print ("    'OPTION': 'VALUE'")
         print ()
-        print (f"  {section}")
-        options = config.items (section)
-        if len(options) >= 1:
-            for item in options:
-                key = item[0]
-                value = item[1]
-                print (f"    {key}: {value}")
-        else:
-            print (f"    (no options in this section)")
+        for section in settings_sections:
+            print ()
+            print (f"  {section}")
+            options = config.items (section)
+            if len (options) >= 1:
+                for item in options:
+                    key = item[0]
+                    value = item[1]
+                    print (f"    {key}: {value}")
+            else:
+                print (f"    (no options in this section)")
     print ()
 
     do_we_change_settings: bool = prompt_to_change_settings()
