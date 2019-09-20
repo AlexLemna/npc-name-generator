@@ -1,5 +1,6 @@
 # rosevomit/core/Utilities.py
 # For those little code snippets that don't make sense going anywhere else.
+from configparser import NoOptionError, NoSectionError
 from decimal import Decimal
 from math import degrees, radians, sin, cos, tan, asin, acos, atan2
 import os
@@ -17,7 +18,11 @@ def CWD_home():
 
 
 def debugmessage(debugstring: str, **kwargs):
-    is_debugging_on: bool = settings.debug_startup()
+    try:
+        is_debugging_on: bool = settings.startup_dialog()
+    except (NoSectionError, NoOptionError):
+        # TODO: When we add a logging module, this exception should definitely be logged.
+        is_debugging_on = True
     if is_debugging_on is True:
         print (textwrap.fill (debugstring), **kwargs)
     else:

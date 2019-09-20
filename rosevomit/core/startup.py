@@ -8,7 +8,6 @@ import pathlib
 import sys
 import xml.etree.ElementTree as ElementTree
 
-from core import settings, utilities
 from core.utilities import debugmessage
 from programcli.textstuff import printwrap
 

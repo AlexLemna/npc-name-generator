@@ -206,6 +206,7 @@ def show_main_menu():
     print ("     3. Calculate the sun's position, default coordinates (EXPERIMENTAL)")
     print ("     4. Calculate the sun's position (EXPERIMENTAL)")
     print ("     5. View and save temporary files")
+    print ("S or 9. Program settings")
     print ("X or 0. Exit program")
     print ()
 
@@ -250,8 +251,11 @@ def ask_for_input():
                     # TODO: RealityError?
                     raise TypeError
         show_main_menu()
+    elif menuchoice == "9" or menuchoice == "S" or menuchoice == "s" or menuchoice == "setting" or menuchoice == "settings":
+        settings.settings_user_interface (header=True)
+        show_main_menu()
     elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
-        show_exit_dialog = settings.dialog_on_exit()
+        show_exit_dialog = settings.exit_dialog()
         if show_exit_dialog is False:
             sys.exit()
         else:
