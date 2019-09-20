@@ -23,6 +23,7 @@ def choose_prompt(ARG_choicelist: list):
 
 def choose_tests(ARG_selectionlist: list, ARG_choicelist: list) -> list:
     """This function prompts the user to select certain tests to run."""
+    print ()
     print (f"The selected tests are: {ARG_selectionlist}")
     print (f"The available tests are:")
     num = 0

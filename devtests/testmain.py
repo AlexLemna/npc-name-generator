@@ -1,8 +1,6 @@
 import os
-import platform
-import statistics
 import sys
-import textwrap
+import traceback
 import unittest
 
 try:
@@ -20,6 +18,7 @@ else:
     PYLINT_MODULE_EXISTS = True
 
 # Rosevomit test modules
+from constants import DATESTRING, DATESTRING_SHORT, PROJECT_NAME
 from performancetests import timetest_name_generation
 import testfunctions
 import testmiscstuff
@@ -27,10 +26,9 @@ import testmiscstuff
 from context import rosevomit
 
 # --------------------- SANITY TEST ---------------------
-def sanity(ARG_test_directory, ARG_datestring: str, ARG_short_datestring: str, ARG_project: str):
+def sanity(ARG_test_directory):
     os.chdir (ARG_test_directory)
-    print ("Running sanity tests... ", end="")
-    with open(ARG_short_datestring + ".sanity.txt", "w+") as f:
+    with open(DATESTRING_SHORT + ".sanity.txt", "w+") as f:
         # Save original stdout and stderr settings
         _old_stdout = sys.stdout
         _old_stderr = sys.stderr
@@ -38,25 +36,22 @@ def sanity(ARG_test_directory, ARG_datestring: str, ARG_short_datestring: str, A
         sys.stdout = f
         sys.stderr = f
 
-        print (ARG_project, "test suite results")
-        print (ARG_datestring)
+        print (PROJECT_NAME, "test suite results")
+        print (DATESTRING)
         testmiscstuff.logformat_line ()
         testmiscstuff.logformat_header ("GENERATOR SANITY TEST")
         print ()
         testsuite = unittest.TestLoader().loadTestsFromModule(testfunctions)
         unittest.TextTestRunner().run(testsuite)
-
         # Restore stdout and stderr to original settings
         sys.stderr = _old_stderr
         sys.stdout = _old_stdout
-    print ("done.")
 
 
 # --------------------- PERFORMANCE TEST ---------------------
-def performance(ARG_test_directory, ARG_datestring: str, ARG_short_datestring: str, ARG_project: str):
+def performance(ARG_test_directory):
     os.chdir (ARG_test_directory)
-    print ("Running performance tests... ", end="")
-    with open(ARG_short_datestring + ".perf.txt", "w+") as f:
+    with open(DATESTRING_SHORT + ".perf.txt", "w+") as f:
         # Save original stdout and stderr settings
         _old_stdout = sys.stdout
         _old_stderr = sys.stderr
@@ -64,8 +59,8 @@ def performance(ARG_test_directory, ARG_datestring: str, ARG_short_datestring: s
         sys.stdout = f
         sys.stderr = f
 
-        print (ARG_project, "test suite results")
-        print (ARG_datestring)
+        print (PROJECT_NAME, "test suite results")
+        print (DATESTRING)
         testmiscstuff.logformat_line ()
         testmiscstuff.logformat_header ("PERFORMANCE TEST FULL RESULTS")
         print ()
@@ -90,17 +85,14 @@ def performance(ARG_test_directory, ARG_datestring: str, ARG_short_datestring: s
         # Restore stdout and stderr to original settings
         sys.stderr = _old_stderr
         sys.stdout = _old_stdout
-    print ("done.")
     return perftest10_results, perftest100_results, perftest1000_results
 
 
 # --------------------- IMPORTS TEST ---------------------
-# TODO: The imports module thing doesn't seem to be working. Need to fix this.
-def imports(ARG_test_directory, ARG_rosevomit_directory, ARG_datestring: str, ARG_short_datestring: str, ARG_project: str):
+def imports(ARG_test_directory, ARG_rosevomit_directory):
     if FINDIMPORTS_MODULE_EXISTS is True:
-        print ("Generating import list... ", end="")
         os.chdir (ARG_test_directory)
-        with open(ARG_short_datestring + ".imports.txt", "w+") as f:
+        with open(DATESTRING_SHORT + ".imports.txt", "w+") as f:
             # Save original stdout and stderr settings
             _old_stdout = sys.stdout
             _old_stderr = sys.stderr
@@ -108,8 +100,8 @@ def imports(ARG_test_directory, ARG_rosevomit_directory, ARG_datestring: str, AR
             sys.stdout = f
             sys.stderr = f
 
-            print (ARG_project, "test suite results")
-            print (ARG_datestring)
+            print (PROJECT_NAME, "test suite results")
+            print (DATESTRING)
             testmiscstuff.logformat_line ()
             testmiscstuff.logformat_header ("full imports list")
             os.chdir (ARG_rosevomit_directory)
@@ -119,19 +111,16 @@ def imports(ARG_test_directory, ARG_rosevomit_directory, ARG_datestring: str, AR
             # Restore stdout and stderr to original settings
             sys.stderr = _old_stderr
             sys.stdout = _old_stdout
-        print ("done.")
     else:
-        print ("The 'findimports' module is not present.")
-        print ("An import list will not be generated for this test.")
+        raise ImportError
+
 
 
 # --------------------- UNUSED IMPORTS TEST ---------------------
-# TODO: The imports module thing doesn't seem to be working. Need to fix this.
-def unused_imports(ARG_test_directory, ARG_rosevomit_directory, ARG_datestring: str, ARG_short_datestring: str, ARG_project: str):
+def unused_imports(ARG_test_directory, ARG_rosevomit_directory):
     if FINDIMPORTS_MODULE_EXISTS is True:
-        print ("Generating unused import list... ", end="")
         os.chdir (ARG_test_directory)
-        with open(ARG_short_datestring + ".imports-unused.txt", "w+") as f:
+        with open(DATESTRING_SHORT + ".imports-unused.txt", "w+") as f:
             # Save original stdout and stderr settings
             _old_stdout = sys.stdout
             _old_stderr = sys.stderr
@@ -139,8 +128,8 @@ def unused_imports(ARG_test_directory, ARG_rosevomit_directory, ARG_datestring: 
             sys.stdout = f
             sys.stderr = f
 
-            print (ARG_project, "test suite results")
-            print (ARG_datestring)
+            print (PROJECT_NAME, "test suite results")
+            print (DATESTRING)
             testmiscstuff.logformat_line ()
             testmiscstuff.logformat_header ("UNUSED IMPORTS LIST")
             os.chdir (ARG_rosevomit_directory)
@@ -150,18 +139,15 @@ def unused_imports(ARG_test_directory, ARG_rosevomit_directory, ARG_datestring: 
             # Restore stdout and stderr to original settings
             sys.stderr = _old_stderr
             sys.stdout = _old_stdout
-        print ("done")
     else:
-        print ("The 'findimports' module is not present.")
-        print ("An unused imports list will not be generated for this test.")
+        raise ImportError
 
 
 # --------------------- PYTLINT TEST ---------------------
-def pylint(ARG_test_directory, ARG_repository_directory, ARG_datestring: str, ARG_short_datestring: str, ARG_project: str):
-    if PYLINT_MODULE_EXISTS:
-        print ("Running pylint... ", end="")
+def pylint(ARG_test_directory, ARG_repository_directory):
+    if PYLINT_MODULE_EXISTS is True:
         os.chdir (ARG_test_directory)
-        with open(ARG_short_datestring + ".pylint.txt", "w+") as f:
+        with open(DATESTRING_SHORT + ".pylint.txt", "w+") as f:
             # Save original stdout and stderr settings
             _old_stdout = sys.stdout
             _old_stderr = sys.stderr
@@ -169,8 +155,8 @@ def pylint(ARG_test_directory, ARG_repository_directory, ARG_datestring: str, AR
             sys.stdout = f
             sys.stderr = f
 
-            print (ARG_project, "test suite results")
-            print (ARG_datestring)
+            print (PROJECT_NAME, "test suite results")
+            print (DATESTRING)
             testmiscstuff.logformat_line ()
             testmiscstuff.logformat_header ("pylint")
             os.chdir (ARG_repository_directory)
@@ -179,106 +165,10 @@ def pylint(ARG_test_directory, ARG_repository_directory, ARG_datestring: str, AR
             #   C0326 spaces
             #   E0401 import-error (because they don't seem to work properly when running statically)
             pylint_opts = ["rosevomit", "--disable=C0301,C0326,E0401", "--reports=yes"]
-            linter.Run (pylint_opts)  # BUG: The script seems to end here, after this linter report successfully runs. Need to find out why.
+            linter.Run (pylint_opts, do_exit=False)
 
             # Restore stdout and stderr to original settings
             sys.stderr = _old_stderr
             sys.stdout = _old_stdout
-        print ("done.")
     else:
-        print ("The 'pylint' module is not present.")
-        print ("A pylint report will not be generated for this test.")
-
-
-# --------------------- SUMMARY REPORT ---------------------
-def summary(ARG_test_directory, ARG_datestring: str, ARG_short_datestring: str, ARG_project: str, ARG_directories_present, ARG_directories_missing, ARG_time, ARG_perfresults_10, ARG_perfresults_100, ARG_perfresults_1000):
-    os.chdir (ARG_test_directory)
-    print ("Writing summary file... ", end="")
-    with open(ARG_short_datestring + ".summary.txt", "w+") as f:
-        # Save original stdout and stderr settings
-        _old_stdout = sys.stdout
-        _old_stderr = sys.stderr
-        # Switch stdout and stderr to file output
-        sys.stdout = f
-        sys.stderr = f
-
-        print (ARG_project, "test suite results")
-        print (ARG_datestring)
-        testmiscstuff.logformat_line ()
-        testmiscstuff.logformat_header ("ENVIRONMENT")
-        print ("Python version:", platform.python_version(), platform.python_implementation())
-        pybuild = platform.python_build()
-        print ("  build:", pybuild[0])
-        print ("        ", pybuild[1])
-        print ("  compiler:", platform.python_compiler())
-        print ("Python path:")
-        for p in sys.path:
-            print ("  ", p)
-
-        testmiscstuff.logformat_line ()
-        testmiscstuff.logformat_header ("TEST AND PROGRAM OVERVIEW")
-        print ("Directories found:", len (ARG_directories_present))
-        for item in ARG_directories_present:
-            print ("  ", item)
-        print ()
-        print ("Directories not found:", len (ARG_directories_missing))
-        for item in ARG_directories_missing:
-            print ("  ", item)
-        print ()
-        if FINDIMPORTS_MODULE_EXISTS is False:
-            print (textwrap.fill ("The third-party module 'findimports' was not present, therefore the following tests were not run: import list, unused imports list"))
-        testtime = ARG_time
-        display_testtime = round (testtime, ndigits=1)
-        # For explanations of the '//' and '%' operators, see here: https://stackoverflow.com/questions/4432208/what-is-the-result-of-in-python
-        display_minutes = int (testtime // 60)
-        display_seconds = round ((testtime % 60), ndigits=1)
-        print (f"Time to run tests: {display_testtime} seconds, or")
-        print (f"                   {display_minutes} minutes, {display_seconds} seconds")
-
-        testmiscstuff.logformat_line ()
-        testmiscstuff.logformat_header ("GENERATOR SANITY TEST")
-        print ("Blah blah blah.")
-
-        testmiscstuff.logformat_line ()
-        testmiscstuff.logformat_header ("PERFORMANCE TEST")
-        print ("Blah blah blah.")
-        # TODO: See below
-        print (textwrap.fill ("TODO: Need to distinguish between minimum, minimum average, and real average. Or, need to find a better naming scheme."))
-        print ()
-        print ("Fastest performance when generating 10 names, per namelist:")
-        for key, value in ARG_perfresults_10.items():
-            # Also converts results from seconds to milliseconds for readibility
-            minresult = min (value) * 1000
-            maxresult = max (value) * 1000
-            meanresult = statistics.mean (value) * 1000
-            display_min = int (round (minresult, ndigits=0))
-            display_min_avg = round ((minresult / 10), ndigits=2)
-            display_avg = round ((meanresult / 10), ndigits=2)
-            print (f"   {key}: {display_min}ms total, avg {display_min_avg}ms per name. (Real avg {display_avg}ms)")
-        print ()
-        print ("Fastest performance when generating 100 names, per namelist:")
-        for key, value in ARG_perfresults_100.items():
-            # Also converts results from seconds to milliseconds for readibility
-            minresult = min (value) * 1000
-            maxresult = max (value) * 1000
-            meanresult = statistics.mean (value) * 1000
-            display_min = int (round (minresult, ndigits=0))
-            display_min_avg = round ((minresult / 100), ndigits=2)
-            display_avg = round ((meanresult / 100), ndigits=2)
-            print (f"   {key}: {display_min}ms total, avg {display_min_avg}ms per name. (Real avg {display_avg}ms)")
-        print ()
-        print ("Fastest performance when generating 1,000 names, per namelist:")
-        for key, value in ARG_perfresults_1000.items():
-            # Also converts results from seconds to milliseconds for readibility
-            minresult = min (value) * 1000
-            maxresult = max (value) * 1000
-            meanresult = statistics.mean (value) * 1000
-            display_min = int (round (minresult, ndigits=0))
-            display_min_avg = round ((minresult / 1000), ndigits=2)
-            display_avg = round ((meanresult / 1000), ndigits=2)
-            print (f"   {key}: {display_min}ms total, avg {display_min_avg}ms per name. (Real avg {display_avg}ms)")
-
-        # Restore stdout and stderr to original settings
-        sys.stderr = _old_stderr
-        sys.stdout = _old_stdout
-    print ("done.")
+        raise ImportError
