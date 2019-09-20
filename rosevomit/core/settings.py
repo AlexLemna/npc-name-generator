@@ -40,9 +40,6 @@ def is_valid() -> bool:
 
 def restore_file():
     """Recreates the file specified in the 'SETTINGS_FILE' variable using internally defined defaults."""
-    check_existence: bool = existence()
-    if check_existence is True:
-        raise FileExistsError
     # Initializing ConfigParser()
     config = configparser.ConfigParser()
     # Entering the default values we want to restore
