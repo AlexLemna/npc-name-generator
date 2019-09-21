@@ -1,3 +1,4 @@
+"""This file contains the main test script for Rosevomit. Running this script will prompt you to choose which tests to run, and then will capture the output of those tests in text files created in this directory."""
 import os
 import pathlib
 import platform
@@ -8,9 +9,11 @@ import time
 import traceback
 
 # Rosevomit test modules
+import formatting
+import messages
 import testmain
 import testmiscstuff
-from constants import DATESTRING, DATESTRING_SHORT, FINDIMPORTS_AVAILABLE, PROJECT_NAME, PYLINT_AVAILABLE
+from constants import ALL_TESTS, DATESTRING, DATESTRING_SHORT, FINDIMPORTS_AVAILABLE, PROJECT_NAME, PYLINT_AVAILABLE
 
 if __name__ != "__main__":
     print (textwrap.fill ("YOU ARE TRYING TO RUN 'RunTests.py' AS A MODULE, AND YOU DIDN'T PROGRAM THIS FILE TO RUN THAT WAY! IT MAY NOT WORK PROPERLY. IF YOU MEANT TO DO THIS, THEN GO TO 'RunTests.py' AND REMOVE THIS WARNING AFTER YOU'VE LOOKED THE FILE OVER TO MAKE SURE IT WON'T START CREATING FILES IN STRANGE PLACES, ETC."))
@@ -23,16 +26,14 @@ available_tests = [
     "sanity",
     "performance",
     ]
-# TODO: The section below is commented out until we can fix how the findimports module handles extended unicode characters
-"""
 if FINDIMPORTS_AVAILABLE is True:
     available_tests.append ("imports")
     available_tests.append ("unused imports")
-"""
 if PYLINT_AVAILABLE is True:
     available_tests.append ("pylint")
 tests_to_run: list = testmiscstuff.choose_prompt (available_tests)
-if len(tests_to_run) == 0:
+num_tests_to_run = len (tests_to_run)
+if num_tests_to_run == 0:
     print ("No tests selected. Exiting now.")
     sys.exit()
 
@@ -90,9 +91,15 @@ print ()
 # Running sanity test, performance test, and saving output to file
 if "sanity" in tests_to_run:
     print ("Running sanity tests... ", end="")
-    testmain.sanity (ARG_test_directory=TESTLOG_DIR)
-    successful_tests.append ("sanity")
-    print ("done.")
+    sanity_finish: bool = testmain.sanity (ARG_test_directory=TESTLOG_DIR)
+    if sanity_finish is True:
+        successful_tests.append ("sanity")
+        print ("done.")
+    elif sanity_finish is False:
+        failed_tests.append ("sanity")
+        print ("error.")
+    else:
+        raise TypeError  # TODO: RealityError candidate
 
 # Running performance tests...
 if "performance" in tests_to_run:
@@ -108,52 +115,47 @@ else:
 # Generating imports list...
 if "imports" in tests_to_run:
     print ("Generating import list... ", end="")
-    if FINDIMPORTS_AVAILABLE is True:
-        testmain.imports (ARG_test_directory=TESTLOG_DIR, ARG_rosevomit_directory=ROSEVOMIT_DIR)
+    imports_finish: bool = testmain.imports (ARG_test_directory=TESTLOG_DIR, ARG_rosevomit_directory=ROSEVOMIT_DIR)
+    if imports_finish is True:
         successful_tests.append ("imports")
         print ("done.")
-    elif FINDIMPORTS_AVAILABLE is False:
+    elif imports_finish is False:
         failed_tests.append ("imports")
-        print ("ERROR.")
-        print ("The 'findimports' module is not present.")
-        print ("An import list will not be generated for this test.")
+        print ("error.")
     else:
         raise TypeError  # TODO: RealityError candidate
 
 # Generating unused imports list...
 if "unused imports" in tests_to_run:
     print ("Generating unused import list... ", end="")
-    if FINDIMPORTS_AVAILABLE is True:
-        testmain.unused_imports (ARG_test_directory=TESTLOG_DIR, ARG_rosevomit_directory=ROSEVOMIT_DIR)
+    unusedimports_finish: bool = testmain.unused_imports (ARG_test_directory=TESTLOG_DIR, ARG_rosevomit_directory=ROSEVOMIT_DIR)
+    if unusedimports_finish is True:
         successful_tests.append ("unused imports")
         print ("done.")
-    elif FINDIMPORTS_AVAILABLE is False:
+    elif unusedimports_finish is False:
         failed_tests.append ("unused imports")
-        print ("ERROR.")
-        print ("The 'findimports' module is not present.")
-        print ("An unused import list will not be generated for this test.")
+        print ("error.")
     else:
         raise TypeError  # TODO: RealityError candidate
 
 # Running pylint tests...
 if "pylint" in tests_to_run:
     print ("Running pylint... ", end="")
-    if PYLINT_AVAILABLE is True:
-        testmain.pylint (ARG_test_directory=TESTLOG_DIR, ARG_repository_directory=REPO_DIR)
+    pylint_finish: bool = testmain.pylint (ARG_test_directory=TESTLOG_DIR, ARG_repository_directory=REPO_DIR)
+    if pylint_finish is True:
         successful_tests.append ("pylint")
         print ("done.")
-    elif PYLINT_AVAILABLE is False:
+    elif pylint_finish is False:
         failed_tests.append ("pylint")
-        print ("ERROR.")
-        print ("The 'pylint' module is not present.")
-        print ("A pylint report will not be generated for this test.")
+        print ("error.")
     else:
-        raise TypeError  # TODO: RealityError
+        raise TypeError  # TODO: RealityError candidate
 
 t1 = time.perf_counter()
 time_elapsed = t1 - t0
 
-# Generating summary file
+
+# ---------------------SUMMARY FILE BEGINS---------------------
 os.chdir (TESTLOG_DIR)
 print ("Writing summary file... ", end="")
 with open(DATESTRING_SHORT + ".summary.txt", "w+") as f:
@@ -164,10 +166,13 @@ with open(DATESTRING_SHORT + ".summary.txt", "w+") as f:
     sys.stdout = f
     sys.stderr = f
 
+    # HEADER
     print (PROJECT_NAME, "test suite results")
     print (DATESTRING)
-    testmiscstuff.logformat_line ()
-    testmiscstuff.logformat_header ("ENVIRONMENT")
+
+    # ENVIRONMENT SUMMARY
+    formatting.line ()
+    formatting.header ("ENVIRONMENT")
     print ("Python version:", platform.python_version(), platform.python_implementation())
     pybuild = platform.python_build()
     print ("  build:", pybuild[0])
@@ -177,8 +182,9 @@ with open(DATESTRING_SHORT + ".summary.txt", "w+") as f:
     for p in sys.path:
         print ("  ", p)
 
-    testmiscstuff.logformat_line ()
-    testmiscstuff.logformat_header ("TEST AND PROGRAM OVERVIEW")
+    # TEST AND PROGRAM OVERVIEW
+    formatting.line ()
+    formatting.header ("TEST AND PROGRAM OVERVIEW")
     print ("Directories found:", len (directories_present))
     for item in directories_present:
         print ("  ", item)
@@ -187,31 +193,53 @@ with open(DATESTRING_SHORT + ".summary.txt", "w+") as f:
     for item in directories_missing:
         print ("  ", item)
     print ()
+
     if FINDIMPORTS_AVAILABLE is False:
         print (textwrap.fill ("The third-party module 'findimports' was not present, therefore the following tests were not run: import list, unused imports list"))
+
+    num_successful_tests = len (successful_tests)
+    print (f"Tests successfully run: {num_successful_tests}")
+    if num_successful_tests > 0:
+        print (textwrap.fill (f"  {successful_tests}"))
+    num_failed_tests = len (failed_tests)
+    print (f"Tests failed to run: {num_failed_tests}")
+    if num_failed_tests > 0:
+        print (textwrap.fill (f"  {failed_tests}"))
     display_testtime = round (time_elapsed, ndigits=1)
-    # For explanations of the '//' and '%' operators, see here: https://stackoverflow.com/questions/4432208/what-is-the-result-of-in-python
-    display_minutes = int (time_elapsed // 60)
-    display_seconds = round ((time_elapsed % 60), ndigits=1)
-    print (f"Tests successfully run:", len (successful_tests))
-    for item in successful_tests:
-        print ("  ", item)
-    print (f"Tests failed to run:", len (failed_tests))
-    for item in failed_tests:
-        print ("  ", item)
-    print (f"Time to run tests:")
-    print (f"  {display_testtime} seconds, or")
-    print (f"  {display_minutes} minutes, {display_seconds} seconds")
+    if display_testtime >= 60:
+        # For explanations of the '//' and '%' operators, see here: https://stackoverflow.com/questions/4432208/what-is-the-result-of-in-python
+        display_minutes = int (time_elapsed // 60)
+        display_seconds = round ((time_elapsed % 60), ndigits=1)
+        print (f"Time to run tests: {display_testtime} seconds ({display_minutes} minutes, {display_seconds} seconds)")
+    else:  # If the tests took less than a minute, we don't need to show the conversion from seconds to minutes
+        print (f"Time to run tests: {display_testtime} seconds")
+    print ()
+    print (f"All tests: {len (ALL_TESTS)}")
+    if len (ALL_TESTS) > 0:
+        print (textwrap.fill (f"  {ALL_TESTS}"))
+    print (f"Available tests: {len (available_tests)}")
+    if len (available_tests) > 0:
+        print (textwrap.fill (f"  {available_tests}"))
+    print (f"Tests selected to run: {len (tests_to_run)}")
+    if len (tests_to_run) > 0:
+        print (textwrap.fill (f"  {tests_to_run}"))
 
+    # SANITY TEST SUMMARY
+    if "sanity" in tests_to_run:
+        formatting.line ()
+        formatting.header ("GENERATOR SANITY TEST")
+    if "sanity" in failed_tests:
+        messages.test_no_finish_message ("sanity")
     if "sanity" in successful_tests:
-        testmiscstuff.logformat_line ()
-        testmiscstuff.logformat_header ("GENERATOR SANITY TEST")
-        print ("Blah blah blah.")
+        messages.test_finish_message ("sanity")
 
+    # PERFORMANCE TEST SUMMARY
+    if "performance" in tests_to_run:
+        formatting.line ()
+        formatting.header ("PERFORMANCE TEST")
+    if "performance" in failed_tests:
+        messages.test_no_finish_message ("performance")
     if "performance" in successful_tests:
-        testmiscstuff.logformat_line ()
-        testmiscstuff.logformat_header ("PERFORMANCE TEST")
-        print ("Blah blah blah.")
         # TODO: See below
         print (textwrap.fill ("TODO: Need to distinguish between minimum, minimum average, and real average. Or, need to find a better naming scheme."))
         print ()
@@ -247,6 +275,33 @@ with open(DATESTRING_SHORT + ".summary.txt", "w+") as f:
             display_min_avg = round ((minresult / 1000), ndigits=2)
             display_avg = round ((meanresult / 1000), ndigits=2)
             print (f"   {key}: {display_min}ms total, avg {display_min_avg}ms per name. (Real avg {display_avg}ms)")
+
+    # IMPORT SUMMARY
+    if "imports" in tests_to_run:
+        formatting.line ()
+        formatting.header ("IMPORTS")
+    if "imports" in failed_tests:
+        messages.test_no_finish_message ("imports")
+    if "imports" in successful_tests:
+        messages.test_finish_message ("imports")
+
+    # UNUSED IMPORT SUMMARY
+    if "unused imports" in tests_to_run:
+        formatting.line ()
+        formatting.header ("UNUSED IMPORTS")
+    if "unused imports" in failed_tests:
+        messages.test_no_finish_message ("unused-imports")
+    if "unused imports" in successful_tests:
+        messages.test_finish_message ("unused imports")
+
+    # PYLINT TEST SUMMARY
+    if "pylint" in tests_to_run:
+        formatting.line ()
+        formatting.header ("PYLINT TEST")
+    if "pylint" in failed_tests:
+        messages.test_no_finish_message ("pylint")
+    if "pylint" in successful_tests:
+        messages.test_finish_message ("pylint")
 
     # Restore stdout and stderr to original settings
     sys.stderr = _old_stderr

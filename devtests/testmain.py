@@ -1,6 +1,6 @@
+"""This file contains the functions for the main tests for Rosevomit. These tests should all be called by the script in '_runtests.py'."""
 import os
 import sys
-import traceback
 import unittest
 
 try:
@@ -19,14 +19,17 @@ else:
 
 # Rosevomit test modules
 from constants import DATESTRING, DATESTRING_SHORT, PROJECT_NAME
+import formatting
+import messages
 from performancetests import timetest_name_generation
-import testfunctions
+import sanitytests
 import testmiscstuff
 # Rosevomit itself
 from context import rosevomit
 
 # --------------------- SANITY TEST ---------------------
 def sanity(ARG_test_directory):
+    """Runs the sanity test"""
     os.chdir (ARG_test_directory)
     with open(DATESTRING_SHORT + ".sanity.txt", "w+") as f:
         # Save original stdout and stderr settings
@@ -38,18 +41,28 @@ def sanity(ARG_test_directory):
 
         print (PROJECT_NAME, "test suite results")
         print (DATESTRING)
-        testmiscstuff.logformat_line ()
-        testmiscstuff.logformat_header ("GENERATOR SANITY TEST")
+        formatting.line ()
+        formatting.header ("GENERATOR SANITY TEST")
         print ()
-        testsuite = unittest.TestLoader().loadTestsFromModule(testfunctions)
-        unittest.TextTestRunner().run(testsuite)
+
+        try:
+            testsuite = unittest.TestLoader().loadTestsFromModule(sanitytests)
+            unittest.TextTestRunner().run(testsuite)
+        except Exception:  # pylint: disable=broad-except
+            messages.traceback_message()
+            did_test_finish = False
+        else:
+            did_test_finish = True
+
         # Restore stdout and stderr to original settings
         sys.stderr = _old_stderr
         sys.stdout = _old_stdout
+    return did_test_finish
 
 
 # --------------------- PERFORMANCE TEST ---------------------
 def performance(ARG_test_directory):
+    """Runs the performance test"""
     os.chdir (ARG_test_directory)
     with open(DATESTRING_SHORT + ".perf.txt", "w+") as f:
         # Save original stdout and stderr settings
@@ -61,26 +74,30 @@ def performance(ARG_test_directory):
 
         print (PROJECT_NAME, "test suite results")
         print (DATESTRING)
-        testmiscstuff.logformat_line ()
-        testmiscstuff.logformat_header ("PERFORMANCE TEST FULL RESULTS")
+        formatting.line ()
+        formatting.header ("PERFORMANCE TEST FULL RESULTS")
         print ()
-        print ("Rosevomit's performance when generating 10 names (measured in seconds)")
-        with testmiscstuff.Suppressor():
-            perftest10_results = timetest_name_generation (ARG_number_of_names=10)
-        for key, value in perftest10_results.items():
-            print (f"   {key}: {value}")
-        print ()
-        print ("Rosevomit's performance when generating 100 names (measured in seconds)")
-        with testmiscstuff.Suppressor():
-            perftest100_results = timetest_name_generation (ARG_number_of_names=100)
-        for key, value in perftest100_results.items():
-            print (f"   {key}: {value}")
-        print ()
-        print ("Rosevomit's performance when generating 1,000 names (measured in seconds)")
-        with testmiscstuff.Suppressor():
-            perftest1000_results = timetest_name_generation (ARG_number_of_names=1000)
-        for key, value in perftest1000_results.items():
-            print (f"   {key}: {value}")
+
+        try:
+            print ("Rosevomit's performance when generating 10 names (measured in seconds)")
+            with testmiscstuff.Suppressor():
+                perftest10_results = timetest_name_generation (ARG_number_of_names=10)
+            for key, value in perftest10_results.items():
+                print (f"   {key}: {value}")
+            print ()
+            print ("Rosevomit's performance when generating 100 names (measured in seconds)")
+            with testmiscstuff.Suppressor():
+                perftest100_results = timetest_name_generation (ARG_number_of_names=100)
+            for key, value in perftest100_results.items():
+                print (f"   {key}: {value}")
+            print ()
+            print ("Rosevomit's performance when generating 1,000 names (measured in seconds)")
+            with testmiscstuff.Suppressor():
+                perftest1000_results = timetest_name_generation (ARG_number_of_names=1000)
+            for key, value in perftest1000_results.items():
+                print (f"   {key}: {value}")
+        except Exception:  # pylint: disable=broad-except
+            messages.traceback_message()
 
         # Restore stdout and stderr to original settings
         sys.stderr = _old_stderr
@@ -90,85 +107,102 @@ def performance(ARG_test_directory):
 
 # --------------------- IMPORTS TEST ---------------------
 def imports(ARG_test_directory, ARG_rosevomit_directory):
-    if FINDIMPORTS_MODULE_EXISTS is True:
-        os.chdir (ARG_test_directory)
-        with open(DATESTRING_SHORT + ".imports.txt", "w+") as f:
-            # Save original stdout and stderr settings
-            _old_stdout = sys.stdout
-            _old_stderr = sys.stderr
-            # Switch stdout and stderr to file output
-            sys.stdout = f
-            sys.stderr = f
+    """Runs the import list test."""
+    os.chdir (ARG_test_directory)
+    with open(DATESTRING_SHORT + ".imports.txt", "w+") as f:
+        # Save original stdout and stderr settings
+        _old_stdout = sys.stdout
+        _old_stderr = sys.stderr
+        # Switch stdout and stderr to file output
+        sys.stdout = f
+        sys.stderr = f
 
-            print (PROJECT_NAME, "test suite results")
-            print (DATESTRING)
-            testmiscstuff.logformat_line ()
-            testmiscstuff.logformat_header ("full imports list")
-            os.chdir (ARG_rosevomit_directory)
-            mock_cli_args = ["rosevomit.py", "-i"]
+        print (PROJECT_NAME, "test suite results")
+        print (DATESTRING)
+        formatting.line ()
+        formatting.header ("full imports list")
+        os.chdir (ARG_rosevomit_directory)
+        mock_cli_args = ["rosevomit.py", "-i"]
+
+        try:
             findimports.main(argv=mock_cli_args)
+        except Exception:  # pylint: disable=broad-except
+            messages.traceback_message()
+            did_test_finish = False
+        else:
+            did_test_finish = True
 
-            # Restore stdout and stderr to original settings
-            sys.stderr = _old_stderr
-            sys.stdout = _old_stdout
-    else:
-        raise ImportError
-
+        # Restore stdout and stderr to original settings
+        sys.stderr = _old_stderr
+        sys.stdout = _old_stdout
+    return did_test_finish
 
 
 # --------------------- UNUSED IMPORTS TEST ---------------------
 def unused_imports(ARG_test_directory, ARG_rosevomit_directory):
-    if FINDIMPORTS_MODULE_EXISTS is True:
-        os.chdir (ARG_test_directory)
-        with open(DATESTRING_SHORT + ".imports-unused.txt", "w+") as f:
-            # Save original stdout and stderr settings
-            _old_stdout = sys.stdout
-            _old_stderr = sys.stderr
-            # Switch stdout and stderr to file output
-            sys.stdout = f
-            sys.stderr = f
+    """Runs the unused import list test."""
+    os.chdir (ARG_test_directory)
+    with open(DATESTRING_SHORT + ".imports-unused.txt", "w+") as f:
+        # Save original stdout and stderr settings
+        _old_stdout = sys.stdout
+        _old_stderr = sys.stderr
+        # Switch stdout and stderr to file output
+        sys.stdout = f
+        sys.stderr = f
 
-            print (PROJECT_NAME, "test suite results")
-            print (DATESTRING)
-            testmiscstuff.logformat_line ()
-            testmiscstuff.logformat_header ("UNUSED IMPORTS LIST")
-            os.chdir (ARG_rosevomit_directory)
-            mock_cli_args = ["rosevomit.py", "-i", "-u"]
+        print (PROJECT_NAME, "test suite results")
+        print (DATESTRING)
+        formatting.line ()
+        formatting.header ("UNUSED IMPORTS LIST")
+        os.chdir (ARG_rosevomit_directory)
+        mock_cli_args = ["rosevomit.py", "-i", "-u"]
+
+        try:
             findimports.main(argv=mock_cli_args)
+        except Exception:  # pylint: disable=broad-except
+            messages.traceback_message()
+            did_test_finish = False
+        else:
+            did_test_finish = True
 
-            # Restore stdout and stderr to original settings
-            sys.stderr = _old_stderr
-            sys.stdout = _old_stdout
-    else:
-        raise ImportError
+        # Restore stdout and stderr to original settings
+        sys.stderr = _old_stderr
+        sys.stdout = _old_stdout
+    return did_test_finish
 
 
 # --------------------- PYTLINT TEST ---------------------
 def pylint(ARG_test_directory, ARG_repository_directory):
-    if PYLINT_MODULE_EXISTS is True:
-        os.chdir (ARG_test_directory)
-        with open(DATESTRING_SHORT + ".pylint.txt", "w+") as f:
-            # Save original stdout and stderr settings
-            _old_stdout = sys.stdout
-            _old_stderr = sys.stderr
-            # Switch stdout and stderr to file output
-            sys.stdout = f
-            sys.stderr = f
+    """Runs a test using pylint"""
+    os.chdir (ARG_test_directory)
+    with open(DATESTRING_SHORT + ".pylint.txt", "w+") as f:
+        # Save original stdout and stderr settings
+        _old_stdout = sys.stdout
+        _old_stderr = sys.stderr
+        # Switch stdout and stderr to file output
+        sys.stdout = f
+        sys.stderr = f
 
-            print (PROJECT_NAME, "test suite results")
-            print (DATESTRING)
-            testmiscstuff.logformat_line ()
-            testmiscstuff.logformat_header ("pylint")
-            os.chdir (ARG_repository_directory)
-            # pylint error messages
-            #   C0301 line-too-long
-            #   C0326 spaces
-            #   E0401 import-error (because they don't seem to work properly when running statically)
-            pylint_opts = ["rosevomit", "--disable=C0301,C0326,E0401", "--reports=yes"]
+        print (PROJECT_NAME, "test suite results")
+        print (DATESTRING)
+        formatting.line ()
+        formatting.header ("pylint")
+        os.chdir (ARG_repository_directory)
+        # pylint error messages
+        #   C0301 line-too-long
+        #   C0326 spaces
+        #   E0401 import-error (because they don't seem to work properly when running statically)
+        pylint_opts = ["rosevomit", "--disable=C0301,C0326,E0401", "--reports=yes"]
+
+        try:
             linter.Run (pylint_opts, do_exit=False)
+        except Exception:  # pylint: disable=broad-except
+            messages.traceback_message()
+            did_test_finish = False
+        else:
+            did_test_finish = True
 
-            # Restore stdout and stderr to original settings
-            sys.stderr = _old_stderr
-            sys.stdout = _old_stdout
-    else:
-        raise ImportError
+        # Restore stdout and stderr to original settings
+        sys.stderr = _old_stderr
+        sys.stdout = _old_stdout
+    return did_test_finish
