@@ -213,5 +213,4 @@ def angle_sanity_check (ARG_angle_value):
         angle_value = angle_value % 360
         if angle_value < 0:
             angle_value = angle_value + 360
-    # angle_value = float (angle_value)  # Otherwise, errors will occur because you can't do math operations that include both decimal and float types
     return angle_value
