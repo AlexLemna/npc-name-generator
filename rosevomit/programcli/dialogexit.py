@@ -8,26 +8,7 @@ import sys
 import textwrap
 
 from core import tempfiles
-
-
-### SOME LISTS OF REGEX PATTERNS FOR PARSING USER INPT
-regexes_yes = [
-    re.compile("^[Y][ES]*$", flags=re.IGNORECASE),
-]
-regexes_no = [
-    re.compile("^[N][O]*$", flags=re.IGNORECASE),
-]
-# Dear future self,
-# Yeah, I just learned about regular expressions. 
-# You got a problem with that?
-#   Love, Your(past)self
-regexes_opt = [
-    re.compile("^[G][IME]*$", flags=re.IGNORECASE),
-    re.compile("^[M][ORE]*", flags=re.IGNORECASE),
-    re.compile("^[O][PTIONS]*", flags=re.IGNORECASE),
-    re.compile("^[G][IME]*\s*[M][ORE]*\s*[O][PTIONS]*$", flags=re.IGNORECASE),
-]
-
+from core.constants import REGEXES_NO, REGEXES_OPT, REGEXES_YES
 
 ### SOME HELPER FUNCTIONS...
 def exit_menu():
@@ -72,11 +53,11 @@ def exit_rosevomit(headless=False):
         pass
 
     _input = exit_prompt()
-    if _input is None or _input is "" or _input is "Y" or any(re.match(pattern, _input) for pattern in regexes_yes):
+    if _input is None or _input is "" or _input is "Y" or any(re.match(pattern, _input) for pattern in REGEXES_YES):
         cleanup_and_exit()
-    elif _input is "N" or any(re.match(pattern, _input) for pattern in regexes_no):
+    elif _input is "N" or any(re.match(pattern, _input) for pattern in REGEXES_NO):
         return False
-    elif _input is "o" or any(re.match(pattern, _input) for pattern in regexes_opt):
+    elif _input is "o" or any(re.match(pattern, _input) for pattern in REGEXES_OPT):
         exit_options_menu()
         _input = exit_options_prompt()
         if _input is "1":

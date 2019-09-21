@@ -9,6 +9,7 @@ import textwrap
 
 # INTERNAL MODULES
 from core import settings, startup
+from core.constants import SEE_ROSA_RUN
 from programcli import worsecli
 
 print ()
@@ -37,7 +38,6 @@ print (69 * "-")
 print ()
 
 # After setup, rosevomit.py will display the main menu and will carry out instructions based on user input. This is an infinite loop - if rosevomit.py ever has no more instructions to carry out, it displays the main menu again and awaits further instructions. This is based on the 'SEE_ROSA_RUN' variable. This variable should never change. If it does, the program exits and gives the system an error code.
-SEE_ROSA_RUN: bool = True
 worsecli.show_main_menu()
 while SEE_ROSA_RUN is True:
     try:

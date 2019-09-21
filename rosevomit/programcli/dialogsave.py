@@ -4,26 +4,18 @@ import re
 
 try:
     import textstuff
-    import core.utilities as ut
-    from core import tempfiles
 except ImportError:
     from programcli import textstuff
-    import core.utilities as ut
-    from core import tempfiles
 
-### SOME LISTS OF REGEX PATTERNS FOR PARSING USER INPT
-regexes_yes = [
-    re.compile("^[Y][ES]*$", flags=re.IGNORECASE),
-]
-regexes_no = [
-    re.compile("^[N][O]*$", flags=re.IGNORECASE),
-]
+import core.utilities as ut
+from core.constants import REGEXES_NO, REGEXES_YES
+from core import tempfiles
 
 
 def proactive(ARG_defaultname: str="file"):
     """Use this function *before* generating data.
     Returns:
-      savebool: A True/False value. If True, the data should be saved at /saved/'filename'. If False, the data should be saved at /temp/'filename'.  
+      savebool: A True/False value. If True, the data should be saved at /saved/'filename'. If False, the data should be saved at /temp/'filename'.
       filename: A string.
     """
     savebool: bool
@@ -31,9 +23,9 @@ def proactive(ARG_defaultname: str="file"):
 
     _input = textstuff.inputwrap ("Do you want to save the data once it is generated? (If you choose not to save the data right now, it still may be available in the /temp directory later. No guarentees, though.) Enter [y]es or no. ")
     _input = _input.strip()
-    if _input in (None, "", "y", "Y") or any(re.match(pattern, _input) for pattern in regexes_yes):
+    if _input in (None, "", "y", "Y") or any(re.match(pattern, _input) for pattern in REGEXES_YES):
         savebool = True
-    elif _input in ("N", "n") or any(re.match(pattern, _input) for pattern in regexes_no):
+    elif _input in ("N", "n") or any(re.match(pattern, _input) for pattern in REGEXES_NO):
         savebool = False
     else:
         textstuff.printwrap (f"Sorry, {_input} isn't a recognized command here.", width=70)
@@ -65,9 +57,9 @@ def reactive(ARG_defaultname: str="file", ARG_fileformat: str="txt"):
     tempfiles.view()
     _input = textstuff.inputwrap ("Would you like to save some/all of these files? Enter [y]es or no: ")
     _input = _input.strip()
-    if _input in (None, "", "y", "Y") or any(re.match(pattern, _input) for pattern in regexes_yes):
+    if _input in (None, "", "y", "Y") or any(re.match(pattern, _input) for pattern in REGEXES_YES):
         _savebool = True
-    elif _input in ("N", "n") or any(re.match(pattern, _input) for pattern in regexes_no):
+    elif _input in ("N", "n") or any(re.match(pattern, _input) for pattern in REGEXES_NO):
         _savebool = False
     else:
         textstuff.printwrap (f"Sorry, {_input} isn't a recognized command here.", width=70)
@@ -89,10 +81,10 @@ def reactive(ARG_defaultname: str="file", ARG_fileformat: str="txt"):
                 print ()
                 print (f"File {current_item_num} of {num_of_items}: {filename}")
                 _input = input (f"Save {filename}? Enter [y]es or no: ")
-                if _input in (None, "", "y", "Y") or any(re.match(pattern, _input) for pattern in regexes_yes):
+                if _input in (None, "", "y", "Y") or any(re.match(pattern, _input) for pattern in REGEXES_YES):
                     files_to_save.append(filename)
                     current_item_num = current_item_num + 1
-                elif _input in ("N", "n") or any(re.match(pattern, _input) for pattern in regexes_no):
+                elif _input in ("N", "n") or any(re.match(pattern, _input) for pattern in REGEXES_NO):
                     current_item_num = current_item_num + 1
                 else:
                     # TODO: This is stupid. Fix this so we don't have to restart this whole thing. This may mean breaking this up into multiple functions.
