@@ -3,9 +3,6 @@
 # --------------------
 # The main file for Alex's "Project ROSEVOMIT", a random name generator  and random timeline generator written in Python.
 
-print ()
-print ("Starting ROSEVOMIT.")
-# MODULES FROM PYTHON'S STANDARD LIBRARY
 import os
 import sys
 import textwrap
@@ -14,6 +11,8 @@ import textwrap
 from core import settings, startup
 from programcli import worsecli
 
+print ()
+print ("Starting ROSEVOMIT.")
 
 HOME_DIRECTORY = os.path.dirname (sys.argv[0])
 
@@ -28,6 +27,7 @@ elif settings.is_valid() is False:
     settings.restore_file()
 else:
     pass
+
 startup.main_setup(HOME_DIRECTORY)
 
 print ()
@@ -36,10 +36,10 @@ print (27 * "-", "ROSEVOMIT.PY", 28 * "-")
 print (69 * "-")
 print ()
 
-# After setup, rosevomit.py will display the main menu and will carry out instructions based on user input. This is an infinite loop - if rosevomit.py ever has no more instructions to carry out, it displays the main menu again and awaits further instructions. This is based on the 'see_rosa_run' variable. This variable should never change. If it does, the program exits and gives the system an error code.
-see_rosa_run = True
+# After setup, rosevomit.py will display the main menu and will carry out instructions based on user input. This is an infinite loop - if rosevomit.py ever has no more instructions to carry out, it displays the main menu again and awaits further instructions. This is based on the 'SEE_ROSA_RUN' variable. This variable should never change. If it does, the program exits and gives the system an error code.
+SEE_ROSA_RUN: bool = True
 worsecli.show_main_menu()
-while see_rosa_run is True:
+while SEE_ROSA_RUN is True:
     try:
         worsecli.ask_for_input()
     except Exception as e:
@@ -47,5 +47,4 @@ while see_rosa_run is True:
         print ()
         print (e.__traceback__)
         input()
-else:
-    sys.exit(1)
+sys.exit(1)

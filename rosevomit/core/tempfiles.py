@@ -11,6 +11,7 @@ import textwrap
 
 
 def delete():
+    """Clears out the temp directory."""
     os.chdir (sys.path[0])
     os.chdir ("./temp")
     with pathlib.Path.cwd() as cwd:
@@ -32,6 +33,7 @@ def delete():
 
 
 def view():
+    """Prints a list of the contents of the temp directory."""
     os.chdir (sys.path[0])
     os.chdir ("./temp")
     with pathlib.Path.cwd() as cwd:
@@ -51,6 +53,7 @@ def view():
             print ()
 
 def save(ARG_file, ARG_overwrite: bool=False, ARG_dialog: bool=True):
+    """Copies a file from the temp directory to the saved directory."""
     os.chdir (sys.path[0])
     os.chdir ("./temp")
     with pathlib.Path.cwd() as cwd:

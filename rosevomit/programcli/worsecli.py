@@ -48,7 +48,7 @@ def submenu_name_show():
 def submenu_name_input():
     """Asks for user input and processes it. Contains logic for the name generation submenu."""
     menuchoice = input ("Enter your choice, or type 'help' for current menu: ")
-    menuchoice = menuchoice.rstrip()  # Strips whitespaces at the end.
+    menuchoice = menuchoice.strip()  # Strips whitespaces
 
     if menuchoice == "1":
         _input = input_integer ("How many first names should be generated? ")
@@ -87,9 +87,9 @@ def submenu_name_input():
         print ()
     elif menuchoice == '0':
         pass
-    elif menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
+    elif menuchoice in ("X", "x", "exit"):
         sys.exit(0)
-    elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
+    elif menuchoice in ("help", "HELP", "'help'", "h", "H", "helf", "HELF"):
         submenu_name_show()
         submenu_name_input()
     elif menuchoice == "":
@@ -114,7 +114,7 @@ def submenu_timeline_show():
 def submenu_timeline_input():
     """Asks for user input and processes it. Contains logic for the name generation submenu."""
     menuchoice = input ("Enter your choice, or type 'help' for current menu: ")
-    menuchoice = menuchoice.rstrip()  # Strips whitespaces at the end.
+    menuchoice = menuchoice.strip()  # Strip whitespaces
 
     if menuchoice == "1":
         _input = input_integer ("How many years of historical global events should be generated? ")
@@ -126,9 +126,9 @@ def submenu_timeline_input():
         submenu_timeline_input ()
     elif menuchoice == '0':
         pass
-    elif menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
+    elif menuchoice in ("X", "x", "exit"):
         sys.exit(0)
-    elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
+    elif menuchoice in ("help", "HELP", "'help'", "h", "H", "helf", "HELF"):
         submenu_timeline_show()
         submenu_timeline_input()
     elif menuchoice == "":
@@ -153,7 +153,7 @@ def submenu_suncalc_show():
 def submenu_suncalc_input():
     """Asks for user input for Suncalc."""
     menuchoice = input ("Enter your choice, or type 'help' for current menu: ")
-    menuchoice = menuchoice.rstrip()  # Strips whitespaces at the end.
+    menuchoice = menuchoice.strip()  # Strips whitespaces
 
     if menuchoice == "1":
         lat = 0
@@ -170,9 +170,9 @@ def submenu_suncalc_input():
         return lat, long
     elif menuchoice == "0":
         show_main_menu()
-    elif menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
+    elif menuchoice in ("X", "x", "exit"):
         sys.exit(0)
-    elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
+    elif menuchoice in ("help", "HELP", "'help'", "h", "H", "helf", "HELF"):
         submenu_suncalc_show()
         submenu_suncalc_input()
     elif menuchoice == "":
@@ -185,7 +185,7 @@ def submenu_suncalc_input():
 def prompt_save():
     """Asks the user if they want to save, and processes response."""
     menuchoice = input ("Would you like to save this result? (Yes/No) ")
-    menuchoice = menuchoice.rstrip()  # Strips whitespaces at the end.
+    menuchoice = menuchoice.strip()  # Strips whitespaces
 
     if re.search(r"^[y][es]*$", menuchoice, flags=re.IGNORECASE):
         return True
@@ -225,9 +225,7 @@ def ask_for_input():
         submenu_timeline_input()
         show_main_menu()
     elif menuchoice == "3":
-        lat = 0
-        long = 0
-        logiccontroller.gen_suncalc(lat, long)
+        logiccontroller.gen_suncalc(0, 0)
         show_main_menu()
     elif menuchoice == "4":
         submenu_suncalc_show()
@@ -251,18 +249,18 @@ def ask_for_input():
                     # TODO: RealityError?
                     raise TypeError
         show_main_menu()
-    elif menuchoice == "9" or menuchoice == "S" or menuchoice == "s" or menuchoice == "setting" or menuchoice == "settings":
+    elif menuchoice in ("9", "S", "s", "setting", "settings"):
         settings.settings_user_interface (header=True)
         show_main_menu()
-    elif menuchoice == '0' or menuchoice == 'X' or menuchoice == "x" or menuchoice == "exit":
+    elif menuchoice in ("0", "X", "x", "exit"):
         show_exit_dialog = settings.exit_dialog()
         if show_exit_dialog is False:
             sys.exit()
         else:
-            do_we_exit = dialogexit.exit()  # dialogexit.exit() should either return False or close the program itself
+            do_we_exit = dialogexit.exit_rosevomit()  # dialogexit.exit_rosevomit() should either return False or close the program itself
             if do_we_exit is False:
                 show_main_menu()
-    elif menuchoice == "help" or menuchoice == "'help'" or menuchoice == "h" or menuchoice == "H" or menuchoice == "helf":
+    elif menuchoice in ("help", "HELP", "'help'", "h", "H", "helf", "HELF"):
         show_main_menu()
     elif menuchoice == "":
         ask_for_input()

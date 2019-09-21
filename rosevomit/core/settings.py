@@ -47,7 +47,7 @@ def restore_file():
         "startup_dialog": "on",
         "logging_service": "off"}
     config["directories"] = {}
-    config["exit behavior"] = {"exit_dialog": "on"}
+    config["exit behavior"] = {"exit_dialog": "off"}
     # Creating the file
     with open(SETTINGS_FILE, "w+") as newfile:
         # Writing header comment
@@ -141,7 +141,7 @@ def _prompt_for_option_name (ARG_config_object, ARG_section: str) -> str:
 
 def _prompt_for_new_value (ARG_section: str, ARG_option: str) -> str:
     """Prompts the user to enter a new value.
-    
+
     Unlike the other '_prompt_ functions, we don't need an argument for the ConfigParser object becasuse we aren't using using any of its validation methods."""
     print ()
     print (f"SELECTED SECTION: {ARG_section}, SELECTED OPTION: {ARG_option}")
@@ -191,7 +191,7 @@ def settings_user_interface (header: bool=True):
     config.read_file(settings)
 
     settings_sections: list = config.sections()
-    if len (settings_sections) < 1:
+    if not settings_sections:  # Empty lists/sequences evaluate to False in Python, and this is the PEP8-recommended way to check if a sequence is empty.
         print (textwrap.fill ("WARNING: The setting file appears to be blank. Please close Rosevomit and restart it - Rosevomit should detect a corrupted settings file and offer to restore the settings file to its default state."))
         input ()
         return
@@ -204,13 +204,13 @@ def settings_user_interface (header: bool=True):
             print ()
             print (f"  {section}")
             options = config.items (section)
-            if len (options) >= 1:
+            if not options:
+                print (f"    (no options in this section)")
+            else:
                 for item in options:
                     key = item[0]
                     value = item[1]
                     print (f"    {key}: {value}")
-            else:
-                print (f"    (no options in this section)")
     print ()
 
     do_we_change_settings: bool = prompt_to_change_settings()

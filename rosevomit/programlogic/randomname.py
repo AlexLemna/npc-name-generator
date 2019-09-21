@@ -20,7 +20,7 @@ def one_file (file1):
         contents = fileData.readlines()
         contents = [item.rstrip() for item in contents]  # strips newline characters ('\n') and spaces
         if __name__ != "__main__":
-            return (random.choice (contents))
+            return random.choice (contents)
         else:
             print (random.choice (contents))
 
@@ -38,8 +38,9 @@ def two_files (file1, file2):
     contents2 = [item.rstrip() for item in contents2]
     fileData2.close()
     contents = contents1 + contents2
-    return (random.choice (contents))
+    return random.choice (contents)
 
 
 if __name__ == "__main__":
+    # TODO: Move to devtests
     one_file("SampleData.txt")

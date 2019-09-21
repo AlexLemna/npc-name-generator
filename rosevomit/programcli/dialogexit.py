@@ -64,7 +64,7 @@ def cleanup_and_exit():
 
 
 ### ...AND THE BIG MAIN FUNCTION
-def exit(headless=False):
+def exit_rosevomit(headless=False):
     assert type(headless) is bool
     if headless is False:
         exit_menu()
@@ -85,14 +85,14 @@ def exit(headless=False):
             sys.exit(0)
         elif _input is "3":
             tempfiles.view()
-            exit(headless=False)
+            exit_rosevomit(headless=False)
         elif _input is "4":
             return
         else:
             print (textwrap.fill (f"Sorry, {_input} isn't a recognized command here.", width=70))
             print()
-            exit(headless=False)  # Return to main exit menu, displayed fully
+            exit_rosevomit(headless=False)  # Return to main exit menu, displayed fully
     else:
         print (textwrap.fill (f"Sorry, {_input} isn't a recognized command here.", width=70))
         print()
-        exit(headless=True)  # Return to main exit menu without displaying the full menu options
+        exit_rosevomit(headless=True)  # Return to main exit menu without displaying the full menu options

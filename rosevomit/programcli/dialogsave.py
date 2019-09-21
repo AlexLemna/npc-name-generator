@@ -1,7 +1,6 @@
 import os
 import pathlib
 import re
-import sys
 
 try:
     import textstuff

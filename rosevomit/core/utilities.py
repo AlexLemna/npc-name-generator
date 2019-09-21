@@ -18,6 +18,7 @@ def CWD_home():
 
 
 def debugmessage(debugstring: str, **kwargs):
+    """If debugging is on, print 'debugstring'. Otherwise, do nothing."""
     try:
         is_debugging_on: bool = settings.startup_dialog()
     except (NoSectionError, NoOptionError):
@@ -30,6 +31,7 @@ def debugmessage(debugstring: str, **kwargs):
 
 
 def validate_range (x, startvalue, endvalue, raiseEx: bool=True):
+    """Check to see if 'x' is between 'startvalue' and 'endvalue' (inclusive)."""
     if type(raiseEx) is not bool: raise TypeError
     valid_types = [int, float, Decimal]
     arguments = [x, startvalue, endvalue]
@@ -50,6 +52,7 @@ def validate_range (x, startvalue, endvalue, raiseEx: bool=True):
 
 
 def validate_type (x, *args, raiseEx: bool=True):
+    """Conducts type checks."""
     if type(raiseEx) is not bool: raise TypeError
     if raiseEx is True:
         if type(x) in args:
@@ -64,6 +67,7 @@ def validate_type (x, *args, raiseEx: bool=True):
 
 
 def repeat (x, y):
+    """Repeats x() 'y' times."""
     for integer in range (0, y):
         x()
 
@@ -82,89 +86,107 @@ def setname(ARG_basename, ARG_fileextension: str="txt"):
 #                               MATH
 # ======================================================================
 def deg2rad(x):
+    """Converts degrees to radians."""
     return radians(x)
 
 
 def rad2deg(x):
+    """Converts radians to degrees."""
     return degrees(x)
 
 
 class angle(Decimal):
+    """An angle, measured in degrees."""
     def __init__(self, deg):
         self._measure = Decimal(angle_sanity_check(Decimal(deg)))
-    
+
     def add(self, x):
+        """Add 'x' to the angle. 'x' should be measured in degrees."""
         x = Decimal(f"{x}")
         _measure = self._measure
         _newmeasure = x + _measure
         self._measure = Decimal(angle_sanity_check(_newmeasure))
-    
+
     @property
     def indegrees(self):
+        """Returns the value of the angle in degrees."""
         return self._measure
-    
+
     @property
     def inradians(self):
+        """Returns the value of the angle in radians."""
         return Decimal(radians(self._measure))
 
     @property
     def sin_indegrees(self):
+        """Returns the value of the sine of the angle in degrees."""
         x = Decimal(degrees(Decimal(sin(Decimal(radians(self._measure))))))
         return x
 
     @property
     def cos_indegrees(self):
+        """Returns the value of the cosine of the angle in degrees."""
         x = Decimal(degrees(Decimal(cos(Decimal(radians(self._measure))))))
         return x
-    
+
     @property
     def tan_indegrees(self):
+        """Returns the value of the tangent of the angle in degrees."""
         x = Decimal(degrees(Decimal(tan(Decimal(radians(self._measure))))))
         return x
-    
+
     @property
     def asin_indegrees(self):
+        """Returns the value of the arcsine (the inverse of the sine) of the angle in degrees."""
         x = Decimal(degrees(Decimal(asin(Decimal(radians(self._measure))))))
         return x
 
     @property
     def acos_indegrees(self):
+        """Returns the value of the arccosine (the inverse of the cosine) of the angle in degrees."""
         x = Decimal(degrees(Decimal(acos(Decimal(radians(self._measure))))))
         return x
-    
+
     @property
     def atan_indegrees(self, y):
+        """Returns the value of the arctangent (the inverse of the tangent) of the angle in degrees."""
         y = Decimal(y)
         x = Decimal(degrees(Decimal(atan2(Decimal(radians(self._measure), Decimal(radians(y)))))))
         return x
-    
+
     @property
     def sin_inradians(self):
+        """Returns the value of the sine of the angle in radians."""
         x = Decimal(sin(Decimal(radians(self._measure))))
         return x
 
     @property
     def cos_inradians(self):
+        """Returns the value of the cosine of the angle in radians."""
         x = Decimal(cos(Decimal(radians(self._measure))))
         return x
-    
+
     @property
     def tan_inradians(self):
+        """Returns the value of the tangent of the angle in radians."""
         x = Decimal(tan(Decimal(radians(self._measure))))
         return x
-    
+
     @property
     def asin_inradians(self):
+        """Returns the value of the arcsine (the inverse of the sine) of the angle in radians."""
         x = Decimal(asin(Decimal(radians(self._measure))))
         return x
 
     @property
     def acos_inradians(self):
+        """Returns the value of the arccosine (the inverse of the cosine) of the angle in radians."""
         x = Decimal(acos(Decimal(radians(self._measure))))
         return x
-    
+
     @property
     def atan_inradians(self, y):
+        """Returns the value of the arctangent (the inverse of the tangent) of the angle in radians."""
         y = Decimal(y)
         x = Decimal(atan2(Decimal(radians(self._measure), Decimal(radians(y)))))
         return x

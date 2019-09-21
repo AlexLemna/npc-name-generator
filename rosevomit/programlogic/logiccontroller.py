@@ -129,4 +129,3 @@ def gen_suncalc (lat, long):
     else:
         # RealityError candidate
         raise TypeError
-
