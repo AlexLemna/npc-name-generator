@@ -5,7 +5,7 @@ import unittest
 
 # Import Rosevomit for testing
 from context import rosevomit
-from rosevomit import programlogic
+from rosevomit import core, programlogic
 
 # ---------- Helper functions ----------
 def test_string_generation (testcaseself, keyword: str):
@@ -40,6 +40,37 @@ def validate_string_cleaning (testcaseself, target_string: str):
 
 
 # ---------- Unit tests ----------
+class ConstantTests (unittest.TestCase):
+    """Testing the values of constants from rosevomit.core.constants"""
+    def test_obvious (self):
+        """Testing that I know how to write a test."""
+        self.assertTrue (rosevomit.core.constants.SEE_ROSA_RUN)
+
+    def test_constant_types (self):
+        """Are the constants of the correct type?"""
+        self.assertIsInstance (rosevomit.core.constants.SEE_ROSA_RUN, bool)
+        self.assertIsInstance (rosevomit.core.constants.CLI_DIRECTORY_NAME, str)
+        self.assertIsInstance (rosevomit.core.constants.LOGIC_DIRECTORY_NAME, str)
+        self.assertIsInstance (rosevomit.core.constants.DATA_DIRECTORY_NAME, str)
+        self.assertIsInstance (rosevomit.core.constants.TEMP_DIRECTORY_NAME, str)
+        self.assertIsInstance (rosevomit.core.constants.SAVE_DIRECTORY_NAME, str)
+        self.assertIsInstance (rosevomit.core.constants.REGEXES_YES, list)
+        self.assertIsInstance (rosevomit.core.constants.REGEXES_NO, list)
+        self.assertIsInstance (rosevomit.core.constants.REGEXES_OPT, list)
+
+    def test_constants_not_empty (self):
+        """Are the constants empty?"""
+        # In Python, empty sequences return as False and non-empty sequences return as True
+        self.assertTrue (rosevomit.core.constants.CLI_DIRECTORY_NAME)
+        self.assertTrue (rosevomit.core.constants.LOGIC_DIRECTORY_NAME)
+        self.assertTrue (rosevomit.core.constants.DATA_DIRECTORY_NAME)
+        self.assertTrue (rosevomit.core.constants.TEMP_DIRECTORY_NAME)
+        self.assertTrue (rosevomit.core.constants.SAVE_DIRECTORY_NAME)
+        self.assertTrue (rosevomit.core.constants.REGEXES_YES)
+        self.assertTrue (rosevomit.core.constants.REGEXES_NO)
+        self.assertTrue (rosevomit.core.constants.REGEXES_OPT)
+
+
 class LowLevelTests (unittest.TestCase):
     """Testing various low level functions in Rosevomit."""
     def test_func_one_file (self):
@@ -49,13 +80,35 @@ class LowLevelTests (unittest.TestCase):
         self.assertIsInstance (result, str)
         validate_string_cleaning (self, result)
 
-
     def test_func_two_files (self):
         """Does two_files() return a string without newlines and spaces?"""
         result = rosevomit.programlogic.randomname.two_files ("SampleData.txt", "SampleData2.txt")
         # Checking that it returns a string
         self.assertIsInstance (result, str)
         validate_string_cleaning (self, result)
+
+
+class UtilityTests (unittest.TestCase):
+    """Testing various functions from the utilities module."""
+    def test_angle_sanity_check_int (self):
+        """Do we ever get angles larger than 360 degrees? (integer version)"""
+        test_integers = []
+        while len (test_integers) < 50:
+            random_integer = random.randint (-1000000, 1000000)
+            test_integers.append (random_integer)
+        for item in test_integers:
+            result = rosevomit.core.utilities.angle_sanity_check (item)
+            self.assertTrue (0 <= result < 360)
+
+    def test_angle_sanity_check_float (self):
+        """Do we ever get angles larger than 360 degrees? (float version)"""
+        test_floats = []
+        while len (test_floats) < 50:
+            random_float = random.uniform (-1000000, 1000000)
+            test_floats.append (random_float)
+        for item in test_floats:
+            result = rosevomit.core.utilities.angle_sanity_check (item)
+            self.assertTrue (0 <= result < 360)
 
 
 class NameGenerationTests (unittest.TestCase):
