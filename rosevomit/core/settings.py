@@ -1,5 +1,5 @@
 # pylint: disable=global-statement
-
+"""This file checks handles interactions with the program settings. The program settings are *not* stored in this file, however - they are stored in settings-data.ini."""
 import configparser
 import os
 import textwrap
@@ -111,7 +111,7 @@ def _prompt_for_section_name (ARG_config_object) -> str:
     _input = input ("leave blank to exit: ")
     _input = _input.strip()
     if _input == "":
-        return
+        return None
     section_name = _input.lower()
     if ARG_config_object.has_section (section_name) is False:
         print (f"Sorry, {section_name} is not a valid section name.")
@@ -129,7 +129,7 @@ def _prompt_for_option_name (ARG_config_object, ARG_section: str) -> str:
     _input = input ("leave blank to exit: ")
     _input = _input.strip()
     if _input == "":
-        return
+        return None
     option_name = _input.lower()
     if ARG_config_object.has_option (ARG_section, option_name) is False:
         print (f"Sorry, {option_name} is not a valid option name.")
@@ -148,7 +148,7 @@ def _prompt_for_new_value (ARG_section: str, ARG_option: str) -> str:
     _input = input ("Type the desired new value, or leave blank to exit: ")
     _input = _input.strip()
     if _input == "":
-        return
+        return None
     else:
         new_value = _input
         return new_value
@@ -195,30 +195,27 @@ def settings_user_interface (header: bool=True):
         print (textwrap.fill ("WARNING: The setting file appears to be blank. Please close Rosevomit and restart it - Rosevomit should detect a corrupted settings file and offer to restore the settings file to its default state."))
         input ()
         return
-    else:
-        print ("The current settings are listed below in the format")
-        print ("  'SECTION'")
-        print ("    'OPTION': 'VALUE'")
+    print ("The current settings are listed below in the format")
+    print ("  'SECTION'")
+    print ("    'OPTION': 'VALUE'")
+    print ()
+    for section in settings_sections:
         print ()
-        for section in settings_sections:
-            print ()
-            print (f"  {section}")
-            options = config.items (section)
-            if not options:
-                print (f"    (no options in this section)")
-            else:
-                for item in options:
-                    key = item[0]
-                    value = item[1]
-                    print (f"    {key}: {value}")
+        print (f"  {section}")
+        options = config.items (section)
+        if not options:
+            print (f"    (no options in this section)")
+        else:
+            for item in options:
+                key = item[0]
+                value = item[1]
+                print (f"    {key}: {value}")
     print ()
 
     do_we_change_settings: bool = prompt_to_change_settings()
+    assert isinstance (do_we_change_settings, bool)
     if do_we_change_settings is True:
         dialog_change_setting ()
         settings_user_interface (header=False)
-    elif do_we_change_settings is False:
-        return  # return to whatever menu/function called this function
     else:
-        # TODO: RealityError candidate?
-        raise TypeError
+        return  # return to whatever menu/function called this function

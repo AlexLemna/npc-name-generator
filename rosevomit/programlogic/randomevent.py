@@ -14,7 +14,7 @@ def check_volcano(in_year, csv_destination=""):
         _write_to_file = True
     else:
         _write_to_file = False
-    if type (in_year) is not int:
+    if isinstance (in_year, int) is False:
         in_year = -1
 
     _list = []
@@ -43,7 +43,7 @@ def check_earthquake(in_year, csv_destination=""):
         _write_to_file = True
     else:
         _write_to_file = False
-    if type (in_year) is not int:
+    if isinstance (in_year, int) is False:
         in_year = -1
 
     _list = []
@@ -66,7 +66,7 @@ def check_impact(in_year, csv_destination=""):
         _write_to_file = True
     else:
         _write_to_file = False
-    if type (in_year) is not int:
+    if isinstance (in_year, int) is False:
         in_year = -1
 
     _list = []
@@ -133,7 +133,7 @@ def check_astronomy(in_year, csv_destination=""):
         _write_to_file = True
     else:
         _write_to_file = False
-    if type (in_year) is not int:
+    if isinstance (in_year, int) is False:
         in_year = -1
 
     _list = []

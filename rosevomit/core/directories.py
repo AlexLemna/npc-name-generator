@@ -47,14 +47,14 @@ def get_dir(ARG_dirname: str):
     elif "REPO_DIR" in locals():  # exists
         os.chdir (REPO_DIR)
         possible_paths = glob.glob (f"*/{ARG_dirname}", recursive=True)
-        if len(possible_paths) is 1:
+        num_possible_paths = len (possible_paths)
+        if num_possible_paths == 1:
             os.chdir (possible_paths[0])
-        elif len (possible_paths) is 0:
+        elif num_possible_paths (possible_paths) == 0:
             raise FileNotFoundError
         else:
             # If multiple paths are returned, something has gone wrong and we need to stop.
-            # TODO: Check if this is the proper exception to raise.
-            raise KeyError
+            raise ValueError
     else:
         # this should definitely 100% never happen
         # TODO: Possible 'RealityError' candidate?

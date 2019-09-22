@@ -1,5 +1,6 @@
 # rosevomit/core/Utilities.py
 # For those little code snippets that don't make sense going anywhere else.
+"""For those little code snippets that don't make sense going anywhere else."""
 from configparser import NoOptionError, NoSectionError
 from decimal import Decimal
 from math import degrees, radians, sin, cos, tan, asin, acos, atan2
@@ -32,13 +33,13 @@ def debugmessage(debugstring: str, **kwargs):
 
 def validate_range (x, startvalue, endvalue, raiseEx: bool=True):
     """Check to see if 'x' is between 'startvalue' and 'endvalue' (inclusive)."""
-    if type(raiseEx) is not bool: raise TypeError
-    valid_types = [int, float, Decimal]
+    assert isinstance (raiseEx, bool)
     arguments = [x, startvalue, endvalue]
     for arg in arguments:
-        if type(arg) not in valid_types: raise TypeError
+        assert isinstance (arg, (int, float, Decimal))
         # We can't compare floats and Decimals directly, so we need to convert to one or the other. Because Decimals are more accurate, we'll convert the floats to Decimals. If we need speed, we'll convert the Decimals to floats instead.
-        if type(arg) is float: arg = Decimal(arg)
+        if isinstance(arg, float):
+            arg = Decimal(arg)
     if raiseEx is True:
         if startvalue <= x <= endvalue:
             pass
@@ -46,21 +47,6 @@ def validate_range (x, startvalue, endvalue, raiseEx: bool=True):
             raise ValueError
     else:
         if startvalue <= x <= endvalue:
-            return True
-        else:
-            return False
-
-
-def validate_type (x, *args, raiseEx: bool=True):
-    """Conducts type checks."""
-    if type(raiseEx) is not bool: raise TypeError
-    if raiseEx is True:
-        if type(x) in args:
-            pass
-        else:
-            raise TypeError
-    else:
-        if type(x) in args:
             return True
         else:
             return False
@@ -95,7 +81,7 @@ def rad2deg(x):
     return degrees(x)
 
 
-class angle(Decimal):
+class Angle(Decimal):
     """An angle, measured in degrees."""
     def __init__(self, deg):
         self._measure = Decimal(angle_sanity_check(Decimal(deg)))
@@ -195,13 +181,12 @@ class angle(Decimal):
 def angle_sanity_check (ARG_angle_value):
     """Ensures that a given angle is between 0 and 360 degrees. If the angle is not within that range, it converts it into that range and returns the corrected angle measurement."""
     # First, we need to prevent some floating point messiness by using the decimal module, otherwise we get results like "-750.8 + 360 = -390.79999999999995", which is obviously ever-so-slightly off. Now, we COULD just admit that this is a tiny error that won't be meaningful for our program and automatically round our results to an acceptable level of precision before this function returns the result, but... I'm new to programming, so I still have the energy and inexperience required to be offended by binary floating-point.
-    valid_types_for_Decimal_class = [Decimal, str, int, tuple]
-    if type (ARG_angle_value) in valid_types_for_Decimal_class:
+    if isinstance (ARG_angle_value, (Decimal, str, int, tuple)):
         angle_value = Decimal (ARG_angle_value)
     # The official documentation for the Decimal module suggests that float is *not* a valid type to be directly converted into Decimal object, but the FAQ shows examples that seem to contradict this. Additionally, the code in this elif clause seems to work, so... I guess that suggests that the FAQ is correct, and float *is* a valid type? I dunno.
     # See here: https://docs.python.org/3.7/library/decimal.html#decimal-faq
     # This comment was written while using Python 3.7.4. Future releases may clarify/fix this confusion, in which case this elif clause can be removed. (It's also possible that I'm just missing something obvious and it's not a Python problem.)
-    elif type (ARG_angle_value) is float:
+    elif isinstance (ARG_angle_value, float):
         angle_value = Decimal (ARG_angle_value)
     else:
         angle_value = Decimal (str(ARG_angle_value))

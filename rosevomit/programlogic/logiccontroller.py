@@ -122,10 +122,8 @@ def gen_suncalc (lat, long):
         os.chdir ("..")
         os.chdir ("./rosevomit/temp/")
     do_we_save, filename = dialogsave.proactive()
+    assert isinstance (do_we_save, bool)
     if do_we_save is False:
         suncalc.main(lat, long)
-    elif do_we_save is True:
+    if do_we_save is True:
         suncalc.main(lat, long, ARG_output_directory="saved", ARG_output_file=filename)
-    else:
-        # RealityError candidate
-        raise TypeError

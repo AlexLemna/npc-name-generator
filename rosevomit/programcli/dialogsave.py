@@ -1,6 +1,7 @@
 import os
 import pathlib
 import re
+import typing
 
 try:
     import textstuff
@@ -34,17 +35,14 @@ def proactive(ARG_defaultname: str="file"):
 
     # TODO: Move "setname" from here to suncalc.main
     _default_name = ut.setname(ARG_defaultname)
+    assert isinstance (savebool, bool)
     if savebool is True:
         _input = textstuff.inputwrap (f"Do you want to save this file as {_default_name}? Leave blank to accept this name, or enter a name of your choice. You don't need to enter the file extension: ")
         _input = _input.strip()  # Strips all leading or trailing whitespaces
         filename = f"{_input}"
-        return savebool, filename
-    elif savebool is False:
-        filename = _default_name
-        return savebool, filename
     else:
-        # TODO: RealityError candidate?
-        raise TypeError
+        filename = _default_name
+    return savebool, filename
 
 
 def reactive(ARG_defaultname: str="file", ARG_fileformat: str="txt"):
@@ -68,7 +66,10 @@ def reactive(ARG_defaultname: str="file", ARG_fileformat: str="txt"):
 
     # TODO: Fix "setname" so that it checks for the file extensions during the setname function itself.
     _default_name = ut.setname(ARG_defaultname, ARG_fileformat)
-    if _savebool is True:
+    assert isinstance (_savebool, bool)
+    if _savebool is False:
+        return files_to_save
+    else:
         with pathlib.Path.cwd() as cwd:
             p = pathlib.PurePath (cwd)
         if p.parts[-1] is not "temp":
@@ -92,14 +93,9 @@ def reactive(ARG_defaultname: str="file", ARG_fileformat: str="txt"):
                     print()
                     reactive(ARG_defaultname, ARG_fileformat)
             return files_to_save
-    elif _savebool is False:
-        return files_to_save
-    else:
-        # TODO: RealityError candidate?
-        raise TypeError
 
 
-def filealreadyexists(ARG_filename):
+def filealreadyexists(ARG_filename) -> typing.Union[str, bool]:
     textstuff.printwrap (f"A file with the filename 'saved/{ARG_filename}' already exists. What should we do with the temporary file 'temp/{ARG_filename}'?")
     textstuff.printwrap (f"    2. Overwrite the old 'saved/{ARG_filename}' using 'temp/{ARG_filename}'")
     textstuff.printwrap (f"    1. Keep the old 'saved/{ARG_filename}' and delete 'temp/{ARG_filename}'")

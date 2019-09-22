@@ -33,6 +33,7 @@ if PYLINT_AVAILABLE is True:
     available_tests.append ("pylint")
 tests_to_run: list = testmiscstuff.choose_prompt (available_tests)
 num_tests_to_run = len (tests_to_run)
+assert num_tests_to_run >= 0
 if num_tests_to_run == 0:
     print ("No tests selected. Exiting now.")
     sys.exit()
@@ -92,14 +93,13 @@ print ()
 if "sanity" in tests_to_run:
     print ("Running sanity tests... ", end="")
     sanity_finish: bool = testmain.sanity (ARG_test_directory=TESTLOG_DIR)
+    assert isinstance (sanity_finish, bool)
     if sanity_finish is True:
         successful_tests.append ("sanity")
         print ("done.")
-    elif sanity_finish is False:
+    else:
         failed_tests.append ("sanity")
         print ("error.")
-    else:
-        raise TypeError  # TODO: RealityError candidate
 
 # Running performance tests...
 if "performance" in tests_to_run:
@@ -116,40 +116,37 @@ else:
 if "imports" in tests_to_run:
     print ("Generating import list... ", end="")
     imports_finish: bool = testmain.imports (ARG_test_directory=TESTLOG_DIR, ARG_rosevomit_directory=ROSEVOMIT_DIR)
+    assert isinstance (imports_finish, bool)
     if imports_finish is True:
         successful_tests.append ("imports")
         print ("done.")
-    elif imports_finish is False:
+    else:
         failed_tests.append ("imports")
         print ("error.")
-    else:
-        raise TypeError  # TODO: RealityError candidate
 
 # Generating unused imports list...
 if "unused imports" in tests_to_run:
     print ("Generating unused import list... ", end="")
     unusedimports_finish: bool = testmain.unused_imports (ARG_test_directory=TESTLOG_DIR, ARG_rosevomit_directory=ROSEVOMIT_DIR)
+    assert isinstance (unusedimports_finish, bool)
     if unusedimports_finish is True:
         successful_tests.append ("unused imports")
         print ("done.")
-    elif unusedimports_finish is False:
+    else:
         failed_tests.append ("unused imports")
         print ("error.")
-    else:
-        raise TypeError  # TODO: RealityError candidate
 
 # Running pylint tests...
 if "pylint" in tests_to_run:
     print ("Running pylint... ", end="")
     pylint_finish: bool = testmain.pylint (ARG_test_directory=TESTLOG_DIR, ARG_repository_directory=REPO_DIR)
+    assert isinstance (pylint_finish, bool)
     if pylint_finish is True:
         successful_tests.append ("pylint")
         print ("done.")
-    elif pylint_finish is False:
+    else:
         failed_tests.append ("pylint")
         print ("error.")
-    else:
-        raise TypeError  # TODO: RealityError candidate
 
 t1 = time.perf_counter()
 time_elapsed = t1 - t0
@@ -214,14 +211,16 @@ with open(DATESTRING_SHORT + ".summary.txt", "w+") as f:
     else:  # If the tests took less than a minute, we don't need to show the conversion from seconds to minutes
         print (f"Time to run tests: {display_testtime} seconds")
     print ()
-    print (f"All tests: {len (ALL_TESTS)}")
-    if len (ALL_TESTS) > 0:
+    num_all_tests = len (ALL_TESTS)
+    print (f"All tests: {num_all_tests}")
+    if num_all_tests > 0:
         print (textwrap.fill (f"  {ALL_TESTS}"))
-    print (f"Available tests: {len (available_tests)}")
-    if len (available_tests) > 0:
+    num_available_tests = len (available_tests)
+    print (f"Available tests: {num_available_tests}")
+    if num_available_tests > 0:
         print (textwrap.fill (f"  {available_tests}"))
-    print (f"Tests selected to run: {len (tests_to_run)}")
-    if len (tests_to_run) > 0:
+    print (f"Tests selected to run: {num_tests_to_run}")
+    if num_tests_to_run > 0:
         print (textwrap.fill (f"  {tests_to_run}"))
 
     # SANITY TEST SUMMARY

@@ -4,6 +4,7 @@
 # A UI module for Alex's "Project Rosevomit" that contains functions for displaying menus beyond Rosevomits's main menu, and for processing the inputs for those menus.
 import re
 import sys
+import typing
 
 from programcli import dialogexit, dialogsave
 from core import settings, tempfiles
@@ -238,26 +239,26 @@ def ask_for_input():
             try:
                 tempfiles.save (file)
             except FileExistsError:
-                _input = dialogsave.filealreadyexists(file)
-                if type (_input) is str:
+                _input: typing.Union[str, bool] = dialogsave.filealreadyexists(file)
+                assert isinstance (_input, (str, bool))
+                if isinstance (_input, str):
                     tempfiles.save (_input)
                 elif _input is True:
                     pass
                 elif _input is False:
                     tempfiles.save (_input, ARG_overwrite=True)
-                else:
-                    # TODO: RealityError?
-                    raise TypeError
         show_main_menu()
     elif menuchoice in ("9", "S", "s", "setting", "settings"):
         settings.settings_user_interface (header=True)
         show_main_menu()
     elif menuchoice in ("0", "X", "x", "exit"):
         show_exit_dialog = settings.exit_dialog()
+        assert isinstance (show_exit_dialog, bool)
         if show_exit_dialog is False:
             sys.exit()
         else:
             do_we_exit = dialogexit.exit_rosevomit()  # dialogexit.exit_rosevomit() should either return False or close the program itself
+            assert isinstance (do_we_exit, bool)
             if do_we_exit is False:
                 show_main_menu()
     elif menuchoice in ("help", "HELP", "'help'", "h", "H", "helf", "HELF"):

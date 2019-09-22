@@ -12,11 +12,11 @@ from core.utilities import debugmessage
 from programcli.textstuff import printwrap
 
 
-def main_setup(homedir):
+def main_setup (ARG_homedir):
     """Contains setup instructions, and prints that info to terminal."""
     debugmessage ("Looking for UI, Logic, and Data directories...")
     missingdirectories = []
-    homedir = pathlib.Path(homedir)
+    homedir = pathlib.Path (ARG_homedir)
     cli_directory = homedir / 'programcli'
     logic_directory = homedir / 'programlogic'
     data_directory = homedir / 'programdata'

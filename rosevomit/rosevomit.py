@@ -2,7 +2,7 @@
 # ROSEVOMIT.PY
 # --------------------
 # The main file for Alex's "Project ROSEVOMIT", a random name generator  and random timeline generator written in Python.
-
+"""The main file for Alex's "Project ROSEVOMIT", a random name generator  and random timeline generator written in Python."""
 import os
 import sys
 import textwrap
@@ -42,9 +42,9 @@ worsecli.show_main_menu()
 while SEE_ROSA_RUN is True:
     try:
         worsecli.ask_for_input()
-    except Exception as e:
-        print (e)
+    except Exception as problem:  # pylint: disable=broad-except
+        print (problem)
         print ()
-        print (e.__traceback__)
+        print (problem.__traceback__)
         input()
 sys.exit(1)

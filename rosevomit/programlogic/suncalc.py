@@ -9,7 +9,7 @@ import os
 import time
 
 from core import directories
-from core.utilities import angle, deg2rad, rad2deg, validate_type, angle_sanity_check
+from core.utilities import Angle, deg2rad, rad2deg, angle_sanity_check
 from programlogic import antikythera_time
 
 # defaults
@@ -102,33 +102,33 @@ def sun_alt_az (fractionalday, latitude, longitude):
     """Expects latitude and longitude in degrees.
     """
     global AXIAL_TILT
-    latitude = angle(latitude)
-    longitude = angle(longitude)
-    ϵ = angle(f"{AXIAL_TILT}")
+    latitude = Angle(latitude)
+    longitude = Angle(longitude)
+    ϵ = Angle(f"{AXIAL_TILT}")
     julianday = Decimal(f"{fractionalday}") - Decimal("0.5")
 
     # first, we need to calculate the position of the sun in the ecliptic coordinate system
         # Mean longitude is the ecliptic longitude that an orbiting body could be found at, if its orbit were circular and free of perturbations. Because our orbit actually *is*, our mean longitude actually *does* equal the ecliptic longitude.
         # In a circular orbit, mean longitude = ecliptic longitude.
         # In a circular orbit with 0 inclination, mean anomaly = mean longitude = ecliptic longitude
-    ecliptic_longitude = angle(julianday * Decimal(f"{360 / 365}"))
+    ecliptic_longitude = Angle(julianday * Decimal(f"{360 / 365}"))
     λ = ecliptic_longitude
-    ecliptic_latitude = angle(Decimal('0'))
+    ecliptic_latitude = Angle(Decimal('0'))
     β = ecliptic_latitude
 
     # next, we need to convert the ecliptic coordinates into equitorial coordinates
         # ra and declination
     right_ascension = Decimal(atan2 (ϵ.cos_inradians * λ.sin_inradians, λ.cos_inradians))
     declination = Decimal(asin (ϵ.sin_inradians * λ.sin_inradians))
-    right_ascension = angle(rad2deg(right_ascension))
-    declination = angle(rad2deg(declination))
+    right_ascension = Angle(rad2deg(right_ascension))
+    declination = Angle(rad2deg(declination))
     α = right_ascension
     δ = declination
         # hour angle
     ara = antikythera_rotation_angle (fractionalday)
-    ara = angle(ara)
+    ara = Angle(ara)
     hour_angle = (ara.inradians + Decimal(pi)) + latitude.inradians - α.inradians
-    h = angle(rad2deg(hour_angle))
+    h = Angle(rad2deg(hour_angle))
 
     # finally, we need to convert the ecliptic coordinates into horizontal coordinates
         # azimuth
@@ -144,7 +144,7 @@ def sun_alt_az (fractionalday, latitude, longitude):
 
 
 def finalformatting_degrees (x):
-    validate_type (x, int, float, Decimal)
+    assert isinstance (x, (int, float, Decimal))
     _result = round(x, 2)
     if _result >= 0:
         _sign = "+"
@@ -164,10 +164,10 @@ def getsunrise_and_sunset(x):
     """Given a list of tuples in (timestamp: str, altitude: float) format, returns the timestamps of the local sunrise and sunset.
     """
     local_x = x.copy()
-    validate_type(local_x, list)
+    assert isinstance (local_x, list)
     # Get sunrise
     solar_alt_tuple = local_x.pop(0)
-    validate_type (solar_alt_tuple, tuple)
+    assert isinstance (solar_alt_tuple, tuple)
 
     sunrise_string = "No sunrise."
     sunset_string = "No sunset"
