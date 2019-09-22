@@ -12,35 +12,27 @@ except ImportError:  # for external unit testing
     from rosevomit.core import directories
 
 
-def one_file (file1):
+def one_file (file1) -> str:
     """A function that returns one random line from a text file 'x'"""
     data_dir = directories.get_dir("programdata")
     os.chdir (data_dir)
-    with open (file1, 'r') as fileData:
-        contents = fileData.readlines()
-        contents = [item.rstrip() for item in contents]  # strips newline characters ('\n') and spaces
-        if __name__ != "__main__":
-            return random.choice (contents)
-        else:
-            print (random.choice (contents))
+    with open (file1, 'r') as filedata:
+        contents = filedata.readlines()
+        contents = [item.strip() for item in contents]  # strips newline characters ('\n') and spaces
+        return random.choice (contents)
 
 
-def two_files (file1, file2):
+def two_files (file1, file2) -> str:
     """A function that returns one random line from a list generated from multiple text files 'x', 'y', and so on."""
     data_dir = directories.get_dir("programdata")
     os.chdir (data_dir)
-    fileData1 = open (file1, 'r')
-    contents1 = fileData1.readlines()
-    contents1 = [item.rstrip() for item in contents1]  # strips newline characters ('\n') and spaces
-    fileData1.close()
-    fileData2 = open (file2, 'r')
-    contents2 = fileData2.readlines()
-    contents2 = [item.rstrip() for item in contents2]
-    fileData2.close()
+    filedata1 = open (file1, 'r')
+    contents1 = filedata1.readlines()
+    contents1 = [item.strip() for item in contents1]  # strips newline characters ('\n') and spaces
+    filedata1.close()
+    filedata2 = open (file2, 'r')
+    contents2 = filedata2.readlines()
+    contents2 = [item.strip() for item in contents2]
+    filedata2.close()
     contents = contents1 + contents2
     return random.choice (contents)
-
-
-if __name__ == "__main__":
-    # TODO: Move to devtests
-    one_file("SampleData.txt")

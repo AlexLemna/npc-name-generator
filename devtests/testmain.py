@@ -47,7 +47,7 @@ def sanity(ARG_test_directory):
 
         try:
             testsuite = unittest.TestLoader().loadTestsFromModule(sanitytests)
-            unittest.TextTestRunner().run(testsuite)
+            unittest.TextTestRunner(verbosity=2).run(testsuite)
         except Exception:  # pylint: disable=broad-except
             messages.traceback_message()
             did_test_finish = False
