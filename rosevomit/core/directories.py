@@ -10,7 +10,7 @@ def get_cwd_name_only():
     return _path_split[-1]
 
 
-def get_dir(ARG_dirname: str):
+def get_dir(ARG_dirname: str) -> pathlib.Path:
     """Returns the path of subdirectory of the 'rosevomit' directory. This function should work anywhere within the 'rosevomit' module or the associated repository."""
     # Let's assume we don't know where this function is being called from or to, and we don't know what the exact directory structure is that we're navigating through. Generally, all we know is that (1) our program Rosevomit is contained in a directory named 'rosevomit', and (2) the 'rosevomit' directory plus whatever directories we've created for documentation/testing/general development purposes should be contained in a directory called 'rosevomitrepo'. We also know (3) the name of the directory (ARG_dirname) we're looking for, which should be somewhere within the 'rosevomit' directory.
     #
@@ -60,4 +60,6 @@ def get_dir(ARG_dirname: str):
         # TODO: Possible 'RealityError' candidate?
         raise FileNotFoundError
     _dirpath = pathlib.Path.cwd()
+    # Finally, return to where we started
+    os.chdir (_cwd)
     return _dirpath

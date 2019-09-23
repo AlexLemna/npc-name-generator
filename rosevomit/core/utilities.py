@@ -21,7 +21,7 @@ def CWD_home():
 def debugmessage(debugstring: str, **kwargs):
     """If debugging is on, print 'debugstring'. Otherwise, do nothing."""
     try:
-        is_debugging_on: bool = settings.startup_dialog()
+        is_debugging_on: bool = settings.show_debug()
     except (NoSectionError, NoOptionError):
         # TODO: When we add a logging module, this exception should definitely be logged.
         is_debugging_on = True

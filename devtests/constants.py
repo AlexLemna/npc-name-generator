@@ -1,6 +1,18 @@
 import datetime
 
-from testmain import FINDIMPORTS_MODULE_EXISTS, PYLINT_MODULE_EXISTS
+try:
+    import findimports
+except ImportError:
+    FINDIMPORTS_AVAILABLE = False
+else:
+    FINDIMPORTS_AVAILABLE = True
+
+try:
+    from pylint import lint as linter
+except ImportError:
+    PYLINT_AVAILABLE = False
+else:
+    PYLINT_AVAILABLE = True
 
 # Setting some constants that will be used in report headers, filenames, titles, etc.
 PROJECT_NAME = "Rosevomit"
@@ -15,6 +27,3 @@ ALL_TESTS: list = [
     "unused imports",
     "pylint"
 ]
-
-FINDIMPORTS_AVAILABLE: bool = FINDIMPORTS_MODULE_EXISTS
-PYLINT_AVAILABLE: bool = PYLINT_MODULE_EXISTS

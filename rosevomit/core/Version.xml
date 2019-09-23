@@ -10,6 +10,6 @@
   <patch>3</patch>
 </version>
 
-<released>False</released>
+<devbuild>True</devbuild>
 
 </data>

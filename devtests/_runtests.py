@@ -21,6 +21,7 @@ if __name__ != "__main__":
     sys.exit(1)
 
 # ---------------------MAIN PROGRAM BEGINS---------------------
+STARTING_DIRECTORY = pathlib.Path.cwd()
 # The program begins by asking the user to determine which tests should be run.
 available_tests = [
     "sanity",
@@ -39,17 +40,16 @@ if num_tests_to_run == 0:
     sys.exit()
 
 # Make sure our working directory is the /devtest directory (which this file should be in)
-starting_directory = pathlib.Path.cwd()
-if starting_directory.name == "devtests":
-    pass
-else:
+os.chdir (STARTING_DIRECTORY)
+if STARTING_DIRECTORY.name != "devtests":
     try:
         os.chdir("devtests")
     except FileNotFoundError as e:  # 'FileNotFoundError' works on directories, too
         print(e)
         traceback.format_exc()
         input ("Press enter to quit.")
-        sys.exit()
+        sys.exit(1)
+
 # Creating a 'testlog' directory (TESTLOG_DIR) where we'll store the test results
 testlogname = str(DATESTRING_SHORT + "-test")
 testlogname = testmiscstuff.make_name_unique (testlogname)

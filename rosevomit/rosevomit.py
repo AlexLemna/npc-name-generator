@@ -3,7 +3,6 @@
 # --------------------
 # The main file for Alex's "Project ROSEVOMIT", a random name generator  and random timeline generator written in Python.
 """The main file for Alex's "Project ROSEVOMIT", a random name generator  and random timeline generator written in Python."""
-import os
 import sys
 import textwrap
 
@@ -14,8 +13,6 @@ from programcli import worsecli
 
 print ()
 print ("Starting ROSEVOMIT.")
-
-HOME_DIRECTORY = os.path.dirname (sys.argv[0])
 
 if settings.existence() is False:
     print ("The settings don't exist. Recreating settings file at:")
@@ -29,7 +26,7 @@ elif settings.is_valid() is False:
 else:
     pass
 
-startup.main_setup(HOME_DIRECTORY)
+startup.main_setup()
 
 print ()
 print (69 * "-")

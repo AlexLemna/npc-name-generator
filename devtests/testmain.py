@@ -21,11 +21,13 @@ else:
 from constants import DATESTRING, DATESTRING_SHORT, PROJECT_NAME
 import formatting
 import messages
-from performancetests import timetest_name_generation
-import sanitytests
-import testmiscstuff
+_start_directory = os.getcwd()  # pylint: disable=invalid-name
+from performancetests import timetest_name_generation  # pylint: disable=wrong-import-position
+import sanitytests  # pylint: disable=wrong-import-position
+import testmiscstuff  # pylint: disable=wrong-import-position
 # Rosevomit itself
-from context import rosevomit
+from context import rosevomit  # pylint: disable=wrong-import-position
+os.chdir (_start_directory)
 
 # --------------------- SANITY TEST ---------------------
 def sanity(ARG_test_directory):

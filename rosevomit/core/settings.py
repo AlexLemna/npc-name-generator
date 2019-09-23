@@ -29,7 +29,7 @@ def existence() -> bool:
 def is_valid() -> bool:
     """Checks to see if the file specified as the 'SETTINGS_FILE' has certain expected options and values."""
     try:
-        startup_dialog()
+        show_debug()
         logging_service()
         exit_dialog()
     except configparser.Error:
@@ -44,7 +44,7 @@ def restore_file():
     config = configparser.ConfigParser()
     # Entering the default values we want to restore
     config["debugging"] = {
-        "startup_dialog": "on",
+        "show_debug": "off",
         "logging_service": "off"}
     config["directories"] = {}
     config["exit behavior"] = {"exit_dialog": "off"}
@@ -60,13 +60,13 @@ def restore_file():
 # ---------- (2) FUNCTIONS FOR READING SETTINGS ----------
 # These functions are used for reading the values of settings from the settings file, either for display to the user or for internal program use.
 # For developer readibility, these functions should be listed below in the same order that the values they read in the settings-data.ini file are listed.
-def startup_dialog() -> bool:
-    """Returns true or false based on the value of startup_dialog' in the 'settings-data.ini' file."""
+def show_debug() -> bool:
+    """Returns true or false based on the value of 'show_debug' in the 'settings-data.ini' file."""
     global SETTINGS_FILE
     settings = open(SETTINGS_FILE)
     config = configparser.ConfigParser()  # Create an instance of ConfigParser
     config.read_file(settings)
-    result: bool = config.getboolean(section="debugging", option="startup_dialog")
+    result: bool = config.getboolean (section="debugging", option="show_debug")
     return result
 
 
@@ -76,7 +76,7 @@ def logging_service() -> bool:
     settings = open(SETTINGS_FILE)
     config = configparser.ConfigParser()  # Create an instance of ConfigParser
     config.read_file(settings)
-    result: bool = config.getboolean(section="debugging", option="logging_service")
+    result: bool = config.getboolean (section="debugging", option="logging_service")
     return result
 
 
@@ -86,7 +86,7 @@ def exit_dialog() -> bool:
     settings = open(SETTINGS_FILE)
     config = configparser.ConfigParser()  # Create an instance of ConfigParser
     config.read_file(settings)
-    result: bool = config.getboolean(section="exit behavior", option="exit_dialog")
+    result: bool = config.getboolean (section="exit behavior", option="exit_dialog")
     return result
 
 # ---------- (3) HELPER FUNCTIONS FOR DISPLAYING SETTINGS DIALOG ----------
