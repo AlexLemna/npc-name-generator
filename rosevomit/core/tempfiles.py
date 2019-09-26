@@ -17,7 +17,7 @@ def delete():
     os.chdir ("./temp")
     with pathlib.Path.cwd() as cwd:
         p = pathlib.PurePath (cwd)
-        if p.parts[-1] is not "temp":
+        if p.parts[-1] != "temp":
             print ("POSSIBLE ERROR:")
             print (textwrap.fill ("We should have found Rosevomit's /temp firectory, but we seem to have gotten lost instead."))
             print ("CURRENT LOCATION:")
@@ -39,7 +39,7 @@ def view():
     os.chdir ("./temp")
     with pathlib.Path.cwd() as cwd:
         p = pathlib.PurePath (cwd)
-        if p.parts[-1] is not "temp":
+        if p.parts[-1] != "temp":
             print ("POSSIBLE ERROR:")
             print (textwrap.fill ("We should have found Rosevomit's /temp firectory, but we seem to have gotten lost instead."))
             print ("CURRENT LOCATION:")
@@ -59,7 +59,7 @@ def save(ARG_file, ARG_overwrite: bool=False, ARG_dialog: bool=True):
     os.chdir ("./temp")
     with pathlib.Path.cwd() as cwd:
         p = pathlib.PurePath (cwd)
-        if p.parts[-1] is not "temp":
+        if p.parts[-1] != "temp":
             print ("POSSIBLE ERROR:")
             print (textwrap.fill ("We should have found Rosevomit's /temp firectory, but we seem to have gotten lost instead."))
             print ("CURRENT LOCATION:")

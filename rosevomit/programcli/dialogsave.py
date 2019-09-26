@@ -9,14 +9,10 @@ import pathlib
 import re
 import typing
 
-try:
-    import textstuff
-except ImportError:
-    from programcli import textstuff
-
 import core.utilities as ut
 from core.constants import REGEXES_NO, REGEXES_YES
 from core import tempfiles
+from programcli import textstuff
 
 
 def proactive(ARG_defaultname: str="file"):
@@ -35,7 +31,7 @@ def proactive(ARG_defaultname: str="file"):
     elif _input in ("N", "n") or any(re.match(pattern, _input) for pattern in REGEXES_NO):
         savebool = False
     else:
-        textstuff.printwrap (f"Sorry, {_input} isn't a recognized command here.", width=70)
+        textstuff.printwrap (f"Sorry, {_input} isn't a recognized command here.")
         print()
         proactive(ARG_defaultname)
 
@@ -66,7 +62,7 @@ def reactive(ARG_defaultname: str="file", ARG_fileformat: str="txt"):
     elif _input in ("N", "n") or any(re.match(pattern, _input) for pattern in REGEXES_NO):
         _savebool = False
     else:
-        textstuff.printwrap (f"Sorry, {_input} isn't a recognized command here.", width=70)
+        textstuff.printwrap (f"Sorry, {_input} isn't a recognized command here.")
         print()
         reactive(ARG_defaultname, ARG_fileformat)
 
@@ -78,33 +74,40 @@ def reactive(ARG_defaultname: str="file", ARG_fileformat: str="txt"):
     else:
         with pathlib.Path.cwd() as cwd:
             p = pathlib.PurePath (cwd)
-        if p.parts[-1] is not "temp":
+        if p.parts[-1] != "temp":
             # TODO: Possible candidate for a custom exception? "Unexpected working directory?"
             raise FileNotFoundError
-        else:
-            num_of_items = len (os.listdir (cwd))
-            current_item_num = 1
-            for filename in os.listdir (cwd):
-                print ()
-                print (f"File {current_item_num} of {num_of_items}: {filename}")
-                _input = input (f"Save {filename}? Enter [y]es or no: ")
-                if _input in (None, "", "y", "Y") or any(re.match(pattern, _input) for pattern in REGEXES_YES):
-                    files_to_save.append(filename)
-                    current_item_num = current_item_num + 1
-                elif _input in ("N", "n") or any(re.match(pattern, _input) for pattern in REGEXES_NO):
-                    current_item_num = current_item_num + 1
-                else:
-                    # TODO: This is stupid. Fix this so we don't have to restart this whole thing. This may mean breaking this up into multiple functions.
-                    textstuff.printwrap (f"Sorry, {_input} isn't a recognized command here.", width=70)
-                    print()
-                    reactive(ARG_defaultname, ARG_fileformat)
-            return files_to_save
+        num_of_items = len (os.listdir (cwd))
+        current_item_num = 1
+        for filename in os.listdir (cwd):
+            print ()
+            print (f"File {current_item_num} of {num_of_items}: {filename}")
+            _input = input (f"Save {filename}? Enter [y]es or no: ")
+            if _input in (None, "", "y", "Y") or any(re.match(pattern, _input) for pattern in REGEXES_YES):
+                files_to_save.append(filename)
+                current_item_num = current_item_num + 1
+            elif _input in ("N", "n") or any(re.match(pattern, _input) for pattern in REGEXES_NO):
+                current_item_num = current_item_num + 1
+            else:
+                # TODO: This is stupid. Fix this so we don't have to restart this whole thing. This may mean breaking this up into multiple functions.
+                textstuff.printwrap (f"Sorry, {_input} isn't a recognized command here.")
+                print()
+                reactive(ARG_defaultname, ARG_fileformat)
+        return files_to_save
 
-
+# TODO: break the following function in to two functions - one where the user can decide if the exiting filw should be overwritten, and one to prompt the user for a new name.
 def filealreadyexists(ARG_filename) -> typing.Union[str, bool]:
+    """Use this function when the user tries to save data using a name that already exists.
+    Returns: 
+      (either)
+      save_as: A string that can be used as the new filename to save data under.
+      (or)
+      True: This function returns true if the user decides to keep the original file and delete the current data without saving it.
+      False: This function returns false if the user decides to overwrite the original file with the new data.
+    """
     textstuff.printwrap (f"A file with the filename 'saved/{ARG_filename}' already exists. What should we do with the temporary file 'temp/{ARG_filename}'?")
-    textstuff.printwrap (f"    2. Overwrite the old 'saved/{ARG_filename}' using 'temp/{ARG_filename}'")
-    textstuff.printwrap (f"    1. Keep the old 'saved/{ARG_filename}' and delete 'temp/{ARG_filename}'")
+    textstuff.printwrap (f"    1. Overwrite the old 'saved/{ARG_filename}' using 'temp/{ARG_filename}'")
+    textstuff.printwrap (f"    2. Keep the old 'saved/{ARG_filename}' and delete 'temp/{ARG_filename}'")
     textstuff.printwrap (f"    3. Save 'temp/{ARG_filename}' under a new name.")
     _input = input ("Choose an option: ")
     _input = _input.strip()
@@ -119,6 +122,7 @@ def filealreadyexists(ARG_filename) -> typing.Union[str, bool]:
             save_as = "new-" + ARG_filename
         return save_as
     else:
-        textstuff.printwrap (f"Sorry, {_input} isn't a recognized command here.", width=70)
+        textstuff.printwrap (f"Sorry, {_input} isn't a recognized command here.")
         print()
-        filealreadyexists(ARG_filename)
+        recursive_response = filealreadyexists(ARG_filename)
+        return recursive_response

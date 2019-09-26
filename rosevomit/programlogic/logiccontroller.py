@@ -71,20 +71,18 @@ def gen(x, y):
         # TODO: define a custom error message, and raise it here.
 
 
-def gen_timeline(eventtypes, yearrange):
+def gen_timeline(ARG_eventtypes, ARG_yearrange):
     """This function receives the user input and calls functions accordingly."""
-    if eventtypes == "globalevents":
-        def get_events(timelineYear, output_file):
+    if ARG_eventtypes == "globalevents":
+        def get_events(ARG_timeline_year, ARG_output_file):
             """This function checks to see what events have happened in a given year. It assumes that the probability of events does not change from year to year."""
             events = []
-            print (f"{timelineYear} years ago, scholars tell us...")
-            # Run checks to generate events. The randomevent checks return a list whose
-            # elements are the event text of events that occured. We add these elements
-            # to the "events" list.
-            events.extend (randomevent.check_volcano (timelineYear, csv_destination=output_file))
-            events.extend (randomevent.check_earthquake (timelineYear, csv_destination=output_file))
-            events.extend (randomevent.check_impact (timelineYear, csv_destination=output_file))
-            events.extend (randomevent.check_astronomy (timelineYear, csv_destination=output_file))
+            print (f"{ARG_timeline_year} years ago, scholars tell us...")
+            # Run checks to generate events. The randomevent checks return a list whose elements are the event text of events that occured. We add these elements to the "events" list.
+            events.extend (randomevent.check_volcano (ARG_timeline_year, ARG_output_file))
+            events.extend (randomevent.check_earthquake (ARG_timeline_year, ARG_output_file))
+            events.extend (randomevent.check_impact (ARG_timeline_year, ARG_output_file))
+            events.extend (randomevent.check_astronomy (ARG_timeline_year, ARG_output_file))
             for item in range (len (events)):
                 print (textwrap.fill (f"    {events[item]}", width=70))
                 print ()
@@ -101,9 +99,10 @@ def gen_timeline(eventtypes, yearrange):
         _tempfile_name = ut.setname("timeline")
         _tempfile = open(_tempfile_name, "a+")
 
-        for item in range (0, yearrange):
-            get_events (timelineYear=yearrange, output_file=_tempfile_name)
-            yearrange = (yearrange - 1)
+        _this_year = ARG_yearrange
+        for item in range (0, ARG_yearrange):
+            get_events (ARG_timeline_year=_this_year, ARG_output_file=_tempfile_name)
+            _this_year = (_this_year - 1)
 
         _tempfile.write ("Testing.")
         _tempfile.close()
@@ -112,7 +111,8 @@ def gen_timeline(eventtypes, yearrange):
         # TODO: define a custom error message, and raise it here.
 
 
-def gen_suncalc (lat, long):
+def gen_suncalc (ARG_lat, ARG_long):
+    """This function asks the user if the suncalc output will be saved, and then calls the suncalc function in an appropriate manner."""
     try:
         try:
             os.chdir ("./temp/")
@@ -125,6 +125,6 @@ def gen_suncalc (lat, long):
     do_we_save, filename = dialogsave.proactive()
     assert isinstance (do_we_save, bool)
     if do_we_save is False:
-        suncalc.main(lat, long)
+        suncalc.main (ARG_lat, ARG_long)
     if do_we_save is True:
-        suncalc.main(lat, long, ARG_output_directory="saved", ARG_output_file=filename)
+        suncalc.main (ARG_lat, ARG_long, ARG_output_directory="saved", ARG_output_file=filename)

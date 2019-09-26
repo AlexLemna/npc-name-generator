@@ -53,34 +53,34 @@ def cleanup_and_exit():
 ### ...AND THE BIG MAIN FUNCTION
 def exit_rosevomit(headless=False):
     """This function handles all calls to exit Rosevomit. It handles the logic behing displaying menus, calling appropriate functions to parse the user input, and appropriate actions to take before exit."""
-    assert type(headless) is bool
-    if headless is False:
+    assert isinstance (ARG_headless, bool)
+    if ARG_headless is False:
         exit_menu()
     else:
         pass
 
     _input = exit_prompt()
-    if _input is None or _input is "" or _input is "Y" or any(re.match(pattern, _input) for pattern in REGEXES_YES):
+    if _input in (None, "", "Y") or any(re.match(pattern, _input) for pattern in REGEXES_YES):
         cleanup_and_exit()
-    elif _input is "N" or any(re.match(pattern, _input) for pattern in REGEXES_NO):
+    elif _input == "N" or any(re.match(pattern, _input) for pattern in REGEXES_NO):
         return False
-    elif _input is "o" or any(re.match(pattern, _input) for pattern in REGEXES_OPT):
+    elif _input == "o" or any(re.match(pattern, _input) for pattern in REGEXES_OPT):
         exit_options_menu()
         _input = exit_options_prompt()
-        if _input is "1":
+        if _input == "1":
             cleanup_and_exit()
-        elif _input is "2":
+        elif _input == "2":
             sys.exit(0)
-        elif _input is "3":
+        elif _input == "3":
             tempfiles.view()
-            exit_rosevomit(headless=False)
-        elif _input is "4":
+            exit_rosevomit (ARG_headless=False)
+        elif _input == "4":
             return
         else:
             print (textwrap.fill (f"Sorry, {_input} isn't a recognized command here.", width=70))
             print()
-            exit_rosevomit(headless=False)  # Return to main exit menu, displayed fully
+            exit_rosevomit (ARG_headless=False)  # Return to main exit menu, displayed fully
     else:
         print (textwrap.fill (f"Sorry, {_input} isn't a recognized command here.", width=70))
         print()
-        exit_rosevomit(headless=True)  # Return to main exit menu without displaying the full menu options
+        exit_rosevomit (ARG_headless=True)  # Return to main exit menu without displaying the full menu options

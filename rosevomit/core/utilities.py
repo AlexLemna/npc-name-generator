@@ -16,12 +16,12 @@ from core import settings
 # ======================================================================
 #                               SYSTEM
 # ======================================================================
-def CWD_home():
+def cwd_home():
     """Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory"""
     os.chdir (os.path.dirname (sys.argv[0]))
 
 
-def debugmessage(debugstring: str, **kwargs):
+def debugmessage(ARG_debugstring: str, **kwargs):
     """If debugging is on, print 'debugstring'. Otherwise, do nothing."""
     try:
         is_debugging_on: bool = settings.show_debug()
@@ -29,27 +29,27 @@ def debugmessage(debugstring: str, **kwargs):
         # TODO: When we add a logging module, this exception should definitely be logged.
         is_debugging_on = True
     if is_debugging_on is True:
-        print (textwrap.fill (debugstring), **kwargs)
+        print (textwrap.fill (ARG_debugstring), **kwargs)
     else:
         pass
 
 
-def validate_range (x, startvalue, endvalue, raiseEx: bool=True):
-    """Check to see if 'x' is between 'startvalue' and 'endvalue' (inclusive)."""
-    assert isinstance (raiseEx, bool)
-    arguments = [x, startvalue, endvalue]
+def validate_range (x, ARG_startvalue, ARG_endvalue, ARG_raise_ex: bool=True):
+    """Check to see if 'x' is between 'ARG_startvalue' and 'ARG_endvalue' (inclusive)."""
+    assert isinstance (ARG_raise_ex, bool)
+    arguments = [x, ARG_startvalue, ARG_endvalue]
     for arg in arguments:
         assert isinstance (arg, (int, float, Decimal))
         # We can't compare floats and Decimals directly, so we need to convert to one or the other. Because Decimals are more accurate, we'll convert the floats to Decimals. If we need speed, we'll convert the Decimals to floats instead.
         if isinstance(arg, float):
             arg = Decimal(arg)
-    if raiseEx is True:
-        if startvalue <= x <= endvalue:
+    if ARG_raise_ex is True:
+        if ARG_startvalue <= x <= ARG_endvalue:
             pass
         else:
             raise ValueError
     else:
-        if startvalue <= x <= endvalue:
+        if ARG_startvalue <= x <= ARG_endvalue:
             return True
         else:
             return False

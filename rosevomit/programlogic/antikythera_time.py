@@ -9,14 +9,16 @@ from decimal import Decimal
 from core.utilities import validate_range
 
 
-def time2fractday (day, hour=0, minute=0, second=0):
-    arglist = [day, hour, minute, second]
+def time2fractday (ARG_day, ARG_hour=0, ARG_minute=0, ARG_second=0):
+    """This function accepts arguments for a given time (day, hour, minute, and second) of the year, and returns the equivalent fractional day."""
+    arglist = [ARG_day, ARG_hour, ARG_minute, ARG_second]
     for arg in arglist:
         assert isinstance (arg, int)
-    validate_range (day, 1, 365, raiseEx=True)
-    validate_range (hour, 0, 23, raiseEx=True)
-    validate_range (minute, 0, 60, raiseEx=True)
-    validate_range (second, 0, 60, raiseEx=True)
-    day = day - 1
-    _result = day + Decimal(f"{hour / 24}") + Decimal(f"{minute / 1440}") + Decimal(f"{second / 86400}")
-    return _result
+    validate_range (ARG_day, 1, 365, ARG_raise_ex=True)
+    validate_range (ARG_hour, 0, 23, ARG_raise_ex=True)
+    validate_range (ARG_minute, 0, 60, ARG_raise_ex=True)
+    validate_range (ARG_second, 0, 60, ARG_raise_ex=True)
+    # Adjusting the day to a "0th count day"
+    day_0_count = ARG_day - 1
+    result = day_0_count + Decimal(f"{ARG_hour / 24}") + Decimal(f"{ARG_minute / 1440}") + Decimal(f"{ARG_second / 86400}")
+    return result

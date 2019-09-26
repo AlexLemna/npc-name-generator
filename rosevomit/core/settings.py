@@ -99,7 +99,7 @@ def prompt_to_change_settings() -> bool:
     """Asks the user if they want to change any settings. Returns true if the user enters 'y' and false if the user enters nothing or 'n'."""
     _input = input ("Would you like to change any settings? y/[n]: ")
     _input = _input.strip()
-    if _input == "n" or _input == "":
+    if _input in ("n", ""):
         return False
     elif _input == "y":
         return True
@@ -185,10 +185,10 @@ def dialog_change_setting():
 
 # ---------- (4) MAIN FUNCTION FOR DISPLAYING SETTINGS DIALOG ----------
 # NOTE: Perhaps this should go in the programcli folder? Need to think about it.
-def settings_user_interface (header: bool=True):
+def settings_user_interface (ARG_show_header: bool=True):
     """Displays a command-line interface to the user for viewing and/or modifying current settings."""
     print ()
-    if header:
+    if ARG_show_header:
         print (10 * "-", "Settings", 10 * "-")
     global SETTINGS_FILE
     settings = open(SETTINGS_FILE)
@@ -221,6 +221,6 @@ def settings_user_interface (header: bool=True):
     assert isinstance (do_we_change_settings, bool)
     if do_we_change_settings is True:
         dialog_change_setting ()
-        settings_user_interface (header=False)
+        settings_user_interface (ARG_show_header=False)
     else:
         return  # return to whatever menu/function called this function

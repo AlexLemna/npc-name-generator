@@ -5,19 +5,19 @@
 import textwrap
 
 
-def printwrap(x, indented=False, end_with='\n'):
+def printwrap(x, ARG_indented: bool=False, ARG_end_with: str='\n'):
     """Textwrapping for regular 'print' commands."""
-    if indented is True:
-        print (textwrap.fill (x, width=70, subsequent_indent="   "), end=end_with)
+    if ARG_indented is True:
+        print (textwrap.fill (x, width=70, subsequent_indent="   "), end=ARG_end_with)
     else:
-        print (textwrap.fill (x, width=70), end=end_with)
+        print (textwrap.fill (x, width=70), end=ARG_end_with)
 
 
-def inputwrap(x, indented=False, end_with=" "):
+def inputwrap(x, ARG_indented: bool=False, ARG_end_with: str=" "):
     """Textwrapping for regular 'input' commands."""
-    if indented is True:
-        _input = input (textwrap.fill (x, width=70, subsequent_indent="   ") + end_with)
+    if ARG_indented is True:
+        _input = input (textwrap.fill (x, width=70, subsequent_indent="   ") + ARG_end_with)
         return _input
     else:
-        _input = input (textwrap.fill (x, width=70) + end_with)
+        _input = input (textwrap.fill (x, width=70) + ARG_end_with)
         return _input

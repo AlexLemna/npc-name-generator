@@ -14,23 +14,25 @@ from core import settings, tempfiles
 from programlogic import logiccontroller
 
 
-def input_integer(_prompt_text="", _if_invalid=None):
-    """Prompts the user for an integer, and checks to make sure that the user's input is actually an integer. If it is, it returns the integer. If it is not, it informs the user of the invalid input and prompts them again for valid input or runs the function passed to it through the '_if_invalid' argument."""
-    _prompt = _prompt_text.rstrip()  # Strips whitespaces at tne end.
-    if _prompt is "" or _prompt is None:
+def input_integer(ARG_prompt_text: str="", ARG_if_invalid=None):
+    """Prompts the user for an integer, and checks to make sure that the user's input is actually an integer. If it is, it returns the integer. If it is not, it informs the user of the invalid input and prompts them again for valid input or runs the function passed to it through the 'ARG_if_invalid' argument."""
+    _prompt = ARG_prompt_text.strip()
+    if _prompt == "" or _prompt is None:
         _input = input ("Please enter a positive integer: ")
     else:
         _input = input (f"{_prompt} ")
-    _input = _input.rstrip()  # Strips whitespaces at the end.
+    _input = _input.strip()
     try:
         _input = abs (int (_input))
         return _input
     except ValueError:
         print ("Sorry, that's not a valid number.")
-        if _if_invalid is "" or _if_invalid is None:
-            input_integer(_prompt)
+        if ARG_if_invalid == "" or ARG_if_invalid is None:
+            recursive_result = input_integer(_prompt)
+            return recursive_result
         else:
-            _if_invalid()
+            result = ARG_if_invalid()
+            return result
 
 
 def submenu_name_show():

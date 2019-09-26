@@ -29,16 +29,16 @@ def get_dir(ARG_dirname: str) -> pathlib.Path:
         while _path_partslist[-1] != "rosevomit":
             _path_partslist.pop()
         _path = os.path.join (*_path_partslist)  # The '*' is a "splat" operator
-        ROSEVOMIT_DIR = pathlib.PurePath (_path)
+        rosevomit_directory = pathlib.PurePath (_path)
         os.chdir ("..")
-        REPO_DIR = pathlib.PurePath (pathlib.Path.cwd())
+        repository_directory = pathlib.PurePath (pathlib.Path.cwd())
     # If the 'rosevomit' directory isn't in _path_parts, then that's a problem. We'll attempt to work around it by looking for the 'rosevomitrepo' directory. At the end of the day, we need *some* sort of place to begin navigating around the filesystem.
     elif "rosevomitrepo" in _path_parts:
         _path_partslist = list(_path_parts)
         while _path_partslist[-1] != "rosevomitrepo":
             _path_partslist.pop()
         _path = os.path.join (*_path_partslist)  # The '*' is a "splat" operator
-        REPO_DIR = pathlib.PurePath (_path)
+        repository_directory = pathlib.PurePath (_path)
     else:
         # If neither 'rosevomit' nor 'rosevomitrepo' show up in our path, we're well and truly lost. Let's raise an exception (a Python error).
         raise FileNotFoundError
@@ -47,11 +47,11 @@ def get_dir(ARG_dirname: str) -> pathlib.Path:
 
     # Now that we've established which parts of the expected Rosevomit filesystem we can find, we navigate to the best available location to look for the subdirectory.
     # TODO: There's a *lot* of advice online about how checking for variable existence in Python is not a good way to handle flow control... so this next part probably needs refactoring.
-    if "ROSEVOMIT_DIR" in locals():  # exists
-        os.chdir (ROSEVOMIT_DIR)
+    if "rosevomit_directory" in locals():  # exists
+        os.chdir (rosevomit_directory)
         os.chdir (f"{ARG_dirname}")
-    elif "REPO_DIR" in locals():  # exists
-        os.chdir (REPO_DIR)
+    elif "repository_directory" in locals():  # exists
+        os.chdir (repository_directory)
         possible_paths = glob.glob (f"*/{ARG_dirname}", recursive=True)
         num_possible_paths = len (possible_paths)
         if num_possible_paths == 1:
