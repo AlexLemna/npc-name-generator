@@ -194,8 +194,11 @@ def pylint(ARG_test_directory, ARG_repository_directory):
         #   C0301 line-too-long
         #   C0326 spaces
         #   R1705 no-else-return
-        #   E0401 import-error (because they don't seem to work properly when running statically)
-        pylint_opts = ["rosevomit", "--disable=C0301,C0326,R1705,E0401", "--reports=yes"]
+        #   E0401 import-error (because they don't seem to work properly for me when running statically)
+        pylint_opts = [
+            "rosevomit",
+            "--rcfile=.pylintrc",
+            ]
 
         try:
             linter.Run (pylint_opts, do_exit=False)
