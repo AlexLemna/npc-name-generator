@@ -1,3 +1,4 @@
+# This Python file uses the following encoding: utf-8
 """The 'messages.py' file contains messages that are displayed in multiple places throughout the testing module. They do not accept user input - they merely display a message."""
 
 import sys

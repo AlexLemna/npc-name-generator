@@ -1,3 +1,4 @@
+# This Python file uses the following encoding: utf-8
 """This file contains the main test script for Rosevomit. Running this script will prompt you to choose which tests to run, and then will capture the output of those tests in text files created in this directory."""
 import os
 import pathlib
@@ -9,10 +10,11 @@ import time
 import traceback
 
 # Rosevomit test modules
+import cli
 import formatting
 import messages
-import testmain
-import testmiscstuff
+import tests
+import testutilities
 from constants import ALL_TESTS, DATESTRING, DATESTRING_SHORT, FINDIMPORTS_AVAILABLE, PROJECT_NAME, PYLINT_AVAILABLE
 
 if __name__ != "__main__":
@@ -32,7 +34,7 @@ if FINDIMPORTS_AVAILABLE is True:
     available_tests.append ("unused imports")
 if PYLINT_AVAILABLE is True:
     available_tests.append ("pylint")
-tests_to_run: list = testmiscstuff.choose_prompt (available_tests)
+tests_to_run: list = cli.choose_prompt (available_tests)
 num_tests_to_run = len (tests_to_run)
 assert num_tests_to_run >= 0
 if num_tests_to_run == 0:
@@ -52,19 +54,19 @@ if STARTING_DIRECTORY.name != "devtests":
 
 # Creating a 'testlog' directory (TESTLOG_DIR) where we'll store the test results
 testlogname = str(DATESTRING_SHORT + "-test")
-testlogname = testmiscstuff.make_name_unique (testlogname)
+testlogname = testutilities.make_name_unique (testlogname)
 os.mkdir (testlogname)
 os.chdir (testlogname)
 TESTLOG_DIR = pathlib.Path.cwd()
 
 # Moving through filesystem, looking for important directories and saving their paths as constants. Note that, as written, this program basically just looks for the directories in their expected location and freaks out if they're not there.
 os.chdir ("..")
-if testmiscstuff.get_cwd_name_only() == "devtests":  # NOTE: We use '==' here, not 'is'!
+if testutilities.get_cwd_name_only() == "devtests":  # NOTE: We use '==' here, not 'is'!
     DEVTEST_DIR = pathlib.Path.cwd()
 else:
     raise FileNotFoundError
 os.chdir ("..")
-if testmiscstuff.get_cwd_name_only() == "rosevomitrepo":
+if testutilities.get_cwd_name_only() == "rosevomitrepo":
     REPO_DIR = pathlib.Path.cwd()
 else:
     raise FileNotFoundError
@@ -92,7 +94,7 @@ print ()
 # Running sanity test, performance test, and saving output to file
 if "sanity" in tests_to_run:
     print ("Running sanity tests... ", end="")
-    sanity_finish: bool = testmain.sanity (ARG_test_directory=TESTLOG_DIR)
+    sanity_finish: bool = tests.sanity (ARG_test_directory=TESTLOG_DIR)
     assert isinstance (sanity_finish, bool)
     if sanity_finish is True:
         successful_tests.append ("sanity")
@@ -104,7 +106,7 @@ if "sanity" in tests_to_run:
 # Running performance tests...
 if "performance" in tests_to_run:
     print ("Running performance tests... ", end="")
-    perftest10_results, perftest100_results, perftest1000_results = testmain.performance (ARG_test_directory=TESTLOG_DIR)
+    perftest10_results, perftest100_results, perftest1000_results = tests.performance (ARG_test_directory=TESTLOG_DIR)
     successful_tests.append ("performance")
     print ("done.")
 else:
@@ -115,7 +117,7 @@ else:
 # Generating imports list...
 if "imports" in tests_to_run:
     print ("Generating import list... ", end="")
-    imports_finish: bool = testmain.imports (ARG_test_directory=TESTLOG_DIR, ARG_rosevomit_directory=ROSEVOMIT_DIR)
+    imports_finish: bool = tests.imports (ARG_test_directory=TESTLOG_DIR, ARG_rosevomit_directory=ROSEVOMIT_DIR)
     assert isinstance (imports_finish, bool)
     if imports_finish is True:
         successful_tests.append ("imports")
@@ -127,7 +129,7 @@ if "imports" in tests_to_run:
 # Generating unused imports list...
 if "unused imports" in tests_to_run:
     print ("Generating unused import list... ", end="")
-    unusedimports_finish: bool = testmain.unused_imports (ARG_test_directory=TESTLOG_DIR, ARG_rosevomit_directory=ROSEVOMIT_DIR)
+    unusedimports_finish: bool = tests.unused_imports (ARG_test_directory=TESTLOG_DIR, ARG_rosevomit_directory=ROSEVOMIT_DIR)
     assert isinstance (unusedimports_finish, bool)
     if unusedimports_finish is True:
         successful_tests.append ("unused imports")
@@ -139,7 +141,7 @@ if "unused imports" in tests_to_run:
 # Running pylint tests...
 if "pylint" in tests_to_run:
     print ("Running pylint... ", end="")
-    pylint_finish: bool = testmain.pylint (ARG_test_directory=TESTLOG_DIR, ARG_repository_directory=REPO_DIR)
+    pylint_finish: bool = tests.pylint (ARG_test_directory=TESTLOG_DIR, ARG_repository_directory=REPO_DIR)
     assert isinstance (pylint_finish, bool)
     if pylint_finish is True:
         successful_tests.append ("pylint")

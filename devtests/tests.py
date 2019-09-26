@@ -1,3 +1,4 @@
+# This Python file uses the following encoding: utf-8
 """This file contains the functions for the main tests for Rosevomit. These tests should all be called by the script in '_runtests.py'."""
 import os
 import sys
@@ -24,7 +25,7 @@ import messages
 _start_directory = os.getcwd()  # pylint: disable=invalid-name
 from performancetests import timetest_name_generation  # pylint: disable=wrong-import-position
 import sanitytests  # pylint: disable=wrong-import-position
-import testmiscstuff  # pylint: disable=wrong-import-position
+import testutilities  # pylint: disable=wrong-import-position
 # Rosevomit itself
 from context import rosevomit  # pylint: disable=wrong-import-position
 os.chdir (_start_directory)
@@ -82,19 +83,19 @@ def performance(ARG_test_directory):
 
         try:
             print ("Rosevomit's performance when generating 10 names (measured in seconds)")
-            with testmiscstuff.Suppressor():
+            with testutilities.Suppressor():
                 perftest10_results = timetest_name_generation (ARG_number_of_names=10)
             for key, value in perftest10_results.items():
                 print (f"   {key}: {value}")
             print ()
             print ("Rosevomit's performance when generating 100 names (measured in seconds)")
-            with testmiscstuff.Suppressor():
+            with testutilities.Suppressor():
                 perftest100_results = timetest_name_generation (ARG_number_of_names=100)
             for key, value in perftest100_results.items():
                 print (f"   {key}: {value}")
             print ()
             print ("Rosevomit's performance when generating 1,000 names (measured in seconds)")
-            with testmiscstuff.Suppressor():
+            with testutilities.Suppressor():
                 perftest1000_results = timetest_name_generation (ARG_number_of_names=1000)
             for key, value in perftest1000_results.items():
                 print (f"   {key}: {value}")

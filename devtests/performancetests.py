@@ -1,7 +1,8 @@
+# This Python file uses the following encoding: utf-8
 """Contains the functions that time the name generation process, and store and return the results."""
 import timeit
 
-from testmiscstuff import Suppressor
+from testutilities import Suppressor
 # Import Rosevomit for testing
 from context import rosevomit
 from rosevomit import programlogic

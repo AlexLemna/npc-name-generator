@@ -1,3 +1,4 @@
+# This Python file uses the following encoding: utf-8
 """This file contains some constants for the devtests module."""
 import datetime
 
