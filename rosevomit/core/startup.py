@@ -1,7 +1,9 @@
-# --------------------
-# Startup.PY
-# --------------------
-# The setup utility file for Alex's "Project ROSEVOMIT", a random name generator  and random timeline generator written in Python.
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# startup.py
+# rosevomit.core.startup
+# ___________________________________________________________________
+"""The setup utility file for Alex's "Project ROSEVOMIT", a random name generator  and random timeline generator written in Python."""
 from core.constants import MAJOR_VERSION, MINOR_VERSION, PATCH_VERSION, IS_DEVBUILD
 from core.utilities import debugmessage
 from programcli import messages

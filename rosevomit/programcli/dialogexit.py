@@ -1,8 +1,9 @@
-# ----------------------------------------
-# DialogExit.py
-# (rosevomit/core/cli/DialogExit.py)
-# ----------------------------------------
-# A UI module for Alex's "Project Rosevomit" that contains the dialog for exiting the program. Prompts the user about cleanup functuons.
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# dialogexit.py
+# rosevomit.programcli.dialogexit
+# ___________________________________________________________________
+"""A UI module that contains the dialog for exiting the program. Prompts the user about cleanup functions."""
 import re
 import sys
 import textwrap
@@ -12,6 +13,7 @@ from core.constants import REGEXES_NO, REGEXES_OPT, REGEXES_YES
 
 ### SOME HELPER FUNCTIONS...
 def exit_menu():
+    """Show exit menu."""
     print ("-" * 16, "Exit Menu", "-" * 17)
     print ("Would you like to exit Rosevomit?")
     print ("        [Y]es (or 'enter')")
@@ -20,12 +22,14 @@ def exit_menu():
 
 
 def exit_prompt():
+    """Show exit menu prompt (suitable after exit menu)."""
     _input = input ("Enter your choice, or leave blank to exit: ")
     _input = _input.strip()  # Strips all leading or trailing whitespaces
     return _input
 
 
 def exit_options_menu():
+    """Show exit options menu."""
     print ("EXIT MENU OPTIONS:")
     print ("     1. Exit (normal)")
     print ("     2. Exit (without cleaning temp directory)")
@@ -34,18 +38,21 @@ def exit_options_menu():
 
 
 def exit_options_prompt():
+    """Show exit options menu prompt (suitable after exit options menu)."""
     _input = input ("Enter your option choice, or leave blank to exit: ")
     _input = _input.strip()  # Strips all leading or trailing whitespaces
     return _input
 
 
 def cleanup_and_exit():
+    """Delete the contents of the 'temp' directory and exit."""
     tempfiles.delete()
     sys.exit(0)
 
 
 ### ...AND THE BIG MAIN FUNCTION
 def exit_rosevomit(headless=False):
+    """This function handles all calls to exit Rosevomit. It handles the logic behing displaying menus, calling appropriate functions to parse the user input, and appropriate actions to take before exit."""
     assert type(headless) is bool
     if headless is False:
         exit_menu()

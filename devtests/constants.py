@@ -1,3 +1,4 @@
+"""This file contains some constants for the devtests module."""
 import datetime
 
 try:

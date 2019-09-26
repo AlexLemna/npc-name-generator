@@ -1,3 +1,4 @@
+"""Contains the functions that time the name generation process, and store and return the results."""
 import timeit
 
 from testmiscstuff import Suppressor

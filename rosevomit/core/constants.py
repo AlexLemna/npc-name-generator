@@ -1,3 +1,8 @@
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# constants.py
+# rosevomit.core.constants
+# ___________________________________________________________________
 """This file contains constants that will be used throughout Rosevomit."""
 from pathlib import Path
 import re

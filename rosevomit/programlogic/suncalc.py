@@ -1,4 +1,10 @@
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# suncalc.py
+# rosevomit.programlogic.suncalc
+# ___________________________________________________________________
 # pylint: skip-file
+"""A file that contains functions for calculating the position across Antikythera, dependinging on the time and date."""
 import csv
 from decimal import Decimal
 from math import cos, sin, tan, acos, asin, atan2

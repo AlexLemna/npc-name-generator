@@ -1,3 +1,8 @@
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# messages.py
+# rosevomit.programcli.messages
+# ___________________________________________________________________
 """Contains system messages to display to users."""
 from programcli import textstuff
 

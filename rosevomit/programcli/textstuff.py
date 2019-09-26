@@ -1,3 +1,7 @@
+# teststuff.py
+# rosevomit.programcli.teststuff
+# ___________________________________________________________________
+"""A file containing functions used for the formatting of output messages."""
 import textwrap
 
 

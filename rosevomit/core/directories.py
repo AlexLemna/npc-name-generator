@@ -1,3 +1,9 @@
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# directories.py
+# rosevomit.core.directories
+# ___________________________________________________________________
+"""This file contains the 'get_dir' function, which should theoretically be able to find any subdirectory of the Rosevomit directory from anywhere within the 'rosevomit' module or the associated repository. Theoretically."""
 import glob
 import os
 import pathlib

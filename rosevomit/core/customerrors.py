@@ -1,4 +1,9 @@
-# Currently a placeholder file
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# customerrors.py
+# rosevomit.core.customerrors
+# ___________________________________________________________________
+"""Currently a placeholder file."""
 
 
 class RosevomitError(Exception):

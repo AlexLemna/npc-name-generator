@@ -1,7 +1,9 @@
-# ----------------------------------------
-# RandomName.py
-# ----------------------------------------
-# A logic module for Alex's "Project Rosevomit" that contains functions for randomly generating names.
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# randomname.py
+# rosevomit.programlogic.randomname
+# ___________________________________________________________________
+"""A file that contains functions for randomly generating names."""
 
 import os
 import random

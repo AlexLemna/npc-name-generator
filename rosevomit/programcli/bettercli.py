@@ -1,3 +1,12 @@
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# bettercli.py
+# rosevomit.programcli.bettercli
+# ___________________________________________________________________
+"""A replacement command-line interface to replace our current one.
+
+WORK IN PROGRESS.
+"""
 import cmd  # "Simple framework for writing CLIs"
 import shlex  # "Lexical analysis for simple syntaxes resembling Unix shell"
 import sys  # "System-specific parameters and functions"

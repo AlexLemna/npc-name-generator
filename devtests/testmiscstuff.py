@@ -1,3 +1,4 @@
+"""Contains miscellaneous functions."""
 import os
 import pathlib
 import sys

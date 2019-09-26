@@ -1,3 +1,5 @@
+"""This file contains functions for the formatting of the the test results files."""
+
 
 def line(char: str = "_", newline: bool = False) -> None:
     """Prints a character 70 times, with an optional preceding newline."""

@@ -1,3 +1,8 @@
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# settings.py
+# rosevomit.core.settings
+# ___________________________________________________________________
 # pylint: disable=global-statement
 """This file checks handles interactions with the program settings. The program settings are *not* stored in this file, however - they are stored in settings-data.ini."""
 import configparser

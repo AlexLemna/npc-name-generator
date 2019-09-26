@@ -1,3 +1,8 @@
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# _dynamic_constants.py
+# rosevomit.core._dynamic_constants
+# ___________________________________________________________________
 """This file contains the functions that generate the dynamic functions."""
 from distutils.util import strtobool
 import os

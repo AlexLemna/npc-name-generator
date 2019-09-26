@@ -1,7 +1,10 @@
-# ----------------------------------------
-# WorseCLI.py
-# ----------------------------------------
-# A UI module for Alex's "Project Rosevomit" that contains functions for displaying menus beyond Rosevomits's main menu, and for processing the inputs for those menus.
+# worsecli.py
+# rosevomit.programcli.worsecli
+# ___________________________________________________________________
+"""A UI module that contains functions for displaying menus beyond Rosevomits's main menu, and for processing the inputs for those menus.
+
+WILL BE REPLACED EVENTUALLY BY rosevomit.programcli.bettercli
+"""
 import re
 import sys
 import typing

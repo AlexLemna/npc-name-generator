@@ -1,8 +1,9 @@
-# --------------------
-# ROSEVOMIT.PY
-# --------------------
-# The main file for Alex's "Project ROSEVOMIT", a random name generator  and random timeline generator written in Python.
-"""The main file for Alex's "Project ROSEVOMIT", a random name generator  and random timeline generator written in Python."""
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# rosevomit.py
+# rosevomit.programlogic.rosevomit
+# ___________________________________________________________________
+"""The main file for Alex's "Project ROSEVOMIT", a random name generator and random timeline generator written in Python."""
 import sys
 import textwrap
 

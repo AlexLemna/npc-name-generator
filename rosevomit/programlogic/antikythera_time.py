@@ -1,3 +1,9 @@
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# antikythera_time.py
+# rosevomit.programlogic.antikythera_time
+# ___________________________________________________________________
+"""A file containing functions related to Antikythera's date/time/calendars."""
 from decimal import Decimal
 
 from core.utilities import validate_range

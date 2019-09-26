@@ -1,8 +1,9 @@
-# ----------------------------------------
-# TempFiles.py
-# (rosevomit/core/logic/TempFiles.py)
-# ----------------------------------------
-# A logic module for Alex's "Project Rosevomit" that handles files in the /temp directory.
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# tempfiles.py
+# rosevomit.core.tempfiles
+# ___________________________________________________________________
+"""A logic module that handles files in the /temp directory."""
 import os
 import pathlib
 import shutil

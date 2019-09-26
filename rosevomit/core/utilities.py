@@ -1,5 +1,8 @@
-# rosevomit/core/Utilities.py
-# For those little code snippets that don't make sense going anywhere else.
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# utilities.py
+# rosevomit.core.utilities
+# ___________________________________________________________________
 """For those little code snippets that don't make sense going anywhere else."""
 from configparser import NoOptionError, NoSectionError
 from decimal import Decimal

@@ -1,8 +1,9 @@
-# --------------------
-# LogicController.py
-# --------------------
-# This is the main "logic" file for Alex's "Project Rosevomit", a random name generator written in Python. Its job is to keep track of the program's custom logic modules and to serve as an intermediary in between them and the main file (rosevomit.py). This isn't actually necessary, but it serves as good coding practice for me. Hopefully.
-
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# logiccontroller.py
+# rosevomit.programlogic.logiccontroller
+# ___________________________________________________________________
+"""This is the main "logic" file. Its job is to keep track of the program's custom logic modules and to serve as an intermediary in between them and the main file (rosevomit.py). This isn't actually necessary, but it serves as good coding practice for me. Hopefully."""
 import os
 import textwrap
 

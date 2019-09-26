@@ -1,3 +1,9 @@
+# This Python file uses the following encoding: utf-8
+# ___________________________________________________________________
+# dialogsave.py
+# rosevomit.programcli.dialogsave
+# ___________________________________________________________________
+"""A UI module that contains the dialog for saving files."""
 import os
 import pathlib
 import re

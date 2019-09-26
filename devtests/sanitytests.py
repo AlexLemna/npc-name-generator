@@ -1,3 +1,4 @@
+"""Contains tests using 'unittest' module."""
 from io import StringIO
 import random
 import sys
