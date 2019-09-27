@@ -9,9 +9,9 @@ import re
 import sys
 import typing
 
-from programcli import dialogexit, dialogsave
+from programcli import messages, dialogexit, dialogsave
 from core import settings, tempfiles
-from programlogic import logiccontroller
+from programlogic import logiccontroller, exiting
 
 
 def input_integer(ARG_prompt_text: str="", ARG_if_invalid=None):
@@ -47,7 +47,6 @@ def submenu_name_show():
     print ("     6. Full names, female-only")
     print ("     7. Full names, male-only")
     print ("     0. Back to main menu.")
-    print ("     X. Exit program")
     print ()
 
 
@@ -93,16 +92,13 @@ def submenu_name_input():
         print ()
     elif menuchoice == '0':
         pass
-    elif menuchoice in ("X", "x", "exit"):
-        sys.exit(0)
     elif menuchoice in ("help", "HELP", "'help'", "h", "H", "helf", "HELF"):
         submenu_name_show()
         submenu_name_input()
     elif menuchoice == "":
         submenu_name_input()
     else:
-        print (f"{menuchoice} is not a recognized command.")
-        print()
+        messages.unrecognized_input_message (menuchoice)
         submenu_name_input()
 
 
@@ -113,7 +109,6 @@ def submenu_timeline_show():
     print ("     1. Global events")
     print ("     2. Regional events (NOT CURRENTLY SUPPORTED)")
     print ("     0. Back to main menu.")
-    print ("     X. Exit program")
     print ()
 
 
@@ -132,15 +127,13 @@ def submenu_timeline_input():
         submenu_timeline_input ()
     elif menuchoice == '0':
         pass
-    elif menuchoice in ("X", "x", "exit"):
-        sys.exit(0)
     elif menuchoice in ("help", "HELP", "'help'", "h", "H", "helf", "HELF"):
         submenu_timeline_show()
         submenu_timeline_input()
     elif menuchoice == "":
         submenu_timeline_input()
     else:
-        print (f"{menuchoice} is not a recognized command.")
+        messages.unrecognized_input_message (menuchoice)
         submenu_timeline_input()
 
 
@@ -152,7 +145,6 @@ def submenu_suncalc_show():
     print ("     2. Pick a preset place (NOT CURRENTLY SUPPORTED)")
     print ("     3. I'll enter the coordinates myself, goddammit!")
     print ("     0. Back to main menu.")
-    print ("     X. Exit program")
     print ()
 
 
@@ -176,19 +168,17 @@ def submenu_suncalc_input():
         return lat, long
     elif menuchoice == "0":
         show_main_menu()
-    elif menuchoice in ("X", "x", "exit"):
-        sys.exit(0)
     elif menuchoice in ("help", "HELP", "'help'", "h", "H", "helf", "HELF"):
         submenu_suncalc_show()
         submenu_suncalc_input()
     elif menuchoice == "":
         submenu_suncalc_input()
     else:
-        print (f"{menuchoice} is not a recognized command.")
+        messages.unrecognized_input_message (menuchoice)
         submenu_suncalc_input()
 
 
-def prompt_save():
+def prompt_save() -> bool:
     """Asks the user if they want to save, and processes response."""
     menuchoice = input ("Would you like to save this result? (Yes/No) ")
     menuchoice = menuchoice.strip()  # Strips whitespaces
@@ -198,8 +188,9 @@ def prompt_save():
     elif re.search(r"^[n][o]*$", menuchoice, flags=re.IGNORECASE):
         return False
     else:
-        print (f"{menuchoice} is not a recognized command.")
-        prompt_save()
+        messages.unrecognized_input_message (menuchoice)
+        recursive_result = prompt_save()
+        return recursive_result
 
 
 def show_main_menu():
@@ -257,15 +248,7 @@ def ask_for_input():
         settings.settings_user_interface (header=True)
         show_main_menu()
     elif menuchoice in ("0", "X", "x", "exit"):
-        show_exit_dialog = settings.exit_dialog()
-        assert isinstance (show_exit_dialog, bool)
-        if show_exit_dialog is False:
-            sys.exit()
-        else:
-            do_we_exit = dialogexit.exit_rosevomit()  # dialogexit.exit_rosevomit() should either return False or close the program itself
-            assert isinstance (do_we_exit, bool)
-            if do_we_exit is False:
-                show_main_menu()
+        exiting.exit_rosevomit()
     elif menuchoice in ("help", "HELP", "'help'", "h", "H", "helf", "HELF"):
         show_main_menu()
     elif menuchoice == "":

@@ -37,6 +37,7 @@ def is_valid() -> bool:
         show_debug()
         logging_service()
         exit_dialog()
+        autoclean_temp_directory()
     except configparser.Error:
         return False
     else:
@@ -50,9 +51,13 @@ def restore_file():
     # Entering the default values we want to restore
     config["debugging"] = {
         "show_debug": "off",
-        "logging_service": "off"}
+        "logging_service": "off",
+        }
     config["directories"] = {}
-    config["exit behavior"] = {"exit_dialog": "off"}
+    config["exit behavior"] = {
+        "exit_dialog": "off",
+        "autoclean_temp_directory": "on",
+        }
     # Creating the file
     with open(SETTINGS_FILE, "w+") as newfile:
         # Writing header comment
@@ -86,12 +91,22 @@ def logging_service() -> bool:
 
 
 def exit_dialog() -> bool:
-    """Returns true or false based on the value of 'exit dialog' in the 'settings-data.ini' file."""
+    """Returns true or false based on the value of 'exit_dialog' in the 'settings-data.ini' file."""
     global SETTINGS_FILE
     settings = open(SETTINGS_FILE)
     config = configparser.ConfigParser()  # Create an instance of ConfigParser
     config.read_file(settings)
     result: bool = config.getboolean (section="exit behavior", option="exit_dialog")
+    return result
+
+
+def autoclean_temp_directory() -> bool:
+    """Returns true or false based on the value of 'autoclean_temp_directory' in the 'settings-data.ini' file."""
+    global SETTINGS_FILE
+    settings = open(SETTINGS_FILE)
+    config = configparser.ConfigParser()  # Create an instance of ConfigParser
+    config.read_file(settings)
+    result: bool = config.getboolean (section="exit behavior", option="autoclean_temp_directory")
     return result
 
 # ---------- (3) HELPER FUNCTIONS FOR DISPLAYING SETTINGS DIALOG ----------
