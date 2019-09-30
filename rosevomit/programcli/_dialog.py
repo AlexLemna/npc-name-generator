@@ -22,6 +22,17 @@ def _prompt_hint_bool (ARG_default: bool) -> str:
         raise TypeError
 
 
+def prompt_generic (ARG_prompt: str) -> str:
+    """Displays a prompt, accepts input, cleans it, and returns it."""
+    _input = formatting.inputwrap (ARG_prompt)
+    result = _input.strip()
+    if result == "":
+        messages.unrecognized_input_message (result)
+        recursive_result = prompt_generic (ARG_prompt)
+        result = recursive_result
+    return result
+
+
 def prompt_yesno (ARG_prompt: str, ARG_default: bool=True) -> bool:
     """Asks the user a yes/no question, and returns the result as a bool."""
     prompt = ARG_prompt.strip()
@@ -39,12 +50,6 @@ def prompt_yesno (ARG_prompt: str, ARG_default: bool=True) -> bool:
         messages.unrecognized_input_message (_input)
         recursive_result = prompt_yesno (ARG_prompt)
         return recursive_result
-
-
-def prompt_save_yesno (ARG_filename: str) -> bool:
-    """Asks the user if they want to save ARG_file. Basically a convenient wrapper around prompt_yesno()."""
-    result = prompt_yesno (f"Save {ARG_filename}?")
-    return result
 
 # ---------- Menus ----------
 def _menu_from_options(ARG_menuoptions, ARG_returns_to: str):

@@ -13,6 +13,27 @@ from core import tempfiles
 from programcli import _dialog, formatting, messages
 
 
+def prompt_save_yesno (ARG_filename: str="") -> bool:
+    """Asks the user if they want to save ARG_file. Basically a convenient wrapper around prompt_yesno()."""
+    if ARG_filename == "":
+        result = _dialog.prompt_yesno ("Do you want to save the results? ")
+    else:
+        result = _dialog.prompt_yesno (f"Save {ARG_filename}? ")
+    return result
+
+
+def prompt_savename (ARG_format: str) -> str:
+    """Asks the user what name they want to save the file under."""
+    if ARG_format[0] != ".":
+        extension = "." + ARG_format
+    else:
+        extension = ARG_format
+    prompt = f"Save the {extension} file as: "
+    filename = _dialog.prompt_generic (prompt)
+    result = filename + extension
+    return result
+
+
 def proactive(ARG_defaultname: str="file"):
     """Use this function *before* generating data.
     Returns:
@@ -36,41 +57,7 @@ def proactive(ARG_defaultname: str="file"):
     return savebool, filename
 
 
-def reactive(ARG_defaultname: str="file", ARG_fileformat: str="txt"):
-    """Use this function when data has already been generated and stored in the /temp directory. It's the equivalent of a "Do you want to save your work?" prompt.
-    Returns:
-      files_to_save: A list of files to save. If it returns empty, save no files.
-    """
-    files_to_save: list = []
-
-    tempfiles.view()
-    do_we_save = _dialog.prompt_yesno ("Would you like to save some/all of these files?")
-
-    # TODO: Fix "setname" so that it checks for the file extensions during the setname function itself.
-    _default_name = ut.setname(ARG_defaultname, ARG_fileformat)
-    assert isinstance (do_we_save, bool)
-    if do_we_save is False:
-        return files_to_save
-    else:
-        with pathlib.Path.cwd() as cwd:
-            p = pathlib.PurePath (cwd)
-        if p.parts[-1] != "temp":
-            # TODO: Possible candidate for a custom exception? "Unexpected working directory?"
-            raise FileNotFoundError
-        num_of_items = len (os.listdir (cwd))
-        current_item_num = 1
-        for filename in os.listdir (cwd):
-            print ()
-            print (f"File {current_item_num} of {num_of_items}: {filename}")
-            do_we_save = _dialog.prompt_save_yesno (filename)
-            if do_we_save is True:
-                files_to_save.append(filename)
-                current_item_num = current_item_num + 1
-            else:
-                current_item_num = current_item_num + 1
-        return files_to_save
-
-# TODO: break the following function in to two functions - one where the user can decide if the exiting filw should be overwritten, and one to prompt the user for a new name.
+# TODO: break the following function in to two functions - one where the user can decide if the exiting file should be overwritten, and one to prompt the user for a new name.
 def filealreadyexists(ARG_filename) -> typing.Union[str, bool]:
     """Use this function when the user tries to save data using a name that already exists.
     Returns:

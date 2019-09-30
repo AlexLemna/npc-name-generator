@@ -229,21 +229,6 @@ def ask_for_input():
         lat, long = submenu_suncalc_input()
         logiccontroller.gen_suncalc(lat, long)
         show_main_menu()
-    elif menuchoice == "5":
-        files_to_save = dialogsave.reactive()
-        for file in files_to_save:
-            try:
-                tempfiles.save (file)
-            except FileExistsError:
-                _input: typing.Union[str, bool] = dialogsave.filealreadyexists(file)
-                assert isinstance (_input, (str, bool))
-                if isinstance (_input, str):
-                    tempfiles.save (_input)
-                elif _input is True:
-                    pass
-                elif _input is False:
-                    tempfiles.save (_input, ARG_overwrite=True)
-        show_main_menu()
     elif menuchoice in ("9", "S", "s", "setting", "settings"):
         settings.settings_user_interface (header=True)
         show_main_menu()
