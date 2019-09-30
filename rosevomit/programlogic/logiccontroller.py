@@ -19,25 +19,24 @@ except ImportError:
     from rosevomit.programlogic import suncalc, randomevent, randomname
 
 
-def generate_names (x, ARG_number: int):
+def generate_names (ARG_nametype: str, ARG_number: int):
     """This function generates a number of random names."""
-    if x == "first":
+    if ARG_nametype == "first":
         ut.repeat (randomname.getname_firstany, ARG_number)
-    elif x == "firstfemale":
+    elif ARG_nametype == "firstfemale":
         ut.repeat (randomname.getname_firstfemale, ARG_number)
-    elif x == "firstmale":
+    elif ARG_nametype == "firstmale":
         ut.repeat (randomname.getname_firstmale, ARG_number)
-    elif x == "last":
+    elif ARG_nametype == "last":
         ut.repeat (randomname.getname_lastany, ARG_number)
-    elif x == "full":
+    elif ARG_nametype == "full":
         ut.repeat (randomname.getname_fullany, ARG_number)
-    elif x == "fullfemale":
+    elif ARG_nametype == "fullfemale":
         ut.repeat (randomname.getname_fullfemale, ARG_number)
-    elif x == "fullmale":
+    elif ARG_nametype == "fullmale":
         ut.repeat (randomname.getname_fullmale, ARG_number)
     else:
-        raise ValueError
-    # TODO: Custom error message?
+        raise ValueError ("rosevomit.programlogic.logiccontroller.generatenames() encountered an unexpected value for 'ARG_nametype'. The value of ARG_nametype was: {}".format(ARG_nametype))
 
 
 def gen_timeline(ARG_eventtypes, ARG_yearrange):
@@ -76,8 +75,7 @@ def gen_timeline(ARG_eventtypes, ARG_yearrange):
         _tempfile.write ("Testing.")
         _tempfile.close()
     else:
-        print ("I'm sorry, I can't do that.")
-        # TODO: define a custom error message, and raise it here.
+        raise ValueError ("rosevomit.programlogic.logiccontroller.gen_timeline() encountered an unexpected value for 'ARG_eventtypes'. The value of ARG_eventtypes was: {}".format(ARG_eventtypes))
 
 
 def gen_suncalc (ARG_lat, ARG_long):
