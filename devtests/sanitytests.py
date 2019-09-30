@@ -17,7 +17,7 @@ def test_string_generation (testcaseself, keyword: str):
 
     test_stdout = StringIO()  # io.StringIO is in-memory stream for text I/O.
     sys.stdout = test_stdout  # Redirecting stdout to stream.
-    rosevomit.programlogic.logiccontroller.gen (keyword, number_names_to_generate)  # Actually running test
+    rosevomit.programlogic.logiccontroller.generate_names (keyword, number_names_to_generate)  # Actually running test
 
     sys.stdout = old_stdout  # Resetting stdout to print to terminal again
     result = test_stdout.getvalue()  # Reading the test results from memory

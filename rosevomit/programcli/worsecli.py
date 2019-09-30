@@ -58,37 +58,37 @@ def submenu_name_input():
     if menuchoice == "1":
         _input = input_integer ("How many first names should be generated? ")
         print ()
-        logiccontroller.gen("first", int(_input))
+        logiccontroller.generate_names("first", int(_input))
         print ()
     elif menuchoice == "2":
         _input = input_integer ("How many female first names should be generated? ")
         print ()
-        logiccontroller.gen("firstfemale", int(_input))
+        logiccontroller.generate_names("firstfemale", int(_input))
         print ()
     elif menuchoice == "3":
         _input = input_integer ("How many male first names should be generated? ")
         print ()
-        logiccontroller.gen("firstmale", int(_input))
+        logiccontroller.generate_names("firstmale", int(_input))
         print ()
     elif menuchoice == "4":
         _input = input_integer ("How many last names should be generated? ")
         print ()
-        logiccontroller.gen("last", int(_input))
+        logiccontroller.generate_names("last", int(_input))
         print ()
     elif menuchoice == "5":
         _input = input_integer ("How many full names should be generated? ")
         print ()
-        logiccontroller.gen("full", int(_input))
+        logiccontroller.generate_names("full", int(_input))
         print ()
     elif menuchoice == "6":
         _input = input_integer ("How many female full names should be generated? ")
         print ()
-        logiccontroller.gen("fullfemale", int(_input))
+        logiccontroller.generate_names("fullfemale", int(_input))
         print ()
     elif menuchoice == "7":
         _input = input_integer ("How many male full names should be generated? ")
         print ()
-        logiccontroller.gen("fullmale", int(_input))
+        logiccontroller.generate_names("fullmale", int(_input))
         print ()
     elif menuchoice == '0':
         pass

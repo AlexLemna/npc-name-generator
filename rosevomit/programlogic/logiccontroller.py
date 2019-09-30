@@ -19,56 +19,25 @@ except ImportError:
     from rosevomit.programlogic import suncalc, randomevent, randomname
 
 
-def gen(x, y):
-    """This function receives the user input and calls functions accordingly."""
+def generate_names (x, ARG_number: int):
+    """This function generates a number of random names."""
     if x == "first":
-        def get_names():
-            output = randomname.two_files ("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")
-            print (output)
-        ut.repeat (get_names, y)
-
+        ut.repeat (randomname.getname_firstany, ARG_number)
     elif x == "firstfemale":
-        def get_names():
-            output = randomname.one_file ("USCensusNamesFirstFemale.txt")
-            print (output)
-        ut.repeat (get_names, y)
-
+        ut.repeat (randomname.getname_firstfemale, ARG_number)
     elif x == "firstmale":
-        def get_names():
-            output = randomname.one_file ("USCensusNamesFirstMale.txt")
-            print (output)
-        ut.repeat (get_names, y)
-
+        ut.repeat (randomname.getname_firstmale, ARG_number)
     elif x == "last":
-        def get_names():
-            output = randomname.one_file ("USCensusNamesLast.txt")
-            print (output)
-        ut.repeat (get_names, y)
-
+        ut.repeat (randomname.getname_lastany, ARG_number)
     elif x == "full":
-        def get_names():
-            output = randomname.two_files ("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")
-            output1 = randomname.one_file ("USCensusNamesLast.txt")
-            print (output, output1)
-        ut.repeat (get_names, y)
-
+        ut.repeat (randomname.getname_fullany, ARG_number)
     elif x == "fullfemale":
-        def get_names():
-            output = randomname.one_file ("USCensusNamesFirstFemale.txt")
-            output1 = randomname.one_file ("USCensusNamesLast.txt")
-            print (output, output1)
-        ut.repeat (get_names, y)
-
+        ut.repeat (randomname.getname_fullfemale, ARG_number)
     elif x == "fullmale":
-        def get_names():
-            output = randomname.one_file ("USCensusNamesFirstMale.txt")
-            output1 = randomname.one_file ("USCensusNamesLast.txt")
-            print (output, output1)
-        ut.repeat (get_names, y)
-
+        ut.repeat (randomname.getname_fullmale, ARG_number)
     else:
-        print ("I'm sorry, I can't do that.")
-        # TODO: define a custom error message, and raise it here.
+        raise ValueError
+    # TODO: Custom error message?
 
 
 def gen_timeline(ARG_eventtypes, ARG_yearrange):
