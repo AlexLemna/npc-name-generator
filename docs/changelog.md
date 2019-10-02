@@ -29,8 +29,8 @@ This upcoming release is expected to be **0.11.0**.
 
 ### Fixed
 
-* BAD VERSIONING: Turns up we weren't updating the in-program version tracker. Fixed that. Also released a fix that corrected this for the previous version. (link here)
-* DEVELOPER TOOLS: Fixed the unexpected exit behavior of Pylint test (issue [#42])
+* BAD VERSIONING: Turns out we weren't updating the in-program version tracker. Fixed that. Also released a fix (commit [77c66b]) that corrected this for the previous version
+* DEVELOPER TOOLS: Fixed the unexpected exit behavior of Pylint test (issue [#42]) and another testing bug that was introduced by other changes in this version (issue [#46])
 * STANDARD PARAMETER NAMES: All the parameter names have been renamed according to my own convention ('ARG_name'). (issue [#40])
 
 ### Removed
@@ -60,6 +60,8 @@ This upcoming release is expected to be **0.11.0**.
 [#40]: https://github.com/AlexLemna/rosevomit/issues/40
 [#41]: https://github.com/AlexLemna/rosevomit/issues/41
 [#42]: https://github.com/AlexLemna/rosevomit/issues/42
+[#46]: https://github.com/AlexLemna/rosevomit/issues/46
+[77c66b]: https://github.com/AlexLemna/rosevomit/commit/77c66b3f391ae7c3db6d436a31a4ee9dce538318
 
 ## [0.10.2][0-10-2-compare] - 2019-09-03
 

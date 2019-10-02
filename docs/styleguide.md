@@ -22,6 +22,8 @@ In general, Rosevomit's code should be written to whatever standards are general
 
 **Functions**, **variables**, **methods**, and **instances** should be lowercase. Separating words with underscores to increase readibility is welcomed, especially if some of the words are abbreviations or acronyms. *See: [snake_case](https://en.wikipedia.org/wiki/Snake_case)*
 
+In a departure from PEP 8, **parameters** (often called arguments) should follow the variable naming conventions while having an `ARG_` as a prefix. This is just for personal convenience, as I find it helpful when writing functions to be able to instantly distinguish between the value of a parameter as it was passed into the function and any similarly-named internal variables.
+
 Since Python does not support **constants** natively, is it considered best practice to write variables you expect to be constant in all capital letters. Like all other variables, constants should be written with underscores when it improves readibility.
 
 **Classes** should have the first letter of each word capitalized, and should have no spaces. *See: [CamelCase](https://en.wikipedia.org/wiki/Camel_case)*
@@ -31,6 +33,7 @@ Since Python does not support **constants** natively, is it considered best prac
 ### tl;dr
 
 * `menu_choice` and `menuchoice` might be variables or functions, but `MenuChoice` is definitely a class.
+* `ARG_menuchoice` is a parameter/argument for a function.
 * `MENU_CHOICE` and `MENUCHOICE` are constants.
 
 ## Commit messages
@@ -142,9 +145,13 @@ See also: #456, #789
 
 ## [Changelog formatting](#changelog)
 
+*SECTIONS: none • back to [top](#Rosevomit's-style-guide)*
+
 I try to adhere to the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) recommendations. I use the recommended catagories of `Added` for new features, `Changed` for changes in existing functionality, `Deprecated` for soon-to-be removed reatures, `Removed` for removed features, `Fixed` for bug fixes, and `Security` for vulnerabilities. I also some additional catagories like `Development` to track changes in testing/development process, and `Internal` to track refactoring/changes that don't directly impact users.
 
 ## [Versioning](#versioning)
+
+*SECTIONS: none • back to [top](#Rosevomit's-style-guide)*
 
 To some extent, versioning on this project is meaningless because I'm not even sure what the end goal of this program **is**. It mostly just exists to help me learn Python (and, potentially, other languages) and I don't expect anyone besides myself to actually use this thing. To be honest, I think I added version numbers just to help me feel a sense of progress.
 
