@@ -1,0 +1,9 @@
+component_depth: 2
+languages:
+- name: python
+  production:
+    include:
+      - /rosevomit/*.py
+  test:
+    include:
+      - /devtests/*.py

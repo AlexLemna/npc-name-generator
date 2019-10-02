@@ -7,7 +7,9 @@
 <version type="human">
   <major>0</major>
   <minor>10</minor>
-  <patch>2</patch>
+  <patch>3</patch>
 </version>
+
+<devbuild>False</devbuild>
 
 </data>

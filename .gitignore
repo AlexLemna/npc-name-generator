@@ -11,6 +11,7 @@ rosevomit/core/*.ini
 devtests/*.log
 devtests/*.txt
 devtests/*test/
+devtests/*test-*/
 
 # Other dev stuff
 /*.ps1

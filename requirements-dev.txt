@@ -1,4 +1,4 @@
 # NOT ACTUALLY REQUIRED, JUST RECOMMENDED #
-mypy==0.720
-pep8==1.7.1
-pylint==2.3.1
+mypy>=0.620
+pep8>=1.7.1
+pylint>=2.3.1
