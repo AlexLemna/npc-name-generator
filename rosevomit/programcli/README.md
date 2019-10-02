@@ -1,6 +1,13 @@
 # ROSEVOMIT/rosevomit/projectcli/
 
-The `rosevomit/projectcli/` directory (folder) contains the modules (files) necessary for Rosevomit's command-line interface. They are generally called by the main script, [`rosevomit.py`](https://github.com/AlexLemna/rosevomit/blob/master/rosevomit/rosevomit.py), which is in the [`rosevomit/`](https://github.com/AlexLemna/rosevomit/tree/master/rosevomit) directory.
+The `rosevomit/projectcli/` directory (folder) contains the modules (files) necessary for Rosevomit's command-line interface. They are generally called by the main script, [`rosevomit.py`](https://github.com/AlexLemna/rosevomit/blob/master/rosevomit/rosevomit.py), which is in the [`rosevomit/`](https://github.com/AlexLemna/rosevomit/tree/master/rosevomit) directory. The files in this directory probably look something like this:
+
+````text
++ __init__.py       <-- a file that Python needs
++ bettercli.py      <-- the main file for the replacement command line interface (WIP)
++ README.md         <-- the file you're reading now
++ worsecli.py       <-- the main file for the current command line interface
+`````
 
 **Message** functions are bits of text that do not accept user input, other than sometimes asking the user to 'press enter' to advance the program. They are generally system-wide, and are defined in the `messages.py` file. In the future, we may divide up message functions into `messages.py` and `_messages.py` (in-use messages vs message templates, respectively) if things get complicated, but we're nowhere near that point.
 
