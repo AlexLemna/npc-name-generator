@@ -7,7 +7,7 @@ This project will adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Contents](#contents)
 
 * [Unreleased](#unreleased)
-* [0.10.3 - 2019-10-01](#0103---2019-10-01)
+* [0.10.3 - 2019-10-02](#0103---2019-10-02)
 * [0.10.2 - 2019-09-03](#0102---2019-09-03)
 * [0.10.1 - 2019-05-11](#0101---2019-05-11)
 * [0.10.0 - 2019-05-01](#0100---2019-05-01)
@@ -19,7 +19,7 @@ This upcoming release is expected to be **0.11.0**.
 
 *No changes yet!*
 
-## [0.10.3][0-10-3-compare] - 2019-10-01
+## [0.10.3][0-10-3-compare] - 2019-10-02
 
 *See [GitHub release][0-10-3-release] and [tag], see [diffs][0-10-3-compare], or return to the [table of contents](#contents).*
 
