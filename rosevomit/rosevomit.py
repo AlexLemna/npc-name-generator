@@ -8,12 +8,14 @@ import sys
 import textwrap
 
 # INTERNAL MODULES
-from core import settings, startup
+from core import logs, settings, startup
 from core.constants import SEE_ROSA_RUN
 from programcli import worsecli
 
+logger = logs.BaseLogger("main")
 print ()
 print ("Starting ROSEVOMIT.")
+logger.logger.critical ("Starting ROSEVOMIT.")
 
 if settings.existence() is False:
     print ("The settings don't exist. Recreating settings file at:")
@@ -27,7 +29,9 @@ elif settings.is_valid() is False:
 else:
     pass
 
+logger.logger.debug ("Calling main setup...")
 startup.main_setup()
+logger.logger.debug ("Main setup complete.")
 
 print ()
 print (69 * "-")

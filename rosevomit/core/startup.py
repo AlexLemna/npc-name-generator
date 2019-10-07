@@ -4,10 +4,12 @@
 # rosevomit.core.startup
 # ___________________________________________________________________
 """The setup utility file for Alex's "Project ROSEVOMIT", a random name generator  and random timeline generator written in Python."""
+from core import logs
 from core.constants import MAJOR_VERSION, MINOR_VERSION, PATCH_VERSION, IS_DEVBUILD
 from core.utilities import debugmessage
 from programcli import messages
 
+startuplogger = logs.BaseLogger("core.startup")
 
 def main_setup ():
     """Contains setup instructions, and prints that info to terminal."""
@@ -23,3 +25,4 @@ def main_setup ():
 
     messages.general_program_message ("Press any key to accept risk and continue, or end the program by exiting this window.")
     debugmessage ("Main setup complete.")
+    startuplogger.logger.debug ("Main setup complete.")

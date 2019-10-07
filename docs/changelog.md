@@ -17,7 +17,11 @@ This project will adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This upcoming release is expected to be **0.11.0**.
 
-*No changes yet!*
+### Added
+
+* NEW FEATURE: Added ability to generate logs during Rosevomit's use. (issue [#27])
+
+[#27]: https://github.com/AlexLemna/rosevomit/issues/27
 
 ## [0.10.3][0-10-3-compare] - 2019-10-02
 
