@@ -61,7 +61,7 @@ def restore_file():
     # Creating the file
     with open(SETTINGS_FILE, "w+") as newfile:
         # Writing header comment
-        newfile.write("; ROSEVOMIT/CORE/SETTINGS/SETTINGS.INI\n")
+        newfile.write("; rosevomit/core/settings/settings-data.ini\n")
         newfile.write("; a file storing Rosevomit's settings\n")
         newfile.write("\n")
         # Writing default values
