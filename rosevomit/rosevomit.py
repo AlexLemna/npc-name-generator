@@ -12,10 +12,11 @@ from core import logs, settings, startup
 from core.constants import SEE_ROSA_RUN
 from programcli import worsecli
 
-logger = logs.BaseLogger("main")
+
+mainlogger = logs.BaseLogger(__name__)
 print ()
 print ("Starting ROSEVOMIT.")
-logger.logger.critical ("Starting ROSEVOMIT.")
+mainlogger.logger.critical ("Starting ROSEVOMIT.")
 
 if settings.existence() is False:
     print ("The settings don't exist. Recreating settings file at:")
@@ -29,10 +30,10 @@ elif settings.is_valid() is False:
 else:
     pass
 
-logger.logger.debug ("Calling main setup...")
+mainlogger.logger.debug ("Calling main setup...")
 startup.main_setup()
-logger.logger.debug ("Main setup complete.")
 
+mainlogger.logger.debug ("Displaying main menu for the first time...")
 print ()
 print (69 * "-")
 print (27 * "-", "ROSEVOMIT.PY", 28 * "-")

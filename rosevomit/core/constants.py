@@ -15,6 +15,7 @@ from core import _dynamic_constants
 SEE_ROSA_RUN: bool = True
 
 _CORE_DIRECTORY_NAME = "core"
+LOG_DIRECTORY_NAME = "core/logdata"
 CLI_DIRECTORY_NAME = "programcli"
 LOGIC_DIRECTORY_NAME = "programlogic"
 DATA_DIRECTORY_NAME = "programdata"
@@ -44,6 +45,7 @@ REGEXES_OPT: list = [
 
 # --- Directory Paths and PurePaths ---
 _CORE_DIRECTORY_PATH: Path = _dynamic_constants.get_critical_directory (_CORE_DIRECTORY_NAME)
+LOG_DIRECTORY_PATH: Path = _dynamic_constants.get_critical_directory (LOG_DIRECTORY_NAME)
 CLI_DIRECTORY_PATH: Path = _dynamic_constants.get_critical_directory (CLI_DIRECTORY_NAME)
 LOGIC_DIRECTORY_PATH: Path = _dynamic_constants.get_critical_directory (LOGIC_DIRECTORY_NAME)
 DATA_DIRECTORY_PATH: Path = _dynamic_constants.get_critical_directory (DATA_DIRECTORY_NAME)

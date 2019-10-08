@@ -9,10 +9,11 @@ from core.constants import MAJOR_VERSION, MINOR_VERSION, PATCH_VERSION, IS_DEVBU
 from core.utilities import debugmessage
 from programcli import messages
 
-startuplogger = logs.BaseLogger("core.startup")
+startuplogger = logs.BaseLogger(__name__)
 
 def main_setup ():
     """Contains setup instructions, and prints that info to terminal."""
+    startuplogger.logger.debug ("Starting main setup procedure.")
     print()
 
     if int (MAJOR_VERSION) >= 1 and IS_DEVBUILD:
@@ -25,4 +26,4 @@ def main_setup ():
 
     messages.general_program_message ("Press any key to accept risk and continue, or end the program by exiting this window.")
     debugmessage ("Main setup complete.")
-    startuplogger.logger.debug ("Main setup complete.")
+    startuplogger.logger.info ("Finished main setup procedure.")

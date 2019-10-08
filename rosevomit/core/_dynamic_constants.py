@@ -10,7 +10,7 @@ import pathlib
 from xml.etree import ElementTree
 
 from core import directories
-from core.utilities import debugmessage
+# from core.utilities import debugmessage
 
 
 def get_critical_directory (ARG_dirname: str) -> pathlib.Path:
@@ -30,7 +30,7 @@ def get_noncritical_directory (ARG_dirname: str) -> pathlib.Path:
     try:
         _result = directories.get_dir (ARG_dirname)
     except (FileNotFoundError, ValueError) as e:
-        debugmessage (e)
+        # debugmessage (e)
         _result = None
     return _result
 
@@ -38,7 +38,7 @@ def get_noncritical_directory (ARG_dirname: str) -> pathlib.Path:
 def get_version_number(ARG_core_directory: pathlib.Path):
     """Gets the version number."""
     try:
-        debugmessage ("Getting version number...", end=" ")
+        # debugmessage ("Getting version number...", end=" ")
         os.chdir (ARG_core_directory)
         _tree = ElementTree.parse ("Version.xml")
         _root = _tree.getroot ()
@@ -55,12 +55,12 @@ def get_version_number(ARG_core_directory: pathlib.Path):
         _devbuild = _root.findtext("devbuild", default="False")
         _devbuild = strtobool (_devbuild)  # Because the 'findtext' function above returns a string, not a bool. pylint: disable=invalid-name
         is_devbuild = bool (_devbuild)  # And because, despite its name, 'strtobool()' returns an integer (1 or 0), not a bool
-        debugmessage ("done.")
+        # debugmessage ("done.")
     except FileNotFoundError:
-        debugmessage ("error.")
+        # debugmessage ("error.")
         print ("ERROR: COULD NOT FIND VERSION FILE.")
     except IOError:
-        debugmessage ("error.")
+        # debugmessage ("error.")
         print ("ERROR: VERSION FILE IS INCOMPLETE OR FORMATTED INCORRECTLY.")
     else:
         return major_version, minor_version, patch_version, is_devbuild
