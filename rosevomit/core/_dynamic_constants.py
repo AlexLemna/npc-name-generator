@@ -3,7 +3,7 @@
 # _dynamic_constants.py
 # rosevomit.core._dynamic_constants
 # ___________________________________________________________________
-"""This file contains the functions that generate the dynamic functions."""
+"""This file contains the functions that generate the dynamic constants."""
 from distutils.util import strtobool
 import os
 import pathlib

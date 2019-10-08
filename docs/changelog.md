@@ -23,6 +23,10 @@ This upcoming release is expected to be **0.11.0**.
 
 [#27]: https://github.com/AlexLemna/rosevomit/issues/27
 
+### Development
+
+* TYPO: Fixed typo in 'rosevomit.core._dynamic_constants' module docstring.
+
 ## [0.10.3][0-10-3-compare] - 2019-10-02
 
 *See [GitHub release][0-10-3-release] and [tag], see [diffs][0-10-3-compare], or return to the [table of contents](#contents).*
