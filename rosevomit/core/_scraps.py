@@ -1,5 +1,6 @@
 """This file just contains some scraps that I'm not using now, but want to keep for reference in the future. This is a temporary file - I may delete it without warning, so DO NOT call from it!"""
 # These imports are just here so I can get the relevant tooltips in VSCode, this does NOT indicate that this is a usable module!
+# pylint: skip-file
 from pathlib import Path
 
 from core.constants import LOG_DIRECTORY_PATH
@@ -45,28 +46,15 @@ LOGGER_CONFIG = {
         },
     },
     "loggers": {
-        "debug": {
-            "handlers": ["debug"],
-            "level": "DEBUG",
-        },
-        "info": {
-            "handlers": ["debug", "info"],
-            "level": "INFO",
-        },
-        "warning": {
-            "handlers": ["debug", "info", "warning"],
-            "level": "WARNING",
-        },
-        "error": {
-            "handlers": ["debug", "info", "warning", "error"],
-            "level": "ERROR",
-        },
-        "critical": {
-            "handlers": ["debug", "info", "warning", "error", "critical"],
-            "level": "CRITICAL",
-        },
+        "debug": {"handlers": ["debug"],"level": "DEBUG",},
+        "info": {"handlers": ["debug", "info"],"level": "INFO",},
+        "warning": {"handlers": ["debug", "info", "warning"],"level": "WARNING",},
+        "error": {"handlers": ["debug", "info", "warning", "error"],"level": "ERROR",},
+        "critical": {"handlers": ["debug", "info", "warning", "error", "critical"], "level": "CRITICAL",},
     },
 }
+
+# ---------- For a potential _static_constants.py file ----------
 
 # This Python file uses the following encoding: utf-8
 # ___________________________________________________________________
@@ -74,10 +62,3 @@ LOGGER_CONFIG = {
 # rosevomit.core._static_constants
 # ___________________________________________________________________
 """This file contains the program's static constants. These are kept in a separate module from the dynamic constants partially for organizational purposes, but also to avoid 'import loops' that might occur if the dynamic constants were kept in the same file as the static constants that some of the dynamic constants use to define themselves."""
-_CORE_DIRECTORY_NAME = "core"
-LOG_DIRECTORY_NAME = "core/logdata"
-CLI_DIRECTORY_NAME = "programcli"
-LOGIC_DIRECTORY_NAME = "programlogic"
-DATA_DIRECTORY_NAME = "programdata"
-TEMP_DIRECTORY_NAME = "temp"
-SAVE_DIRECTORY_NAME = "saved"

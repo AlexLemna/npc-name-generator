@@ -4,8 +4,6 @@
 # rosevomit.programcli.dialogsave
 # ___________________________________________________________________
 """A UI module that contains the dialog for saving files."""
-import os
-import pathlib
 import typing
 
 import core.utilities as ut

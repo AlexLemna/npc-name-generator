@@ -8,15 +8,16 @@ import sys
 import textwrap
 
 # INTERNAL MODULES
-from core import logs, settings, startup
+import core  # <-- Keep this as the first internal import! Logging is started by the __init__.py of the core module
+from core import settings, startup
 from core.constants import SEE_ROSA_RUN
 from programcli import worsecli
 
 
-mainlogger = logs.BaseLogger(__name__)
+MAINLOGGER = core.logs.BaseLogger(__name__)
 print ()
 print ("Starting ROSEVOMIT.")
-mainlogger.logger.critical ("Starting ROSEVOMIT.")
+MAINLOGGER.logger.critical ("Starting ROSEVOMIT.")
 
 if settings.existence() is False:
     print ("The settings don't exist. Recreating settings file at:")
@@ -30,10 +31,10 @@ elif settings.is_valid() is False:
 else:
     pass
 
-mainlogger.logger.debug ("Calling main setup...")
+MAINLOGGER.logger.debug ("Calling main setup...")
 startup.main_setup()
 
-mainlogger.logger.debug ("Displaying main menu for the first time...")
+MAINLOGGER.logger.debug ("Displaying main menu for the first time...")
 print ()
 print (69 * "-")
 print (27 * "-", "ROSEVOMIT.PY", 28 * "-")

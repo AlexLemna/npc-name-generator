@@ -15,7 +15,7 @@ from core import settings
 from core.logs import BaseLogger
 
 
-utilitieslogger = BaseLogger(__name__)
+UTILITIESLOGGER = BaseLogger(__name__)
 
 # ======================================================================
 #                               SYSTEM
@@ -30,7 +30,7 @@ def debugmessage(ARG_debugstring: str, **kwargs):
     try:
         is_debugging_on: bool = settings.show_debug()
     except (NoSectionError, NoOptionError):
-        utilitieslogger.logger.error ("A value was not found for 'show_debug' in Rosevomit's settings file (settings-data.ini). Therefor, all debug messages WILL be shown.")
+        UTILITIESLOGGER.logger.error ("A value was not found for 'show_debug' in Rosevomit's settings file (settings-data.ini). Therefor, all debug messages WILL be shown.")
         is_debugging_on = True
     if is_debugging_on is True:
         print (textwrap.fill (ARG_debugstring), **kwargs)

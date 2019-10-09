@@ -9,7 +9,7 @@ import sys
 from core import logs, settings, tempfiles
 from programcli import dialogexit
 
-exitlogger = logs.BaseLogger (__name__)
+EXITLOGGER = logs.BaseLogger (__name__)
 
 def exit_rosevomit():
     """Handles Rosevomit's exit behavior."""
@@ -23,5 +23,5 @@ def exit_rosevomit():
     if always_show_exit_dialog is True:
         dialogexit.simple_exit_dialog()  # "Are you sure you want to exit?"
     else:
-        exitlogger.logger.critical ("Exiting ROSEVOMIT.")
+        EXITLOGGER.logger.critical ("Exiting ROSEVOMIT.")
         sys.exit(0)

@@ -6,11 +6,9 @@
 WILL BE REPLACED EVENTUALLY BY rosevomit.programcli.bettercli
 """
 import re
-import sys
-import typing
 
-from programcli import messages, dialogexit, dialogsave
-from core import settings, tempfiles
+from programcli import messages
+from core import settings
 from programlogic import logiccontroller, exiting
 
 
