@@ -9,6 +9,10 @@ import configparser
 import os
 import textwrap
 
+from core import logs
+
+_SETTINGSLOGGER = logs.BaseLogger (__name__)
+
 # ---------- Contents ----------
 # ---------- -------- ----------
 # This module has four subsections:

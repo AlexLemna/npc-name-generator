@@ -8,8 +8,10 @@ WILL BE REPLACED EVENTUALLY BY rosevomit.programcli.bettercli
 import re
 
 from programcli import messages
-from core import settings
+from core import logs, settings
 from programlogic import logiccontroller, exiting
+
+_WORSECLI_LOGGER = logs.BaseLogger (__name__)
 
 
 def input_integer(ARG_prompt_text: str="", ARG_if_invalid=None):

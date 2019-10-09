@@ -4,6 +4,9 @@
 # rosevomit.core.customerrors
 # ___________________________________________________________________
 """Currently a placeholder file."""
+from core import logs
+
+_CUSTOMERRORSLOGGER = logs.BaseLogger (__name__)
 
 
 class RosevomitError(Exception):

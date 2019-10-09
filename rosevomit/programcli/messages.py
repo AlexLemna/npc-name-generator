@@ -4,7 +4,10 @@
 # rosevomit.programcli.messages
 # ___________________________________________________________________
 """Contains system messages to display to users."""
+from core import logs
 from programcli import formatting
+
+_MESSAGE_LOGGER = logs.BaseLogger (__name__)
 
 # ---------- Standard messages ----------
 def general_program_message (ARG_string: str):

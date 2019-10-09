@@ -4,8 +4,13 @@
 # rosevomit.programlogic.saving
 # ___________________________________________________________________
 """This file handles Rosevomit's filesaving behavior."""
+from core import logs
 import core.utilities as ut
 from programcli import dialogsave
+
+
+_SAVELOGGER = logs.BaseLogger (__name__)
+
 
 # Generic save function
 def generic_save_results(ARG_function, ARG_filetype: str="txt"):

@@ -8,6 +8,12 @@ import os
 import random
 
 
+from core import logs
+
+
+_RANDOMEVENTLOGGER = logs.BaseLogger (__name__)
+
+
 def check_volcano(ARG_in_year, ARG_csv_destination=""):
     """Checks to see if a volcano explodes. Returns text to display onscreen, and also possibly writes some data related to each event to the specified file."""
     # Validating arguments

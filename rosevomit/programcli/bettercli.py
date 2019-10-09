@@ -18,6 +18,10 @@ if sys.platform in ("win32", "cygwin"):
 else:
     import readline  # Available as part of the standard library on most non-Windows systems.
 
+from core import logs
+
+_BETTERCLI_LOGGER = logs.BaseLogger (__name__)
+
 
 class CLIv2(cmd.Cmd):
     """Creates instance of 'Cmd' framework, which we modify."""

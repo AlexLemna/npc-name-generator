@@ -7,8 +7,6 @@
 import logging
 import os
 
-from core.constants import LOG_DIRECTORY_PATH
-
 
 class BaseLogger:  # pylint: disable=too-few-public-methods
     """Auxiliary logger, which can be called from other modules."""
@@ -16,6 +14,9 @@ class BaseLogger:  # pylint: disable=too-few-public-methods
         self.logger = logging.getLogger (f"{ARG_loggername}")
         self.logger.info ("Logger initialized.")
 
+_LOGALOG = BaseLogger(__name__)
+
+from core.constants import LOG_DIRECTORY_PATH
 
 def _startsession (ARG_targetfile):
     """Writes a blank line and a session header to the targetfile."""

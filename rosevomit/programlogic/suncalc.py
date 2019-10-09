@@ -14,10 +14,11 @@ import operator
 import os
 import time
 
-from core import directories
+from core import directories, logs
 from core.utilities import Angle, deg2rad, rad2deg, angle_sanity_check
 from programlogic import antikythera_time
 
+_SUNCALCLOGGER = logs.BaseLogger (__name__)
 # defaults
 AXIAL_TILT = 10  # Note that axial tilt is also called "obliquity of the ecliptic"
 

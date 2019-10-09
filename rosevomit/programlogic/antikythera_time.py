@@ -6,7 +6,11 @@
 """A file containing functions related to Antikythera's date/time/calendars."""
 from decimal import Decimal
 
+from core import logs
 from core.utilities import validate_range
+
+
+_TIMETRACKER = logs.BaseLogger (__name__)
 
 
 def time2fractday (ARG_day, ARG_hour=0, ARG_minute=0, ARG_second=0):

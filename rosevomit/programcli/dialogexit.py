@@ -6,7 +6,10 @@
 """A UI module that contains the dialog for exiting the program."""
 import sys
 
+from core import logs
 from programcli import _dialog
+
+_EXIT_DIALOG_LOGGER = logs.BaseLogger (__name__)
 
 
 def simple_exit_dialog():

@@ -9,9 +9,12 @@ import os
 import random
 
 try:
-    from core import directories
+    from core import directories, logs
 except ImportError:  # for external unit testing
     from rosevomit.core import directories
+
+
+_RANDOMNAMELOGGER = logs.BaseLogger (__name__)
 
 
 def one_file (ARG_file1) -> str:

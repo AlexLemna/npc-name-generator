@@ -8,6 +8,10 @@ import glob
 import os
 import pathlib
 
+from core import logs
+
+_DIRECTORIESLOGGER = logs.BaseLogger (__name__)
+
 
 def get_cwd_name_only():
     """Returns only the folder name of the current working directory, not the full path."""

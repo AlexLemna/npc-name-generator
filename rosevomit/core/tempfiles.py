@@ -9,7 +9,10 @@ import pathlib
 import shutil
 import textwrap
 
+from core import logs
 from core.constants import TEMP_DIRECTORY_PATH
+
+_TEMPFILELOGGER = logs.BaseLogger(__name__)
 
 
 def _check_that_cwd_is_temp():

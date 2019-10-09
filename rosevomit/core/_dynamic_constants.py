@@ -9,8 +9,10 @@ import os
 import pathlib
 from xml.etree import ElementTree
 
-from core import directories
+from core import directories, logs
 # from core.utilities import debugmessage
+
+_DYNAMICCONSTANTSLOGGER = logs.BaseLogger (__name__)
 
 
 def get_critical_directory (ARG_dirname: str) -> pathlib.Path:

@@ -8,15 +8,18 @@ import os
 import textwrap
 
 try:
-    from core import customerrors
+    from core import logs, customerrors
     import core.utilities as ut
     from programcli import dialogsave
     from programlogic import suncalc, randomevent, randomname
 except ImportError:
-    from rosevomit.core import customerrors
+    from rosevomit.core import logs, customerrors
     import rosevomit.core.utilities as ut
     from rosevomit.programcli import dialogsave
     from rosevomit.programlogic import suncalc, randomevent, randomname
+
+
+_LOGICLOGGER = logs.BaseLogger (__name__)
 
 
 def generate_names (ARG_nametype: str, ARG_number: int):

@@ -7,7 +7,9 @@
 from pathlib import Path
 import re
 
-from core import _dynamic_constants
+from core import _dynamic_constants, logs
+
+_CONSTANTSLOGGER = logs.BaseLogger (__name__)
 
 # ---------- STATIC CONSTANTS ----------
 # These constants are explicitly defined in the code.

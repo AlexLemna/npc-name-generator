@@ -7,8 +7,10 @@
 from distutils.util import strtobool
 import re
 
-from core import REGEXES_NO, REGEXES_YES
+from core import logs, REGEXES_NO, REGEXES_YES
 from programcli import formatting, messages
+
+_DIALOG_LOGGER = logs.BaseLogger (__name__)
 
 # ---------- Prompts ----------
 def _prompt_hint_bool (ARG_default: bool) -> str:

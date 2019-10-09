@@ -7,8 +7,10 @@
 import typing
 
 import core.utilities as ut
-from core import tempfiles
+from core import logs, tempfiles
 from programcli import _dialog, formatting, messages
+
+_SAVE_DIALOG_LOGGER = logs.BaseLogger (__name__)
 
 
 def prompt_save_yesno (ARG_filename: str="") -> bool:

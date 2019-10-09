@@ -6,6 +6,10 @@
 """A file containing functions used for the formatting of output messages."""
 import textwrap
 
+from core import logs
+
+_FORMATTING_LOGGER = logs.BaseLogger (__name__)
+
 
 def printwrap(x, ARG_indented: bool=False, ARG_end_with: str='\n'):
     """Textwrapping for regular 'print' commands."""
