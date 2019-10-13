@@ -51,16 +51,23 @@ def is_valid() -> bool:
 def restore_file():
     """Recreates the file specified in the 'SETTINGS_FILE' variable using internally defined defaults."""
     # Initializing ConfigParser()
-    config = configparser.ConfigParser()
+    config = configparser.ConfigParser(allow_no_value=True)
     # Entering the default values we want to restore
+    # (Also, not that "'; this is a comment': None" is the way to insert comments into the auto-generated config file)
     config["debugging"] = {
         "show_debug": "off",
-        "logging_service": "off",
+        "; ^ Should debug messages be printed to the console? Defaults to 'off'.": None,
+        "logging_service": "on",
+        "; Should debug messages be entered into a log? Defaults to 'on'.": None,
         }
-    config["directories"] = {}
+    config["directories"] = {
+        "; ^ (NOT YET IMPLEMENTED) Will allow users to specify custom locations to be used as /temp or /saved directories.": None,
+    }
     config["exit behavior"] = {
         "exit_dialog": "off",
+        "; ^ Displays a 'Are you sure you want to exit?' prompt before exiting. Defaults to 'off'.": None,
         "autoclean_temp_directory": "on",
+        "; ^ Automatically deletes the contents of the /temp directory before exiting. Defaults to 'on'.": None,
         }
     # Creating the file
     with open(SETTINGS_FILE, "w+") as newfile:

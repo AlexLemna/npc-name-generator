@@ -18,6 +18,7 @@ class BaseLogger:  # pylint: disable=too-few-public-methods
 
 _LOGALOG = BaseLogger(__name__)
 
+from core import settings
 from core.constants import LOG_DIRECTORY_PATH
 
 def _startsession (ARG_targetfile):
@@ -29,48 +30,51 @@ def _startsession (ARG_targetfile):
 
 def start_logging(ARG_parentlogger, ARG_bufferlogger):
     """Create file handlers, creates formatter and adds it to the handlers, and adds those handlers to logger."""
-    filehandlers = []
+    if settings.logging_service() is False:
+        pass
+    else:
+        filehandlers = []
 
-    debugfile = os.path.join (LOG_DIRECTORY_PATH, "10-debug.log")
-    _startsession (debugfile)
-    filehandler1 = logging.FileHandler(debugfile)
-    filehandler1.setLevel (logging.DEBUG)
-    filehandlers.append (filehandler1)
+        debugfile = os.path.join (LOG_DIRECTORY_PATH, "10-debug.log")
+        _startsession (debugfile)
+        filehandler1 = logging.FileHandler(debugfile)
+        filehandler1.setLevel (logging.DEBUG)
+        filehandlers.append (filehandler1)
 
-    infofile = os.path.join (LOG_DIRECTORY_PATH, "20-info.log")
-    _startsession (infofile)
-    filehandler2 = logging.FileHandler(infofile)
-    filehandler2.setLevel (logging.INFO)
-    filehandlers.append (filehandler2)
+        infofile = os.path.join (LOG_DIRECTORY_PATH, "20-info.log")
+        _startsession (infofile)
+        filehandler2 = logging.FileHandler(infofile)
+        filehandler2.setLevel (logging.INFO)
+        filehandlers.append (filehandler2)
 
-    warnfile = os.path.join (LOG_DIRECTORY_PATH, "30-warning.log")
-    _startsession (warnfile)
-    filehandler3 = logging.FileHandler(warnfile)
-    filehandler3.setLevel (logging.WARNING)
-    filehandlers.append (filehandler3)
+        warnfile = os.path.join (LOG_DIRECTORY_PATH, "30-warning.log")
+        _startsession (warnfile)
+        filehandler3 = logging.FileHandler(warnfile)
+        filehandler3.setLevel (logging.WARNING)
+        filehandlers.append (filehandler3)
 
-    errorfile = os.path.join (LOG_DIRECTORY_PATH, "40-error.log")
-    _startsession (errorfile)
-    filehandler4 = logging.FileHandler(errorfile)
-    filehandler4.setLevel (logging.ERROR)
-    filehandlers.append (filehandler4)
+        errorfile = os.path.join (LOG_DIRECTORY_PATH, "40-error.log")
+        _startsession (errorfile)
+        filehandler4 = logging.FileHandler(errorfile)
+        filehandler4.setLevel (logging.ERROR)
+        filehandlers.append (filehandler4)
 
-    criticalfile = os.path.join (LOG_DIRECTORY_PATH, "50-critical.log")
-    _startsession (criticalfile)
-    filehandler5 = logging.FileHandler(criticalfile)
-    filehandler5.setLevel (logging.CRITICAL)
-    filehandlers.append (filehandler5)
+        criticalfile = os.path.join (LOG_DIRECTORY_PATH, "50-critical.log")
+        _startsession (criticalfile)
+        filehandler5 = logging.FileHandler(criticalfile)
+        filehandler5.setLevel (logging.CRITICAL)
+        filehandlers.append (filehandler5)
 
-    formatter = logging.Formatter ("%(asctime)s %(name)s @ %(filename)s:%(lineno)d - %(levelname)s - %(funcName)s: %(message)s")
-    for item in filehandlers:
-        item.setFormatter (formatter)
-        ARG_parentlogger.addHandler (item)
+        formatter = logging.Formatter ("%(asctime)s %(name)s @ %(filename)s:%(lineno)d - %(levelname)s - %(funcName)s: %(message)s")
+        for item in filehandlers:
+            item.setFormatter (formatter)
+            ARG_parentlogger.addHandler (item)
 
-    bufferfile = os.path.join (LOG_DIRECTORY_PATH, "00-buffer.log")
-    _startsession (bufferfile)
-    bufferfilehandler = logging.FileHandler(bufferfile)
-    bufferfilehandler.setFormatter(formatter)
+        bufferfile = os.path.join (LOG_DIRECTORY_PATH, "00-buffer.log")
+        _startsession (bufferfile)
+        bufferfilehandler = logging.FileHandler(bufferfile)
+        bufferfilehandler.setFormatter(formatter)
 
-    ARG_bufferlogger.setTarget(bufferfilehandler)
-    ARG_bufferlogger.flush()
-    ARG_bufferlogger.close()
+        ARG_bufferlogger.setTarget(bufferfilehandler)
+        ARG_bufferlogger.flush()
+        ARG_bufferlogger.close()
