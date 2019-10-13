@@ -5,6 +5,7 @@
 # ___________________________________________________________________
 """This file contains config dictionaries for the default logger."""
 import logging
+import logging.handlers
 import os
 
 
@@ -24,7 +25,7 @@ def _startsession (ARG_targetfile):
         f.write("\n---------- BEGIN SESSION ----------\n")
 
 
-def start_logging(ARG_parentlogger):
+def start_logging(ARG_parentlogger, ARG_bufferlogger):
     """Create file handlers, creates formatter and adds it to the handlers, and adds those handlers to logger."""
     filehandlers = []
 
@@ -62,3 +63,12 @@ def start_logging(ARG_parentlogger):
     for item in filehandlers:
         item.setFormatter (formatter)
         ARG_parentlogger.addHandler (item)
+
+    bufferfile = os.path.join (LOG_DIRECTORY_PATH, "00-buffer.log")
+    _startsession (bufferfile)
+    bufferfilehandler = logging.FileHandler(bufferfile)
+    bufferfilehandler.setFormatter(formatter)
+
+    ARG_bufferlogger.setTarget(bufferfilehandler)
+    ARG_bufferlogger.flush()
+    ARG_bufferlogger.close()
