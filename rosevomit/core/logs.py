@@ -4,6 +4,7 @@
 # rosevomit.core.logs
 # ___________________________________________________________________
 """This file contains config dictionaries for the default logger."""
+import datetime
 import logging
 import logging.handlers
 import os
@@ -22,7 +23,8 @@ from core.constants import LOG_DIRECTORY_PATH
 def _startsession (ARG_targetfile):
     """Writes a blank line and a session header to the targetfile."""
     with open(ARG_targetfile, "a") as f:
-        f.write("\n---------- BEGIN SESSION ----------\n")
+        t_start = datetime.datetime.now()
+        f.write(f"\n---------- BEGIN SESSION: {t_start} ----------\n")
 
 
 def start_logging(ARG_parentlogger, ARG_bufferlogger):
