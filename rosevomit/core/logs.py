@@ -23,9 +23,22 @@ from core.constants import LOG_DIRECTORY_PATH
 
 def _startsession (ARG_targetfile):
     """Writes a blank line and a session header to the targetfile."""
+    if os.path.isfile(ARG_targetfile) is False:
+        fileheader = _logfile_readme()
+        with open(ARG_targetfile, "w") as f:
+            f.write (fileheader)
     with open(ARG_targetfile, "a") as f:
         t_start = datetime.datetime.now()
         f.write(f"\n---------- BEGIN SESSION: {t_start} ----------\n")
+
+
+def _logfile_readme() -> str:
+    """Returns a string containing a 'how to read this logfile' message."""
+    line1 = "Messages are displayed below in the format"
+    line2 = "    <DATE> <TIME> <LOGGER NAME> @ <FILE>:<LINE> - <LEVEL> - <FUNCTION>:<MESSAGE>"
+    line3 = "where <DATE> is the date in 'YYYY-MM-DD' format, <TIME> is the time in 'HH:MM:SS,milliseconds' format, <LOGGER NAME> is the name of the logger that generated the message (which should be the __name__ of the file where the logger was initialized), <FILE> and <LINE> is the file name and line number where the message was generated, <LEVEL> is the priority level that the message was generated at, <FUNCTION> is the name of the function that the message was generated inside, and <MESSAGE> is the actual message that was generated. "
+    message = f"{line1}\n\n{line2}\n\n{line3}\n\n"
+    return message
 
 
 def start_logging(ARG_parentlogger, ARG_bufferlogger):
