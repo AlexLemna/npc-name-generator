@@ -10,7 +10,7 @@ import logging.handlers
 
 # See https://docs.python.org/3/howto/logging-cookbook.html
 # create parent logger
-PARENTLOGGER = logging.getLogger("")
+PARENTLOGGER = logging.getLogger()
 PARENTLOGGER.setLevel (logging.DEBUG)
 BUFFERLOGGER = logging.handlers.MemoryHandler(capacity=1000,flushLevel=logging.CRITICAL)
 PARENTLOGGER.addHandler(BUFFERLOGGER)
