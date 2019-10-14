@@ -20,8 +20,10 @@ This upcoming release is expected to be **0.11.0**.
 ### Added
 
 * NEW FEATURE: Added ability to generate logs during Rosevomit's use. (issue [#27])
+* NEW FEATURE: Added ability to see licensing information from within Rosevomit. (Issue [#47])
 
 [#27]: https://github.com/AlexLemna/rosevomit/issues/27
+[#47]: https://github.com/AlexLemna/rosevomit/issues/47
 
 ### Development
 

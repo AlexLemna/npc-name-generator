@@ -35,6 +35,37 @@ def input_integer(ARG_prompt_text: str="", ARG_if_invalid=None):
             return result
 
 
+def submenu_about_show():
+    """Contains the display instructions for the about menu."""
+    print ()
+    print ("What information do you wish to display?")
+    print ("    1. About Rosevomit")
+    print ("    2. Licensing information")
+    print ("    0. Back to main menu.")
+    print ()
+
+
+def submenu_about_input():
+    """Asks for user input and processes it. Contains logic for the about submenu."""
+    menuchoice = input ("Enter your choice, or type 'help' for current menu: ")
+    menuchoice = menuchoice.strip()  # Strips whitespaces
+
+    if menuchoice == "1":
+        messages.about_program_message()
+    elif menuchoice == "2":
+        messages.about_license_message()
+    elif menuchoice == '0':
+        pass
+    elif menuchoice in ("help", "HELP", "'help'", "h", "H", "helf", "HELF"):
+        submenu_about_show()
+        submenu_about_input()
+    elif menuchoice == "":
+        submenu_about_input()
+    else:
+        messages.unrecognized_input_message (menuchoice)
+        submenu_about_input()
+
+
 def submenu_name_show():
     """Contains display instructions for the name generation menu."""
     print ()
@@ -203,6 +234,7 @@ def show_main_menu():
     print ("     3. Calculate the sun's position, default coordinates (EXPERIMENTAL)")
     print ("     4. Calculate the sun's position (EXPERIMENTAL)")
     print ("     5. View and save temporary files")
+    print ("     8. Program information")
     print ("S or 9. Program settings")
     print ("X or 0. Exit program")
     print ()
@@ -228,6 +260,10 @@ def ask_for_input():
         submenu_suncalc_show()
         lat, long = submenu_suncalc_input()
         logiccontroller.gen_suncalc(lat, long)
+        show_main_menu()
+    elif menuchoice == "8":
+        submenu_about_show()
+        submenu_about_input()
         show_main_menu()
     elif menuchoice in ("9", "S", "s", "setting", "settings"):
         settings.settings_user_interface (header=True)

@@ -4,7 +4,7 @@
 # rosevomit.programcli.messages
 # ___________________________________________________________________
 """Contains system messages to display to users."""
-from core import logs
+from core import about, logs
 from programcli import formatting
 
 _MESSAGE_LOGGER = logs.BaseLogger (__name__)
@@ -40,3 +40,23 @@ def warning_version_is_devbuild ():
 def warning_version_is_prerelease_devbuild (ARG_major_version, ARG_minor_version, ARG_patch_version):
     """Displays a warning that this version is both a pre-release version and a development build."""
     formatting.printwrap (f"You are using a development build of Rosevomit {ARG_major_version}.{ARG_minor_version}.{ARG_patch_version}. This software is actively under development, and this development build may not be stable! Proceed at your own risk.")
+
+# ---------- "About" messages ----------
+def about_license_message():
+    """Displays the strings contained in rosevomit.core.about.LICENSE."""
+    print()
+    for string in about.LICENSE:
+        formatting.printwrap (string)
+        print()
+    general_program_message("   ")
+    print()
+
+
+def about_program_message():
+    """Displays the strings contained in rosevomit.core.about.PROGRAM."""
+    print()
+    for string in about.PROGRAM:
+        formatting.printwrap (string)
+        print()
+    general_program_message("   ")
+    print()
