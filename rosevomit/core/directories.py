@@ -60,7 +60,7 @@ def get_dir(ARG_dirname: str) -> pathlib.Path:
         num_possible_paths = len (possible_paths)
         if num_possible_paths == 1:
             os.chdir (possible_paths[0])
-        elif num_possible_paths (possible_paths) == 0:
+        elif num_possible_paths == 0:
             raise FileNotFoundError
         else:
             # If multiple paths are returned, something has gone wrong and we need to stop.
