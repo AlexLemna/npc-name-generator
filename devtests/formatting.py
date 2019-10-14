@@ -9,7 +9,7 @@ def line(char: str = "_", newline: bool = False) -> None:
     if len(char) is 1:
         print (char * 70)
     else:
-        raise ValueError  # TODO: Custom exception?
+        raise ValueError(f"The parameter 'char' must be a string that is one character long, not {len(char)} characters long!")
 
 
 def header(text: str) -> None:
