@@ -17,6 +17,8 @@ import tests
 import testutilities
 from constants import ALL_TESTS, DATESTRING, DATESTRING_SHORT, FINDIMPORTS_AVAILABLE, PROJECT_NAME, PYLINT_AVAILABLE
 
+from context import rosevomit
+
 if __name__ != "__main__":
     print (textwrap.fill ("YOU ARE TRYING TO RUN 'RunTests.py' AS A MODULE, AND YOU DIDN'T PROGRAM THIS FILE TO RUN THAT WAY! IT MAY NOT WORK PROPERLY. IF YOU MEANT TO DO THIS, THEN GO TO 'RunTests.py' AND REMOVE THIS WARNING AFTER YOU'VE LOOKED THE FILE OVER TO MAKE SURE IT WON'T START CREATING FILES IN STRANGE PLACES, ETC."))
     input()
@@ -184,6 +186,14 @@ with open(DATESTRING_SHORT + ".summary.txt", "w+") as f:
     # TEST AND PROGRAM OVERVIEW
     formatting.line ()
     formatting.header ("TEST AND PROGRAM OVERVIEW")
+    MAJOR_VERSION = rosevomit.core.constants.MAJOR_VERSION
+    MINOR_VERSION = rosevomit.core.constants.MINOR_VERSION
+    PATCH_VERSION = rosevomit.core.constants.PATCH_VERSION
+    IS_DEVBUILD = rosevomit.core.constants.IS_DEVBUILD
+    print (f"Rosevomit version: {MAJOR_VERSION}.{MINOR_VERSION}.{PATCH_VERSION}")
+    if IS_DEVBUILD is True:
+        print ("  --!! DEVBUILD !!--")
+    print ()
     print ("Directories found:", len (directories_present))
     for item in directories_present:
         print ("  ", item)
