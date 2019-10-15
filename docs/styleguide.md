@@ -58,15 +58,18 @@ FOOTER
 
 with the ```DETAILS``` and ```FOOTER``` sections being optional. The ```FOOTER``` section should reference relevant issues, restate breaking changes, and link to mitigation/comments on tose breaking changes.
 
-#### **Acceptable ```<type>```**
+#### **Acceptable ```<type>```s**
 
-* **FEAT**: A new feature
-* **FIX**: A bug fix
-* **ADJ** or **REF**: My most common `<type>` - a code change that neither fixes a bug nor adds a feature. This includes anything that would be considered [refactoring](https://en.wikipedia.org/wiki/Code_refactoring). Basically, I use this for anything that's not covered by "FIX" or "FEAT".
+Changes that involve changes to the program's code...
+
+* **FEAT**: A new feature (or a feature that *will be* new in this upcoming release.)
+  * **EHNCE**: Additions or changes to an existing feature (or a feature that *will not* be new in this upcoming release.)
+* **ADJ** or **REF**: My most common `<type>` - a code change that neither fixes a bug nor adds/changes a feature from the user's point of view. This includes anything that would be considered [refactoring](https://en.wikipedia.org/wiki/Code_refactoring). Basically, I use this for anything that's not covered by "FIX" or "FEAT".
   * **TWEAK**: A small change that would otherwise be considered an ADJ or REF (meaning it *does* somehow change the meaning of the code) but that is unimportant and affects no more than two lines.
+* **FIX**: A bug fix
 * **STYLE**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 
-Documentation and development changes
+Documentation and development changes...
 
 * **DOCS**: Documentation changes only
 * **TEST**: Changes to the testing process
@@ -74,9 +77,12 @@ Documentation and development changes
   * **GIT** for Git
   * **BCH** for Better Code Hub
   * If I ever start using them, I could conciebavly have **TRAVIS** for Travis and **DOCKER** for Docker.
+
+Other changes...
+
 * **REVRT** or **REVERT**: Reverting to an earlier commit
 
-Related to releases,
+Related to releases...
 
 * **RP**: Preperation for pushing to a release branch. Generally includes adding release notes and incrementing the version number. Use this on `rc` branches.
 * **RELEASE**: A commit that pushes a new version to a release branch.
@@ -84,7 +90,7 @@ Related to releases,
 
 #### **Acceptable ```<scope>```**
 
-Anything that specifies the place of the changes. In my case, it'll probably be directories, etc. One rule to remember is that **if the changed files are not noted in the subject, they must be noted in the body**.
+Anything that specifies the place of the changes. In my case, it'll probably be directories, etc. One rule to remember is that *if the changed files are not noted in the subject, they must be noted in the body*.
 
 #### **The ```<subject>``` text**
 
