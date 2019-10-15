@@ -9,6 +9,7 @@ import os
 import pathlib
 
 from core import logs
+from core.customerrors import RealityError
 
 _DIRECTORIESLOGGER = logs.BaseLogger (__name__)
 
@@ -66,9 +67,7 @@ def get_dir(ARG_dirname: str) -> pathlib.Path:
             # If multiple paths are returned, something has gone wrong and we need to stop.
             raise ValueError
     else:
-        # this should definitely 100% never happen
-        # TODO: Possible 'RealityError' candidate?
-        raise FileNotFoundError
+        raise RealityError("This should definitely 100% never happen.")
     _dirpath = pathlib.Path.cwd()
     # Finally, return to where we started
     os.chdir (_cwd)

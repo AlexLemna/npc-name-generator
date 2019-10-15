@@ -10,6 +10,7 @@ import shutil
 import textwrap
 
 from core import logs
+from core.customerrors import RealityError
 from core.constants import TEMP_DIRECTORY_PATH
 
 _TEMPFILELOGGER = logs.BaseLogger(__name__)
@@ -40,8 +41,7 @@ def is_empty() -> bool:
     elif number_of_items_in_directory > 0:
         result = False
     else:
-        # TODO: Reality error candidate?
-        raise ValueError ("'number_of_items_in_directory' cannot be negative.")
+        raise RealityError ("'number_of_items_in_directory' cannot be negative.")
     return result
 
 
