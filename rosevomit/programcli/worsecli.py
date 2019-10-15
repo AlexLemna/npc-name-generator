@@ -266,7 +266,7 @@ def ask_for_input():
         submenu_about_input()
         show_main_menu()
     elif menuchoice in ("9", "S", "s", "setting", "settings"):
-        settings.settings_user_interface (header=True)
+        settings.settings_user_interface (ARG_show_header=True)
         show_main_menu()
     elif menuchoice in ("0", "X", "x", "exit"):
         exiting.exit_rosevomit()
