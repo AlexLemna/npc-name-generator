@@ -63,6 +63,7 @@ with the ```DETAILS``` and ```FOOTER``` sections being optional. The ```FOOTER``
 * **FEAT**: A new feature
 * **FIX**: A bug fix
 * **ADJ** or **REF**: My most common `<type>` - a code change that neither fixes a bug nor adds a feature. This includes anything that would be considered [refactoring](https://en.wikipedia.org/wiki/Code_refactoring). Basically, I use this for anything that's not covered by "FIX" or "FEAT".
+  * **TWEAK**: A small change that would otherwise be considered an ADJ or REF (meaning it *does* somehow change the meaning of the code) but that is unimportant and affects no more than two lines.
 * **STYLE**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 
 Documentation and development changes
