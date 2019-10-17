@@ -14,6 +14,7 @@ In general, Rosevomit's code should be written to whatever standards are general
   * [Commit message shorthand](#commit-message-shorthand)
   * [General rules](#GENERAL-RULES)
 * [Changelog formatting](#changelog)
+* [Docstrings](#docstrings)
 * [Versioning](#versioning)
 
 ## Python naming conventions
@@ -155,6 +156,89 @@ See also: #456, #789
 *SECTIONS: none • back to [top](#Rosevomit's-style-guide)*
 
 I try to adhere to the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) recommendations. I use the recommended catagories of `Added` for new features, `Changed` for changes in existing functionality, `Deprecated` for soon-to-be removed reatures, `Removed` for removed features, `Fixed` for bug fixes, and `Security` for vulnerabilities. I also some additional catagories like `Development` to track changes in testing/development process, and `Internal` to track refactoring/changes that don't directly impact users.
+
+## [Docstrings](#docstrings)
+
+Docstrings for functions
+
+````python
+"""A short summary.
+
+.. deprecated:: 1.6.0
+          `ndobj_old` will be removed in NumPy 2.0.0, it is replaced by
+          `ndobj_new` because the latter works also with array subclasses.
+
+A few sentences giving an extended description. This section should be used to clarify functionality, not to discuss implementation detail or background theory, which should rather be explored in the Notes section below. You may refer to the parameters and the function name, but parameter descriptions still belong in the Parameters section.
+
+Parameters
+----------
+x : type
+    Description of parameter `x`. Enclose variables in single backticks. The colon must be preceded by a space, or omitted if the type is absent.
+y
+    Description of parameter `y` (with type not specified)
+filename : str
+copy : bool
+dtype : data-type
+iterable : iterable object
+shape : int or tuple of int
+files : list of str
+x : int, optional
+x1, x2 : array_like
+    When two or more input parameters have exactly the same type, shape and description, they can be combined.
+
+Attributes  <!-- for classes only
+----------
+x : float
+    The X coordinate.
+y : float
+    The Y coordinate.
+
+Returns
+-------
+err_code : int
+    Non-zero value indicates error code, or zero on success.
+err_msg : str or None
+    Human readable error message, or None on success.
+int
+    Description of anonymous integer return value.
+
+Yields
+------
+err_code : int
+    Non-zero value indicates error code, or zero on success.
+err_msg : str or None
+    Human readable error message, or None on success.
+
+Raises  <!-- This section should be used judiciously, i.e., only for errors that are non-obvious or have a large chance of getting raised.
+------
+LinAlgException
+    If the matrix is not numerically invertible.
+
+See Also  <!-- An optional section used to refer to related code. This section can be very useful, but should be used judiciously. The goal is to direct users to other functions they may not be aware of, or have easy means of discovering (by looking at the module docstring, for example). Routines whose docstrings further explain parameters used by this function are good candidates.
+--------
+func_a : Function a with its description.
+func_b, func_c_, func_d
+func_e
+
+Notes
+-----
+An optional section that provides additional information about the code, possibly including a discussion of the algorithm. This section may include mathematical equations, written in LaTeX format:
+
+The FFT is a fast implementation of the discrete Fourier transform:
+
+.. math:: X(e^{j\omega } ) = x(n)e^{ - j\omega n}
+
+Examples
+--------
+>>> np.add(1, 2)
+3
+
+Comment explaining the second example
+
+>>> import numpy.random
+>>> np.random.rand(2)
+array([ 0.35773152,  0.38568979])  #random
+````
 
 ## [Versioning](#versioning)
 
