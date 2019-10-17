@@ -18,7 +18,7 @@ def _prompt_hint_bool (ARG_default: bool) -> str:
     if ARG_default is True:
         return "([Yes]/No)"
     elif ARG_default is False:
-        return "([Yes]/No)"
+        return "(Yes/[No])"
     else:
         # ARG_default must be bool.
         raise TypeError
