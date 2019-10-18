@@ -23,6 +23,16 @@ _SUNCALCLOGGER = logs.BaseLogger (__name__)
 AXIAL_TILT = 10  # Note that axial tilt is also called "obliquity of the ecliptic"
 
 def main(lat, long, ARG_output_directory=None, ARG_output_file="results"):
+    """The main suncalc function.
+    Parameters
+    ----------
+    lat, long
+        The observer's coordinates, measured in degrees (°).
+    ARG_output_directory (default is None)
+        The default directoryto save results in.
+    ARG_output_file (default is "results")
+        The default name (minus the extension) to be used when naming the save file.
+    """
     lat = Decimal(lat)
     long = Decimal(long)
     minute_intervals = [0, 15, 30, 45]
@@ -92,7 +102,18 @@ def main(lat, long, ARG_output_directory=None, ARG_output_file="results"):
 
 
 def antikythera_rotation_angle (astrodate):
-    """Returns the 'Antikythera Rotation Angle', equivalent to Earth's 'Earth Rotation Angle' and similar to Earth's 'Greenwich Sidereal Time', though Earth's GST includes an adjustment for the procession of Earth's March equinox that is irrelevant for Antikythera."""
+    """Returns the 'Antikythera Rotation Angle', equivalent to Earth's 'Earth Rotation Angle' and similar to Earth's 'Greenwich Sidereal Time', though Earth's GST includes an adjustment for the procession of Earth's March equinox that is irrelevant for Antikythera.
+
+    Parameters
+    ----------
+    astrodate
+        The fractional day of the year.
+
+    Returns
+    -------
+    rotation_angle
+        The rotation angle of the planet, measured in degrees (°).
+    """
     # validating
     if 0 <= astrodate <= 365:
         pass

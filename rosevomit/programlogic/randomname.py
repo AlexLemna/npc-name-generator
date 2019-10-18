@@ -18,7 +18,18 @@ _RANDOMNAMELOGGER = logs.BaseLogger (__name__)
 
 
 def one_file (ARG_file1) -> str:
-    """A function that returns one random line from a text file 'x'"""
+    """A function that returns one random line from a text file 'ARG_file1'.
+
+    Parameters
+    ----------
+    ARG_file
+        The file to draw a random line from.
+
+    Returns
+    -------
+    str
+        A random line from 'ARG_file'.
+    """
     data_dir = directories.get_dir("programdata")
     os.chdir (data_dir)
     with open (ARG_file1, 'r') as filedata:
@@ -28,7 +39,18 @@ def one_file (ARG_file1) -> str:
 
 
 def two_files (ARG_file1, ARG_file2) -> str:
-    """A function that returns one random line from a list generated from multiple text files 'x', 'y', and so on."""
+    """A function that returns one random line from a list generated from multiple text files 'x', 'y', and so on.
+
+    Parameters
+    ----------
+    ARG_file1, ARG_file2
+        The files to draw a random line from.
+
+    Returns
+    -------
+    str
+        A random line from 'ARG_file1' or 'ARG_file2'.
+    """
     data_dir = directories.get_dir("programdata")
     os.chdir (data_dir)
     filedata1 = open (ARG_file1, 'r')
@@ -44,31 +66,31 @@ def two_files (ARG_file1, ARG_file2) -> str:
 
 
 def getname_firstany():
-    """Returns a random first name."""
+    """Returns a random first name. Accepts nothing, returns nothing."""
     result = two_files ("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")
     print (result)
 
 
 def getname_firstfemale():
-    """Returns a random female first name."""
+    """Returns a random female first name. Accepts nothing, returns nothing."""
     result = one_file ("USCensusNamesFirstFemale.txt")
     print (result)
 
 
 def getname_firstmale():
-    """Returns a random male first name."""
+    """Returns a random male first name. Accepts nothing, returns nothing."""
     result = one_file ("USCensusNamesFirstMale.txt")
     print (result)
 
 
 def getname_lastany():
-    """Returns a random last name."""
+    """Returns a random last name. Accepts nothing, returns nothing."""
     result = one_file ("USCensusNamesLast.txt")
     print (result)
 
 
 def getname_fullany():
-    """Returns a random full name."""
+    """Returns a random full name. Accepts nothing, returns nothing."""
     firstname = two_files ("USCensusNamesFirstFemale.txt", "USCensusNamesFirstMale.txt")
     lastname = one_file ("USCensusNamesLast.txt")
     result = firstname + lastname
@@ -76,7 +98,7 @@ def getname_fullany():
 
 
 def getname_fullfemale():
-    """Returns a random female full name."""
+    """Returns a random female full name. Accepts nothing, returns nothing."""
     firstname = one_file ("USCensusNamesFirstFemale.txt")
     lastname = one_file ("USCensusNamesLast.txt")
     result = firstname + lastname
@@ -84,7 +106,7 @@ def getname_fullfemale():
 
 
 def getname_fullmale():
-    """Returns a random male full name."""
+    """Prints a random male full name. Accepts nothing, returns nothing."""
     firstname = one_file ("USCensusNamesFirstMale.txt")
     lastname = one_file ("USCensusNamesLast.txt")
     result = firstname + lastname

@@ -23,7 +23,15 @@ _LOGICLOGGER = logs.BaseLogger (__name__)
 
 
 def generate_names (ARG_nametype: str, ARG_number: int):
-    """This function generates a number of random names."""
+    """This function generates a number of random names.
+
+    Parameters
+    ----------
+    ARG_nametype : str
+        Valid nametypes are 'first', 'firstfemale', 'firstmale', 'last', 'full', 'fullfemale', 'fullmale'.
+    ARG_number : int
+        The number of names to generate.
+    """
     if ARG_nametype == "first":
         ut.repeat (randomname.getname_firstany, ARG_number)
     elif ARG_nametype == "firstfemale":
@@ -42,8 +50,16 @@ def generate_names (ARG_nametype: str, ARG_number: int):
         raise ValueError ("rosevomit.programlogic.logiccontroller.generatenames() encountered an unexpected value for 'ARG_nametype'. The value of ARG_nametype was: {}".format(ARG_nametype))
 
 
-def gen_timeline(ARG_eventtypes, ARG_yearrange):
-    """This function receives the user input and calls functions accordingly."""
+def gen_timeline(ARG_eventtypes: str, ARG_yearrange: int):
+    """This function receives the user input and calls functions accordingly.
+
+    Parameters
+    ----------
+    ARG_eventtypes : str
+        The only valid eventtype at the moment is 'globalevents'.
+    ARG_yearrange : int
+        The number of years to generate events for.
+    """
     if ARG_eventtypes == "globalevents":
         def get_events(ARG_timeline_year, ARG_output_file):
             """This function checks to see what events have happened in a given year. It assumes that the probability of events does not change from year to year."""
@@ -82,7 +98,13 @@ def gen_timeline(ARG_eventtypes, ARG_yearrange):
 
 
 def gen_suncalc (ARG_lat, ARG_long):
-    """This function asks the user if the suncalc output will be saved, and then calls the suncalc function in an appropriate manner."""
+    """This function asks the user if the suncalc output will be saved, and then calls the suncalc function in an appropriate manner.
+
+    Parameters
+    ----------
+    ARG_lat, ARG_long
+        The observer's latitude and longitude, which will be passed to suncalc.main()
+    """
     try:
         try:
             os.chdir ("./temp/")

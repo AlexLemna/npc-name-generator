@@ -10,6 +10,7 @@ from math import degrees, radians, sin, cos, tan, asin, acos, atan2
 import os
 import sys
 import textwrap
+from typing import Callable, Union
 
 from core import settings
 from core.logs import BaseLogger
@@ -21,12 +22,20 @@ UTILITIESLOGGER = BaseLogger(__name__)
 #                               SYSTEM
 # ======================================================================
 def cwd_home():
-    """Ensures that the current working directory is set to the home directory of the active script. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory"""
+    """Ensures that the current working directory is set to the home directory of the active script. Accepts no parameters, returns nothing. From https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory"""
     os.chdir (os.path.dirname (sys.argv[0]))
 
 
 def debugmessage(ARG_debugstring: str, **kwargs):
-    """If debugging is on, print 'debugstring'. Otherwise, do nothing."""
+    """If debugging is on, print 'debugstring'. Otherwise, do nothing.
+
+    Parameters
+    ----------
+    ARG_debugstring : str
+        Text of debug message to print.
+    **kwargs
+        Keyword arguments to pass to textwrap.fill()
+    """
     try:
         is_debugging_on: bool = settings.show_debug()
     except (NoSectionError, NoOptionError):
@@ -38,8 +47,25 @@ def debugmessage(ARG_debugstring: str, **kwargs):
         pass
 
 
-def validate_range (x, ARG_startvalue, ARG_endvalue, ARG_raise_ex: bool=True):
-    """Check to see if 'x' is between 'ARG_startvalue' and 'ARG_endvalue' (inclusive)."""
+def validate_range (x, ARG_startvalue, ARG_endvalue, ARG_raise_ex: bool=True) -> Union[bool, None]:
+    """Check to see if 'x' is between 'ARG_startvalue' and 'ARG_endvalue' (inclusive).
+
+    Parameters
+    ----------
+    x
+        The number to check.
+    ARG_startvalue
+        The minimum acceptable value of 'x'
+    ARG_endvalue
+        The maximum acceptable value of 'x'
+    ARG_raise_ex : bool, defaults to 'True'
+        If 'True', this function will raise ValueError if 'x' is not between 'ARG_startvalue' and 'ARG_endvalue'. If 'False', this function will simply return a boolean indicating if 'x' is between 'ARG_startvalue' and 'ARG_endvalue'.
+
+    Returns
+    -------
+    None or bool
+        If ARG_raise_ex is 'True', this function raises ValueError if x is outside the specified range and otherwise passes silently. If ARG_raise_ex is 'False', this function returns 'True' is x is inside the specified range and otherwise returns 'False'.
+    """
     assert isinstance (ARG_raise_ex, bool)
     arguments = [x, ARG_startvalue, ARG_endvalue]
     for arg in arguments:
@@ -59,14 +85,35 @@ def validate_range (x, ARG_startvalue, ARG_endvalue, ARG_raise_ex: bool=True):
             return False
 
 
-def repeat (x, y):
-    """Repeats x() 'y' times."""
+def repeat (x: Callable, y: int):
+    """Repeats x() 'y' times.
+
+    Parameters
+    ----------
+    x : typing.Callable
+        The object to be called repeatedly
+    y : int
+        The number of times to call 'x'
+    """
     for integer in range (0, y):
         x()
 
 
-def setname(ARG_basename, ARG_fileextension: str="txt"):
-    """Determines a valid filename for based off a desired 'ARG_basename'. Checks to make sure that _filename is not already in use. If it is, it adds a number on the end of _filename and keeps checking to see if the new _filename is unused, incrementing the number until it finds an unused _filename. """
+def setname(ARG_basename: str, ARG_fileextension: str="txt") -> str:
+    """Determines a valid filename for based off a desired 'ARG_basename'. Checks to make sure that _filename is not already in use. If it is, it adds a number on the end of _filename and keeps checking to see if the new _filename is unused, incrementing the number until it finds an unused _filename.
+
+    Parameters
+    ----------
+    ARG_basename : str
+        The desired name for the file. For instance, if 'ARG_basename' is 'example' and files named example1.txt, example2.txt, and example3.txt already exist, then this function will return example4.txt.
+    ARG_fileextension : str, defaults to 'txt'
+        The desired file extension for the file. The file extension is considered part of the filename when this function checks to see if the filename already exists.
+
+    Returns
+    -------
+    _filename : str
+        A valid filename that hass been determined to be unique.
+    """
     _startnum = 1
     _filename = f"{ARG_basename}{_startnum}.{ARG_fileextension}"
     while os.path.isfile (_filename) is True:
@@ -79,17 +126,51 @@ def setname(ARG_basename, ARG_fileextension: str="txt"):
 #                               MATH
 # ======================================================================
 def deg2rad(x):
-    """Converts degrees to radians."""
+    """Converts degrees to radians.
+
+    Parameters
+    ----------
+    x
+        A value in degrees
+    """
     return radians(x)
 
 
 def rad2deg(x):
-    """Converts radians to degrees."""
+    """Converts radians to degrees.
+
+    Parameters
+    ----------
+    x
+        A value in radians
+    """
     return degrees(x)
 
 
 class Angle(Decimal):
-    """An angle, measured in degrees."""
+    """An angle, measured in degrees.
+
+    Paraneters
+    ----------
+    deg
+        The initial measurement of the angle in degrees (°).
+
+    Attributes
+    ----------
+    _measure : Decimal
+        The current measurement of the angle in degrees (°).
+
+    Methods
+    -------
+    The class Angle has many methods and properties. Some important ones are:
+
+    add(x)
+        Add 'x' to the angle's current '_measure'. 'x' should be measured in degrees (°).
+    indegrees()
+        Returns the current measurement of the angle in degrees.
+    inradians()
+        Returns the current measurement of the angle in radians.
+    """
     def __init__(self, deg):
         self._measure = Decimal(angle_sanity_check(Decimal(deg)))
 
@@ -186,7 +267,18 @@ class Angle(Decimal):
 
 
 def angle_sanity_check (ARG_angle_value):
-    """Ensures that a given angle is between 0 and 360 degrees. If the angle is not within that range, it converts it into that range and returns the corrected angle measurement."""
+    """Ensures that a given angle is between 0° and 360°. If the angle is not within that range, it converts it into that range and returns the corrected angle measurement.
+
+    Parameters
+    ----------
+    ARG_angle_value
+        A value in degrees
+
+    Returns
+    -------
+    angle_value : int or Decimal
+        An angle value between 0° and 360° that is equivalent to ARG_angle_value.
+    """
     # First, we need to prevent some floating point messiness by using the decimal module, otherwise we get results like "-750.8 + 360 = -390.79999999999995", which is obviously ever-so-slightly off. Now, we COULD just admit that this is a tiny error that won't be meaningful for our program and automatically round our results to an acceptable level of precision before this function returns the result, but... I'm new to programming, so I still have the energy and inexperience required to be offended by binary floating-point.
     if isinstance (ARG_angle_value, (Decimal, str, int, tuple)):
         angle_value = Decimal (ARG_angle_value)

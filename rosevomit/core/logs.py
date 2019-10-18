@@ -11,7 +11,15 @@ import os
 
 
 class BaseLogger:  # pylint: disable=too-few-public-methods
-    """Auxiliary logger, which can be called from other modules."""
+    """Auxiliary logger, which can be called from other modules.
+
+    Upon __init__, creates a logger with ARG_loggername as a name and generates a INFO-level log record saying 'Logger initialized.'.
+
+    Parameters
+    ----------
+    ARG_loggername : str
+        The name that the logger should be called under. It's highly recommended to just set ARG_loggername to __name__.
+    """
     def __init__(self, ARG_loggername: str):
         self.logger = logging.getLogger (f"{ARG_loggername}")
         self.logger.info ("Logger initialized.")
@@ -22,7 +30,13 @@ from core import settings
 from core.constants import LOG_DIRECTORY_PATH
 
 def _startsession (ARG_targetfile):
-    """Writes a blank line and a session header to the targetfile."""
+    """Writes a blank line and a session header to the targetfile.
+
+    Parameters
+    ----------
+    ARG_targetfile : any type that open() accepts as a filename
+        Path to the file that should recieve the new session header.
+    """
     if os.path.isfile(ARG_targetfile) is False:
         fileheader = _logfile_readme()
         with open(ARG_targetfile, "w") as f:
@@ -33,7 +47,13 @@ def _startsession (ARG_targetfile):
 
 
 def _logfile_readme() -> str:
-    """Returns a string containing a 'how to read this logfile' message."""
+    """Returns a string containing a 'how to read this logfile' message.
+
+    Returns
+    -------
+    str
+        Returns a formatted paragraph-long message with tips on reading log file output.
+    """
     line1 = "Messages are displayed below in the format"
     line2 = "    <DATE> <TIME> <LOGGER NAME> @ <FILE>:<LINE> - <LEVEL> - <FUNCTION>:<MESSAGE>"
     line3 = "where <DATE> is the date in 'YYYY-MM-DD' format, <TIME> is the time in 'HH:MM:SS,milliseconds' format, <LOGGER NAME> is the name of the logger that generated the message (which should be the __name__ of the file where the logger was initialized), <FILE> and <LINE> is the file name and line number where the message was generated, <LEVEL> is the priority level that the message was generated at, <FUNCTION> is the name of the function that the message was generated inside, and <MESSAGE> is the actual message that was generated. "
@@ -41,8 +61,16 @@ def _logfile_readme() -> str:
     return message
 
 
-def start_logging(ARG_parentlogger, ARG_bufferlogger):
-    """Create file handlers, creates formatter and adds it to the handlers, and adds those handlers to logger."""
+def start_logging(ARG_parentlogger: logging.Logger, ARG_bufferlogger: logging.handlers.MemoryHandler):
+    """Create file handlers, creates formatter and adds it to the handlers, and adds those handlers to logger.
+
+    Parameters
+    ----------
+    ARG_parentlogger : logging.Logger
+        The root logger.
+    ARG_bufferlogger : logging.handlers.Memoryhandler
+        A MemoryHander object to buffer messages to.
+    """
     if settings.logging_service() is False:
         pass
     else:

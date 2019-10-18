@@ -16,18 +16,38 @@ _DYNAMICCONSTANTSLOGGER = logs.BaseLogger (__name__)
 
 
 def get_critical_directory (ARG_dirname: str) -> pathlib.Path:
-    """Tries to find the path to a directory. If the path cannot be found, this function will *not* surpress any exceptions and will *not* attempt to create a directory on its own.
+    """Returns the path to a Rosevomit subdirectory. Basically a wrapper for core.directories.get_dir().
 
-    Basically, this function is just a wrapper for core.directories.get_dir().
+    If the path cannot be found, this function will *not* surpress any exceptions.
+
+    Parameters
+    ----------
+    ARG_dirname : str
+        The name of the Rosevomit directory you're looking for.
+
+    Returns
+    -------
+    pathlib.Path
+        A path returned from core.directories.get_dir().
     """
     _result = directories.get_dir (ARG_dirname)
     return _result
 
 
 def get_noncritical_directory (ARG_dirname: str) -> pathlib.Path:
-    """Tries to find the path to a directory. If the path cannot be found, this function will *not* surpress any exceptions and will *not* attempt to create a directory on its own.
+    """Returns the path to a Rosevomit subdirectory. Basically a wrapper for core.directories.get_dir().
 
-    Basically, this function is just a wrapper for core.directories.get_dir().
+    If FileNotFoundErrors or ValueErrors arise, this function will surpress those errors and return "None".
+
+    Parameters
+    ----------
+    ARG_dirname : str
+        The name of the Rosevomit directory you're looking for.
+
+    Returns
+    -------
+    pathlib.Path or NoneType
+        A path returned from core.directories.get_dir(), or None if FileNotFoundError or ValueError are raised.
     """
     try:
         _result = directories.get_dir (ARG_dirname)
@@ -38,7 +58,24 @@ def get_noncritical_directory (ARG_dirname: str) -> pathlib.Path:
 
 
 def get_version_number(ARG_core_directory: pathlib.Path):
-    """Gets the version number."""
+    """Gets the version number.
+
+    Parameters
+    ----------
+    ARG_core_directory : pathlib.Path
+        The path to Rosevomit's core directory.
+
+    Returns
+    -------
+    major_version : str or NoneType
+        The program's major version number.
+    minor_version : str or NoneType
+        The program's minor version number.
+    patch_version : str ot NoneType
+        The program's patch version number.
+    is_devbuild : bool
+        True if this program is a dev version, else False.
+    """
     try:
         # debugmessage ("Getting version number...", end=" ")
         os.chdir (ARG_core_directory)

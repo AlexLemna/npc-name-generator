@@ -15,7 +15,15 @@ _RANDOMEVENTLOGGER = logs.BaseLogger (__name__)
 
 
 def check_volcano(ARG_in_year, ARG_csv_destination=""):
-    """Checks to see if a volcano explodes. Returns text to display onscreen, and also possibly writes some data related to each event to the specified file."""
+    """Checks to see if a volcano explodes. Returns text to display onscreen, and also possibly writes some data related to each event to the specified file.
+
+    Parameters
+    ----------
+    ARG_in_year
+        "...in this year, something happened..."
+    ARG_csv_destination (defaults to "")
+        The file to store results in. Should include '.csv' extension.
+    """
     # Validating arguments
     if os.path.isfile (f"{ARG_csv_destination}") is True:
         _write_to_file = True
@@ -46,7 +54,15 @@ def check_volcano(ARG_in_year, ARG_csv_destination=""):
 
 
 def check_earthquake(ARG_in_year, ARG_csv_destination=""):
-    """Checks to see if an earthquake occurs. Note that the frequency values here are not exactly based off real-life values. Also note that there are 10 - 20 serious earthquakes (rated X) each year that fall below XI and XII. These are omitted due to their frequency."""
+    """Checks to see if an earthquake occurs. Note that the frequency values here are not exactly based off real-life values. Also note that there are 10 - 20 serious earthquakes (rated X) each year that fall below XI and XII. These are omitted due to their frequency.
+
+    Parameters
+    ----------
+    ARG_in_year
+        "...in this year, something happened..."
+    ARG_csv_destination (defaults to "")
+        The file to store results in. Should include '.csv' extension.
+    """
     # Validating arguments
     if os.path.isfile (f"{ARG_csv_destination}") is True:
         _write_to_file = True
@@ -72,7 +88,15 @@ def check_earthquake(ARG_in_year, ARG_csv_destination=""):
 
 
 def check_impact(ARG_in_year, ARG_csv_destination=""):
-    """Checks to see if a asteroid impact occurs. Returns text to display onscreen, and also possibly writes some data related to each event to the specified file."""
+    """Checks to see if a asteroid impact occurs. Returns text to display onscreen, and also possibly writes some data related to each event to the specified file.
+
+    Parameters
+    ----------
+    ARG_in_year
+        "...in this year, something happened..."
+    ARG_csv_destination (defaults to "")
+        The file to store results in. Should include '.csv' extension.
+    """
     # Validating arguments
     if os.path.isfile (f"{ARG_csv_destination}") is True:
         _write_to_file = True
@@ -142,7 +166,15 @@ def check_impact(ARG_in_year, ARG_csv_destination=""):
 
 
 def check_astronomy(ARG_in_year, ARG_csv_destination=""):
-    """Checks to see if a supernova becomes visible. Returns text to display onscreen, and also possibly writes some data related to each event to the specified file."""
+    """Checks to see if a supernova becomes visible. Returns text to display onscreen, and also possibly writes some data related to each event to the specified file.
+
+    Parameters
+    ----------
+    ARG_in_year
+        "...in this year, something happened..."
+    ARG_csv_destination (defaults to "")
+        The file to store results in. Should include '.csv' extension.
+    """
     # Validating arguments
     if os.path.isfile (f"{ARG_csv_destination}") is True:
         _write_to_file = True

@@ -8,6 +8,7 @@
 import configparser
 import os
 import textwrap
+from typing import Union
 
 from core import logs
 
@@ -29,14 +30,27 @@ SETTINGS_FILE = os.path.join (os.path.dirname (__file__), "settings-data.ini")
 def existence() -> bool:
     """Checks to see if the file defined as the global constant SETTINGS_FILE exists.
 
-    Note: this function might have trouble locating the SETTINGS_FILE if run as a module.
+    Returns
+    -------
+    bool
+        Returns os.path.isfile(SETTINGS_FILE)
+
+    Note
+    ----
+    This function might have trouble locating the SETTINGS_FILE if run as a module.
     """
     _result = os.path.isfile(SETTINGS_FILE)
     return _result
 
 
 def is_valid() -> bool:
-    """Checks to see if the file specified as the 'SETTINGS_FILE' has certain expected options and values."""
+    """Checks to see if the file specified as the 'SETTINGS_FILE' has certain expected options and values.
+
+    Returns
+    -------
+    bool
+        Returns 'False' if core.settings.show_debug(), core.settings.logging_service(), core.settings.exit_dialog(), or core.settings.autoclean_temp_directory() raise configparser.Error.
+    """
     try:
         show_debug()
         logging_service()
@@ -49,7 +63,7 @@ def is_valid() -> bool:
 
 
 def restore_file():
-    """Recreates the file specified in the 'SETTINGS_FILE' variable using internally defined defaults."""
+    """Recreates the file specified in the 'SETTINGS_FILE' variable using internally defined defaults. Accepts no parameters, returns nothing."""
     # Initializing ConfigParser()
     config = configparser.ConfigParser(allow_no_value=True)
     # Entering the default values we want to restore
@@ -82,7 +96,13 @@ def restore_file():
 # These functions are used for reading the values of settings from the settings file, either for display to the user or for internal program use.
 # For developer readibility, these functions should be listed below in the same order that the values they read in the settings-data.ini file are listed.
 def show_debug() -> bool:
-    """Returns true or false based on the value of 'show_debug' in the 'settings-data.ini' file."""
+    """Returns true or false based on the value of 'show_debug' in the 'settings-data.ini' file.
+
+    Returns
+    -------
+    bool
+        The return value of config.getboolean() for section 'debugging' and option 'show_debug'.
+    """
     global SETTINGS_FILE
     settings = open(SETTINGS_FILE)
     config = configparser.ConfigParser()  # Create an instance of ConfigParser
@@ -92,7 +112,13 @@ def show_debug() -> bool:
 
 
 def logging_service() -> bool:
-    """Returns true of false based on the value of 'logging_service' in the 'settings-data.ini' file."""
+    """Returns true of false based on the value of 'logging_service' in the 'settings-data.ini' file.
+
+    Returns
+    -------
+    bool
+        The return value of config.getboolean() for section 'debugging' and option 'logging_service'.
+    """
     global SETTINGS_FILE
     settings = open(SETTINGS_FILE)
     config = configparser.ConfigParser()  # Create an instance of ConfigParser
@@ -102,7 +128,13 @@ def logging_service() -> bool:
 
 
 def exit_dialog() -> bool:
-    """Returns true or false based on the value of 'exit_dialog' in the 'settings-data.ini' file."""
+    """Returns true or false based on the value of 'exit_dialog' in the 'settings-data.ini' file.
+
+    Returns
+    -------
+    bool
+        The return value of config.getboolean() for section 'exit behavior' and option 'exit_dialog'.
+    """
     global SETTINGS_FILE
     settings = open(SETTINGS_FILE)
     config = configparser.ConfigParser()  # Create an instance of ConfigParser
@@ -112,7 +144,13 @@ def exit_dialog() -> bool:
 
 
 def autoclean_temp_directory() -> bool:
-    """Returns true or false based on the value of 'autoclean_temp_directory' in the 'settings-data.ini' file."""
+    """Returns true or false based on the value of 'autoclean_temp_directory' in the 'settings-data.ini' file.
+
+    Returns
+    -------
+    bool
+        The return value of config.getboolean() for section 'exit behavior' and option 'autoclean_temp_directory'.
+    """
     global SETTINGS_FILE
     settings = open(SETTINGS_FILE)
     config = configparser.ConfigParser()  # Create an instance of ConfigParser
@@ -122,7 +160,13 @@ def autoclean_temp_directory() -> bool:
 
 # ---------- (3) HELPER FUNCTIONS FOR DISPLAYING SETTINGS DIALOG ----------
 def prompt_to_change_settings() -> bool:
-    """Asks the user if they want to change any settings. Returns true if the user enters 'y' and false if the user enters nothing or 'n'."""
+    """Asks the user if they want to change any settings.
+
+    Returns
+    -------
+    bool
+        If user inputs 'y', return 'True'. If user inputs 'n' or nothing, return 'False'.
+    """
     _input = input ("Would you like to change any settings? y/[n]: ")
     _input = _input.strip()
     if _input in ("n", ""):
@@ -135,8 +179,20 @@ def prompt_to_change_settings() -> bool:
         return recursive_response
 
 
-def _prompt_for_section_name (ARG_config_object) -> str:
-    """Prompts the user to enter a valid section name. Checks that section name exists."""
+def _prompt_for_section_name (ARG_config_object: configparser.ConfigParser) -> Union[str, None]:
+    """Prompts the user to enter a valid section name. Checks that section name exists.
+
+    Parameters
+    ----------
+    ARG_config_object : configparser.ConfigParser
+        The settings, which have been read from `SETTINGS_FILE` by configparser and stored in this configparser.ConfigParser object.
+
+
+    Returns
+    -------
+    str or None
+        If a string, it's an section name that exists in the given config object. If None, the user wishes to exit whatever dialog called this function.
+    """
     print ()
     print ("Type the section name of the setting you would like to change, or")
     _input = input ("leave blank to exit: ")
@@ -152,8 +208,21 @@ def _prompt_for_section_name (ARG_config_object) -> str:
         return section_name
 
 
-def _prompt_for_option_name (ARG_config_object, ARG_section: str) -> str:
-    """Prompts the user to enter a valid option name. Checks that option name exists."""
+def _prompt_for_option_name (ARG_config_object: configparser.ConfigParser, ARG_section: str) -> Union[str, None]:
+    """Prompts the user to enter a valid option name. Checks that option name exists.
+
+    Parameters
+    ----------
+    ARG_config_object : configparser.ConfigParser
+        The settings, which have been read from `SETTINGS_FILE` by configparser and stored in this configparser.ConfigParser object.
+    ARG_section : str
+        A valid section name in the config object (see above).
+
+    Returns
+    -------
+    str or None
+        If a string, it's an option name that exists in the given section and config object. If None, the user wishes to exit whatever dialog called this function.
+    """
     print ()
     print (f"SELECTED SECTION: {ARG_section}")
     print ("Type the option name of the setting you would like to change, or")
@@ -170,10 +239,23 @@ def _prompt_for_option_name (ARG_config_object, ARG_section: str) -> str:
         return option_name
 
 
-def _prompt_for_new_value (ARG_section: str, ARG_option: str) -> str:
+def _prompt_for_new_value (ARG_section: str, ARG_option: str) -> Union[str, None]:
     """Prompts the user to enter a new value.
 
-    Unlike the other '_prompt_ functions, we don't need an argument for the ConfigParser object becasuse we aren't using using any of its validation methods."""
+    Unlike the other '_prompt_ functions, we don't need an argument for the ConfigParser object becasuse we aren't using using any of its validation methods.
+
+    Parameters
+    ----------
+    ARG_section : str
+        A valid section name in the ConfigParser object.
+    ARG_option : str
+        A valid option name in the ConfigParser object.
+
+    Returns
+    -------
+    str or None
+        If a string, it's the value the user entered. If None, the user wishes to exit whatever dialog called this function.
+    """
     print ()
     print (f"SELECTED SECTION: {ARG_section}, SELECTED OPTION: {ARG_option}")
     _input = input ("Type the desired new value, or leave blank to exit: ")
@@ -187,7 +269,7 @@ def _prompt_for_new_value (ARG_section: str, ARG_option: str) -> str:
 
 
 def dialog_change_setting():
-    """Asks the user to type the name of the setting they wish to change. Validates that the user's input is an actual name ('key') in the 'settings-data.ini' file. Launches the appropriate function to change that setting."""
+    """Asks the user to type the name of the setting they wish to change. Validates that the user's input is an actual name ('key') in the 'settings-data.ini' file. Launches the appropriate function to change that setting. Accepts no parameters, returns nothing."""
     global SETTINGS_FILE
     settings = open (SETTINGS_FILE)
     config = configparser.ConfigParser()
@@ -212,7 +294,14 @@ def dialog_change_setting():
 # ---------- (4) MAIN FUNCTION FOR DISPLAYING SETTINGS DIALOG ----------
 # NOTE: Perhaps this should go in the programcli folder? Need to think about it.
 def settings_user_interface (ARG_show_header: bool=True):
-    """Displays a command-line interface to the user for viewing and/or modifying current settings."""
+    """Displays a command-line interface to the user for viewing and/or modifying current settings.
+
+    Parameters
+    ----------
+    ARG_show_header : bool, defaults to 'True'
+        If 'True', this function will display this header: 
+        "---------- Settings ----------"
+    """
     print ()
     if ARG_show_header:
         print (10 * "-", "Settings", 10 * "-")

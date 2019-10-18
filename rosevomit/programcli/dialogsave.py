@@ -14,7 +14,18 @@ _SAVE_DIALOG_LOGGER = logs.BaseLogger (__name__)
 
 
 def prompt_save_yesno (ARG_filename: str="") -> bool:
-    """Asks the user if they want to save ARG_file. Basically a convenient wrapper around prompt_yesno()."""
+    """Asks the user if they want to save ARG_file. Basically a convenient wrapper around prompt_yesno().
+
+    Parameters
+    ----------
+    ARG_filename : str
+        The name of the file that the user will be asked if they want to save.
+
+    Returns
+    -------
+    bool
+        If the user wants to save 'ARG_file", this returns 'True'. Else, 'False'.
+    """
     if ARG_filename == "":
         result = _dialog.prompt_yesno ("Do you want to save the results? ")
     else:
@@ -23,7 +34,18 @@ def prompt_save_yesno (ARG_filename: str="") -> bool:
 
 
 def prompt_savename (ARG_format: str) -> str:
-    """Asks the user what name they want to save the file under."""
+    """Asks the user what name they want to save the file under.
+
+    Parameters
+    ----------
+    ARG_format : str
+        Used to generate the file extension as ".ARG_format"
+
+    Returns
+    -------
+    result : str
+        This is the filename entered by the user with the file extension ".ARG_format" added to the end.
+"""
     if ARG_format[0] != ".":
         extension = "." + ARG_format
     else:
@@ -36,9 +58,18 @@ def prompt_savename (ARG_format: str) -> str:
 
 def proactive(ARG_defaultname: str="file"):
     """Use this function *before* generating data.
-    Returns:
-      savebool: A True/False value. If True, the data should be saved at /saved/'filename'. If False, the data should be saved at /temp/'filename'.
-      filename: A string.
+
+    Parameters
+    ----------
+    ARG_defaultname : str, default is "file"
+        The filename to save the data under, assuming the user does not choose another name.
+
+    Returns
+    -------
+    savebool : bool
+        If True, the data should be saved at /saved/'filename'. If False, the data should be saved at /temp/'filename'.
+    filename : str
+        The filename to save the data under.
     """
     savebool: bool
     filename: str
@@ -60,12 +91,16 @@ def proactive(ARG_defaultname: str="file"):
 # TODO: break the following function in to two functions - one where the user can decide if the exiting file should be overwritten, and one to prompt the user for a new name.
 def filealreadyexists(ARG_filename) -> typing.Union[str, bool]:
     """Use this function when the user tries to save data using a name that already exists.
-    Returns:
-      (either)
-      save_as: A string that can be used as the new filename to save data under.
-      (or)
-      True: This function returns true if the user decides to keep the original file and delete the current data without saving it.
-      False: This function returns false if the user decides to overwrite the original file with the new data.
+
+    Parameters
+    ----------
+    ARG_filename
+        The filename that already exists.
+
+    Returns
+    -------
+    str (new_filename) or bool
+      This function returns 'True' if the user decides to keep the original file and delete the current data without saving it. This function returns 'False' if the user decides to overwrite the original file with the new data. If this function returns a string, this means that the user has decided to save data under a new filename.
     """
     formatting.printwrap (f"A file with the filename 'saved/{ARG_filename}' already exists. What should we do with the temporary file 'temp/{ARG_filename}'?")
     formatting.printwrap (f"    1. Overwrite the old 'saved/{ARG_filename}' using 'temp/{ARG_filename}'")
@@ -81,8 +116,8 @@ def filealreadyexists(ARG_filename) -> typing.Union[str, bool]:
         save_as = input ("Enter new name: ")
         save_as = save_as.strip()
         if save_as == "":
-            save_as = "new-" + ARG_filename
-        return save_as
+            new_filename = "new-" + ARG_filename
+        return new_filename
     else:
         messages.unrecognized_input_message (_input)
         recursive_result = filealreadyexists(ARG_filename)

@@ -6,6 +6,7 @@
 """A file containing the base functions for a command line interface dialog."""
 from distutils.util import strtobool
 import re
+from typing import Union
 
 from core import logs, REGEXES_NO, REGEXES_YES
 from programcli import formatting, messages
@@ -14,18 +15,39 @@ _DIALOG_LOGGER = logs.BaseLogger (__name__)
 
 # ---------- Prompts ----------
 def _prompt_hint_bool (ARG_default: bool) -> str:
-    """Determines which prompt hint to show the user."""
+    """Determines which prompt hint to show the user.
+
+    Parameters
+    ----------
+    ARG_default : bool
+        Determines which prompt hint to return.
+
+    Returns
+    -------
+    str
+        The prompt hint. If 'True', returns '([Yes]/No)'. If 'False', returns '(Yes/[No])'.
+    """
     if ARG_default is True:
         return "([Yes]/No)"
     elif ARG_default is False:
         return "(Yes/[No])"
     else:
-        # ARG_default must be bool.
-        raise TypeError
+        raise TypeError ("ARG_default must be bool.")
 
 
 def prompt_generic (ARG_prompt: str) -> str:
-    """Displays a prompt, accepts input, cleans it, and returns it."""
+    """Displays a prompt, accepts input, cleans it, and returns it.
+
+    Parameters
+    ----------
+    ARG_prompt : str
+        Prompt to display.
+
+    Returns
+    -------
+    str
+        User's input in response to the prompt.
+    """
     _input = formatting.inputwrap (ARG_prompt)
     result = _input.strip()
     if result == "":
@@ -36,7 +58,20 @@ def prompt_generic (ARG_prompt: str) -> str:
 
 
 def prompt_yesno (ARG_prompt: str, ARG_default: bool=True) -> bool:
-    """Asks the user a yes/no question, and returns the result as a bool."""
+    """Asks the user a yes/no question, and returns the result as a bool.
+
+    Parameters
+    ----------
+    ARG_prompt : str
+        Prompt to display.
+    ARG_default : bool, defaults to True
+        The boolean value to return if the user inputs nothing. Also determines which prompt hint will be displayed to the user.
+
+    Returns
+    -------
+    bool
+        User's input in response to the prompt.
+    """
     prompt = ARG_prompt.strip()
     input_hint = _prompt_hint_bool (ARG_default)
     _input = formatting.inputwrap (f"{prompt} {input_hint}")
@@ -54,8 +89,16 @@ def prompt_yesno (ARG_prompt: str, ARG_default: bool=True) -> bool:
         return recursive_result
 
 # ---------- Menus ----------
-def _menu_from_options(ARG_menuoptions, ARG_returns_to: str):
-    """Displays a menu from a list or tuple of options. Unlike a menu from a dict (see '_menu_from_keyed_options()'), this menu will have automatically assigned 'keys'. The 'ARG_returns_to' is the 'parent' menu, and is always offered as the '0' option."""
+def _menu_from_options(ARG_menuoptions: Union[list, tuple], ARG_returns_to: str):
+    """Displays a menu from a list or tuple of options. Unlike a menu from a dict (see '_menu_from_keyed_options()'), this menu will have automatically assigned 'keys'. The 'ARG_returns_to' is the 'parent' menu, and is always offered as the '0' option.
+
+    Parameters
+    ----------
+    ARG_menuoptions : list or tuple
+        The options to list in the menu display.
+    ARG_returns_to : str
+        The menu to return to if the user enters '0'.
+    """
     assert isinstance (ARG_menuoptions, (list, tuple))
     formatting.printwrap (f"0. {ARG_returns_to}", ARG_indented=True)
     for option_number, option in enumerate (ARG_menuoptions):
@@ -67,8 +110,18 @@ def _menu_from_keyed_options (ARG_menuoptions: dict, ARG_returns_to: str):
     raise NotImplementedError("The developer has not yet implemented menus based on dicts yet!")
 
 
-def menu(ARG_name: str, ARG_parent_menu_name: str, ARG_options):
-    """Displays a menu of options. Technically, a wrapper function for a bunch of other internal functions that it calls depending on the type of ARG_options."""
+def menu(ARG_name: str, ARG_parent_menu_name: str, ARG_options: Union[list, tuple, dict]):
+    """Displays a menu of options. Technically, a wrapper function for a bunch of other internal functions that it calls depending on the type of ARG_options.
+
+    Parameters
+    ----------
+    ARG_name : str
+        The name of the menu, to be displayed in a header.
+    ARG_parent_menu_name : str
+        The name of the menu to return to.
+    ARG_options : list or tuple or dict
+        A list, tuple, or dict containing the options to display.
+    """
     formatting.menu_title (ARG_name)
     if isinstance (ARG_options, (list, tuple)):
         _menu_from_options (ARG_options, ARG_returns_to=ARG_parent_menu_name)
@@ -79,5 +132,5 @@ def menu(ARG_name: str, ARG_parent_menu_name: str, ARG_options):
 
 # ---------- Displays ----------
 def display_directory_contents():
-    """Displays the contents of a directory."""
+    """Displays the contents of a directory. NOT YET IMPLEMENTED!"""
     raise NotImplementedError

@@ -10,6 +10,16 @@ _CUSTOMERRORSLOGGER = logs.BaseLogger (__name__)
 
 
 class RealityError(Exception):
-    """These things should not happen."""
+    """These things should not happen.
+
+    Upon __init__, pass *args and **kwargs to Exception (superclass).
+
+    Parameters
+    ----------
+    *args
+        A varying number of positional arguments.
+    **kwargs
+        A varying number of named (keyworded) arguments.
+    """
     def __init__ (self, *args, **kwargs):
         super().__init__(self, *args, **kwargs)

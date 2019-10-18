@@ -13,8 +13,21 @@ from core.utilities import validate_range
 _TIMETRACKER = logs.BaseLogger (__name__)
 
 
-def time2fractday (ARG_day, ARG_hour=0, ARG_minute=0, ARG_second=0):
-    """This function accepts arguments for a given time (day, hour, minute, and second) of the year, and returns the equivalent fractional day."""
+def time2fractday (ARG_day: int, ARG_hour: int=0, ARG_minute: int=0, ARG_second: int=0):
+    """This function accepts arguments for a given time (day, hour, minute, and second) of the year, and returns the equivalent fractional day.
+
+    Parameters
+    ----------
+    ARG_day : int
+        The day of the year of the desired fractional date, from 1 to 365.
+    ARG_hour, ARG_minute, ARG_second : int (default is 0)
+        The hour, minute, and second of the desired fractional date. 'ARG_hour' must be between 0 and 23. 'ARG_minute' and 'ARG_second' must be between 0 and 59.
+
+    Returns
+    -------
+    int or Decimal
+        The fractional day equivalent to the given day, hour, minute, and second.
+    """
     arglist = [ARG_day, ARG_hour, ARG_minute, ARG_second]
     for arg in arglist:
         assert isinstance (arg, int)

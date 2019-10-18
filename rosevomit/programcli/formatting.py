@@ -12,7 +12,17 @@ _FORMATTING_LOGGER = logs.BaseLogger (__name__)
 
 
 def printwrap(x, ARG_indented: bool=False, ARG_end_with: str='\n'):
-    """Textwrapping for regular 'print' commands."""
+    """Textwrapping for regular 'print' commands.
+
+    Parameters
+    ----------
+    x
+        The text to be wrapped.
+    ARG_indented : bool (default is 'False')
+        Whether or not the textwrapped string should be indented.
+    ARG_end_with : str (default is '\n')
+        The string that the textwrapped string will end with.
+    """
     if ARG_indented is True:
         print (textwrap.fill (x, width=70, subsequent_indent="   "), end=ARG_end_with)
     else:
@@ -20,7 +30,22 @@ def printwrap(x, ARG_indented: bool=False, ARG_end_with: str='\n'):
 
 
 def inputwrap(x, ARG_indented: bool=False, ARG_end_with: str=" "):
-    """Textwrapping for regular 'input' commands."""
+    """Textwrapping for regular 'input' commands.
+
+    Parameters
+    ----------
+    x
+        The text to be wrapped.
+    ARG_indented : bool (default is 'False')
+        Whether or not the textwrapped string should be indented.
+    ARG_end_with : str (default is ' ')
+        The string that the textwrapped string will end with.
+
+    Returns
+    -------
+    str
+        User input.
+    """
     if ARG_indented is True:
         _input = input (textwrap.fill (x, width=70, subsequent_indent="   ") + ARG_end_with)
         return _input
@@ -30,7 +55,18 @@ def inputwrap(x, ARG_indented: bool=False, ARG_end_with: str=" "):
 
 # ---------- Menu titles ----------
 def _menutitlestring (ARG_title: str) -> str:
-    """Returns a suitable title string that is uppercase, and ends in 'MENU', and is less than or equal to 70 characters long."""
+    """Returns a suitable title string that is uppercase, and ends in 'MENU', and is less than or equal to 70 characters long.
+
+    Parameters
+    ----------
+    ARG_title : str
+        A string to be used as the basis for the title string.
+
+    Returns
+    -------
+    str
+        A suitable title string that is uppercase, and ends in 'MENU', and is less than or equal to 70 characters long.
+    """
     title = str (ARG_title)  # If ARG_title isn't a string, we definitely want it to be
     if len (title) > 65:
         title = title[0:64]  # Cuts off anything beyond 65 characters (standard width of an old terminal window is 70 characters, and we're potentially adding 5 characters below)
@@ -43,7 +79,13 @@ def _menutitlestring (ARG_title: str) -> str:
 
 
 def menu_title (ARG_menuname: str):
-    """Standardized formatting for a menu title. Prints an empty line, then prints a menu title."""
+    """Standardized formatting for a menu title. Prints an empty line, then prints a menu title.
+
+    Parameters
+    ----------
+    ARG_menuname : str
+        Menu name, which will be included in menu title
+    """
     print()
     titlestring = _menutitlestring (ARG_menuname)
     print (titlestring)

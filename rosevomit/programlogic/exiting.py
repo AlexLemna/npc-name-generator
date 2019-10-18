@@ -12,7 +12,7 @@ from programcli import dialogexit
 EXITLOGGER = logs.BaseLogger (__name__)
 
 def exit_rosevomit():
-    """Handles Rosevomit's exit behavior."""
+    """Handles Rosevomit's exit behavior. Accepts nothing, returns nothing."""
     do_temp_files_exist: bool = not tempfiles.is_empty()  # The 'not' operator effectively reverses the boolean returned from tempfiles.is_empty()
     always_show_exit_dialog: bool = settings.exit_dialog()
     autoclean_temp_directory: bool = settings.autoclean_temp_directory()

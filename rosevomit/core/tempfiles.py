@@ -17,7 +17,7 @@ _TEMPFILELOGGER = logs.BaseLogger(__name__)
 
 
 def _check_that_cwd_is_temp():
-    """Checks to see if we are in the temp directory."""
+    """Checks to see if we are in the temp directory. Accepts no parameters, returns nothing."""
     with pathlib.Path.cwd() as cwd:
         p = pathlib.PurePath (cwd)
         if p.parts[-1] != "temp":
@@ -31,7 +31,13 @@ def _check_that_cwd_is_temp():
 
 
 def is_empty() -> bool:
-    """Checks to see if the /temp directory is empty. Returns a bool."""
+    """Checks to see if the /temp directory is empty.
+
+    Returns
+    -------
+    bool
+        Returns 'True' if /temp directory is empty.
+    """
     os.chdir (TEMP_DIRECTORY_PATH)
     _check_that_cwd_is_temp()
     with pathlib.Path.cwd() as cwd:
@@ -46,7 +52,7 @@ def is_empty() -> bool:
 
 
 def delete():
-    """Clears out the temp directory."""
+    """Clears out the temp directory. Accepts no parameters, returns nothing."""
     os.chdir (TEMP_DIRECTORY_PATH)
     _check_that_cwd_is_temp()
     with pathlib.Path.cwd() as cwd:
@@ -59,7 +65,7 @@ def delete():
 
 
 def view():
-    """Prints a list of the contents of the temp directory."""
+    """Prints a list of the contents of the temp directory. Accepts no parameters, returns nothing."""
     os.chdir (TEMP_DIRECTORY_PATH)
     _check_that_cwd_is_temp()
     with pathlib.Path.cwd() as cwd:
@@ -71,7 +77,17 @@ def view():
 
 
 def save(ARG_file, ARG_overwrite: bool=False, ARG_dialog: bool=True):
-    """Copies a file from the temp directory to the saved directory."""
+    """Copies a file from the temp directory to the saved directory.
+
+    Parameters
+    ----------
+    ARG_file
+        The file to be copied.
+    ARG_overwrite : bool, defaults to 'False'
+        Determines program behavior when a file with the same name as ARG_file already exists in the saved/ directory. If 'True', overwrites the existing file. If 'False', raises FileExistsError.
+    ARG_dialog : bool, defaults to 'True'
+        If `True`, prints a message to the command line upon function success.
+    """
     os.chdir (TEMP_DIRECTORY_PATH)
     _check_that_cwd_is_temp()
     with pathlib.Path.cwd() as cwd:

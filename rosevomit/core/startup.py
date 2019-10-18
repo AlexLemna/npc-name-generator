@@ -12,7 +12,7 @@ from programcli import messages
 _STARTUPLOGGER = logs.BaseLogger(__name__)
 
 def main_setup ():
-    """Contains setup instructions, and prints that info to terminal."""
+    """Contains setup instructions, and prints that info to terminal. Accepts no parameters, returns nothing."""
     _STARTUPLOGGER.logger.debug ("Starting main setup procedure.")
     print()
 

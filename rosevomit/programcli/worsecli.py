@@ -36,7 +36,7 @@ def input_integer(ARG_prompt_text: str="", ARG_if_invalid=None):
 
 
 def submenu_about_show():
-    """Contains the display instructions for the about menu."""
+    """Contains the display instructions for the about menu. Accepts no parameters, returns nothing."""
     print ()
     print ("What information do you wish to display?")
     print ("    1. About Rosevomit")
@@ -67,7 +67,7 @@ def submenu_about_input():
 
 
 def submenu_name_show():
-    """Contains display instructions for the name generation menu."""
+    """Contains display instructions for the name generation menu. Accepts no parameters, returns nothing."""
     print ()
     print ("What sorts of names would you like to generate?")
     print ("     1. First names")
@@ -82,7 +82,7 @@ def submenu_name_show():
 
 
 def submenu_name_input():
-    """Asks for user input and processes it. Contains logic for the name generation submenu."""
+    """Asks for user input and processes it. Contains logic for the name generation submenu. Accepts no parameters, returns nothing."""
     menuchoice = input ("Enter your choice, or type 'help' for current menu: ")
     menuchoice = menuchoice.strip()  # Strips whitespaces
 
@@ -134,7 +134,7 @@ def submenu_name_input():
 
 
 def submenu_timeline_show():
-    """Contains display instructions for the timeline generation menu."""
+    """Contains display instructions for the timeline generation menu. Accepts no parameters, returns nothing."""
     print ()
     print ("What sort of timeline would you like to generate?")
     print ("     1. Global events")
@@ -144,7 +144,7 @@ def submenu_timeline_show():
 
 
 def submenu_timeline_input():
-    """Asks for user input and processes it. Contains logic for the name generation submenu."""
+    """Asks for user input and processes it. Contains logic for the name generation submenu. Accepts no parameters, returns nothing."""
     menuchoice = input ("Enter your choice, or type 'help' for current menu: ")
     menuchoice = menuchoice.strip()  # Strip whitespaces
 
@@ -169,7 +169,7 @@ def submenu_timeline_input():
 
 
 def submenu_suncalc_show():
-    """Displays user options for Suncalc."""
+    """Displays user options for Suncalc. Accepts no parameters, returns nothing."""
     print ()
     print ("What are the observer's coordinates?")
     print ("     1. Default (0, 0)")
@@ -225,7 +225,7 @@ def prompt_save() -> bool:
 
 
 def show_main_menu():
-    """Contains display instructions for the main menu."""
+    """Contains display instructions for the main menu. Accepts no parameters, returns nothing."""
     print ()
     print (10 * "-", "Rosevomit.py Main Menu", 10 * "-")
     print ("What would you like do?")
@@ -241,7 +241,7 @@ def show_main_menu():
 
 
 def ask_for_input():
-    """Asks for user input and processes it. Contains logic for the main menu."""
+    """Asks for user input and processes it. Contains logic for the main menu. Accepts no parameters, returns nothing."""
     menuchoice = input ("Enter your choice, or type 'help' for current menu: ")
     menuchoice = menuchoice.rstrip()  # Strips whitespaces at the end.
 

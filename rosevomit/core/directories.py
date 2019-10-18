@@ -14,15 +14,32 @@ from core.customerrors import RealityError
 _DIRECTORIESLOGGER = logs.BaseLogger (__name__)
 
 
-def get_cwd_name_only():
-    """Returns only the folder name of the current working directory, not the full path."""
+def get_cwd_name_only() -> str:
+    """Returns only the folder name of the current working directory, not the full path.
+
+    Returns
+    -------
+    str
+        The name of the current working directory.
+    """
     _cwd = pathlib.Path.cwd()
     _path_split = os.path.split(_cwd)
     return _path_split[-1]
 
 
 def get_dir(ARG_dirname: str) -> pathlib.Path:
-    """Returns the path of subdirectory of the 'rosevomit' directory. This function should work anywhere within the 'rosevomit' module or the associated repository."""
+    """Returns the path of subdirectory of the 'rosevomit' directory. This function should work anywhere within the 'rosevomit' module or the associated repository.
+
+    Parameters
+    ----------
+    ARG_dirname : str
+        The name of the Rosevomit directory you're looking for.
+
+    Returns
+    -------
+    _dirpath : pathlib.Path
+        The path of the Rosevomit directory you're looking for.
+    """
     # Let's assume we don't know where this function is being called from or to, and we don't know what the exact directory structure is that we're navigating through. Generally, all we know is that (1) our program Rosevomit is contained in a directory named 'rosevomit', and (2) the 'rosevomit' directory plus whatever directories we've created for documentation/testing/general development purposes should be contained in a directory called 'rosevomitrepo'. We also know (3) the name of the directory (ARG_dirname) we're looking for, which should be somewhere within the 'rosevomit' directory.
     #
     # We begin by finding out where we are.
