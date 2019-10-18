@@ -20,8 +20,8 @@ def time2fractday (ARG_day, ARG_hour=0, ARG_minute=0, ARG_second=0):
         assert isinstance (arg, int)
     validate_range (ARG_day, 1, 365, ARG_raise_ex=True)
     validate_range (ARG_hour, 0, 23, ARG_raise_ex=True)
-    validate_range (ARG_minute, 0, 60, ARG_raise_ex=True)
-    validate_range (ARG_second, 0, 60, ARG_raise_ex=True)
+    validate_range (ARG_minute, 0, 59, ARG_raise_ex=True)
+    validate_range (ARG_second, 0, 59, ARG_raise_ex=True)
     # Adjusting the day to a "0th count day"
     day_0_count = ARG_day - 1
     result = day_0_count + Decimal(f"{ARG_hour / 24}") + Decimal(f"{ARG_minute / 1440}") + Decimal(f"{ARG_second / 86400}")
