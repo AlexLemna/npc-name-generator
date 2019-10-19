@@ -16,10 +16,10 @@ First, navigate to the directory that will contain the project repository or dir
 > python -m venv name-of-desired-venv
 ````
 
-Then, in Windows, run:
+In order to activate the virtual environment in Windows, run:
 
 ````shell
-> venv/Scripts/actibate.ps
+> venv/Scripts/activate.ps1
 ````
 
 or, in Mac or Unix, run:
@@ -27,6 +27,39 @@ or, in Mac or Unix, run:
 ````shell
 source name-of-desired-venv/bin/activate
 ````
+
+This should result in something looking like this:
+
+### updating with pip
+
+From within the virtual environment, you can now modify/install/update Python modules without affecting your "base" installation. The pip version that is automatically installed in the virtual environment might be out of date. We can try to install an upgrade first with
+
+```shell
+> python -m pip install --upgrade pip
+```
+
+Note that setuptools might also be installed and out of date, so feel to type ```pip install --upgrade setuptools``` as well. No need for the `python -m` when we aren't trying to have pip upgrade itself.
+
+Then, install the required
+
+```python
+>>> pip install --upgrade setuptools
+```
+
+If you ever want to quickly upgrade all out-of-date modules (not necessarily recommended), try the following (shamelessly stolen from [here](https://simpleit.rocks/python/upgrade-all-pip-requirements-package-console-commands/)):
+
+```shell
+> pip list --outdated --format columns | cut -d' ' -f1 | xargs -n1 pip install --upgrade
+```
+
+This might look a big complex, but here's what each command does:
+
+* `pip list --outdated` lists the outdated packages
+  * `--format columns` makes sure that the outdated packages are printed in a nice column layout
+* `cut -d' '` splits the results from the earlier commands into "fields" at each space character it encounters
+  * `f1` takes the first field of each line
+* `xargs -n1` is basically "use at most 1 arg by command line". No idea what this means. Again, I'm just copying this from [here](https://simpleit.rocks/python/upgrade-all-pip-requirements-package-console-commands/).
+  * `pip install --upgrade` upgrades all the packages
 
 ## VS Code
 
