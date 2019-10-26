@@ -76,7 +76,6 @@ def proactive(ARG_defaultname: str="file"):
 
     savebool = _dialog.prompt_yesno ("Do you want to save the data once it is generated? (If you choose not to save the data right now, it still may be available in the /temp directory later. No guarentees, though.)")
 
-    # TODO: Move "setname" from here to suncalc.main
     _default_name = ut.setname(ARG_defaultname)
     assert isinstance (savebool, bool)
     if savebool is True:

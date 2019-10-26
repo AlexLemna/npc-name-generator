@@ -4,16 +4,17 @@
 # rosevomit.programlogic.logiccontroller
 # ___________________________________________________________________
 """This is the main "logic" file. Its job is to keep track of the program's custom logic modules and to serve as an intermediary in between them and the main file (rosevomit.py). This isn't actually necessary, but it serves as good coding practice for me. Hopefully."""
+import datetime
 import os
 import textwrap
 
 try:
-    from core import logs, customerrors
+    from core import logs, customerrors, constants
     import core.utilities as ut
     from programcli import dialogsave
     from programlogic import suncalc, randomevent, randomname
 except ImportError:
-    from rosevomit.core import logs, customerrors
+    from rosevomit.core import logs, customerrors, constants
     import rosevomit.core.utilities as ut
     from rosevomit.programcli import dialogsave
     from rosevomit.programlogic import suncalc, randomevent, randomname
@@ -98,25 +99,15 @@ def gen_timeline(ARG_eventtypes: str, ARG_yearrange: int):
 
 
 def gen_suncalc (ARG_lat, ARG_long):
-    """This function asks the user if the suncalc output will be saved, and then calls the suncalc function in an appropriate manner.
+    """Calls the suncalc function
 
     Parameters
     ----------
     ARG_lat, ARG_long
         The observer's latitude and longitude, which will be passed to suncalc.main()
     """
-    try:
-        try:
-            os.chdir ("./temp/")
-        except FileNotFoundError:
-            os.chdir ("..")
-            os.chdir ("./temp")
-    except FileNotFoundError:  # Maybe it's being run by a testing script?
-        os.chdir ("..")
-        os.chdir ("./rosevomit/temp/")
-    do_we_save, filename = dialogsave.proactive()
-    assert isinstance (do_we_save, bool)
-    if do_we_save is False:
-        suncalc.main (ARG_lat, ARG_long)
-    if do_we_save is True:
-        suncalc.main (ARG_lat, ARG_long, ARG_output_directory="saved", ARG_output_file=filename)
+    os.chdir (constants.SAVE_DIRECTORY_PATH)
+    current_time = datetime.datetime.now()
+    datestring = current_time.strftime ("%Y%b%d-%H%M")
+    filename_for_results = "suncalc_" + datestring
+    suncalc.main (ARG_lat, ARG_long, ARG_output_file=filename_for_results)
