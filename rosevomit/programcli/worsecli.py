@@ -175,7 +175,6 @@ def submenu_suncalc_show():
     print ("     1. Default (0, 0)")
     print ("     2. Pick a preset place (NOT CURRENTLY SUPPORTED)")
     print ("     3. I'll enter the coordinates myself, goddammit!")
-    print ("     0. Back to main menu.")
     print ()
 
 
@@ -190,23 +189,25 @@ def submenu_suncalc_input():
         return lat, long
     elif menuchoice == "2":
         print ("This option is not currently supported.")
-        submenu_timeline_input ()
+        recursive_result = submenu_suncalc_input ()
+        return recursive_result
     elif menuchoice == '3':
         lat = input ("Enter latitude: ")
         long = input ("Enter longitude: ")
         lat = float(lat)
         long = float(long)
         return lat, long
-    elif menuchoice == "0":
-        show_main_menu()
     elif menuchoice in ("help", "HELP", "'help'", "h", "H", "helf", "HELF"):
         submenu_suncalc_show()
-        submenu_suncalc_input()
+        recursive_result = submenu_suncalc_input()
+        return recursive_result
     elif menuchoice == "":
-        submenu_suncalc_input()
+        recursive_result = submenu_suncalc_input()
+        return recursive_result
     else:
         messages.unrecognized_input_message (menuchoice)
-        submenu_suncalc_input()
+        recursive_result = submenu_suncalc_input()
+        return recursive_result
 
 
 def prompt_save() -> bool:
@@ -231,9 +232,7 @@ def show_main_menu():
     print ("What would you like do?")
     print ("     1. Generate random names")
     print ("     2. Generate a random timeline")
-    print ("     3. Calculate the sun's position, default coordinates (EXPERIMENTAL)")
-    print ("     4. Calculate the sun's position (EXPERIMENTAL)")
-    print ("     5. View and save temporary files")
+    print ("     3. Calculate the sun's position (EXPERIMENTAL)")
     print ("     8. Program information")
     print ("S or 9. Program settings")
     print ("X or 0. Exit program")
@@ -254,9 +253,6 @@ def ask_for_input():
         submenu_timeline_input()
         show_main_menu()
     elif menuchoice == "3":
-        logiccontroller.gen_suncalc(0, 0)
-        show_main_menu()
-    elif menuchoice == "4":
         submenu_suncalc_show()
         lat, long = submenu_suncalc_input()
         logiccontroller.gen_suncalc(lat, long)
