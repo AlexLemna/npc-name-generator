@@ -6,7 +6,7 @@ def line(char: str = "_", newline: bool = False) -> None:
     """Prints a character 70 times, with an optional preceding newline."""
     if newline is True:
         print ()
-    if len(char) is 1:
+    if len(char) == 1:
         print (char * 70)
     else:
         raise ValueError(f"The parameter 'char' must be a string that is one character long, not {len(char)} characters long!")
